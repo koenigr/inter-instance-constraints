@@ -1,0 +1,5 @@
+SET related('Tom', 'Susi');
+SET role('Manager', TASKA);
+IF related('Tom','Susi') THEN cannot_do_u( 'Tom', TASKA);
+IF executed_u( UI, 'Task1') THEN cannot_do_u(UI, 'Task2');
+IF executed_u( UJ, 'Task2') AND related(UI,UJ) THEN cannot_do_u(UI, 'Task3');
