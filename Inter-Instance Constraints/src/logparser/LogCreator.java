@@ -25,27 +25,27 @@ import de.uni.freiburg.iig.telematik.jawl.writer.PerspectiveException;
 public class LogCreator {
 
 	public List<List<LogTrace<LogEntry>>> createLog() throws LockingException, CompatibilityException, ParameterException, PerspectiveException, IOException, ParserException {
-		LogEntry entryA = new LogEntry("act_1");
+		LogEntry entryA = new LogEntry("activity_1");
 		entryA.setEventType(EventType.start);
-		entryA.setOriginator("sub_1");
-		entryA.setGroup("r1");
+		entryA.setOriginator("user_1");
+		entryA.setGroup("role_1");
 		entryA.setTimestamp(new Date(1445405281));
 		
 		System.out.println(entryA);
 		
-		LogEntry entryB = new LogEntry("act_2");
+		LogEntry entryB = new LogEntry("activity_2");
 		entryB.setEventType(EventType.complete);
-		entryB.setOriginator("sub_1");
-		entryB.setGroup("r1");
+		entryB.setOriginator("user_1");
+		entryB.setGroup("role_1");
 		entryB.setTimestamp(new Date(2145405300));
 		entryB.addMetaAttribute(new DataAttribute("desc", "Marty McFly arrives at the year 1985"));
 		
 		System.out.println(entryB);
 		
-		DULogEntry entryC = new DULogEntry("act_3");
+		DULogEntry entryC = new DULogEntry("activity_3");
 		entryC.setEventType(EventType.start);
 		entryC.setOriginator("sub_1");
-		entryC.setGroup("r1");
+		entryC.setGroup("role_1");
 		entryC.addDataUsage(new DataAttribute("fluxsettings"), DataUsage.READ);
 		
 		LogTrace<LogEntry> traceA = new LogTrace<LogEntry>();
@@ -53,7 +53,7 @@ public class LogCreator {
 		traceA.addEntry(entryB);
 		System.out.println(traceA);
 		
-		LogTrace<LogEntry> traceB = LogTraceUtils.createTraceFromActivities(3, "act_3","act_4", "act_5", "act_6");
+		LogTrace<LogEntry> traceB = LogTraceUtils.createTraceFromActivities(3, "activity_3","activity_4", "activity_5", "activity_6");
 		System.out.println(traceB);
 		
 		Log<LogEntry> log = new Log<LogEntry>();
