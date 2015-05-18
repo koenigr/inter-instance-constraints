@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkflowLog>
+<Process id="process1">
+<ProcessInstance id="1">
+<AuditTrailEntry>
+<WorkflowModelElement>act_1</WorkflowModelElement>
+<EventType>start</EventType>
+<Timestamp>1970-01-17T18:30:05.281+0100</Timestamp>
+<Originator>sub_1</Originator>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>act_2</WorkflowModelElement>
+<EventType>complete</EventType>
+<Timestamp>1970-01-25T20:56:45.300+0100</Timestamp>
+<Originator>sub_1</Originator>
+<Data>
+<Attribute name="desc">Marty McFly arrives at the year 1985</Attribute>
+</Data>
+</AuditTrailEntry>
+</ProcessInstance>
+<ProcessInstance id="2">
+<AuditTrailEntry>
+<WorkflowModelElement>act_3</WorkflowModelElement>
+<EventType></EventType>
+<Timestamp>-</Timestamp>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>act_4</WorkflowModelElement>
+<EventType></EventType>
+<Timestamp>-</Timestamp>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>act_5</WorkflowModelElement>
+<EventType></EventType>
+<Timestamp>-</Timestamp>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>act_6</WorkflowModelElement>
+<EventType></EventType>
+<Timestamp>-</Timestamp>
+</AuditTrailEntry>
+</ProcessInstance>
+</Process>
+</WorkflowLog>

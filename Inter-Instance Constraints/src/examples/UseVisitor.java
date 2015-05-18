@@ -1,0 +1,35 @@
+package examples;
+
+import java.io.IOException;
+
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+
+import antlr4.Inter_InstanceLexer;
+import antlr4.Inter_InstanceParser;
+
+
+public class UseVisitor {
+	
+	public static void main(String[] args) throws IOException {
+		// create a CharStream that reads from standard input
+		ANTLRInputStream input = new ANTLRInputStream(System.in);
+		
+		// create a lexer that feeds off of input CharStream
+		Inter_InstanceLexer lexer = new Inter_InstanceLexer(input);
+		
+		// create a buffer of tokens pulled from the lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		
+		// create a parser that feeds off the tokens buffer
+		Inter_InstanceParser parser = new Inter_InstanceParser(tokens);
+
+		ParseTree tree = parser.r(); // begin parsing at r rule
+		System.out.println(tree.toStringTree());
+		
+		MyVisitor visitor = new MyVisitor();
+		visitor.visit(tree);
+	}
+
+}
