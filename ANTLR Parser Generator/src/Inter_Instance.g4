@@ -12,9 +12,9 @@ statement	: explicit
 			| derivation
 			;
 			
-explicit 	: 'SET' (extern|specification) ';';
+explicit 	: 'SET' (extern|specification) ;
 
-assignment : 'IF' assignmentBody ('AND' assignmentBody)* 'THEN' assignmentHead  ';' ;
+assignment : 'IF' assignmentBody ('AND' assignmentBody)* 'THEN' assignmentHead ;
 
 assignmentBody 	: specification
 				| status
@@ -25,7 +25,7 @@ assignmentBody 	: specification
 
 assignmentHead : enforcement ;
 
-staticdynamic : 'IF' staticdynamicBody ('AND' staticdynamicBody)* 'THEN' staticdynamicHead  ';' ;
+staticdynamic : 'IF' staticdynamicBody ('AND' staticdynamicBody)* 'THEN' staticdynamicHead ;
 
 staticdynamicBody 	: specification
 					| comparison
@@ -36,7 +36,7 @@ staticdynamicHead   : enforcement
 					| specification 
 					;
 
-derivation : 'IF' derivationBody ('AND' derivationBody)* 'THEN' derivationHead  ';' ;
+derivation : 'IF' derivationBody ('AND' derivationBody)* 'THEN' derivationHead ;
 
 derivationBody 		: specification
 					| status
@@ -65,6 +65,7 @@ enforcement		: 'cannot_do_u(' user ',' task ')'
 				| 'cannot_do_r(' role ',' task ')'
 				| 'must_execute_u(' user ',' task ')'
 				| 'must_execute_r(' role ',' task ')'
+				| 'panic'
 				;
 			
 status			: 'executed_u(' user ',' task ')'
@@ -76,20 +77,21 @@ status			: 'executed_u(' user ',' task ')'
 				;
 	
 conditional		: 'count(' (specification|status|comparison) ',' nt ')'
-				| 'count(' (VARIABLE|nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'avg(' (VARIABLE|nt)',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'min(' (VARIABLE|nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'max(' (VARIABLE|nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'sum(' (VARIABLE|nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
+				| 'count(' (nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
+				| 'avg(' (nt)',' (specification|status|comparison|output|input) ',' nt ')' // TODO instead of user all vars
+				| 'min(' (nt) ',' (specification|status|comparison|output|input) ',' nt ')' // TODO instead of user all vars
+				| 'max(' (nt) ',' (specification|status|comparison|output|input) ',' nt ')' // TODO instead of user all vars
+				| 'sum(' (nt) ',' (specification|status|comparison|output|input) ',' nt ')' // TODO instead of user all vars
 				;
 	
-comparison 		: (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')') '=' (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')')
+comparison 		: (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')') ('='|'!=') (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')')
 				| (taut|nt|'('arithmetic')') ('<'|'<='|'>'|'>=') (taut|nt|'('arithmetic')')
 				; 
 				
 arithmetic		: nt ('*'|'/'|'+'|'-') nt
 				| '('arithmetic')' ('*'|'/'|'+'|'-') '('arithmetic')';
 	
+// Constants and Vars
 user	: CONSTANT | VARIABLE ; 	// TODO: add surname
 role	: CONSTANT | VARIABLE ;
 task 	: intra|inter|interp;
@@ -102,12 +104,15 @@ nt		: NUMBER
 		| 'time_interval(' task ',' task ')'; 
 ut		: user ;
 rt		: role ;
-ct 		: '??' ;
+ct 		: '??' ; // timepoint symbols
 tt		: task ;
 ti		: task ;
 wt		: 'workflow' ;
 taut	:  VARIABLE ;
-
+input	: 'Input(' task ').' inputvar ;
+inputvar: VARIABLE ; // TODO: es sollte auch Kleinschreibung möglich sein
+output 	: 'Output(' task ').' outputvar;
+outputvar: VARIABLE;
 
 STRING  : [A-Z][a-z]+;
 CONSTANT : '\''.*?'\'' ;

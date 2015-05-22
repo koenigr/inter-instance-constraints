@@ -1,4 +1,4 @@
-// Generated from Inter_Instance.g4 by ANTLR 4.4
+// Generated from Inter_Instance.g4 by ANTLR 4.5
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -16,420 +16,468 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEnforcement(@NotNull Inter_InstanceParser.EnforcementContext ctx) { }
+	@Override public void enterFile(Inter_InstanceParser.FileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEnforcement(@NotNull Inter_InstanceParser.EnforcementContext ctx) { }
+	@Override public void exitFile(Inter_InstanceParser.FileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNt(@NotNull Inter_InstanceParser.NtContext ctx) { }
+	@Override public void enterStatement(Inter_InstanceParser.StatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNt(@NotNull Inter_InstanceParser.NtContext ctx) { }
+	@Override public void exitStatement(Inter_InstanceParser.StatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignmentHead(@NotNull Inter_InstanceParser.AssignmentHeadContext ctx) { }
+	@Override public void enterExplicit(Inter_InstanceParser.ExplicitContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignmentHead(@NotNull Inter_InstanceParser.AssignmentHeadContext ctx) { }
+	@Override public void exitExplicit(Inter_InstanceParser.ExplicitContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStaticdynamicBody(@NotNull Inter_InstanceParser.StaticdynamicBodyContext ctx) { }
+	@Override public void enterAssignment(Inter_InstanceParser.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStaticdynamicBody(@NotNull Inter_InstanceParser.StaticdynamicBodyContext ctx) { }
+	@Override public void exitAssignment(Inter_InstanceParser.AssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTi(@NotNull Inter_InstanceParser.TiContext ctx) { }
+	@Override public void enterAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTi(@NotNull Inter_InstanceParser.TiContext ctx) { }
+	@Override public void exitAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDerivationHead(@NotNull Inter_InstanceParser.DerivationHeadContext ctx) { }
+	@Override public void enterAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDerivationHead(@NotNull Inter_InstanceParser.DerivationHeadContext ctx) { }
+	@Override public void exitAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignmentBody(@NotNull Inter_InstanceParser.AssignmentBodyContext ctx) { }
+	@Override public void enterStaticdynamic(Inter_InstanceParser.StaticdynamicContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignmentBody(@NotNull Inter_InstanceParser.AssignmentBodyContext ctx) { }
+	@Override public void exitStaticdynamic(Inter_InstanceParser.StaticdynamicContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArithmetic(@NotNull Inter_InstanceParser.ArithmeticContext ctx) { }
+	@Override public void enterStaticdynamicBody(Inter_InstanceParser.StaticdynamicBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArithmetic(@NotNull Inter_InstanceParser.ArithmeticContext ctx) { }
+	@Override public void exitStaticdynamicBody(Inter_InstanceParser.StaticdynamicBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFile(@NotNull Inter_InstanceParser.FileContext ctx) { }
+	@Override public void enterStaticdynamicHead(Inter_InstanceParser.StaticdynamicHeadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFile(@NotNull Inter_InstanceParser.FileContext ctx) { }
+	@Override public void exitStaticdynamicHead(Inter_InstanceParser.StaticdynamicHeadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExtern(@NotNull Inter_InstanceParser.ExternContext ctx) { }
+	@Override public void enterDerivation(Inter_InstanceParser.DerivationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExtern(@NotNull Inter_InstanceParser.ExternContext ctx) { }
+	@Override public void exitDerivation(Inter_InstanceParser.DerivationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRole(@NotNull Inter_InstanceParser.RoleContext ctx) { }
+	@Override public void enterDerivationBody(Inter_InstanceParser.DerivationBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRole(@NotNull Inter_InstanceParser.RoleContext ctx) { }
+	@Override public void exitDerivationBody(Inter_InstanceParser.DerivationBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStaticdynamicHead(@NotNull Inter_InstanceParser.StaticdynamicHeadContext ctx) { }
+	@Override public void enterDerivationHead(Inter_InstanceParser.DerivationHeadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStaticdynamicHead(@NotNull Inter_InstanceParser.StaticdynamicHeadContext ctx) { }
+	@Override public void exitDerivationHead(Inter_InstanceParser.DerivationHeadContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIntra(@NotNull Inter_InstanceParser.IntraContext ctx) { }
+	@Override public void enterExtern(Inter_InstanceParser.ExternContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIntra(@NotNull Inter_InstanceParser.IntraContext ctx) { }
+	@Override public void exitExtern(Inter_InstanceParser.ExternContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatus(@NotNull Inter_InstanceParser.StatusContext ctx) { }
+	@Override public void enterSpecification(Inter_InstanceParser.SpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatus(@NotNull Inter_InstanceParser.StatusContext ctx) { }
+	@Override public void exitSpecification(Inter_InstanceParser.SpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTask(@NotNull Inter_InstanceParser.TaskContext ctx) { }
+	@Override public void enterEnforcement(Inter_InstanceParser.EnforcementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTask(@NotNull Inter_InstanceParser.TaskContext ctx) { }
+	@Override public void exitEnforcement(Inter_InstanceParser.EnforcementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDerivationBody(@NotNull Inter_InstanceParser.DerivationBodyContext ctx) { }
+	@Override public void enterStatus(Inter_InstanceParser.StatusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDerivationBody(@NotNull Inter_InstanceParser.DerivationBodyContext ctx) { }
+	@Override public void exitStatus(Inter_InstanceParser.StatusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTaut(@NotNull Inter_InstanceParser.TautContext ctx) { }
+	@Override public void enterConditional(Inter_InstanceParser.ConditionalContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTaut(@NotNull Inter_InstanceParser.TautContext ctx) { }
+	@Override public void exitConditional(Inter_InstanceParser.ConditionalContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUt(@NotNull Inter_InstanceParser.UtContext ctx) { }
+	@Override public void enterComparison(Inter_InstanceParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUt(@NotNull Inter_InstanceParser.UtContext ctx) { }
+	@Override public void exitComparison(Inter_InstanceParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWt(@NotNull Inter_InstanceParser.WtContext ctx) { }
+	@Override public void enterArithmetic(Inter_InstanceParser.ArithmeticContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWt(@NotNull Inter_InstanceParser.WtContext ctx) { }
+	@Override public void exitArithmetic(Inter_InstanceParser.ArithmeticContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCt(@NotNull Inter_InstanceParser.CtContext ctx) { }
+	@Override public void enterUser(Inter_InstanceParser.UserContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCt(@NotNull Inter_InstanceParser.CtContext ctx) { }
+	@Override public void exitUser(Inter_InstanceParser.UserContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComparison(@NotNull Inter_InstanceParser.ComparisonContext ctx) { }
+	@Override public void enterRole(Inter_InstanceParser.RoleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComparison(@NotNull Inter_InstanceParser.ComparisonContext ctx) { }
+	@Override public void exitRole(Inter_InstanceParser.RoleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatement(@NotNull Inter_InstanceParser.StatementContext ctx) { }
+	@Override public void enterTask(Inter_InstanceParser.TaskContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatement(@NotNull Inter_InstanceParser.StatementContext ctx) { }
+	@Override public void exitTask(Inter_InstanceParser.TaskContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInter(@NotNull Inter_InstanceParser.InterContext ctx) { }
+	@Override public void enterIntra(Inter_InstanceParser.IntraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInter(@NotNull Inter_InstanceParser.InterContext ctx) { }
+	@Override public void exitIntra(Inter_InstanceParser.IntraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDerivation(@NotNull Inter_InstanceParser.DerivationContext ctx) { }
+	@Override public void enterInter(Inter_InstanceParser.InterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDerivation(@NotNull Inter_InstanceParser.DerivationContext ctx) { }
+	@Override public void exitInter(Inter_InstanceParser.InterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment(@NotNull Inter_InstanceParser.AssignmentContext ctx) { }
+	@Override public void enterInterp(Inter_InstanceParser.InterpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignment(@NotNull Inter_InstanceParser.AssignmentContext ctx) { }
+	@Override public void exitInterp(Inter_InstanceParser.InterpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTt(@NotNull Inter_InstanceParser.TtContext ctx) { }
+	@Override public void enterNt(Inter_InstanceParser.NtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTt(@NotNull Inter_InstanceParser.TtContext ctx) { }
+	@Override public void exitNt(Inter_InstanceParser.NtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExplicit(@NotNull Inter_InstanceParser.ExplicitContext ctx) { }
+	@Override public void enterUt(Inter_InstanceParser.UtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExplicit(@NotNull Inter_InstanceParser.ExplicitContext ctx) { }
+	@Override public void exitUt(Inter_InstanceParser.UtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSpecification(@NotNull Inter_InstanceParser.SpecificationContext ctx) { }
+	@Override public void enterRt(Inter_InstanceParser.RtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSpecification(@NotNull Inter_InstanceParser.SpecificationContext ctx) { }
+	@Override public void exitRt(Inter_InstanceParser.RtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterConditional(@NotNull Inter_InstanceParser.ConditionalContext ctx) { }
+	@Override public void enterCt(Inter_InstanceParser.CtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitConditional(@NotNull Inter_InstanceParser.ConditionalContext ctx) { }
+	@Override public void exitCt(Inter_InstanceParser.CtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRt(@NotNull Inter_InstanceParser.RtContext ctx) { }
+	@Override public void enterTt(Inter_InstanceParser.TtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRt(@NotNull Inter_InstanceParser.RtContext ctx) { }
+	@Override public void exitTt(Inter_InstanceParser.TtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStaticdynamic(@NotNull Inter_InstanceParser.StaticdynamicContext ctx) { }
+	@Override public void enterTi(Inter_InstanceParser.TiContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStaticdynamic(@NotNull Inter_InstanceParser.StaticdynamicContext ctx) { }
+	@Override public void exitTi(Inter_InstanceParser.TiContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUser(@NotNull Inter_InstanceParser.UserContext ctx) { }
+	@Override public void enterWt(Inter_InstanceParser.WtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUser(@NotNull Inter_InstanceParser.UserContext ctx) { }
+	@Override public void exitWt(Inter_InstanceParser.WtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInterp(@NotNull Inter_InstanceParser.InterpContext ctx) { }
+	@Override public void enterTaut(Inter_InstanceParser.TautContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInterp(@NotNull Inter_InstanceParser.InterpContext ctx) { }
+	@Override public void exitTaut(Inter_InstanceParser.TautContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInput(Inter_InstanceParser.InputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInput(Inter_InstanceParser.InputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInputvar(Inter_InstanceParser.InputvarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInputvar(Inter_InstanceParser.InputvarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOutput(Inter_InstanceParser.OutputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOutput(Inter_InstanceParser.OutputContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOutputvar(Inter_InstanceParser.OutputvarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOutputvar(Inter_InstanceParser.OutputvarContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEveryRule(@NotNull ParserRuleContext ctx) { }
+	@Override public void enterEveryRule(ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEveryRule(@NotNull ParserRuleContext ctx) { }
+	@Override public void exitEveryRule(ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitTerminal(@NotNull TerminalNode node) { }
+	@Override public void visitTerminal(TerminalNode node) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitErrorNode(@NotNull ErrorNode node) { }
+	@Override public void visitErrorNode(ErrorNode node) { }
 }

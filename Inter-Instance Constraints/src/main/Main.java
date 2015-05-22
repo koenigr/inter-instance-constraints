@@ -8,6 +8,7 @@ import logging.LoggerFactory;
 import logparser.LogCreator;
 import logparser.LogParser;
 import logtransformer.LogTransformer;
+import logtransformer.LogTransformerToProlog;
 import modelchecker.Modelchecker;
 
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -41,7 +42,7 @@ public class Main {
 		LogCreator lcreator = new LogCreator();
 		List<List<LogTrace<LogEntry>>> logs = lcreator.createLog();
 		
-		LogTransformer ltransformer = new LogTransformer();
+		LogTransformerToProlog ltransformer = new LogTransformerToProlog();
 		ltransformer.transform(logs);
 		
 		Modelchecker mc = new Modelchecker(tree, logs);
