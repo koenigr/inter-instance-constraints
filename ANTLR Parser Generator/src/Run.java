@@ -1,10 +1,10 @@
-import org.antlr.runtime.*;
+import org.antlr.v4.runtime.*;
 
 public class Run {
 	
 public static void main(String[] args) throws Exception {
 // create a CharStream that reads from standard input
-ANTLRInputStream input = new ANTLRInputStream(System.in);
+CharStream input = new ANTLRInputStream(System.in);
 // create a lexer that feeds off of input CharStream
 Inter_InstanceLexer lexer = new Inter_InstanceLexer(input);
 // create a buffer of tokens pulled from the lexer

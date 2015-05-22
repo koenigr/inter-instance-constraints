@@ -100,6 +100,18 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArithmetic(@NotNull Inter_InstanceParser.ArithmeticContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArithmetic(@NotNull Inter_InstanceParser.ArithmeticContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFile(@NotNull Inter_InstanceParser.FileContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,6 +155,18 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStaticdynamicHead(@NotNull Inter_InstanceParser.StaticdynamicHeadContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIntra(@NotNull Inter_InstanceParser.IntraContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntra(@NotNull Inter_InstanceParser.IntraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -256,6 +280,18 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInter(@NotNull Inter_InstanceParser.InterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInter(@NotNull Inter_InstanceParser.InterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDerivation(@NotNull Inter_InstanceParser.DerivationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -359,6 +395,18 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUser(@NotNull Inter_InstanceParser.UserContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInterp(@NotNull Inter_InstanceParser.InterpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInterp(@NotNull Inter_InstanceParser.InterpContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

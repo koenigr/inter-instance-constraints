@@ -76,38 +76,46 @@ status			: 'executed_u(' user ',' task ')'
 				;
 	
 conditional		: 'count(' (specification|status|comparison) ',' nt ')'
-				| 'count(' user ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'avg(' user ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'mint(' user ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'max(' user ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'sum(' user ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'timestamp ('
-				| 'time_interval('
+				| 'count(' (VARIABLE|nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
+				| 'avg(' (VARIABLE|nt)',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
+				| 'min(' (VARIABLE|nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
+				| 'max(' (VARIABLE|nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
+				| 'sum(' (VARIABLE|nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
 				;
 	
-comparison 		: (ut|rt|ct|tt|ti|wt|nt) '=' (ut|rt|ct|tt|ti|wt|nt)
-				| (taut|nt) ('<'|'<='|'>'|'>=') (taut|nt)
-				;
+comparison 		: (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')') '=' (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')')
+				| (taut|nt|'('arithmetic')') ('<'|'<='|'>'|'>=') (taut|nt|'('arithmetic')')
+				; 
 				
+arithmetic		: nt ('*'|'/'|'+'|'-') nt
+				| '('arithmetic')' ('*'|'/'|'+'|'-') '('arithmetic')';
 	
 user	: CONSTANT | VARIABLE ; 	// TODO: add surname
 role	: CONSTANT | VARIABLE ;
-task 	: CONSTANT | VARIABLE ;
-nt		: NUMBER; 		// TODO: nt are constants and vars
+task 	: intra|inter|interp;
+intra	: CONSTANT|VARIABLE ;
+inter	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
+interp	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
+nt		: NUMBER 
+		| VARIABLE 
+		| 'timestamp(' task ',' taut ')'	
+		| 'time_interval(' task ',' task ')'; 
 ut		: user ;
 rt		: role ;
 ct 		: '??' ;
 tt		: task ;
 ti		: task ;
 wt		: 'workflow' ;
-taut	: 'kp' ;
+taut	:  VARIABLE ;
 
 
 STRING  : [A-Z][a-z]+;
 CONSTANT : '\''.*?'\'' ;
-VARIABLE : [A-Z]+ ;
+VARIABLE : [A-Z0-9]+ ;
 STRING_NUM : [A-Za-z0-9]+ ;
 NUMBER : [1-9][0-9]+ ;
 
+// TODO Comments erweitern
+COMMENTS: '/*' .*?  '*/' -> skip;
 WS		: [ \t\r\n]+ -> skip;
 
