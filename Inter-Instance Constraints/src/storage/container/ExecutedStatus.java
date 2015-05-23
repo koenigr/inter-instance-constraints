@@ -1,6 +1,6 @@
 package storage.container;
 
-public class ExecutedStatus {
+public class ExecutedStatus implements Facts {
 	
 	private String user;
 	private String task;

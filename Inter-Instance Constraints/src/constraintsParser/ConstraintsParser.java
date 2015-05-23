@@ -10,14 +10,14 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import antlr4.Inter_InstanceLexer;
-import antlr4.Inter_InstanceParser;
+import main.Inter_InstanceLexer;
+import main.Inter_InstanceParser;
 
 public class ConstraintsParser {
 	
 	public ParseTree parse() throws IOException {
 
-		File f = new File("constraintfiles/test");
+		File f = new File("constraintfiles/myIICollection");
 		InputStream in = System.in;
 
 		try {
@@ -41,7 +41,7 @@ public class ConstraintsParser {
 		// create a parser that feeds off the tokens buffer
 		Inter_InstanceParser parser = new Inter_InstanceParser(tokens);
 
-		ParseTree tree = parser.r(); // begin parsing at r rule
+		ParseTree tree = parser.file(); // begin parsing at file rule
 			
 		return tree;
 	}

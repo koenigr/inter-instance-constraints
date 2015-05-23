@@ -1,20 +1,18 @@
-package examples;
+package main;
+
+// Generated from Inter_Instance.g4 by ANTLR 4.5
 
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import storage.container.CriticalTaskPair;
-import storage.container.StatusContainer;
-import main.Inter_InstanceBaseListener;
-import main.Inter_InstanceParser;
-
-
-
-public class MyListener extends Inter_InstanceBaseListener {
-	
-	StatusContainer sc = new StatusContainer();
-	
+/**
+ * This class provides an empty implementation of {@link Inter_InstanceListener},
+ * which can be extended to create a listener which only needs to handle a subset
+ * of the available methods.
+ */
+public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -26,9 +24,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFile(Inter_InstanceParser.FileContext ctx) {
-		sc.printToFile();
-	}
+	@Override public void exitFile(Inter_InstanceParser.FileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -52,15 +48,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExplicit(Inter_InstanceParser.ExplicitContext ctx) { 
-		System.out.println("Output from Listener: " + ctx.getText());
-		System.out.println("Number of children: " + ctx.children.size());
-		System.out.println("Test of child i: " + ctx.getChild(1).getText());
-		sc.addCriticalTaskPair(
-				new CriticalTaskPair(
-						ctx.getChild(1).getChild(1).getText(),
-						ctx.getChild(1).getChild(3).getText()));
-	}
+	@Override public void exitExplicit(Inter_InstanceParser.ExplicitContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -180,9 +168,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExtern(Inter_InstanceParser.ExternContext ctx) { 
-		System.out.println(ctx.children.size());
-	}
+	@Override public void exitExtern(Inter_InstanceParser.ExternContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -472,4 +458,28 @@ public class MyListener extends Inter_InstanceBaseListener {
 	 */
 	@Override public void exitOutputvar(Inter_InstanceParser.OutputvarContext ctx) { }
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEveryRule(ParserRuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEveryRule(ParserRuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void visitTerminal(TerminalNode node) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void visitErrorNode(ErrorNode node) { }
 }

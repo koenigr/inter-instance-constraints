@@ -12,6 +12,7 @@ import logtransformer.LogTransformerToProlog;
 import modelchecker.Modelchecker;
 
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import constraintsParser.ConstraintsParser;
 import de.invation.code.toval.parser.ParserException;
@@ -21,6 +22,7 @@ import de.uni.freiburg.iig.telematik.jawl.log.LockingException;
 import de.uni.freiburg.iig.telematik.jawl.log.LogEntry;
 import de.uni.freiburg.iig.telematik.jawl.log.LogTrace;
 import de.uni.freiburg.iig.telematik.jawl.writer.PerspectiveException;
+import examples.MyListener;
 import examples.MyVisitor;
 
 public class Main {
@@ -38,6 +40,9 @@ public class Main {
 			
 		MyVisitor visitor = new MyVisitor();
 		visitor.visit(tree);
+		
+		ParseTreeWalker walker = new ParseTreeWalker();
+		walker.walk(new MyListener(), tree);
 		
 		LogCreator lcreator = new LogCreator();
 		List<List<LogTrace<LogEntry>>> logs = lcreator.createLog();

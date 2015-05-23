@@ -6,8 +6,8 @@ import java.io.IOException;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-import antlr4.Inter_InstanceLexer;
-import antlr4.Inter_InstanceParser;
+import main.Inter_InstanceLexer;
+import main.Inter_InstanceParser;
 
 public class UseParser {
 

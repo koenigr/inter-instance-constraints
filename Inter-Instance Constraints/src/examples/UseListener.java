@@ -7,8 +7,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import antlr4.Inter_InstanceLexer;
-import antlr4.Inter_InstanceParser;
+import main.Inter_InstanceLexer;
+import main.Inter_InstanceParser;
 
 
 public class UseListener {
@@ -25,7 +25,7 @@ public class UseListener {
 		// create a parser that feeds off the tokens buffer
 		Inter_InstanceParser parser = new Inter_InstanceParser(tokens);
 
-		ParseTree tree = parser.r(); // begin parsing at r rule
+		ParseTree tree = parser.file(); // begin parsing at r rule
 		System.out.println(tree.toStringTree());
 		
 		
