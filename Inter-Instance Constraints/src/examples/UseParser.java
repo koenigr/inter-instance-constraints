@@ -24,7 +24,7 @@ public class UseParser {
 		// create a parser that feeds off the tokens buffer
 		Inter_InstanceParser parser = new Inter_InstanceParser(tokens);
 
-		ParseTree tree = parser.r(); // begin parsing at r rule
+		ParseTree tree = parser.file(); // begin parsing at file rule
 		System.out.println(tree.toStringTree());
 	}
 

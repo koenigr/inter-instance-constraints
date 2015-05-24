@@ -10,7 +10,7 @@ public class CriticalTaskPair implements Facts{
 		this.task2 = task2;
 	}
 	
-	public String toString() {
+	public String getAsString() {
 		return "critical_task_pair(" +task1 + "," + task2 + ").\n";
 	}
 }

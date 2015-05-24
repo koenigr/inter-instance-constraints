@@ -2,8 +2,8 @@ package logtransformer;
 
 import java.util.List;
 
-import storage.container.ExecutedStatus;
-import storage.container.StatusContainer;
+import storage.container.status.ExecutedUserStatus;
+import storage.container.status.StatusContainer;
 import storage.ontology.Ontology;
 import storage.ontology.Ontology.Group;
 import storage.ontology.Ontology.Instance;
@@ -51,7 +51,7 @@ public class LogTransformer {
 					Task t = on.new Task(on.new Timestamp(), taskname, u, g);
 					
 					// Feed status container
-					sc.addExecutedStatus(new ExecutedStatus(username, taskname));
+					sc.addExecutedUserStatus(new ExecutedUserStatus(username, taskname));
 					
 					System.out.println("4 " + trace.size());
 					System.out.println(entry.toString());

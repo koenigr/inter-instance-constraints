@@ -5,7 +5,8 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import storage.container.CriticalTaskPair;
-import storage.container.StatusContainer;
+import storage.container.ExternAndSpecificationContainer;
+import storage.container.status.StatusContainer;
 import main.Inter_InstanceBaseListener;
 import main.Inter_InstanceParser;
 
@@ -13,7 +14,7 @@ import main.Inter_InstanceParser;
 
 public class MyListener extends Inter_InstanceBaseListener {
 	
-	StatusContainer sc = new StatusContainer();
+	ExternAndSpecificationContainer esc = new ExternAndSpecificationContainer();
 	
 	/**
 	 * {@inheritDoc}
@@ -27,7 +28,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFile(Inter_InstanceParser.FileContext ctx) {
-		sc.printToFile();
+		esc.printToFile();
 	}
 	/**
 	 * {@inheritDoc}
@@ -56,7 +57,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 		System.out.println("Output from Listener: " + ctx.getText());
 		System.out.println("Number of children: " + ctx.children.size());
 		System.out.println("Test of child i: " + ctx.getChild(1).getText());
-		sc.addCriticalTaskPair(
+		esc.addCriticalTaskPair(
 				new CriticalTaskPair(
 						ctx.getChild(1).getChild(1).getText(),
 						ctx.getChild(1).getChild(3).getText()));

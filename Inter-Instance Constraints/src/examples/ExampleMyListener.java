@@ -5,7 +5,7 @@ import main.Inter_InstanceParser;
 
 
 
-public class MyListener extends Inter_InstanceBaseListener {
+public class ExampleMyListener extends Inter_InstanceBaseListener {
 
 	public void exitFile(Inter_InstanceParser.FileContext ctx) {
 		System.out.println("Na endlich");
