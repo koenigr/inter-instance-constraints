@@ -1,0 +1,9 @@
+relative_of('Tom', 'Susi').
+relative_of('Mark', 'Susi').
+role('Manager', 'check').
+role('Manager', 'pay').
+role('Manager', 'activity_3').
+role('Manager', 'activity_4').
+role('Manager', 'activity_5').
+role('Manager', 'activity_6').
+

@@ -1,0 +1,134 @@
+Starting...
+
+IP - constraint 1: Task "send_mail" darf nur 2 mal pro Tag ausgeführt werden
+2  [5,8]
+UserBob executed Task with ID = 3 illegally 
+2  [3,8]
+UserStefania executed Task with ID = 5 illegally 
+2  [3,5]
+UserLorenzo executed Task with ID = 8 illegally 
+
+IP constraint 2: Ein User darf nicht mehr als 100 Tasks pro Tag erledigen
+0  []
+0  []
+1  [1]
+UserSusi executed Task with ID = 2 illegally 
+0  []
+1  [0]
+UserMark executed Task with ID = 4 illegally 
+0  []
+1  [4]
+UserMark executed Task with ID = 6 illegally 
+0  []
+0  []
+
+constraint 1: Ein User darf bei "pay" nicht mehr als 5000 Euro im Monat auszahlen
+0  []
+2000  [2000]
+4000  [2000,2000]
+UserSusi executed Task with ID = 7 illegally 
+
+constraint 2: U1 und U2 dürfen nicht mehr als 3x zusammen an T1 und T2 arbeiten
+0  []
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 0 illegally 
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 0 illegally 
+0  []
+0  []
+0  []
+0  []
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 0 illegally 
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 4 illegally 
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 4 illegally 
+0  []
+0  []
+0  []
+0  []
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 4 illegally 
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 6 illegally 
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 6 illegally 
+0  []
+0  []
+0  []
+0  []
+6  [Mark,Mark,Mark,Mark,Mark,Mark]
+UserMark executed Task with ID = 6 illegally 
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+0  []
+
+constraint 3: Ein User darf "check" nicht mehr als 5 mal im Monat ausführen
+0  []
+1  [0]
+2  [0,4]
+UserMark executed Task with ID = 6 illegally 
+
+Intra constraint 1: Wenn zwei User verwandt sind, dürfen sie nicht pay und check ausführen
+UserSusi executed Task with ID = 1 illegally 
+UserSusi executed Task with ID = 2 illegally 
+UserSusi executed Task with ID = 7 illegally 
+
+Intra - constraint 2: Wenn ein User send_email ausgeführt hat, darf er nicht mehr call_customer ausführen
