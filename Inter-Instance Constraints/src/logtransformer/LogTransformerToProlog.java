@@ -6,10 +6,12 @@ import java.util.List;
 import storage.container.status.ExecutedGroupStatus;
 import storage.container.status.ExecutedUserStatus;
 import storage.container.status.StatusContainer;
+import storage.container.status.TaskAttribute;
 import storage.container.status.TaskName;
 import storage.container.status.TaskWorkflow;
 import storage.container.status.Timestamp;
 import storage.container.status.WorkflowName;
+import de.uni.freiburg.iig.telematik.jawl.log.DataAttribute;
 import de.uni.freiburg.iig.telematik.jawl.log.LogEntry;
 import de.uni.freiburg.iig.telematik.jawl.log.LogTrace;
 
@@ -55,6 +57,12 @@ public class LogTransformerToProlog {
 					sc.addTaskName(new TaskName(taskID, name));
 					sc.addTaskWorkflow(new TaskWorkflow(taskID, workflowID));
 					sc.addWorkflowName(new WorkflowName(workflowID, workflowname));
+					
+					for(DataAttribute a : entry.getMetaAttributes()) {
+						String attrName = a.name;
+						Object attrVal = a.value;
+						sc.addTaskAttribute(new TaskAttribute(taskID, attrName, attrVal ));
+					}
 					
 				}
 			}

@@ -25,49 +25,114 @@ import de.uni.freiburg.iig.telematik.jawl.writer.PerspectiveException;
 public class LogCreator {
 
 	public List<List<LogTrace<LogEntry>>> createLog() throws LockingException, CompatibilityException, ParameterException, PerspectiveException, IOException, ParserException {
-		LogEntry entryA = new LogEntry("activity_1");
+
+		Date d = new Date();
+		d.setYear(2015);
+		d.setMonth(5);
+		d.setDate(2);
+		
+		LogEntry entryA = new LogEntry("check");
 		entryA.setEventType(EventType.start);
-		entryA.setOriginator("user_1");
-		entryA.setGroup("role_1");
-		entryA.setTimestamp(new Date(1445405281));
+		entryA.setOriginator("Mark");
+		entryA.setGroup("Clerk");
+		entryA.setTimestamp(d);
 		
-		System.out.println(entryA);
-		
-		LogEntry entryB = new LogEntry("activity_2");
+		LogEntry entryB = new LogEntry("pay");
 		entryB.setEventType(EventType.complete);
-		entryB.setOriginator("user_1");
-		entryB.setGroup("role_1");
+		entryB.setOriginator("Susi");
+		entryB.setGroup("Manager");
 		entryB.setTimestamp(new Date(2145405300));
-		entryB.addMetaAttribute(new DataAttribute("desc", "Marty McFly arrives at the year 1985"));
+		entryB.addMetaAttribute(new DataAttribute("loan_amount", "2000"));
 		
-		System.out.println(entryB);
-		
-		DULogEntry entryC = new DULogEntry("activity_3");
+		DULogEntry entryC = new DULogEntry("send_mail");
 		entryC.setEventType(EventType.start);
-		entryC.setOriginator("sub_1");
-		entryC.setGroup("role_1");
-		entryC.addDataUsage(new DataAttribute("fluxsettings"), DataUsage.READ);
+		entryC.setOriginator("Bob");
+		entryC.setGroup("Admin");
+		entryC.setTimestamp(d);
 		
+		LogEntry entryD = new LogEntry("check");
+		entryD.setEventType(EventType.start);
+		entryD.setOriginator("Mark");
+		entryD.setGroup("Clerk");
+		entryD.setTimestamp(d);
+		
+		LogEntry entryE = new LogEntry("check");
+		entryE.setEventType(EventType.start);
+		entryE.setOriginator("Mark");
+		entryE.setGroup("Clerk");
+		entryE.setTimestamp(d);
+		
+		LogEntry entryF = new LogEntry("pay");
+		entryF.setEventType(EventType.complete);
+		entryF.setOriginator("Susi");
+		entryF.setGroup("Manager");
+		entryF.setTimestamp(new Date(2145405300));
+		entryF.addMetaAttribute(new DataAttribute("loan_amount", "2000"));
+		
+		LogEntry entryG = new LogEntry("pay");
+		entryG.setEventType(EventType.complete);
+		entryG.setOriginator("Susi");
+		entryG.setGroup("Manager");
+		entryG.setTimestamp(new Date(2145405300));
+		entryG.addMetaAttribute(new DataAttribute("loan_amount", "2000"));
+		
+		LogEntry entryH = new LogEntry("send_mail");
+		entryH.setEventType(EventType.complete);
+		entryH.setOriginator("Stefania");
+		entryH.setGroup("Marketing");
+		entryH.setTimestamp(new Date(2145405300));
+		entryH.addMetaAttribute(new DataAttribute("recipient", "chef"));
+		
+		LogEntry entryI = new LogEntry("send_mail");
+		entryI.setEventType(EventType.complete);
+		entryI.setOriginator("Lorenzo");
+		entryI.setGroup("Secretary");
+		entryI.setTimestamp(new Date(2145405300));
+		entryI.addMetaAttribute(new DataAttribute("recipient", "customer"));
+		
+		LogEntry entryJ = new LogEntry("call_customer");
+		entryJ.setEventType(EventType.complete);
+		entryJ.setOriginator("Lorenzo");
+		entryJ.setGroup("Secretary");
+		entryJ.setTimestamp(new Date(2145405300));
+		entryJ.addMetaAttribute(new DataAttribute("recipient", "customer"));
+		
+		/*
+		 * Create Log Traces
+		 */
 		LogTrace<LogEntry> traceA = new LogTrace<LogEntry>();
 		traceA.addEntry(entryA);
 		traceA.addEntry(entryB);
-		System.out.println(traceA);
+		traceA.addEntry(entryF);
 		
-		LogTrace<LogEntry> traceB = LogTraceUtils.createTraceFromActivities(3, "activity_3","activity_4", "activity_5", "activity_6");
-		System.out.println(traceB);
+		LogTrace<LogEntry> traceB = new LogTrace<LogEntry>();
+		traceB.addEntry(entryC);
+		traceB.addEntry(entryD);
+		traceB.addEntry(entryH);
+		
+		LogTrace<LogEntry> traceC = new LogTrace<LogEntry>();
+		traceC.addEntry(entryE);
+		traceC.addEntry(entryG);
+		traceC.addEntry(entryI);
+		traceC.addEntry(entryJ);
+		
+		
+		/*
+		 * Create Logs
+		 */
 		
 		Log<LogEntry> log = new Log<LogEntry>();
 		log.addTrace(traceA);
 		log.addTrace(traceB);
+		log.addTrace(traceC);
 		
-		System.out.println(log.getSummary().getActivities());
-		System.out.println(log.getSummary().getOriginators());
 		
 		// Serialize Logs
 		String fileName = "./LogFileOutput";
 		LogWriter w = new LogWriter(LogFormatFactory.MXML(), fileName);
 		w.writeTrace(traceA);
 		w.writeTrace(traceB);
+		w.writeTrace(traceC);
 		w.closeFile();
 		
 		// Parse Logs

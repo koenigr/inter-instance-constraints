@@ -25,6 +25,8 @@ public class StatusContainer {
 	
 	private static ArrayList<WorkflowName> workflowName = new ArrayList<WorkflowName>();
 	
+	private static ArrayList<TaskAttribute> taskAttribute = new ArrayList<TaskAttribute>();
+	
 	public void addExecutedUserStatus(ExecutedUserStatus s) {
 		exUserStatus.add(s);
 	}
@@ -49,6 +51,9 @@ public class StatusContainer {
 		workflowName.add(s);
 	}
 
+	public void addTaskAttribute(TaskAttribute s) {
+		taskAttribute.add(s);
+	}
 	
 	public void printToFile() {
 		try {
@@ -87,6 +92,12 @@ public class StatusContainer {
 			writer.write("% workflow names facts\n"); 
 
 			for (WorkflowName e : workflowName) {
+				writer.write(e.getAsString());
+			}
+			
+			writer.write("% task attributes\n");
+			
+			for (TaskAttribute e : taskAttribute) {
 				writer.write(e.getAsString());
 			}
 			
