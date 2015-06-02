@@ -1,8 +1,8 @@
 package storage.container.externspec;
 
-import storage.container.Fact;
+import storage.container.Facts;
 
-public class GLB extends Fact{
+public class GLB implements Facts {
  
 	String Role;
 	String Task;

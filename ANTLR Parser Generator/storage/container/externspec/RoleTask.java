@@ -1,8 +1,8 @@
 package storage.container.externspec;
 
-import storage.container.Fact;
+import storage.container.Facts;
 
-public class RoleTask extends Fact{
+public class RoleTask implements Facts{
 	
 	String Role;
 	String Task;

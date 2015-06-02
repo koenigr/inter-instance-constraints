@@ -1,8 +1,8 @@
 package storage.container.externspec;
 
-import storage.container.Fact;
+import storage.container.Facts;
 
-public class Partner extends Fact{
+public class Partner implements Facts{
 	
 	String User1;
 	String User2;

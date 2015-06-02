@@ -12,6 +12,8 @@ import modelchecker.Modelchecker;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import storage.container.externspec.Dominates;
+import storage.container.rules.RuleContainer;
 import constraintsParser.ConstraintsParser;
 import de.invation.code.toval.parser.ParserException;
 import de.invation.code.toval.validate.CompatibilityException;

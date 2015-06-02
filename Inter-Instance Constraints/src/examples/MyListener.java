@@ -4,8 +4,8 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import storage.container.CriticalTaskPair;
-import storage.container.ExternAndSpecificationContainer;
+import storage.container.externspec.CriticalTaskPair;
+import storage.container.externspec.ExternAndSpecificationContainer;
 import storage.container.status.StatusContainer;
 import main.Inter_InstanceBaseListener;
 import main.Inter_InstanceParser;

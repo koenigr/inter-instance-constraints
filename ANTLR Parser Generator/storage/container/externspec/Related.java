@@ -1,8 +1,8 @@
 package storage.container.externspec;
 
-import storage.container.Fact;
+import storage.container.Facts;
 
-public class Related extends Fact{
+public class Related implements Facts{
 	
 	String User1;
 	String User2;

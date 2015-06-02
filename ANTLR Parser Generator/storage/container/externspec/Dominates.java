@@ -1,8 +1,8 @@
 package storage.container.externspec;
 
-import storage.container.Fact;
+import storage.container.Facts;
 
-public class Dominates extends Fact {
+public class Dominates implements Facts {
 	
 	String Role1;
 	String Role2;

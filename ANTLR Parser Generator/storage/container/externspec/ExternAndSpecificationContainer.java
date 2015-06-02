@@ -1,4 +1,4 @@
-package storage.container.externspec;
+package container.externspec;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -10,8 +10,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 
 public class ExternAndSpecificationContainer {
-	
-	private static String outputFile = "prologfiles/externSpec.pl";
 
 	private static ArrayList<CriticalTaskPair> criticalTaskPair = new ArrayList<CriticalTaskPair>();
 	
@@ -33,9 +31,7 @@ public class ExternAndSpecificationContainer {
 	
 	private static ArrayList<UserTask> userTask = new ArrayList<UserTask>();
 	
-	public ExternAndSpecificationContainer(String outputFile) {
-		this.outputFile = outputFile;
-	}
+
 	
 	public void addCriticalTaskPair(CriticalTaskPair s) {
 		criticalTaskPair.add(s);
@@ -82,7 +78,7 @@ public class ExternAndSpecificationContainer {
 	public void printToFile() {
 		try {
 			
-			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("outputFile"), "utf-8"));
+			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("prologfiles/externSpec.pl"), "utf-8"));
 			writer.write("% Critical Task Pair facts\n"); 
 
 			for (CriticalTaskPair e : criticalTaskPair) {
@@ -91,55 +87,55 @@ public class ExternAndSpecificationContainer {
 			
 			writer.write("% dominates facts\n"); 
 
-			for (Dominates e : dominates) {
+			for (Dominates e : Dominates) {
 				writer.write(e.toString());
 			}
 			
 			writer.write("% glb facts\n"); 
 
-			for (GLB e : glb) {
+			for (GLB e : GLB) {
 				writer.write(e.toString());
 			}
 			
 			writer.write("% lub facts\n"); 
 
-			for (LUB e : lub) {
+			for (LUB e : LUB) {
 				writer.write(e.toString());
 			}
 			
 			writer.write("% partner facts\n"); 
 
-			for (Partner e : partner) {
+			for (Partner e : Partner) {
 				writer.write(e.toString());
 			}
 			
 			writer.write("% related facts\n"); 
 
-			for (Related e : related) {
+			for (Related e : Related) {
 				writer.write(e.toString());
 			}
 			
 			writer.write("% role task facts\n"); 
 
-			for (RoleTask e : roleTask) {
+			for (RoleTask e : RoleTask) {
 				writer.write(e.toString());
 			}
 			
 			writer.write("% same group facts\n"); 
 
-			for (SameGroup e : sameGroup) {
+			for (SameGroup e : SameGroup) {
 				writer.write(e.toString());
 			}
 			
 			writer.write("% user role facts\n"); 
 
-			for (UserRole e : userRole) {
+			for (UserRole e : UserRole) {
 				writer.write(e.toString());
 			}
 			
 			writer.write("% user task facts\n"); 
 
-			for (UserTask e : userTask) {
+			for (UserTask e : UserTask) {
 				writer.write(e.toString());
 			}
 			

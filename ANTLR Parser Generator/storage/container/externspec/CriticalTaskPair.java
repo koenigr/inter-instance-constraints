@@ -1,8 +1,6 @@
-package storage.container.externspec;
+package storage.container;
 
-import storage.container.Fact;
-
-public class CriticalTaskPair extends Fact{
+public class CriticalTaskPair implements Facts{
 	
 	private String task1;
 	private String task2;
