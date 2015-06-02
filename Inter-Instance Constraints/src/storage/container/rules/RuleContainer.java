@@ -2,26 +2,39 @@ package storage.container.rules;
 
 import java.util.ArrayList;
 
-import storage.container.Fact;
-
+import storage.container.Rule;
 
 public class RuleContainer {
 
-	private static ArrayList<Fact> body = new ArrayList<Fact>();
-	private static Fact head;
+	private ArrayList<PanicRule> panic = new ArrayList<PanicRule>();
+	private ArrayList<UserCannotDoRule> userCannotDo = new ArrayList<UserCannotDoRule>();
+	private ArrayList<UserMustDoRule> userMustDo = new ArrayList<UserMustDoRule>();
+	private ArrayList<RoleCannotDoRule> roleCannotDo = new ArrayList<RoleCannotDoRule>();
+	private ArrayList<RoleMustDoRule> roleMustDo = new ArrayList<RoleMustDoRule>();
 	
-
-	public static void setHead(Fact head) {
-		RuleContainer.head = head;
+	public void addPanicRule(PanicRule r) {
+		panic.add(r);
 	}
-
-	public void addFact(Fact f) {
-		body.add(f);
+	
+	public void addUserCannotDoRule(UserCannotDoRule r) {
+		userCannotDo.add(r);
+	}
+	
+	public void addUserMustDoRule(UserMustDoRule r) {
+		userMustDo.add(r);
+	}
+	
+	public void addRoleCannotDoRule(RoleCannotDoRule r) {
+		roleCannotDo.add(r);
+	}
+	
+	public void addPRoleMustDoRule(RoleMustDoRule r) {
+		roleMustDo.add(r);
 	}
 	
 	public void printToFile() {
-		for(Fact f : body) {
-			System.out.println(f.getAsString());
+		for(Rule r : panic) {
+			System.out.println(r.getAsString());
 		}
 	}
 	
