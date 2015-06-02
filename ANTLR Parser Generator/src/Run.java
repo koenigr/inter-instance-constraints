@@ -24,17 +24,16 @@ CommonTokenStream tokens = new CommonTokenStream(lexer);
 Inter_InstanceParser parser = new Inter_InstanceParser(tokens);
 // begin parsing at rule file
 
-ParseTree tree2 = parser.file();
+Inter_InstanceParser.FileContext tree = parser.file();
 
 fs.close();
 
 ParseTreeWalker walker = new ParseTreeWalker();
-walker.walk(new MyListener(), tree2);
+walker.walk(new MyListener(), tree);
 
-/*
-Inter_InstanceParser.FileContext tree = parser.file();
+
 tree.inspect(parser);
-*/
+
 }
 
 }

@@ -4,13 +4,13 @@ grammar Inter_Instance;
 
 file  	: (define)* (statement)*   EOF; // TODO find a better name
 
-define : DEF CLAUSE '(' ARGS (',' ARGS)* ')'; 
+define : DEF CLAUSE '(' ARGS ((KONJ|',') ARGS)* ')'; 
 
 statement	: explicitSetting
 	 		| assignment
 			;
 			
-explicitSetting 	: SET (extern|specification) (',' (extern|specification))* ;
+explicitSetting 	: SET (extern|specification) ((KONJ|',') (extern|specification))* ;
 
 assignment : (DESC)? IF assignmentBody THEN assignmentHead ;
 
@@ -32,8 +32,8 @@ extern	: ut 'is related to' ut			#related
 		| ut 'is in same group as' ut	#samegroup
 		;
 		
-specification	: 'role' rt 'must execute' tt  		#roleTask
-				| 'user' ut 'must execute' tt 		#userTask
+specification	: 'role' rt 'can execute' tt  		#roleTask // TODO bessere Bezeichnung
+				| 'user' ut 'can execute' tt 		#userTask
 				| 'user' ut 'belongs to role' rt 	#userRole
 				|  rt 'is glb of' tt 				#glb
 				|  rt 'is lub' tt 					#lub
@@ -112,7 +112,7 @@ SINGLE_LINE_COMMENTS: '//' .*? '\n'    -> skip ;
 SET		: 'SET';
 IF		: 'IF' | 'if' | 'If' | 'iF';
 THEN	: 'THEN';
-KONJ 	: 'AND'; // TODO
+KONJ 	: 'AND' | 'and'; // TODO
 DISJ	: 'OR'; // TODO
 DEF		: ('DEF'|'DEFINE'|'define'|'def');   
 DESC	: ('DESC') [ ]*? '"' .*?  '"'; // TODO
