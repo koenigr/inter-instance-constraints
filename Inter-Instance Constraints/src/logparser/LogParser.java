@@ -6,10 +6,10 @@ import java.util.List;
 
 import de.invation.code.toval.parser.ParserException;
 import de.invation.code.toval.validate.ParameterException;
-import de.uni.freiburg.iig.telematik.jawl.log.LogEntry;
-import de.uni.freiburg.iig.telematik.jawl.log.LogTrace;
-import de.uni.freiburg.iig.telematik.jawl.parser.ParsingMode;
-import de.uni.freiburg.iig.telematik.jawl.parser.xes.XESLogParser;
+import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
+import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
+import de.uni.freiburg.iig.telematik.sewol.parser.ParsingMode;
+import de.uni.freiburg.iig.telematik.sewol.parser.xes.XESLogParser;
 
 public class LogParser {
 	

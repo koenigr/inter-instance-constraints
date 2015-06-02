@@ -6,8 +6,6 @@ import java.util.logging.Logger;
 
 import logging.LoggerFactory;
 import logparser.LogCreator;
-import logparser.LogParser;
-import logtransformer.LogTransformer;
 import logtransformer.LogTransformerToProlog;
 import modelchecker.Modelchecker;
 
@@ -18,10 +16,10 @@ import constraintsParser.ConstraintsParser;
 import de.invation.code.toval.parser.ParserException;
 import de.invation.code.toval.validate.CompatibilityException;
 import de.invation.code.toval.validate.ParameterException;
-import de.uni.freiburg.iig.telematik.jawl.log.LockingException;
-import de.uni.freiburg.iig.telematik.jawl.log.LogEntry;
-import de.uni.freiburg.iig.telematik.jawl.log.LogTrace;
-import de.uni.freiburg.iig.telematik.jawl.writer.PerspectiveException;
+import de.uni.freiburg.iig.telematik.sewol.log.LockingException;
+import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
+import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
+import de.uni.freiburg.iig.telematik.sewol.writer.PerspectiveException;
 import examples.MyListener;
 import examples.MyVisitor;
 

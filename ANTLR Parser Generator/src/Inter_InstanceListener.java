@@ -18,6 +18,16 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitFile(Inter_InstanceParser.FileContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#define}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefine(Inter_InstanceParser.DefineContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#define}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefine(Inter_InstanceParser.DefineContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#statement}.
 	 * @param ctx the parse tree
 	 */
@@ -58,6 +68,16 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#clauses}.
+	 * @param ctx the parse tree
+	 */
+	void enterClauses(Inter_InstanceParser.ClausesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#clauses}.
+	 * @param ctx the parse tree
+	 */
+	void exitClauses(Inter_InstanceParser.ClausesContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#assignmentHead}.
 	 * @param ctx the parse tree
 	 */
@@ -67,66 +87,6 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#staticdynamic}.
-	 * @param ctx the parse tree
-	 */
-	void enterStaticdynamic(Inter_InstanceParser.StaticdynamicContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#staticdynamic}.
-	 * @param ctx the parse tree
-	 */
-	void exitStaticdynamic(Inter_InstanceParser.StaticdynamicContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#staticdynamicBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterStaticdynamicBody(Inter_InstanceParser.StaticdynamicBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#staticdynamicBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitStaticdynamicBody(Inter_InstanceParser.StaticdynamicBodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#staticdynamicHead}.
-	 * @param ctx the parse tree
-	 */
-	void enterStaticdynamicHead(Inter_InstanceParser.StaticdynamicHeadContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#staticdynamicHead}.
-	 * @param ctx the parse tree
-	 */
-	void exitStaticdynamicHead(Inter_InstanceParser.StaticdynamicHeadContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#derivation}.
-	 * @param ctx the parse tree
-	 */
-	void enterDerivation(Inter_InstanceParser.DerivationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#derivation}.
-	 * @param ctx the parse tree
-	 */
-	void exitDerivation(Inter_InstanceParser.DerivationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#derivationBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterDerivationBody(Inter_InstanceParser.DerivationBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#derivationBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitDerivationBody(Inter_InstanceParser.DerivationBodyContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#derivationHead}.
-	 * @param ctx the parse tree
-	 */
-	void enterDerivationHead(Inter_InstanceParser.DerivationHeadContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#derivationHead}.
-	 * @param ctx the parse tree
-	 */
-	void exitDerivationHead(Inter_InstanceParser.DerivationHeadContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#extern}.
 	 * @param ctx the parse tree
@@ -178,6 +138,16 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitConditional(Inter_InstanceParser.ConditionalContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#conditionalBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionalBody(Inter_InstanceParser.ConditionalBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#conditionalBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionalBody(Inter_InstanceParser.ConditionalBodyContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#comparison}.
 	 * @param ctx the parse tree
 	 */
@@ -187,6 +157,26 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitComparison(Inter_InstanceParser.ComparisonContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#equalityParams}.
+	 * @param ctx the parse tree
+	 */
+	void enterEqualityParams(Inter_InstanceParser.EqualityParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#equalityParams}.
+	 * @param ctx the parse tree
+	 */
+	void exitEqualityParams(Inter_InstanceParser.EqualityParamsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#unequalityParams}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnequalityParams(Inter_InstanceParser.UnequalityParamsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#unequalityParams}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnequalityParams(Inter_InstanceParser.UnequalityParamsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#arithmetic}.
 	 * @param ctx the parse tree
@@ -198,35 +188,35 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitArithmetic(Inter_InstanceParser.ArithmeticContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#user}.
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#ut}.
 	 * @param ctx the parse tree
 	 */
-	void enterUser(Inter_InstanceParser.UserContext ctx);
+	void enterUt(Inter_InstanceParser.UtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#user}.
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#ut}.
 	 * @param ctx the parse tree
 	 */
-	void exitUser(Inter_InstanceParser.UserContext ctx);
+	void exitUt(Inter_InstanceParser.UtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#role}.
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#rt}.
 	 * @param ctx the parse tree
 	 */
-	void enterRole(Inter_InstanceParser.RoleContext ctx);
+	void enterRt(Inter_InstanceParser.RtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#role}.
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#rt}.
 	 * @param ctx the parse tree
 	 */
-	void exitRole(Inter_InstanceParser.RoleContext ctx);
+	void exitRt(Inter_InstanceParser.RtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#task}.
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#tt}.
 	 * @param ctx the parse tree
 	 */
-	void enterTask(Inter_InstanceParser.TaskContext ctx);
+	void enterTt(Inter_InstanceParser.TtContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#task}.
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#tt}.
 	 * @param ctx the parse tree
 	 */
-	void exitTask(Inter_InstanceParser.TaskContext ctx);
+	void exitTt(Inter_InstanceParser.TtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#intra}.
 	 * @param ctx the parse tree
@@ -268,26 +258,6 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitNt(Inter_InstanceParser.NtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#ut}.
-	 * @param ctx the parse tree
-	 */
-	void enterUt(Inter_InstanceParser.UtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#ut}.
-	 * @param ctx the parse tree
-	 */
-	void exitUt(Inter_InstanceParser.UtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#rt}.
-	 * @param ctx the parse tree
-	 */
-	void enterRt(Inter_InstanceParser.RtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#rt}.
-	 * @param ctx the parse tree
-	 */
-	void exitRt(Inter_InstanceParser.RtContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#ct}.
 	 * @param ctx the parse tree
 	 */
@@ -297,16 +267,6 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCt(Inter_InstanceParser.CtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#tt}.
-	 * @param ctx the parse tree
-	 */
-	void enterTt(Inter_InstanceParser.TtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#tt}.
-	 * @param ctx the parse tree
-	 */
-	void exitTt(Inter_InstanceParser.TtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#ti}.
 	 * @param ctx the parse tree

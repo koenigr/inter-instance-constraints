@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import de.uni.freiburg.iig.telematik.jawl.log.LogEntry;
-import de.uni.freiburg.iig.telematik.jawl.log.LogTrace;
+import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
+import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
 
 public class Modelchecker {
 	

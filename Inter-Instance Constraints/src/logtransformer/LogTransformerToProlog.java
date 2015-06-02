@@ -3,6 +3,9 @@ package logtransformer;
 import java.util.Date;
 import java.util.List;
 
+import de.uni.freiburg.iig.telematik.sewol.log.DataAttribute;
+import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
+import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
 import storage.container.status.ExecutedGroupStatus;
 import storage.container.status.ExecutedUserStatus;
 import storage.container.status.StatusContainer;
@@ -11,9 +14,6 @@ import storage.container.status.TaskName;
 import storage.container.status.TaskWorkflow;
 import storage.container.status.Timestamp;
 import storage.container.status.WorkflowName;
-import de.uni.freiburg.iig.telematik.jawl.log.DataAttribute;
-import de.uni.freiburg.iig.telematik.jawl.log.LogEntry;
-import de.uni.freiburg.iig.telematik.jawl.log.LogTrace;
 
 public class LogTransformerToProlog {
 	

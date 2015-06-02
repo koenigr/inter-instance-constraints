@@ -5,22 +5,20 @@ import java.util.Date;
 import java.util.List;
 
 import de.invation.code.toval.parser.ParserException;
-import de.invation.code.toval.types.DataUsage;
 import de.invation.code.toval.validate.CompatibilityException;
 import de.invation.code.toval.validate.ParameterException;
-import de.uni.freiburg.iig.telematik.jawl.format.LogFormatFactory;
-import de.uni.freiburg.iig.telematik.jawl.log.DULogEntry;
-import de.uni.freiburg.iig.telematik.jawl.log.DataAttribute;
-import de.uni.freiburg.iig.telematik.jawl.log.EventType;
-import de.uni.freiburg.iig.telematik.jawl.log.LockingException;
-import de.uni.freiburg.iig.telematik.jawl.log.Log;
-import de.uni.freiburg.iig.telematik.jawl.log.LogEntry;
-import de.uni.freiburg.iig.telematik.jawl.log.LogTrace;
-import de.uni.freiburg.iig.telematik.jawl.log.LogTraceUtils;
-import de.uni.freiburg.iig.telematik.jawl.parser.ParsingMode;
-import de.uni.freiburg.iig.telematik.jawl.parser.xes.XESLogParser;
-import de.uni.freiburg.iig.telematik.jawl.writer.LogWriter;
-import de.uni.freiburg.iig.telematik.jawl.writer.PerspectiveException;
+import de.uni.freiburg.iig.telematik.sewol.format.LogFormatFactory;
+import de.uni.freiburg.iig.telematik.sewol.log.DULogEntry;
+import de.uni.freiburg.iig.telematik.sewol.log.DataAttribute;
+import de.uni.freiburg.iig.telematik.sewol.log.EventType;
+import de.uni.freiburg.iig.telematik.sewol.log.LockingException;
+import de.uni.freiburg.iig.telematik.sewol.log.Log;
+import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
+import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
+import de.uni.freiburg.iig.telematik.sewol.parser.ParsingMode;
+import de.uni.freiburg.iig.telematik.sewol.parser.xes.XESLogParser;
+import de.uni.freiburg.iig.telematik.sewol.writer.LogWriter;
+import de.uni.freiburg.iig.telematik.sewol.writer.PerspectiveException;
 
 public class LogCreator {
 
@@ -36,6 +34,7 @@ public class LogCreator {
 		entryA.setOriginator("Mark");
 		entryA.setGroup("Clerk");
 		entryA.setTimestamp(d);
+		
 		
 		LogEntry entryB = new LogEntry("pay");
 		entryB.setEventType(EventType.complete);

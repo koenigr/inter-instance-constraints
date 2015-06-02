@@ -2,13 +2,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 public class Run {
 	
 public static void main(String[] args) throws Exception {
 	
-File f = new File("examples/myIICollection");
+File f = new File("examples/example1");
 InputStream fs = new FileInputStream(f);
 // create a CharStream that reads from standard input
 ANTLRInputStream input = new ANTLRInputStream(fs);

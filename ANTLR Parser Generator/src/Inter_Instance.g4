@@ -2,21 +2,21 @@
 grammar Inter_Instance;
 
 
-file  	: (statement)*   EOF; // TODO find a better name
+file  	: (define)* (statement)*   EOF; // TODO find a better name
 
-// TODO : define own literals
+define : DEF CLAUSE '(' ARGS (',' ARGS)* ')'; 
 
 statement	: explicit
 	 		| assignment
-			| staticdynamic
-			| derivation
 			;
 			
-explicit 	: 'SET' (extern|specification) ;
+explicit 	: SET (extern|specification) (',' (extern|specification))* ;
 
-assignment : 'IF' assignmentBody ('AND' assignmentBody)* 'THEN' assignmentHead ;
+assignment : (DESC)? IF assignmentBody THEN assignmentHead ;
 
-assignmentBody 	: specification
+assignmentBody 	: clauses ( KONJ clauses)* ;
+
+clauses			: specification
 				| status
 				| comparison
 				| conditional
@@ -25,102 +25,106 @@ assignmentBody 	: specification
 
 assignmentHead : enforcement ;
 
-staticdynamic : 'IF' staticdynamicBody ('AND' staticdynamicBody)* 'THEN' staticdynamicHead ;
-
-staticdynamicBody 	: specification
-					| comparison
-					| conditional
-					;
-
-staticdynamicHead   : enforcement
-					| specification 
-					;
-
-derivation : 'IF' derivationBody ('AND' derivationBody)* 'THEN' derivationHead ;
-
-derivationBody 		: specification
-					| status
-					;
-
-derivationHead   	: enforcement
-					| specification 
-					;		
 					
 /* Literals */
-extern	: 'related(' user ',' user ')'
-		| 'partner_of(' user ',' user ')'
-		| 'same_group(' user ',' user ')'
+extern	: ut 'is related to' ut			#related
+		| ut 'is partner of' ut			#partnerof
+		| ut 'is in same group as' ut	#samegroup
 		;
 		
-specification	: 'role(' role ',' task ')'
-				| 'user(' user ',' task ')'
-				| 'belong(' user ',' role ')'
-				| 'glb(' role ',' task ')'
-				| 'lub(' role ',' task ')'
-				| '>(' role ',' role ')'
-				| 'critical_task_pair(' task ',' task ')'
+specification	: 'role' rt 'must execute' tt  		#roleTask
+				| 'user' ut 'must execute' tt 		#userTask
+				| 'user' ut 'belongs to role' rt 	#userRole
+				|  rt 'is glb of' tt 				#glb
+				|  rt 'is lub' tt 					#lub
+				|  rt 'dominates' rt 				#dominate
+				| 'critical_task_pair('tt','tt')'	#critTaskPair
 				;
 
-enforcement		: 'cannot_do_u(' user ',' task ')' 
-				| 'cannot_do_r(' role ',' task ')'
-				| 'must_execute_u(' user ',' task ')'
-				| 'must_execute_r(' role ',' task ')'
-				| 'panic'
+enforcement		: 'user'? ut 'cannot execute' tt	#cannotUser
+				| 'role' rt 'cannot execute' tt		#cannotRole
+				|  ut 'must execute' tt				#mustUser
+				| 'mrole' rt 'must execute' tt 		#mustRole
+				| 'panic'							#panic
 				;
 			
-status			: 'executed_u(' user ',' task ')'
-				| 'executed_r(' role ',' task ')'
-				| 'assigned(' user ',' task ')'
-				| 'aborted(' task ')'
-				| 'succeeded(' task ')'
-				| 'collaborator(' user ',' user ')'
+status			:  'user'? ut 'executed' tt			#executedUser
+				|  'role' rt 'executed' tt			#executedRole
+				|  ut 'is assigned to' tt			#assignedUser
+				|  tt 'aborted'						#abortedTask
+				|  tt'succeeded'					#succeededTask
+				|  ut 'is collaborator of' ut		#collaborator
+				|  ut 'is collaborator of' ut 'in tasks' tt ',' tt #collaboratorExt
 				;
 	
-conditional		: 'count(' (specification|status|comparison) ',' nt ')'
-				| 'count(' (nt) ',' (specification|status|comparison) ',' nt ')' // TODO instead of user all vars
-				| 'avg(' (nt)',' (specification|status|comparison|output|input) ',' nt ')' // TODO instead of user all vars
-				| 'min(' (nt) ',' (specification|status|comparison|output|input) ',' nt ')' // TODO instead of user all vars
-				| 'max(' (nt) ',' (specification|status|comparison|output|input) ',' nt ')' // TODO instead of user all vars
-				| 'sum(' (nt) ',' (specification|status|comparison|output|input) ',' nt ')' // TODO instead of user all vars
+conditional		: 'NUMBER' WHERE conditionalBody 'IS' nt							#numSimple
+				| 'NUMBER OF' (VARIABLE|ut|tt) WHERE conditionalBody 'IS' nt		#numVars
+				| 'NUMBER OF DIFF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt	#numDiff
+				| 'SUM OF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt			#sum
+				| 'AVG OF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt			#avg
+				| 'MIN OF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt			#min
+				| 'MAX OF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt			#max
 				;
+
+conditionalBody 	: clauses ( KONJ clauses)* ;
 	
-comparison 		: (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')') ('='|'!=') (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')')
-				| (taut|nt|'('arithmetic')') ('<'|'<='|'>'|'>=') (taut|nt|'('arithmetic')')
+comparison 		: equalityParams ('='|'!=') equalityParams 		 					#equality
+				| unequalityParams ('<'|'<='|'>'|'>=') unequalityParams				#unequality
 				; 
+				
+equalityParams	: (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')');
+
+unequalityParams: (taut|nt|rt|'('arithmetic')'); // TODO hier ist am Anfang noch nicht klar, was es ist, deshalb sollte es nicht gleich abgestempelt werden
 				
 arithmetic		: nt ('*'|'/'|'+'|'-') nt
 				| '('arithmetic')' ('*'|'/'|'+'|'-') '('arithmetic')';
 	
 // Constants and Vars
-user	: CONSTANT | VARIABLE ; 	// TODO: add surname
-role	: CONSTANT | VARIABLE ;
-task 	: intra|inter|interp;
+ut	: CONSTANT | VARIABLE ; 	// TODO: add surname
+rt	: CONSTANT | VARIABLE | ut '.Role' | tt '.Role';
+tt 	: intra|inter|interp;
 intra	: CONSTANT|VARIABLE ;
 inter	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
 interp	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
 nt		: NUMBER 
 		| VARIABLE 
-		| 'timestamp(' task ',' taut ')'	
-		| 'time_interval(' task ',' task ')'; 
-ut		: user ;
-rt		: role ;
+		| 'timestamp(' tt ',' taut ')'	
+		| 'time_interval(' tt ',' tt ')'
+		| output
+		| input
+		;
+		
 ct 		: '??' ; // timepoint symbols
-tt		: task ;
-ti		: task ;
-wt		: 'workflow' ;
-taut	:  VARIABLE ;
-input	: 'Input(' task ').' inputvar ;
+ti		: '??' ;
+wt		: '??' ;
+taut	:  VARIABLE|ct ;
+input	: 'Input(' tt ').' inputvar ;
 inputvar: VARIABLE ; // TODO: es sollte auch Kleinschreibung möglich sein
-output 	: 'Output(' task ').' outputvar;
+output 	: 'Output(' tt ').' outputvar;
 outputvar: VARIABLE;
 
-STRING  : [A-Z][a-z]+;
+
+// LEXER PART
+
+MULTILINE_COMMENTS  : '/*' .*?  '*/' -> skip;
+SINGLE_LINE_COMMENTS: '//' .*? '\n'    -> skip ;
+
+SET		: 'SET';
+IF		: 'IF' | 'if' | 'If' | 'iF';
+THEN	: 'THEN';
+KONJ 	: 'AND'; // TODO
+DISJ	: 'OR'; // TODO
+DEF		: ('DEF'|'DEFINE'|'define'|'def');   
+DESC	: ('DESC') [ ]*? '"' .*?  '"'; // TODO
+ARGS	: ('UT'|'RT'|'TT'|'WT'|'TauT'|'NT');
+WHERE	: 'WHERE';
+
 CONSTANT : '\''.*?'\'' ;
-VARIABLE : [A-Z0-9]+ ;
-STRING_NUM : [A-Za-z0-9]+ ;
+VARIABLE : [A-Za-z0-9]+ ;
+CLAUSE	: [a-z_]+;
 NUMBER : [1-9][0-9]+ ;
 
-// TODO Comments erweitern
-COMMENTS: '/*' .*?  '*/' -> skip;
+
+// TODO Whitespaces ganz zum Schluss
 WS		: [ \t\r\n]+ -> skip;
 
