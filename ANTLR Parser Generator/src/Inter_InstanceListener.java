@@ -38,15 +38,15 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitStatement(Inter_InstanceParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#explicit}.
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#explicitSetting}.
 	 * @param ctx the parse tree
 	 */
-	void enterExplicit(Inter_InstanceParser.ExplicitContext ctx);
+	void enterExplicitSetting(Inter_InstanceParser.ExplicitSettingContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#explicit}.
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#explicitSetting}.
 	 * @param ctx the parse tree
 	 */
-	void exitExplicit(Inter_InstanceParser.ExplicitContext ctx);
+	void exitExplicitSetting(Inter_InstanceParser.ExplicitSettingContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#assignment}.
 	 * @param ctx the parse tree
@@ -88,55 +88,353 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#extern}.
+	 * Enter a parse tree produced by the {@code related}
+	 * labeled alternative in {@link Inter_InstanceParser#extern}.
 	 * @param ctx the parse tree
 	 */
-	void enterExtern(Inter_InstanceParser.ExternContext ctx);
+	void enterRelated(Inter_InstanceParser.RelatedContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#extern}.
+	 * Exit a parse tree produced by the {@code related}
+	 * labeled alternative in {@link Inter_InstanceParser#extern}.
 	 * @param ctx the parse tree
 	 */
-	void exitExtern(Inter_InstanceParser.ExternContext ctx);
+	void exitRelated(Inter_InstanceParser.RelatedContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#specification}.
+	 * Enter a parse tree produced by the {@code partnerof}
+	 * labeled alternative in {@link Inter_InstanceParser#extern}.
 	 * @param ctx the parse tree
 	 */
-	void enterSpecification(Inter_InstanceParser.SpecificationContext ctx);
+	void enterPartnerof(Inter_InstanceParser.PartnerofContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#specification}.
+	 * Exit a parse tree produced by the {@code partnerof}
+	 * labeled alternative in {@link Inter_InstanceParser#extern}.
 	 * @param ctx the parse tree
 	 */
-	void exitSpecification(Inter_InstanceParser.SpecificationContext ctx);
+	void exitPartnerof(Inter_InstanceParser.PartnerofContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#enforcement}.
+	 * Enter a parse tree produced by the {@code samegroup}
+	 * labeled alternative in {@link Inter_InstanceParser#extern}.
 	 * @param ctx the parse tree
 	 */
-	void enterEnforcement(Inter_InstanceParser.EnforcementContext ctx);
+	void enterSamegroup(Inter_InstanceParser.SamegroupContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#enforcement}.
+	 * Exit a parse tree produced by the {@code samegroup}
+	 * labeled alternative in {@link Inter_InstanceParser#extern}.
 	 * @param ctx the parse tree
 	 */
-	void exitEnforcement(Inter_InstanceParser.EnforcementContext ctx);
+	void exitSamegroup(Inter_InstanceParser.SamegroupContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#status}.
+	 * Enter a parse tree produced by the {@code roleTask}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatus(Inter_InstanceParser.StatusContext ctx);
+	void enterRoleTask(Inter_InstanceParser.RoleTaskContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#status}.
+	 * Exit a parse tree produced by the {@code roleTask}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatus(Inter_InstanceParser.StatusContext ctx);
+	void exitRoleTask(Inter_InstanceParser.RoleTaskContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#conditional}.
+	 * Enter a parse tree produced by the {@code userTask}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
 	 * @param ctx the parse tree
 	 */
-	void enterConditional(Inter_InstanceParser.ConditionalContext ctx);
+	void enterUserTask(Inter_InstanceParser.UserTaskContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#conditional}.
+	 * Exit a parse tree produced by the {@code userTask}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
 	 * @param ctx the parse tree
 	 */
-	void exitConditional(Inter_InstanceParser.ConditionalContext ctx);
+	void exitUserTask(Inter_InstanceParser.UserTaskContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code userRole}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void enterUserRole(Inter_InstanceParser.UserRoleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code userRole}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void exitUserRole(Inter_InstanceParser.UserRoleContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code glb}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void enterGlb(Inter_InstanceParser.GlbContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code glb}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void exitGlb(Inter_InstanceParser.GlbContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code lub}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void enterLub(Inter_InstanceParser.LubContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code lub}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void exitLub(Inter_InstanceParser.LubContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code dominate}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void enterDominate(Inter_InstanceParser.DominateContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code dominate}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void exitDominate(Inter_InstanceParser.DominateContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code critTaskPair}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void enterCritTaskPair(Inter_InstanceParser.CritTaskPairContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code critTaskPair}
+	 * labeled alternative in {@link Inter_InstanceParser#specification}.
+	 * @param ctx the parse tree
+	 */
+	void exitCritTaskPair(Inter_InstanceParser.CritTaskPairContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code cannotUser}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCannotUser(Inter_InstanceParser.CannotUserContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code cannotUser}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCannotUser(Inter_InstanceParser.CannotUserContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code cannotRole}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCannotRole(Inter_InstanceParser.CannotRoleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code cannotRole}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCannotRole(Inter_InstanceParser.CannotRoleContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code mustUser}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void enterMustUser(Inter_InstanceParser.MustUserContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code mustUser}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void exitMustUser(Inter_InstanceParser.MustUserContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code mustRole}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void enterMustRole(Inter_InstanceParser.MustRoleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code mustRole}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void exitMustRole(Inter_InstanceParser.MustRoleContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code panic}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void enterPanic(Inter_InstanceParser.PanicContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code panic}
+	 * labeled alternative in {@link Inter_InstanceParser#enforcement}.
+	 * @param ctx the parse tree
+	 */
+	void exitPanic(Inter_InstanceParser.PanicContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code executedUser}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterExecutedUser(Inter_InstanceParser.ExecutedUserContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code executedUser}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitExecutedUser(Inter_InstanceParser.ExecutedUserContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code executedRole}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterExecutedRole(Inter_InstanceParser.ExecutedRoleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code executedRole}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitExecutedRole(Inter_InstanceParser.ExecutedRoleContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code assignedUser}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignedUser(Inter_InstanceParser.AssignedUserContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code assignedUser}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignedUser(Inter_InstanceParser.AssignedUserContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code abortedTask}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterAbortedTask(Inter_InstanceParser.AbortedTaskContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code abortedTask}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitAbortedTask(Inter_InstanceParser.AbortedTaskContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code succeededTask}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterSucceededTask(Inter_InstanceParser.SucceededTaskContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code succeededTask}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitSucceededTask(Inter_InstanceParser.SucceededTaskContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code collaborator}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterCollaborator(Inter_InstanceParser.CollaboratorContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code collaborator}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitCollaborator(Inter_InstanceParser.CollaboratorContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code collaboratorExt}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterCollaboratorExt(Inter_InstanceParser.CollaboratorExtContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code collaboratorExt}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitCollaboratorExt(Inter_InstanceParser.CollaboratorExtContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code numSimple}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumSimple(Inter_InstanceParser.NumSimpleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code numSimple}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumSimple(Inter_InstanceParser.NumSimpleContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code numVars}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumVars(Inter_InstanceParser.NumVarsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code numVars}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumVars(Inter_InstanceParser.NumVarsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code numDiff}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumDiff(Inter_InstanceParser.NumDiffContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code numDiff}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumDiff(Inter_InstanceParser.NumDiffContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code sum}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterSum(Inter_InstanceParser.SumContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code sum}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitSum(Inter_InstanceParser.SumContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code avg}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterAvg(Inter_InstanceParser.AvgContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code avg}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitAvg(Inter_InstanceParser.AvgContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code min}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterMin(Inter_InstanceParser.MinContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code min}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitMin(Inter_InstanceParser.MinContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code max}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterMax(Inter_InstanceParser.MaxContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code max}
+	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitMax(Inter_InstanceParser.MaxContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#conditionalBody}.
 	 * @param ctx the parse tree
@@ -148,15 +446,29 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitConditionalBody(Inter_InstanceParser.ConditionalBodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#comparison}.
+	 * Enter a parse tree produced by the {@code equality}
+	 * labeled alternative in {@link Inter_InstanceParser#comparison}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparison(Inter_InstanceParser.ComparisonContext ctx);
+	void enterEquality(Inter_InstanceParser.EqualityContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#comparison}.
+	 * Exit a parse tree produced by the {@code equality}
+	 * labeled alternative in {@link Inter_InstanceParser#comparison}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparison(Inter_InstanceParser.ComparisonContext ctx);
+	void exitEquality(Inter_InstanceParser.EqualityContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code unequality}
+	 * labeled alternative in {@link Inter_InstanceParser#comparison}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnequality(Inter_InstanceParser.UnequalityContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code unequality}
+	 * labeled alternative in {@link Inter_InstanceParser#comparison}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnequality(Inter_InstanceParser.UnequalityContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#equalityParams}.
 	 * @param ctx the parse tree

@@ -6,17 +6,17 @@ file  	: (define)* (statement)*   EOF; // TODO find a better name
 
 define : DEF CLAUSE '(' ARGS (',' ARGS)* ')'; 
 
-statement	: explicit
+statement	: explicitSetting
 	 		| assignment
 			;
 			
-explicit 	: SET (extern|specification) (',' (extern|specification))* ;
+explicitSetting 	: SET (extern|specification) (',' (extern|specification))* ;
 
 assignment : (DESC)? IF assignmentBody THEN assignmentHead ;
 
 assignmentBody 	: clauses ( KONJ clauses)* ;
 
-clauses			: specification
+clauses			: specification		
 				| status
 				| comparison
 				| conditional

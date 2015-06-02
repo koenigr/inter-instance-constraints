@@ -4,6 +4,9 @@ import java.io.InputStream;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
 
 public class Run {
 	
@@ -19,10 +22,19 @@ Inter_InstanceLexer lexer = new Inter_InstanceLexer(input);
 CommonTokenStream tokens = new CommonTokenStream(lexer);
 // create a parser that feeds off the tokens buffer
 Inter_InstanceParser parser = new Inter_InstanceParser(tokens);
-// begin parsing at rule r
-Inter_InstanceParser.FileContext tree = parser.file();
+// begin parsing at rule file
 
+ParseTree tree2 = parser.file();
+
+fs.close();
+
+ParseTreeWalker walker = new ParseTreeWalker();
+walker.walk(new MyListener(), tree2);
+
+/*
+Inter_InstanceParser.FileContext tree = parser.file();
 tree.inspect(parser);
+*/
 }
 
 }
