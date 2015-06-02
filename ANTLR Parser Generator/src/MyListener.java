@@ -21,22 +21,33 @@ import storage.container.externspec.RoleTask;
 import storage.container.externspec.SameGroup;
 import storage.container.externspec.UserRole;
 import storage.container.externspec.UserTask;
+import storage.container.rules.RuleBody;
+import storage.container.rules.RuleContainer;
+import storage.container.rules.UserCannotDoRule;
+import storage.container.rules.CannotDoUser;
 
 public class MyListener extends Inter_InstanceBaseListener {
 	
 	private ExternAndSpecificationContainer esc;
 	
-	private final String OUTPUT_FILE = "prologfiles/externspec.pl";
+	private RuleContainer rc;
+	
+	private final String OUTPUT_FILE_SPEC = "prologfiles/externspec.pl";
+	private final String OUTPUT_FILE_RULE = "prologfiles/rules.pl";
 	
 	private Logger logger = LoggerFactory.getLogger();
 	
-	private enum Context {UNDEF, SETTING, DEFINE, ASSIGNMENT}
+	private enum Context {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY}
 	
 	private Context context = Context.UNDEF;
 	
+	private RuleBody body;
+	
 	public MyListener() {
 		
-		esc = new ExternAndSpecificationContainer(OUTPUT_FILE);
+		esc = new ExternAndSpecificationContainer(OUTPUT_FILE_SPEC);
+		
+		rc = new RuleContainer(OUTPUT_FILE_RULE);
 		
 		try {
 			LoggerFactory.setup();
@@ -52,6 +63,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	public void exitFile(Inter_InstanceParser.FileContext ctx) {
 		logger.info("Exiting File");
 		esc.printToFile();
+		rc.printToFile();
 	}
 	
 	public void enterExplicitSetting(Inter_InstanceParser.ExplicitSettingContext ctx) {
@@ -73,17 +85,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting Define context");
 		context = Context.UNDEF;
 	}
-	
-	public void enterAssignment(Inter_InstanceParser.AssignmentContext ctx) {
-		logger.info("Entering Assignment context");
-		context = Context.ASSIGNMENT;
-	}
-	
-	public void exitAssignment(Inter_InstanceParser.AssignmentContext ctx) {
-		logger.info("Exiting Assignment context");
-		context = Context.UNDEF;
-	}
-	
+
 	@Override
 	public void exitRelated(Inter_InstanceParser.RelatedContext ctx) {
 		logger.info("Exiting Related context");
@@ -132,13 +134,14 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void enterAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) {
-		// TODO Auto-generated method stub
+		context = Context.ASSIGNMENT_BODY;
+		body = new RuleBody();
 		
 	}
 
 	@Override
 	public void exitAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) {
-		// TODO Auto-generated method stub
+		context = Context.UNDEF;
 		
 	}
 
@@ -156,13 +159,13 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void enterAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) {
-		// TODO Auto-generated method stub
+		context = Context.ASSIGNMENT_HEAD;
 		
 	}
 
 	@Override
 	public void exitAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) {
-		// TODO Auto-generated method stub
+		context = Context.UNDEF;
 		
 	}
 
@@ -296,19 +299,46 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitCannotUser(Inter_InstanceParser.CannotUserContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterCannotRole(Inter_InstanceParser.CannotRoleContext ctx) {
-		// TODO Auto-generated method stub
+		switch(context) {
+		case ASSIGNMENT_HEAD : 
+			System.out.println("Head User Cannot do");
+			UserCannotDoRule rule = new UserCannotDoRule();
+			if (ctx.getChildCount() == 3) {
+				String user = ctx.getChild(0).getText();
+				String task = ctx.getChild(2).getText();
+				rule.setHead(new CannotDoUser(user, task));
+				rule.setBody(body);
+			} else {
+				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
+			}
+			
+			rc.addUserCannotDoRule(rule);
+			break;
+			
+		case ASSIGNMENT_BODY :
+		default: break;
+		}
 		
 	}
 
 	@Override
 	public void exitCannotRole(Inter_InstanceParser.CannotRoleContext ctx) {
-		// TODO Auto-generated method stub
+		switch(context) {
+		case ASSIGNMENT_HEAD : 
+			System.out.println("Head");
+			UserCannotDoRule rule = new UserCannotDoRule();
+			if (ctx.getChildCount() == 3) {
+				String user = ctx.getChild(0).getText();
+				String task = ctx.getChild(2).getText();
+				rule.setHead(new CannotDoUser(user, task));
+			} else {
+				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
+			}
+			break;
+			
+		case ASSIGNMENT_BODY :
+		default: break;
+		}
 		
 	}
 
