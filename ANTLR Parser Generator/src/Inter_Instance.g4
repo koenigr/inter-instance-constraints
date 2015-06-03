@@ -72,7 +72,7 @@ comparison 		: equalityParams ('='|'!=') equalityParams 		 					#equality
 				| unequalityParams ('<'|'<='|'>'|'>=') unequalityParams				#unequality
 				; 
 				
-equalityParams	: (ut|rt|ct|tt|ti|wt|nt|'('arithmetic')');
+equalityParams	: (nt|rt|ct|tt|ti|wt|ut|'('arithmetic')');
 
 unequalityParams: (taut|nt|rt|'('arithmetic')'); // TODO hier ist am Anfang noch nicht klar, was es ist, deshalb sollte es nicht gleich abgestempelt werden
 				
@@ -88,7 +88,7 @@ inter	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
 interp	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
 nt		: NUMBER 
 		| VARIABLE 
-		| 'timestamp(' tt ',' taut ')'	
+		| 'timestamp(' tt ',' taut ')'	// TODO Das ist TauT
 		| 'time_interval(' tt ',' tt ')'
 		| output
 		| input

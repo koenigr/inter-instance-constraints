@@ -37,9 +37,13 @@ public class MyListener extends Inter_InstanceBaseListener {
 	
 	private Logger logger = LoggerFactory.getLogger();
 	
-	private enum Context {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY}
+	private enum InputContext {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY}
 	
-	private Context context = Context.UNDEF;
+	private InputContext inputContext = InputContext.UNDEF;
+	
+	private enum RuleContext {UNDEF, INTRAINSTANCE, INTERINSTANCE, INTERPROCESS}
+	
+	private RuleContext ruleContext = RuleContext.UNDEF;
 	
 	private RuleBody body;
 	
@@ -67,28 +71,28 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 	
 	public void enterExplicitSetting(Inter_InstanceParser.ExplicitSettingContext ctx) {
-		logger.info("Entering Explicit setting context");
-		context = Context.SETTING;
+		logger.info("Entering Explicit setting inputContext");
+		inputContext = InputContext.SETTING;
 	}
 	
 	public void exitExplicitSetting(Inter_InstanceParser.ExplicitSettingContext ctx) {
-		logger.info("Exiting Explicit setting context");
-		context = Context.UNDEF;
+		logger.info("Exiting Explicit setting inputContext");
+		inputContext = InputContext.UNDEF;
 	}
 	
 	public void enterDefine(Inter_InstanceParser.DefineContext ctx) {
-		logger.info("Entering Define context");
-		context = Context.DEFINE;
+		logger.info("Entering Define inputContext");
+		inputContext = InputContext.DEFINE;
 	}
 	
 	public void exitDefine(Inter_InstanceParser.DefineContext ctx) {
-		logger.info("Exiting Define context");
-		context = Context.UNDEF;
+		logger.info("Exiting Define inputContext");
+		inputContext = InputContext.UNDEF;
 	}
 
 	@Override
 	public void exitRelated(Inter_InstanceParser.RelatedContext ctx) {
-		logger.info("Exiting Related context");
+		logger.info("Exiting Related inputContext");
 		Related r = new Related("","");
 		int numOfChildren = ctx.getChildCount();
 		
@@ -103,7 +107,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 		}
 		
 
-		if (context == Context.SETTING) {
+		if (inputContext == InputContext.SETTING) {
 			esc.addRelated(r);
 		}
 	}
@@ -134,14 +138,14 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void enterAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) {
-		context = Context.ASSIGNMENT_BODY;
+		inputContext = InputContext.ASSIGNMENT_BODY;
 		body = new RuleBody();
 		
 	}
 
 	@Override
 	public void exitAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) {
-		context = Context.UNDEF;
+		inputContext = InputContext.UNDEF;
 		
 	}
 
@@ -159,20 +163,20 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void enterAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) {
-		context = Context.ASSIGNMENT_HEAD;
+		inputContext = InputContext.ASSIGNMENT_HEAD;
 		
 	}
 
 	@Override
 	public void exitAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) {
-		context = Context.UNDEF;
+		inputContext = InputContext.UNDEF;
 		
 	}
 
 	@Override
 	public void exitPartnerof(Inter_InstanceParser.PartnerofContext ctx) {
-		logger.info("Exiting Partner context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting Partner inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 3) {
 			String user1 = ctx.getChild(0).getText();
 			String user2 = ctx.getChild(2).getText();
@@ -186,8 +190,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 	
 	@Override
 	public void exitSamegroup(Inter_InstanceParser.SamegroupContext ctx) {
-		logger.info("Exiting sameGroup context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting sameGroup inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 3) {
 			String user1 = ctx.getChild(0).getText();
 			String user2 = ctx.getChild(2).getText();
@@ -200,8 +204,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitRoleTask(Inter_InstanceParser.RoleTaskContext ctx) {
-		logger.info("Exiting Role Task context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting Role Task inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 4) {
 			String role = ctx.getChild(1).getText();
 			String task = ctx.getChild(3).getText();
@@ -214,8 +218,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitUserTask(Inter_InstanceParser.UserTaskContext ctx) {
-		logger.info("Exiting User Task context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting User Task inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 4) {
 			String user = ctx.getChild(1).getText();
 			String task = ctx.getChild(3).getText();
@@ -228,8 +232,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitUserRole(Inter_InstanceParser.UserRoleContext ctx) {
-		logger.info("Exiting User Role context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting User Role inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 4) {
 			String user = ctx.getChild(1).getText();
 			String role = ctx.getChild(3).getText();
@@ -242,8 +246,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitGlb(Inter_InstanceParser.GlbContext ctx) {
-		logger.info("Exiting Glb context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting Glb inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 3) {
 			String role = ctx.getChild(0).getText();
 			String task = ctx.getChild(2).getText();
@@ -256,8 +260,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitLub(Inter_InstanceParser.LubContext ctx) {
-		logger.info("Exiting Lub context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting Lub inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 3) {
 			String role = ctx.getChild(0).getText();
 			String task = ctx.getChild(2).getText();
@@ -270,8 +274,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitDominate(Inter_InstanceParser.DominateContext ctx) {
-		logger.info("Exiting Dominate context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting Dominate inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 3) {
 				String role1 = ctx.getChild(0).getText();
 				String role2 = ctx.getChild(2).getText();
@@ -284,8 +288,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitCritTaskPair(Inter_InstanceParser.CritTaskPairContext ctx) {
-		logger.info("Exiting Critical Task Pair context");
-		if (context == Context.SETTING) {
+		logger.info("Exiting Critical Task Pair inputContext");
+		if (inputContext == InputContext.SETTING) {
 			if (ctx.getChildCount() == 5) {
 				String task1 = ctx.getChild(1).getText();
 				String task2 = ctx.getChild(3).getText();
@@ -299,7 +303,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitCannotUser(Inter_InstanceParser.CannotUserContext ctx) {
-		switch(context) {
+		switch(inputContext) {
 		case ASSIGNMENT_HEAD : 
 			System.out.println("Head User Cannot do");
 			UserCannotDoRule rule = new UserCannotDoRule();
@@ -323,7 +327,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitCannotRole(Inter_InstanceParser.CannotRoleContext ctx) {
-		switch(context) {
+		switch(inputContext) {
 		case ASSIGNMENT_HEAD : 
 			System.out.println("Head");
 			UserCannotDoRule rule = new UserCannotDoRule();
@@ -427,19 +431,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterSucceededTask(Inter_InstanceParser.SucceededTaskContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitSucceededTask(Inter_InstanceParser.SucceededTaskContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterCollaborator(Inter_InstanceParser.CollaboratorContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -451,19 +443,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterCollaboratorExt(Inter_InstanceParser.CollaboratorExtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitCollaboratorExt(Inter_InstanceParser.CollaboratorExtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterNumSimple(Inter_InstanceParser.NumSimpleContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -475,19 +455,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterNumVars(Inter_InstanceParser.NumVarsContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitNumVars(Inter_InstanceParser.NumVarsContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterNumDiff(Inter_InstanceParser.NumDiffContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -499,19 +467,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterSum(Inter_InstanceParser.SumContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitSum(Inter_InstanceParser.SumContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterAvg(Inter_InstanceParser.AvgContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -523,22 +479,11 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterMin(Inter_InstanceParser.MinContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitMin(Inter_InstanceParser.MinContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void enterMax(Inter_InstanceParser.MaxContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void exitMax(Inter_InstanceParser.MaxContext ctx) {
@@ -559,43 +504,19 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterEquality(Inter_InstanceParser.EqualityContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitEquality(Inter_InstanceParser.EqualityContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void enterUnequality(Inter_InstanceParser.UnequalityContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void exitUnequality(Inter_InstanceParser.UnequalityContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void enterEqualityParams(Inter_InstanceParser.EqualityParamsContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void exitEqualityParams(Inter_InstanceParser.EqualityParamsContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterUnequalityParams(Inter_InstanceParser.UnequalityParamsContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -607,31 +528,14 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterArithmetic(Inter_InstanceParser.ArithmeticContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitArithmetic(Inter_InstanceParser.ArithmeticContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void enterUt(Inter_InstanceParser.UtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void exitUt(Inter_InstanceParser.UtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterRt(Inter_InstanceParser.RtContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -643,19 +547,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterTt(Inter_InstanceParser.TtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitTt(Inter_InstanceParser.TtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterIntra(Inter_InstanceParser.IntraContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -667,19 +559,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterInter(Inter_InstanceParser.InterContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitInter(Inter_InstanceParser.InterContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterInterp(Inter_InstanceParser.InterpContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -691,19 +571,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterNt(Inter_InstanceParser.NtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitNt(Inter_InstanceParser.NtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterCt(Inter_InstanceParser.CtContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -715,22 +583,11 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterTi(Inter_InstanceParser.TiContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitTi(Inter_InstanceParser.TiContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void enterWt(Inter_InstanceParser.WtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void exitWt(Inter_InstanceParser.WtContext ctx) {
@@ -738,11 +595,6 @@ public class MyListener extends Inter_InstanceBaseListener {
 		
 	}
 
-	@Override
-	public void enterTaut(Inter_InstanceParser.TautContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void exitTaut(Inter_InstanceParser.TautContext ctx) {
@@ -750,20 +602,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 		
 	}
 
-	@Override
-	public void enterInput(Inter_InstanceParser.InputContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void exitInput(Inter_InstanceParser.InputContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterInputvar(Inter_InstanceParser.InputvarContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -775,19 +616,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterOutput(Inter_InstanceParser.OutputContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitOutput(Inter_InstanceParser.OutputContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterOutputvar(Inter_InstanceParser.OutputvarContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
