@@ -616,13 +616,25 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCt(Inter_InstanceParser.CtContext ctx) { }
+	@Override public void enterTp(Inter_InstanceParser.TpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCt(Inter_InstanceParser.CtContext ctx) { }
+	@Override public void exitTp(Inter_InstanceParser.TpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTs(Inter_InstanceParser.TsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTs(Inter_InstanceParser.TsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

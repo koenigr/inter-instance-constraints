@@ -570,15 +570,25 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitNt(Inter_InstanceParser.NtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#ct}.
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#tp}.
 	 * @param ctx the parse tree
 	 */
-	void enterCt(Inter_InstanceParser.CtContext ctx);
+	void enterTp(Inter_InstanceParser.TpContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#ct}.
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#tp}.
 	 * @param ctx the parse tree
 	 */
-	void exitCt(Inter_InstanceParser.CtContext ctx);
+	void exitTp(Inter_InstanceParser.TpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#ts}.
+	 * @param ctx the parse tree
+	 */
+	void enterTs(Inter_InstanceParser.TsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#ts}.
+	 * @param ctx the parse tree
+	 */
+	void exitTs(Inter_InstanceParser.TsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#ti}.
 	 * @param ctx the parse tree

@@ -72,7 +72,7 @@ comparison 		: equalityParams ('='|'!=') equalityParams 		 					#equality
 				| inequalityParams ('<'|'<='|'>'|'>=') inequalityParams				#unequality
 				; 
 				
-equalityParams	: (nt|rt|tp|tt|ti|wt|ut|'('arithmetic')');
+equalityParams	: (nt|rt|tp|tt|ti|wt|ut|'('arithmetic')'); // TODO hier ist am Anfang noch nicht klar, was es ist, deshalb sollte es nicht gleich abgestempelt werden
 
 inequalityParams: (taut|nt|rt|'('arithmetic')'); // TODO hier ist am Anfang noch nicht klar, was es ist, deshalb sollte es nicht gleich abgestempelt werden
 				
@@ -88,16 +88,19 @@ inter	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
 interp	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
 nt		: NUMBER 
 		| VARIABLE 
-		| 'timestamp(' tt ',' taut ')'	// TODO Das ist TauT
-		| 'time_interval(' tt ',' tt ')'
 		| variable
 		;
 		
-tp 		: '??' ; // timepoint symbols
+tp 		: YEAR? MONTH? DAY? HOUR? MINUTE? SECOND? MSECOND? ; // timepoint symbols // TODO das kann auch den Empty String matchen
 ts		: '??' ; // timeinterval symbols
 ti		: tt TASKINSTANCE ; // task instances
 wt		: '??' ; // workflow symbols
-taut	:  VARIABLE|tp ;
+taut	: VARIABLE
+		| tp
+		| ts
+		| 'timestamp(' tt ')'
+		| 'timeinterval(' tt ',' tt ')'
+		;
 variable: 'Var(' tt ').'CONSTANT;
 
 
@@ -107,7 +110,7 @@ MULTILINE_COMMENTS  : '/*' .*?  '*/' -> skip;
 SINGLE_LINE_COMMENTS: '//' .*? '\n'    -> skip ;
 
 // KEYWORDS
-SET		: 'SET';
+SET		: 'SET' | 'set'; // TODO hier auch Groß und Kleinschreibung vermischt
 IF		: 'IF' | 'if' | 'If' | 'iF';
 THEN	: 'THEN';
 KONJ 	: 'AND' | 'and'; // TODO
@@ -119,14 +122,21 @@ WHERE	: 'WHERE';
 ROLE	: '.Role';
 TASKINSTANCE : '.InstanceID';
 
-//
+// TIME POINTS
+YEAR		:	NUMBER 'y';
+MONTH		:	NUMBER 'm';
+DAY			:	NUMBER 'd';
+HOUR		:	NUMBER 'h';
+MINUTE		:	NUMBER 'min';
+SECOND		:	NUMBER 'sec';
+MSECOND	:	NUMBER 'ms';
 
 
 // ELEMENTARY 
 CONSTANT : '\''.*?'\'' ;
 VARIABLE : [A-Z][A-Za-z0-9]* ; 
 CLAUSE	: [a-z_]+;
-NUMBER : [0-9]* ; // Null muss auch erlaubt sein
+NUMBER : [0-9]+ ; // Null muss auch erlaubt sein
 STRING  : [A-Za-z0-9]+;
 
 
