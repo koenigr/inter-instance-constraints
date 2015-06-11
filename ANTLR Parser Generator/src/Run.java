@@ -12,7 +12,7 @@ public class Run {
 	
 public static void main(String[] args) throws Exception {
 	
-File f = new File("examples/example2");
+File f = new File("examples/IntraInstance_nonhierarchical");
 InputStream fs = new FileInputStream(f);
 // create a CharStream that reads from standard input
 ANTLRInputStream input = new ANTLRInputStream(fs);

@@ -60,28 +60,28 @@ status			:  'user'? ut 'executed' tt			#executedUser
 conditional		: 'NUMBER' WHERE conditionalBody 'IS' nt							#numSimple
 				| 'NUMBER OF' (VARIABLE|ut|tt) WHERE conditionalBody 'IS' nt		#numVars
 				| 'NUMBER OF DIFF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt	#numDiff
-				| 'SUM OF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt			#sum
-				| 'AVG OF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt			#avg
-				| 'MIN OF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt			#min
-				| 'MAX OF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt			#max
+				| 'SUM OF' (VARIABLE|ut|tt|nt)  WHERE conditionalBody 'IS' nt			#sum
+				| 'AVG OF' (VARIABLE|ut|tt|nt)  WHERE conditionalBody 'IS' nt			#avg
+				| 'MIN OF' (VARIABLE|ut|tt|nt)  WHERE conditionalBody 'IS' nt			#min
+				| 'MAX OF' (VARIABLE|ut|tt|nt)  WHERE conditionalBody 'IS' nt			#max
 				;
 
 conditionalBody 	: clauses ( KONJ clauses)* ;
 	
 comparison 		: equalityParams ('='|'!=') equalityParams 		 					#equality
-				| unequalityParams ('<'|'<='|'>'|'>=') unequalityParams				#unequality
+				| inequalityParams ('<'|'<='|'>'|'>=') inequalityParams				#unequality
 				; 
 				
-equalityParams	: (nt|rt|ct|tt|ti|wt|ut|'('arithmetic')');
+equalityParams	: (nt|rt|tp|tt|ti|wt|ut|'('arithmetic')');
 
-unequalityParams: (taut|nt|rt|'('arithmetic')'); // TODO hier ist am Anfang noch nicht klar, was es ist, deshalb sollte es nicht gleich abgestempelt werden
+inequalityParams: (taut|nt|rt|'('arithmetic')'); // TODO hier ist am Anfang noch nicht klar, was es ist, deshalb sollte es nicht gleich abgestempelt werden
 				
-arithmetic		: nt ('*'|'/'|'+'|'-') nt
+arithmetic		: nt|taut ('*'|'/'|'+'|'-') nt|taut // TautT, weil zB time1 - time2 = 30 days
 				| '('arithmetic')' ('*'|'/'|'+'|'-') '('arithmetic')';
 	
 // Constants and Vars
 ut	: CONSTANT | VARIABLE ; 	// TODO: add surname
-rt	: CONSTANT | VARIABLE | ut '.Role' | tt '.Role';
+rt	: CONSTANT | VARIABLE | ut ROLE | tt ROLE;
 tt 	: intra|inter|interp;
 intra	: CONSTANT|VARIABLE ;
 inter	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
@@ -90,25 +90,23 @@ nt		: NUMBER
 		| VARIABLE 
 		| 'timestamp(' tt ',' taut ')'	// TODO Das ist TauT
 		| 'time_interval(' tt ',' tt ')'
-		| output
-		| input
+		| variable
 		;
 		
-ct 		: '??' ; // timepoint symbols
-ti		: '??' ;
-wt		: '??' ;
-taut	:  VARIABLE|ct ;
-input	: 'Input(' tt ').' inputvar ;
-inputvar: VARIABLE ; // TODO: es sollte auch Kleinschreibung möglich sein
-output 	: 'Output(' tt ').' outputvar;
-outputvar: VARIABLE;
+tp 		: '??' ; // timepoint symbols
+ts		: '??' ; // timeinterval symbols
+ti		: tt TASKINSTANCE ; // task instances
+wt		: '??' ; // workflow symbols
+taut	:  VARIABLE|tp ;
+variable: 'Var(' tt ').'CONSTANT;
 
 
-// LEXER PART
+// LEXER PART // TODO move into own file
 
 MULTILINE_COMMENTS  : '/*' .*?  '*/' -> skip;
 SINGLE_LINE_COMMENTS: '//' .*? '\n'    -> skip ;
 
+// KEYWORDS
 SET		: 'SET';
 IF		: 'IF' | 'if' | 'If' | 'iF';
 THEN	: 'THEN';
@@ -118,13 +116,20 @@ DEF		: ('DEF'|'DEFINE'|'define'|'def');
 DESC	: ('DESC') [ ]*? '"' .*?  '"'; // TODO
 ARGS	: ('UT'|'RT'|'TT'|'WT'|'TauT'|'NT');
 WHERE	: 'WHERE';
+ROLE	: '.Role';
+TASKINSTANCE : '.InstanceID';
 
+//
+
+
+// ELEMENTARY 
 CONSTANT : '\''.*?'\'' ;
-VARIABLE : [A-Za-z0-9]+ ;
+VARIABLE : [A-Z][A-Za-z0-9]* ; 
 CLAUSE	: [a-z_]+;
-NUMBER : [1-9][0-9]+ ;
+NUMBER : [0-9]* ; // Null muss auch erlaubt sein
+STRING  : [A-Za-z0-9]+;
 
 
-// TODO Whitespaces ganz zum Schluss
+// SKIP WHITESPACES
 WS		: [ \t\r\n]+ -> skip;
 

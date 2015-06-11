@@ -480,15 +480,15 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitEqualityParams(Inter_InstanceParser.EqualityParamsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#unequalityParams}.
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#inequalityParams}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnequalityParams(Inter_InstanceParser.UnequalityParamsContext ctx);
+	void enterInequalityParams(Inter_InstanceParser.InequalityParamsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#unequalityParams}.
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#inequalityParams}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnequalityParams(Inter_InstanceParser.UnequalityParamsContext ctx);
+	void exitInequalityParams(Inter_InstanceParser.InequalityParamsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#arithmetic}.
 	 * @param ctx the parse tree
@@ -610,43 +610,13 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitTaut(Inter_InstanceParser.TautContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#input}.
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void enterInput(Inter_InstanceParser.InputContext ctx);
+	void enterVariable(Inter_InstanceParser.VariableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#input}.
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void exitInput(Inter_InstanceParser.InputContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#inputvar}.
-	 * @param ctx the parse tree
-	 */
-	void enterInputvar(Inter_InstanceParser.InputvarContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#inputvar}.
-	 * @param ctx the parse tree
-	 */
-	void exitInputvar(Inter_InstanceParser.InputvarContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#output}.
-	 * @param ctx the parse tree
-	 */
-	void enterOutput(Inter_InstanceParser.OutputContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#output}.
-	 * @param ctx the parse tree
-	 */
-	void exitOutput(Inter_InstanceParser.OutputContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#outputvar}.
-	 * @param ctx the parse tree
-	 */
-	void enterOutputvar(Inter_InstanceParser.OutputvarContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#outputvar}.
-	 * @param ctx the parse tree
-	 */
-	void exitOutputvar(Inter_InstanceParser.OutputvarContext ctx);
+	void exitVariable(Inter_InstanceParser.VariableContext ctx);
 }

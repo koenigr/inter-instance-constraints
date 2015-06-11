@@ -508,13 +508,13 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnequalityParams(Inter_InstanceParser.UnequalityParamsContext ctx) { }
+	@Override public void enterInequalityParams(Inter_InstanceParser.InequalityParamsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnequalityParams(Inter_InstanceParser.UnequalityParamsContext ctx) { }
+	@Override public void exitInequalityParams(Inter_InstanceParser.InequalityParamsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -664,49 +664,13 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInput(Inter_InstanceParser.InputContext ctx) { }
+	@Override public void enterVariable(Inter_InstanceParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInput(Inter_InstanceParser.InputContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInputvar(Inter_InstanceParser.InputvarContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInputvar(Inter_InstanceParser.InputvarContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOutput(Inter_InstanceParser.OutputContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOutput(Inter_InstanceParser.OutputContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterOutputvar(Inter_InstanceParser.OutputvarContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOutputvar(Inter_InstanceParser.OutputvarContext ctx) { }
+	@Override public void exitVariable(Inter_InstanceParser.VariableContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
