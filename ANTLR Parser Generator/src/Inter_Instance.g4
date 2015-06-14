@@ -75,7 +75,7 @@ comparison 		: equalityExpr
 				; 
 				
 equalityExpr	: VARIABLE equality VARIABLE
-				| ('('arithmeticExpr')'|nt) equality (nt|'('arithmeticExpr')')
+				| nt equality nt
 				| rt equality rt
 				| tp equality tp
 				| ts equality ts
@@ -85,10 +85,13 @@ equalityExpr	: VARIABLE equality VARIABLE
 				| ut equality ut
 				;
 
-inequalityExpr	: (tp|nt|rt|'('arithmetic')');
+inequalityExpr	: VARIABLE inequality VARIABLE
+				| nt inequality nt
+				| rt inequality rt
+				| tp inequality tp
+				| ts inequality ts
+				;
 				
-arithmeticExpr		: nt|tp| ts ('<'|'<='|'>'|'>=') nt|tp | ts// TautT, weil zB time1 - time2 = 30 days
-				| '('arithmetic')'  '('arithmetic')';
 	
 event			: 'assign' // TODO hier eine Funktion, die aus einem File liest
 				| 'ate_abort'
@@ -106,29 +109,31 @@ event			: 'assign' // TODO hier eine Funktion, die aus einem File liest
 unknownEvent	: CONSTANT;
 
 // Constants and Vars
-ut				: CONSTANT | VARIABLE ; 	// TODO: add surname
+ut				: CONSTANT | VARIABLE ;
 rt				: CONSTANT | VARIABLE | ut ROLE | tt ROLE;
 tt 				: intra|inter|interp;
 intra			: CONSTANT|VARIABLE ;
 inter			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
 interp			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
 nt				: NUMBER 
+				| '(' nt arithmetic nt ')'
 				| VARIABLE 
-				| variable
 				;
 				
 // timepoint symbols		
 tp 		: NUMBER '-' NUMBER '-' NUMBER  'T' NUMBER (':' NUMBER (':' NUMBER ('[,.]' NUMBER)?)? )? # dateTime
-		| NUMBER ('-' NUMBER ('-' NUMBER)? )?			# date 	 
-		| NUMBER (':' NUMBER (':' NUMBER ('[,.]' NUMBER)?)? )?		 # time
-		| 'timestamp(' tt ')'  #timestamp
-		| VARIABLE
+		| NUMBER ('-' NUMBER ('-' NUMBER)? )?						# date 	 
+		| NUMBER (':' NUMBER (':' NUMBER ('[,.]' NUMBER)?)? )?		# time
+		| '(' tp ADD ts ')'    										# relativeTimepoint
+		| 'timestamp(' tt ')'  										# timestamp
+		| VARIABLE 													# varTP
 		; 
 		
 // timeinterval symbols
-ts		: 'P' YEAR? MONTH? DAY? HOUR? MINUTE? SECOND? 
-		| 'timeinterval(' tt ',' tt ')' #timeinterval
-		| VARIABLE
+ts		: 'P' YEAR? MONTH? DAY? HOUR? MINUTE? SECOND? 				# absoluteInterval
+		| '(' tp SUB tp ')'											# timedifference
+		| 'timeinterval(' tt ',' tt ')'								# timeinterval
+		| VARIABLE													# varTS
 		; 
 	
 // task instances	
@@ -141,14 +146,14 @@ wt		: tt WORKFLOW ;
 wi 		: tt WORKFLOWINSTANCE;
 
 // task variables
-variable: 'Var(' tt ').'CONSTANT
+vt		: 'Var(' tt ').'CONSTANT
 		; 
 
 // Comparison Cases
 equality 	: EQUAL 		#equal
 			| NOTEQUAL		#noteual
 			;
-unequality	: LOWER			#lower
+inequality	: LOWER			#lower
 			| LEQ			#leq
 			| GREATER		#greater
 			| GEQ			#geq
