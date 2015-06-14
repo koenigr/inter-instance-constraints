@@ -2,21 +2,21 @@
 grammar Inter_Instance;
 
 
-file  	: (define)* (statement)*   EOF; // TODO find a better name
+file  	: (define)* (explicitSetting)* (assignment)*  EOF; // TODO find a better name
 
 define : DEF CLAUSE '(' ARGS ((KONJ|',') ARGS)* ')'; 
-
-statement	: explicitSetting
-	 		| assignment
-			;
 			
-explicitSetting 	: SET (extern|specification) ((KONJ|',') (extern|specification))* ;
+explicitSetting : SET (extern|specification) ((KONJ|',') (extern|specification))* ;
 
 assignment : (DESC)? IF assignmentBody THEN assignmentHead ;
 
 assignmentBody 	: clauses ( KONJ clauses)* ;
 
-clauses			: specification		
+clauses			: atoms
+				| '(' atoms (DISJ atoms)* ')'
+				;
+
+atoms			: specification		
 				| status
 				| comparison
 				| conditional
@@ -51,8 +51,10 @@ enforcement		: 'user'? ut 'cannot execute' tt	#cannotUser
 status			:  'user'? ut 'executed' tt			#executedUser
 				|  'role' rt 'executed' tt			#executedRole
 				|  ut 'is assigned to' tt			#assignedUser
-				|  tt 'aborted'						#abortedTask
-				|  tt'succeeded'					#succeededTask
+				|  tt 'aborted'						#abortedTask // TODO hier auch mit den EventTypes..
+				|  tt 'succeeded'					#succeededTask
+				|  tt 'started'						#startedTask
+				| 'EventType(' tt ').' (event | unknownEvent) #flexibleEvent
 				|  ut 'is collaborator of' ut		#collaborator
 				|  ut 'is collaborator of' ut 'in tasks' tt ',' tt #collaboratorExt
 				;
@@ -68,41 +70,95 @@ conditional		: 'NUMBER' WHERE conditionalBody 'IS' nt							#numSimple
 
 conditionalBody 	: clauses ( KONJ clauses)* ;
 	
-comparison 		: equalityParams ('='|'!=') equalityParams 		 					#equality
-				| inequalityParams ('<'|'<='|'>'|'>=') inequalityParams				#unequality
+comparison 		: equalityExpr	 					
+				| inequalityExpr	
 				; 
 				
-equalityParams	: (nt|rt|tp|tt|ti|wt|ut|'('arithmetic')'); // TODO hier ist am Anfang noch nicht klar, was es ist, deshalb sollte es nicht gleich abgestempelt werden
+equalityExpr	: VARIABLE equality VARIABLE
+				| ('('arithmeticExpr')'|nt) equality (nt|'('arithmeticExpr')')
+				| rt equality rt
+				| tp equality tp
+				| ts equality ts
+				| ti equality ti
+				| wt equality wt
+				| wi equality wi
+				| ut equality ut
+				;
 
-inequalityParams: (taut|nt|rt|'('arithmetic')'); // TODO hier ist am Anfang noch nicht klar, was es ist, deshalb sollte es nicht gleich abgestempelt werden
+inequalityExpr	: (tp|nt|rt|'('arithmetic')');
 				
-arithmetic		: nt|taut ('*'|'/'|'+'|'-') nt|taut // TautT, weil zB time1 - time2 = 30 days
-				| '('arithmetic')' ('*'|'/'|'+'|'-') '('arithmetic')';
+arithmeticExpr		: nt|tp| ts ('<'|'<='|'>'|'>=') nt|tp | ts// TautT, weil zB time1 - time2 = 30 days
+				| '('arithmetic')'  '('arithmetic')';
 	
-// Constants and Vars
-ut	: CONSTANT | VARIABLE ; 	// TODO: add surname
-rt	: CONSTANT | VARIABLE | ut ROLE | tt ROLE;
-tt 	: intra|inter|interp;
-intra	: CONSTANT|VARIABLE ;
-inter	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
-interp	: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
-nt		: NUMBER 
-		| VARIABLE 
-		| variable
-		;
-		
-tp 		: YEAR? MONTH? DAY? HOUR? MINUTE? SECOND? MSECOND? ; // timepoint symbols // TODO das kann auch den Empty String matchen
-ts		: '??' ; // timeinterval symbols
-ti		: tt TASKINSTANCE ; // task instances
-wt		: '??' ; // workflow symbols
-taut	: VARIABLE
-		| tp
-		| ts
-		| 'timestamp(' tt ')'
-		| 'timeinterval(' tt ',' tt ')'
-		;
-variable: 'Var(' tt ').'CONSTANT;
+event			: 'assign' // TODO hier eine Funktion, die aus einem File liest
+				| 'ate_abort'
+				| 'autoskip'
+				| 'complete'
+				| 'manual_skip'
+				| 'pi_abort'
+				| 'reassign'
+				| 'resume'
+				| 'schedule'
+				| 'start'
+				| 'suspend'
+				| 'withdraw'
+				;
+unknownEvent	: CONSTANT;
 
+// Constants and Vars
+ut				: CONSTANT | VARIABLE ; 	// TODO: add surname
+rt				: CONSTANT | VARIABLE | ut ROLE | tt ROLE;
+tt 				: intra|inter|interp;
+intra			: CONSTANT|VARIABLE ;
+inter			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
+interp			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
+nt				: NUMBER 
+				| VARIABLE 
+				| variable
+				;
+				
+// timepoint symbols		
+tp 		: NUMBER '-' NUMBER '-' NUMBER  'T' NUMBER (':' NUMBER (':' NUMBER ('[,.]' NUMBER)?)? )? # dateTime
+		| NUMBER ('-' NUMBER ('-' NUMBER)? )?			# date 	 
+		| NUMBER (':' NUMBER (':' NUMBER ('[,.]' NUMBER)?)? )?		 # time
+		| 'timestamp(' tt ')'  #timestamp
+		| VARIABLE
+		; 
+		
+// timeinterval symbols
+ts		: 'P' YEAR? MONTH? DAY? HOUR? MINUTE? SECOND? 
+		| 'timeinterval(' tt ',' tt ')' #timeinterval
+		| VARIABLE
+		; 
+	
+// task instances	
+ti		: tt TASKINSTANCE ; 
+
+// workflow symbols
+wt		: tt WORKFLOW ; 
+
+// workflow instances
+wi 		: tt WORKFLOWINSTANCE;
+
+// task variables
+variable: 'Var(' tt ').'CONSTANT
+		; 
+
+// Comparison Cases
+equality 	: EQUAL 		#equal
+			| NOTEQUAL		#noteual
+			;
+unequality	: LOWER			#lower
+			| LEQ			#leq
+			| GREATER		#greater
+			| GEQ			#geq
+			;
+
+arithmetic	: MUL 			#mul
+			| DIV			#div
+			| ADD			#add
+			| SUB			#sub
+			;
 
 // LEXER PART // TODO move into own file
 
@@ -114,30 +170,42 @@ SET		: 'SET' | 'set'; // TODO hier auch Groß und Kleinschreibung vermischt
 IF		: 'IF' | 'if' | 'If' | 'iF';
 THEN	: 'THEN';
 KONJ 	: 'AND' | 'and'; // TODO
-DISJ	: 'OR'; // TODO
+DISJ	: 'OR' | 'or'; // TODO
 DEF		: ('DEF'|'DEFINE'|'define'|'def');   
 DESC	: ('DESC') [ ]*? '"' .*?  '"'; // TODO
 ARGS	: ('UT'|'RT'|'TT'|'WT'|'TauT'|'NT');
 WHERE	: 'WHERE';
 ROLE	: '.Role';
 TASKINSTANCE : '.InstanceID';
+WORKFLOWINSTANCE: .'WorkflowID';
+WORKFLOW:	'.Workflow';
 
 // TIME POINTS
-YEAR		:	NUMBER 'y';
-MONTH		:	NUMBER 'm';
-DAY			:	NUMBER 'd';
-HOUR		:	NUMBER 'h';
-MINUTE		:	NUMBER 'min';
-SECOND		:	NUMBER 'sec';
-MSECOND	:	NUMBER 'ms';
+YEAR		:	NUMBER 'Y' ;
+MONTH		:	NUMBER 'M' ;
+DAY			:	NUMBER 'D' ;
+HOUR		:	NUMBER 'h' ;
+MINUTE		:	NUMBER 'm' ;
+SECOND		:	NUMBER ('[,.]' NUMBER)? 's';
 
+// SPECIAL SYMBOLS
+EQUAL   	: '=' ;
+NOTEQUAL	: '!=' ;
+LOWER		: '<' ;
+LEQ			: '<=' ;
+GREATER		: '>' ;
+GEQ			: '>=' ;
+MUL		 	: '*' ;
+DIV			: '/' ;
+ADD			: '+' ;
+SUB			: '-' ;
 
 // ELEMENTARY 
 CONSTANT : '\''.*?'\'' ;
 VARIABLE : [A-Z][A-Za-z0-9]* ; 
 CLAUSE	: [a-z_]+;
 NUMBER : [0-9]+ ; // Null muss auch erlaubt sein
-STRING  : [A-Za-z0-9]+;
+STRING  : [A-Za-z0-9]+; // Ist es schlimm, dass CLAUSE herausgefiltert wird?
 
 
 // SKIP WHITESPACES

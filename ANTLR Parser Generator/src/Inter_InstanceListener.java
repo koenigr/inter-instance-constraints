@@ -78,6 +78,16 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitClauses(Inter_InstanceParser.ClausesContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#atoms}.
+	 * @param ctx the parse tree
+	 */
+	void enterAtoms(Inter_InstanceParser.AtomsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#atoms}.
+	 * @param ctx the parse tree
+	 */
+	void exitAtoms(Inter_InstanceParser.AtomsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#assignmentHead}.
 	 * @param ctx the parse tree
 	 */
@@ -328,6 +338,30 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitSucceededTask(Inter_InstanceParser.SucceededTaskContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code startedTask}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterStartedTask(Inter_InstanceParser.StartedTaskContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code startedTask}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitStartedTask(Inter_InstanceParser.StartedTaskContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code flexibleEvent}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterFlexibleEvent(Inter_InstanceParser.FlexibleEventContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code flexibleEvent}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitFlexibleEvent(Inter_InstanceParser.FlexibleEventContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code collaborator}
 	 * labeled alternative in {@link Inter_InstanceParser#status}.
 	 * @param ctx the parse tree
@@ -500,6 +534,26 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitArithmetic(Inter_InstanceParser.ArithmeticContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#event}.
+	 * @param ctx the parse tree
+	 */
+	void enterEvent(Inter_InstanceParser.EventContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#event}.
+	 * @param ctx the parse tree
+	 */
+	void exitEvent(Inter_InstanceParser.EventContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#unknownEvent}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnknownEvent(Inter_InstanceParser.UnknownEventContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#unknownEvent}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnknownEvent(Inter_InstanceParser.UnknownEventContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#ut}.
 	 * @param ctx the parse tree
 	 */
@@ -570,15 +624,41 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitNt(Inter_InstanceParser.NtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#tp}.
+	 * Enter a parse tree produced by the {@code dateTime}
+	 * labeled alternative in {@link Inter_InstanceParser#tp}.
 	 * @param ctx the parse tree
 	 */
-	void enterTp(Inter_InstanceParser.TpContext ctx);
+	void enterDateTime(Inter_InstanceParser.DateTimeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#tp}.
+	 * Exit a parse tree produced by the {@code dateTime}
+	 * labeled alternative in {@link Inter_InstanceParser#tp}.
 	 * @param ctx the parse tree
 	 */
-	void exitTp(Inter_InstanceParser.TpContext ctx);
+	void exitDateTime(Inter_InstanceParser.DateTimeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code date}
+	 * labeled alternative in {@link Inter_InstanceParser#tp}.
+	 * @param ctx the parse tree
+	 */
+	void enterDate(Inter_InstanceParser.DateContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code date}
+	 * labeled alternative in {@link Inter_InstanceParser#tp}.
+	 * @param ctx the parse tree
+	 */
+	void exitDate(Inter_InstanceParser.DateContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code time}
+	 * labeled alternative in {@link Inter_InstanceParser#tp}.
+	 * @param ctx the parse tree
+	 */
+	void enterTime(Inter_InstanceParser.TimeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code time}
+	 * labeled alternative in {@link Inter_InstanceParser#tp}.
+	 * @param ctx the parse tree
+	 */
+	void exitTime(Inter_InstanceParser.TimeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#ts}.
 	 * @param ctx the parse tree
