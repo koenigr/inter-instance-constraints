@@ -1,4 +1,6 @@
 // Generated from Inter_Instance.g4 by ANTLR 4.5
+
+
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -709,16 +711,6 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVarTS(Inter_InstanceParser.VarTSContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#ti}.
-	 * @param ctx the parse tree
-	 */
-	void enterTi(Inter_InstanceParser.TiContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#ti}.
-	 * @param ctx the parse tree
-	 */
-	void exitTi(Inter_InstanceParser.TiContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#wt}.
 	 * @param ctx the parse tree

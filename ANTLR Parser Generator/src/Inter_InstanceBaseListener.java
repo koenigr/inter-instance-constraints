@@ -1,5 +1,7 @@
 // Generated from Inter_Instance.g4 by ANTLR 4.5
 
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -755,18 +757,6 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVarTS(Inter_InstanceParser.VarTSContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTi(Inter_InstanceParser.TiContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTi(Inter_InstanceParser.TiContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

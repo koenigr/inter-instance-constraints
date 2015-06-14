@@ -1,10 +1,28 @@
 // Define a grammar called Hello
 grammar Inter_Instance;
 
+@parser::header{
+}
+
+@parser::members{
+	public void checkDate(String sdate) { // TODO kann man solche Funktionen auch in ein extra file verschieben?
+		String[] tmpArr = sdate.split("[-T:]"); // TODO gibt es eine praktische Konvention, wie man einen DateString testet?
+		if (tmpArr[0] != null) {}
+		if (tmpArr[1] != null) {
+			if (Integer.parseInt(tmpArr[1]) < 1 || Integer.parseInt(tmpArr[1])>12) {
+				System.out.println("Month must be a value between 1 and 12");
+			}
+		}
+		if (tmpArr[2] != null) {}
+		if (tmpArr[3] != null) {}
+		if (tmpArr[4] != null) {}
+		if (tmpArr[5] != null) {}
+	}
+}
 
 file  	: (define)* (explicitSetting)* (assignment)*  EOF; // TODO find a better name
 
-define : DEF CLAUSE '(' ARGS ((KONJ|',') ARGS)* ')'; 
+define : DEF CLAUSE '(' ARGS ((KONJ|',') ARGS)* ')'; // TODO Alles in ein Array oder so laden
 			
 explicitSetting : SET (extern|specification) ((KONJ|',') (extern|specification))* ;
 
@@ -42,7 +60,9 @@ specification	: 'role' rt 'can execute' tt  		#roleTask // TODO bessere Bezeichn
 				;
 
 enforcement		: 'user'? ut 'cannot execute' tt	#cannotUser
-				| 'role' rt 'cannot execute' tt		#cannotRole
+				| 'role' r=rt 'cannot execute' tt	
+				{System.out.println($r.text);}
+				#cannotRole
 				|  ut 'must execute' tt				#mustUser
 				| 'mrole' rt 'must execute' tt 		#mustRole
 				| 'panic'							#panic
@@ -55,17 +75,17 @@ status			:  'user'? ut 'executed' tt			#executedUser
 				|  tt 'succeeded'					#succeededTask
 				|  tt 'started'						#startedTask
 				| 'EventType(' tt ').' (event | unknownEvent) #flexibleEvent
-				|  ut 'is collaborator of' ut		#collaborator
-				|  ut 'is collaborator of' ut 'in tasks' tt ',' tt #collaboratorExt
+				|  ut 'is collaborator of' ut		#collaborator // TODO ??
+				|  ut 'is collaborator of' ut 'in tasks' tt ',' tt #collaboratorExt // TODO ??
 				;
 	
 conditional		: 'NUMBER' WHERE conditionalBody 'IS' nt							#numSimple
-				| 'NUMBER OF' (VARIABLE|ut|tt) WHERE conditionalBody 'IS' nt		#numVars
-				| 'NUMBER OF DIFF' (VARIABLE|ut|tt)  WHERE conditionalBody 'IS' nt	#numDiff
-				| 'SUM OF' (VARIABLE|ut|tt|nt)  WHERE conditionalBody 'IS' nt			#sum
-				| 'AVG OF' (VARIABLE|ut|tt|nt)  WHERE conditionalBody 'IS' nt			#avg
-				| 'MIN OF' (VARIABLE|ut|tt|nt)  WHERE conditionalBody 'IS' nt			#min
-				| 'MAX OF' (VARIABLE|ut|tt|nt)  WHERE conditionalBody 'IS' nt			#max
+				| 'NUMBER OF' VARIABLE WHERE conditionalBody 'IS' nt		#numVars
+				| 'NUMBER OF DIFF' VARIABLE  WHERE conditionalBody 'IS' nt	#numDiff
+				| 'SUM OF' VARIABLE  WHERE conditionalBody 'IS' nt			#sum
+				| 'AVG OF' VARIABLE  WHERE conditionalBody 'IS' nt			#avg
+				| 'MIN OF' VARIABLE WHERE conditionalBody 'IS' nt			#min
+				| 'MAX OF' VARIABLE  WHERE conditionalBody 'IS' nt			#max
 				;
 
 conditionalBody 	: clauses ( KONJ clauses)* ;
@@ -79,7 +99,6 @@ equalityExpr	: VARIABLE equality VARIABLE
 				| rt equality rt
 				| tp equality tp
 				| ts equality ts
-				| ti equality ti
 				| wt equality wt
 				| wi equality wi
 				| ut equality ut
@@ -121,23 +140,25 @@ nt				: NUMBER
 				;
 				
 // timepoint symbols		
-tp 		: NUMBER '-' NUMBER '-' NUMBER  'T' NUMBER (':' NUMBER (':' NUMBER ('[,.]' NUMBER)?)? )? # dateTime
-		| NUMBER ('-' NUMBER ('-' NUMBER)? )?						# date 	 
-		| NUMBER (':' NUMBER (':' NUMBER ('[,.]' NUMBER)?)? )?		# time
+tp 		:DATETIME
+		{checkDate($DATETIME.text);}
+		# dateTime
+		| DATE					# date 	 
+		| TIME		# time
 		| '(' tp ADD ts ')'    										# relativeTimepoint
 		| 'timestamp(' tt ')'  										# timestamp
 		| VARIABLE 													# varTP
 		; 
 		
 // timeinterval symbols
-ts		: 'P' YEAR? MONTH? DAY? HOUR? MINUTE? SECOND? 				# absoluteInterval
+ts		: (YEARS)? (MONTHS)? (DAYS)? (HOURS)? (MINUTES)? (SECONDS)? // TODO wie machen, dass mind 1 da sein muss?
+		 {System.out.println($DAYS.text);}		
+			# absoluteInterval
 		| '(' tp SUB tp ')'											# timedifference
 		| 'timeinterval(' tt ',' tt ')'								# timeinterval
 		| VARIABLE													# varTS
 		; 
 	
-// task instances	
-ti		: tt TASKINSTANCE ; 
 
 // workflow symbols
 wt		: tt WORKFLOW ; 
@@ -185,14 +206,6 @@ TASKINSTANCE : '.InstanceID';
 WORKFLOWINSTANCE: .'WorkflowID';
 WORKFLOW:	'.Workflow';
 
-// TIME POINTS
-YEAR		:	NUMBER 'Y' ;
-MONTH		:	NUMBER 'M' ;
-DAY			:	NUMBER 'D' ;
-HOUR		:	NUMBER 'h' ;
-MINUTE		:	NUMBER 'm' ;
-SECOND		:	NUMBER ('[,.]' NUMBER)? 's';
-
 // SPECIAL SYMBOLS
 EQUAL   	: '=' ;
 NOTEQUAL	: '!=' ;
@@ -204,6 +217,18 @@ MUL		 	: '*' ;
 DIV			: '/' ;
 ADD			: '+' ;
 SUB			: '-' ;
+
+
+YEARS 	: NUMBER 'Y';
+MONTHS	: NUMBER 'M';
+DAYS	: NUMBER 'D';
+HOURS	: NUMBER 'h';
+MINUTES	: NUMBER 'm';
+SECONDS	: NUMBER ('.' NUMBER)? 's';
+
+DATETIME: NUMBER '-' NUMBER '-' NUMBER  'T' NUMBER (':' NUMBER (':' NUMBER ('.' NUMBER)?)? )? ;
+DATE	: NUMBER ('-' NUMBER ('-' NUMBER)? )?	;
+TIME	: NUMBER (':' NUMBER (':' NUMBER ('.' NUMBER)?)? )? ;
 
 // ELEMENTARY 
 CONSTANT : '\''.*?'\'' ;
