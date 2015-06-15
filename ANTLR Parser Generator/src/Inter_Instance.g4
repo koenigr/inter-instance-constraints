@@ -2,33 +2,35 @@
 grammar Inter_Instance;
 
 @parser::header{
+  import parser.ParserHelper;
+  import java.util.logging.Logger;
+  import java.util.logging.Level;
+  import logging.LoggerFactory;
+  import exceptions.UnexpectedContextException;
 }
 
 @parser::members{
-	public void checkDate(String sdate) { // TODO kann man solche Funktionen auch in ein extra file verschieben?
-		String[] tmpArr = sdate.split("[-T:]"); // TODO gibt es eine praktische Konvention, wie man einen DateString testet?
-		if (tmpArr[0] != null) {}
-		if (tmpArr[1] != null) {
-			if (Integer.parseInt(tmpArr[1]) < 1 || Integer.parseInt(tmpArr[1])>12) {
-				System.out.println("Month must be a value between 1 and 12");
-			}
-		}
-		if (tmpArr[2] != null) {}
-		if (tmpArr[3] != null) {}
-		if (tmpArr[4] != null) {}
-		if (tmpArr[5] != null) {}
-	}
+  ParserHelper ph = new ParserHelper();
+  enum Context { UNKNOWN, INTRA, INTER, INTERP};
+  Context context = Context.UNKNOWN;
+  Logger logger = LoggerFactory.getLogger();
+  
 }
 
-file  	: (define)* (explicitSetting)* (assignment)*  EOF; // TODO find a better name
+file  	: { logger.severe("Start parsing..."); }
+		(define)* (explicitSetting)* (assignment)*  EOF
+		 { logger.severe("End of parsing..."); }
+		;
 
 define : DEF CLAUSE '(' ARGS ((KONJ|',') ARGS)* ')'; // TODO Alles in ein Array oder so laden
 			
 explicitSetting : SET (extern|specification) ((KONJ|',') (extern|specification))* ;
 
-assignment : (DESC)? IF assignmentBody THEN assignmentHead ;
+assignment 	: { context = Context.UNKNOWN;}
+			(DESC)? IF assignmentBody THEN assignmentHead 	
+			;
 
-assignmentBody 	: clauses ( KONJ clauses)* ;
+assignmentBody 	: clauses ( KONJ clauses)* ; 
 
 clauses			: atoms
 				| '(' atoms (DISJ atoms)* ')'
@@ -130,10 +132,47 @@ unknownEvent	: CONSTANT;
 // Constants and Vars
 ut				: CONSTANT | VARIABLE ;
 rt				: CONSTANT | VARIABLE | ut ROLE | tt ROLE;
-tt 				: intra|inter|interp;
-intra			: CONSTANT|VARIABLE ;
-inter			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
-interp			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE);
+tt 				: intra { 
+					if (context == Context.UNKNOWN) {
+						context = Context.INTRA;
+					} else if (context != Context.INTRA) {
+					logger.log(Level.SEVERE, ""
+						, new UnexpectedContextException($intra.text, "INTRA",  context.toString())
+					);
+					}
+				}
+				|inter { 
+					if (context == Context.UNKNOWN) {
+						context = Context.INTER;
+					} else if (context != Context.INTER) {
+					logger.log(Level.SEVERE, ""
+						, new UnexpectedContextException($inter.text, "INTER",  context.toString())
+					);
+					}
+				}
+				|interp { 
+					if (context == Context.UNKNOWN) {
+						context = Context.INTERP;
+					} else if (context != Context.INTERP) {
+					logger.log(Level.SEVERE, ""
+						, new UnexpectedContextException($interp.text, "INTERP", context.toString())
+					);
+					}
+				}
+				;
+
+intra			: CONSTANT|VARIABLE 
+				;
+				
+				
+inter			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)
+				;
+				
+				
+interp			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)
+				;
+				
+				
 nt				: NUMBER 
 				| '(' nt arithmetic nt ')'
 				| VARIABLE 
@@ -141,19 +180,19 @@ nt				: NUMBER
 				
 // timepoint symbols		
 tp 		:DATETIME
-		{checkDate($DATETIME.text);}
-		# dateTime
-		| DATE					# date 	 
-		| TIME		# time
+		{ph.checkDateTime($DATETIME.text);}							# dateTime
+		| DATE					
+		{ph.checkDate($DATE.text);}									# date 	 
+		| TIME		
+		{ph.checkTime($TIME.text);}									# time
 		| '(' tp ADD ts ')'    										# relativeTimepoint
 		| 'timestamp(' tt ')'  										# timestamp
 		| VARIABLE 													# varTP
 		; 
 		
 // timeinterval symbols
-ts		: (YEARS)? (MONTHS)? (DAYS)? (HOURS)? (MINUTES)? (SECONDS)? // TODO wie machen, dass mind 1 da sein muss?
-		 {System.out.println($DAYS.text);}		
-			# absoluteInterval
+ts		: TIMEINTERVAL		
+		{ph.checkTimeInterval($TIMEINTERVAL.text);}					# absoluteInterval
 		| '(' tp SUB tp ')'											# timedifference
 		| 'timeinterval(' tt ',' tt ')'								# timeinterval
 		| VARIABLE													# varTS
@@ -225,6 +264,17 @@ DAYS	: NUMBER 'D';
 HOURS	: NUMBER 'h';
 MINUTES	: NUMBER 'm';
 SECONDS	: NUMBER ('.' NUMBER)? 's';
+
+TIMEINTERVAL: 'P' [ ]? YEARS [ ]? (MONTHS)? [ ]? (DAYS)? [ ]? (HOURS)? 
+			[ ]? (MINUTES)? [ ]? (SECONDS)? 
+			| 'P' [ ]? MONTHS [ ]? (DAYS)? [ ]? (HOURS)? 
+			[ ]? (MINUTES)? [ ]? (SECONDS)? 
+			| 'P' [ ]? DAYS [ ]? (HOURS)? 
+			[ ]? (MINUTES)? [ ]? (SECONDS)? 
+			| 'P' HOURS [ ]? (MINUTES)? [ ]? (SECONDS)? 
+			| 'P' MINUTES [ ]? (SECONDS)? 
+			| 'P' SECONDS
+		 	; // TODO im Moment ist es so, dass es keine Variable mit P geben darf
 
 DATETIME: NUMBER '-' NUMBER '-' NUMBER  'T' NUMBER (':' NUMBER (':' NUMBER ('.' NUMBER)?)? )? ;
 DATE	: NUMBER ('-' NUMBER ('-' NUMBER)? )?	;
