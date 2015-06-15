@@ -1,6 +1,8 @@
 package parser;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import logging.LoggerFactory;
@@ -14,6 +16,25 @@ public class ParserHelper {
 	
 	Logger logger = LoggerFactory.getLogger();
 	
+	HashMap<String, Clause> definedClauses = new HashMap<String, Clause>();
+	
+	class Clause {
+		String name;
+		ArrayList<String> argTypes = new ArrayList<String>();
+		
+		public Clause(String name) {
+			this.name = name;
+		}
+		
+		public void addArgType(String Type) {
+			argTypes.add(Type);
+		}
+		
+		public int getNumberOfArgs() {
+			return argTypes.size();
+		}
+	}
+	
 	public ParserHelper() {
 			try {
 				LoggerFactory.setup();
@@ -22,6 +43,32 @@ public class ParserHelper {
 			}
 		}
 	
+	
+	public void addClause(String name) {
+		
+		logger.info("Defining new clause " + name);
+		
+		if (!definedClauses.containsKey(name)) {
+			definedClauses.put(name, new Clause(name));
+		} else {
+			logger.severe("You are trying to overrwrite previously defined clause."
+					+ "Are you sure?");
+		}
+	}
+	
+	public boolean existsClause(String name) {
+		return definedClauses.containsKey(name);
+	}
+	
+	public void addArgTypeToClause(String name, String arg) {
+		logger.info("Adding argument type " + arg + " to clause " + name);
+		if (definedClauses.containsKey(name)) {
+			System.out.println("Successed");
+			definedClauses.get(name).addArgType(arg);
+		} else {
+			System.out.println("Shit happened");
+		}
+	}
 	
 	/**
 	 * @param sdate

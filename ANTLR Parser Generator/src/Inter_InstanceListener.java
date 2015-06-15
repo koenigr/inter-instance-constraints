@@ -85,6 +85,16 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitAtoms(Inter_InstanceParser.AtomsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#definedClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefinedClause(Inter_InstanceParser.DefinedClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#definedClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefinedClause(Inter_InstanceParser.DefinedClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#assignmentHead}.
 	 * @param ctx the parse tree
 	 */

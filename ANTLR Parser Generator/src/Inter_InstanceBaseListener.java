@@ -107,6 +107,18 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDefinedClause(Inter_InstanceParser.DefinedClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDefinedClause(Inter_InstanceParser.DefinedClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) { }
 	/**
 	 * {@inheritDoc}

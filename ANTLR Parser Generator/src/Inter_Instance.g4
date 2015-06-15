@@ -22,7 +22,11 @@ file  	: { logger.severe("Start parsing..."); }
 		 { logger.severe("End of parsing..."); }
 		;
 
-define : DEF CLAUSE '(' ARGS ((KONJ|',') ARGS)* ')'; // TODO Alles in ein Array oder so laden
+define 	: DEF CLAUSE {ph.addClause($CLAUSE.text);} '(' ARGS {ph.addArgTypeToClause($CLAUSE.text, $ARGS.text);}
+			((',') ARGS {ph.addArgTypeToClause($CLAUSE.text, $ARGS.text);}	
+			)* ')' 
+		
+		; 
 			
 explicitSetting : SET (extern|specification) ((KONJ|',') (extern|specification))* ;
 
@@ -41,6 +45,13 @@ atoms			: specification
 				| comparison
 				| conditional
 				| extern
+				| definedClause
+				;
+
+definedClause	: CLAUSE '(' (CONSTANT|VARIABLE) (',' (CONSTANT|VARIABLE))* ')'
+				{ if(!ph.existsClause($CLAUSE.text)) {
+					System.out.println("Unknown clause " + $CLAUSE.text);
+				} }
 				;
 
 assignmentHead : enforcement ;
