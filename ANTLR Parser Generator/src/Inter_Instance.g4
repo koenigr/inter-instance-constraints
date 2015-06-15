@@ -31,8 +31,10 @@ define 	: DEF CLAUSE {ph.addClause($CLAUSE.text);} '(' ARGS {ph.addArgTypeToClau
 explicitSetting : SET (extern|specification) ((KONJ|',') (extern|specification))* ;
 
 assignment 	: { context = Context.UNKNOWN;}
-			(DESC)? IF assignmentBody THEN assignmentHead 	
+			(description)? IF assignmentBody THEN assignmentHead 	
 			;
+			
+description		: DESC CONSTANT;
 
 assignmentBody 	: clauses ( KONJ clauses)* ; 
 
@@ -248,7 +250,7 @@ THEN	: 'THEN';
 KONJ 	: 'AND' | 'and'; // TODO
 DISJ	: 'OR' | 'or'; // TODO
 DEF		: ('DEF'|'DEFINE'|'define'|'def');   
-DESC	: ('DESC') [ ]*? '"' .*?  '"'; // TODO
+DESC	: 'DESC';
 ARGS	: ('UT'|'RT'|'TT'|'WT'|'TauT'|'NT');
 WHERE	: 'WHERE';
 ROLE	: '.Role';

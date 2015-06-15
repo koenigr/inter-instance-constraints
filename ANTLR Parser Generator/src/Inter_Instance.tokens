@@ -142,6 +142,7 @@ WS=92
 'timeinterval('=50
 'Var('=51
 'THEN'=56
+'DESC'=60
 'WHERE'=62
 '.Role'=63
 '.InstanceID'=64

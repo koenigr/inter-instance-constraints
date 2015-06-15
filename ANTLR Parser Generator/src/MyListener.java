@@ -21,10 +21,17 @@ import storage.container.externspec.RoleTask;
 import storage.container.externspec.SameGroup;
 import storage.container.externspec.UserRole;
 import storage.container.externspec.UserTask;
+import storage.container.rules.CannotDoRole;
+import storage.container.rules.MustDoRole;
+import storage.container.rules.MustDoUser;
+import storage.container.rules.PanicRule;
+import storage.container.rules.RoleCannotDoRule;
+import storage.container.rules.RoleMustDoRule;
 import storage.container.rules.RuleBody;
 import storage.container.rules.RuleContainer;
 import storage.container.rules.UserCannotDoRule;
 import storage.container.rules.CannotDoUser;
+import storage.container.rules.UserMustDoRule;
 
 public class MyListener extends Inter_InstanceBaseListener {
 	
@@ -46,6 +53,8 @@ public class MyListener extends Inter_InstanceBaseListener {
 	private RuleContext ruleContext = RuleContext.UNDEF;
 	
 	private RuleBody body;
+	
+	private String description;
 	
 	public MyListener() {
 		
@@ -125,15 +134,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterStatement(Inter_InstanceParser.StatementContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitStatement(Inter_InstanceParser.StatementContext ctx) {
-		// TODO Auto-generated method stub
-		
+	public void exitDescription(Inter_InstanceParser.DescriptionContext ctx) {
+		System.out.println("Number of children " + ctx.getChildCount());
+		 description = ctx.getChild(1).getText();
 	}
 
 	@Override
@@ -147,6 +150,11 @@ public class MyListener extends Inter_InstanceBaseListener {
 	public void exitAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) {
 		inputContext = InputContext.UNDEF;
 		
+	}
+	
+	@Override
+	public void exitAssignment(Inter_InstanceParser.AssignmentContext ctx) {
+		description = "";
 	}
 
 	@Override
@@ -182,7 +190,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 			String user2 = ctx.getChild(2).getText();
 			esc.addPartner(new Partner(user1, user2));
 		} else {
-			logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
+			logger.log(Level.SEVERE, "unexpected number of children " + ctx.getChildCount(), new RuntimeException());
 		}
 		}
 		
@@ -196,9 +204,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 			String user1 = ctx.getChild(0).getText();
 			String user2 = ctx.getChild(2).getText();
 			esc.addSameGroup(new SameGroup(user1, user2));
-		} else {
-			logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
-		}
+			} else {
+				logger.log(Level.SEVERE, "unexpected number of children " + ctx.getChildCount(), new RuntimeException());
+			}
 		}
 	}
 
@@ -315,7 +323,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 			} else {
 				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
 			}
-			
+			rule.setDescription(description);
 			rc.addUserCannotDoRule(rule);
 			break;
 			
@@ -330,14 +338,16 @@ public class MyListener extends Inter_InstanceBaseListener {
 		switch(inputContext) {
 		case ASSIGNMENT_HEAD : 
 			System.out.println("Head");
-			UserCannotDoRule rule = new UserCannotDoRule();
+			RoleCannotDoRule rule = new RoleCannotDoRule();
 			if (ctx.getChildCount() == 3) {
 				String user = ctx.getChild(0).getText();
 				String task = ctx.getChild(2).getText();
-				rule.setHead(new CannotDoUser(user, task));
+				rule.setHead(new CannotDoRole(user, task));
 			} else {
 				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
 			}
+			rule.setDescription(description);
+			rc.addRoleCannotDoRule(rule);
 			break;
 			
 		case ASSIGNMENT_BODY :
@@ -347,39 +357,69 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterMustUser(Inter_InstanceParser.MustUserContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitMustUser(Inter_InstanceParser.MustUserContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enterMustRole(Inter_InstanceParser.MustRoleContext ctx) {
-		// TODO Auto-generated method stub
+		switch(inputContext) {
+		case ASSIGNMENT_HEAD : 
+			System.out.println("Head");
+			UserMustDoRule rule = new UserMustDoRule();
+			if (ctx.getChildCount() == 3) {
+				String user = ctx.getChild(0).getText();
+				String task = ctx.getChild(2).getText();
+				rule.setHead(new MustDoUser(user, task));
+			} else {
+				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
+			}
+			rule.setDescription(description);
+			rc.addUserMustDoRule(rule);
+			break;
+			
+		case ASSIGNMENT_BODY :
+		default: break;
+		}
 		
 	}
 
 	@Override
 	public void exitMustRole(Inter_InstanceParser.MustRoleContext ctx) {
-		// TODO Auto-generated method stub
-		
+		switch(inputContext) {
+		case ASSIGNMENT_HEAD : 
+			System.out.println("Head");
+			RoleMustDoRule rule = new RoleMustDoRule();
+			if (ctx.getChildCount() == 3) {
+				String user = ctx.getChild(0).getText();
+				String task = ctx.getChild(2).getText();
+				rule.setHead(new MustDoRole(user, task));
+			} else {
+				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
+			}
+			rule.setDescription(description);
+			rc.addRoleMustDoRule(rule);
+			break;
+			
+		case ASSIGNMENT_BODY :
+		default: break;
+		}
 	}
 
-	@Override
-	public void enterPanic(Inter_InstanceParser.PanicContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void exitPanic(Inter_InstanceParser.PanicContext ctx) {
-		// TODO Auto-generated method stub
-		
+		switch(inputContext) {
+		case ASSIGNMENT_HEAD : 
+			System.out.println("Head");
+			PanicRule rule = new PanicRule();
+			if (ctx.getChildCount() == 0) {
+				// TODO
+			} else {
+				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
+			}
+			rule.setDescription(description);
+			rc.addPanicRule(rule);
+			break;
+			
+		case ASSIGNMENT_BODY :
+		default: break;
+		}	
 	}
 
 	@Override
@@ -497,42 +537,6 @@ public class MyListener extends Inter_InstanceBaseListener {
 		
 	}
 
-	@Override
-	public void exitConditionalBody(Inter_InstanceParser.ConditionalBodyContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitEquality(Inter_InstanceParser.EqualityContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void exitUnequality(Inter_InstanceParser.UnequalityContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void exitEqualityParams(Inter_InstanceParser.EqualityParamsContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitUnequalityParams(Inter_InstanceParser.UnequalityParamsContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitArithmetic(Inter_InstanceParser.ArithmeticContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	public void exitUt(Inter_InstanceParser.UtContext ctx) {
@@ -576,53 +580,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 		
 	}
 
-	@Override
-	public void exitCt(Inter_InstanceParser.CtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitTi(Inter_InstanceParser.TiContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
 	public void exitWt(Inter_InstanceParser.WtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void exitTaut(Inter_InstanceParser.TautContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void exitInput(Inter_InstanceParser.InputContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitInputvar(Inter_InstanceParser.InputvarContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitOutput(Inter_InstanceParser.OutputContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitOutputvar(Inter_InstanceParser.OutputvarContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}
