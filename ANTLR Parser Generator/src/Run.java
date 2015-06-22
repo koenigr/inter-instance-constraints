@@ -7,12 +7,20 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import storage.StorageHelper;
+
 
 public class Run {
 	
 public static void main(String[] args) throws Exception {
+
+// TODO die Files als Arg übergeben	
+String location = "examples";
+String[] filenames = {"example2"};
+
+for (String file : filenames) {
 	
-File f = new File("examples/example1");
+File f = new File(location + "/" +  file);
 InputStream fs = new FileInputStream(f);
 // create a CharStream that reads from standard input
 ANTLRInputStream input = new ANTLRInputStream(fs);
@@ -32,7 +40,11 @@ ParseTreeWalker walker = new ParseTreeWalker();
 walker.walk(new MyListener(), tree);
 
 
-tree.inspect(parser);
+ tree.inspect(parser);
+
+}
+
+StorageHelper.getInstance().printToFile();
 
 }
 

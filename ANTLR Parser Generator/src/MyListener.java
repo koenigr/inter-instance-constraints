@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import storage.StorageHelper;
 import storage.container.externspec.CriticalTaskPair;
 import storage.container.externspec.Dominates;
 import storage.container.externspec.ExternAndSpecificationContainer;
@@ -39,9 +40,6 @@ public class MyListener extends Inter_InstanceBaseListener {
 	
 	private RuleContainer rc;
 	
-	private final String OUTPUT_FILE_SPEC = "prologfiles/externspec.pl";
-	private final String OUTPUT_FILE_RULE = "prologfiles/rules.pl";
-	
 	private Logger logger = LoggerFactory.getLogger();
 	
 	private enum InputContext {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY}
@@ -58,9 +56,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 	
 	public MyListener() {
 		
-		esc = new ExternAndSpecificationContainer(OUTPUT_FILE_SPEC);
+		esc = StorageHelper.getInstance().getExternSpecContainer();
 		
-		rc = new RuleContainer(OUTPUT_FILE_RULE);
+		rc = StorageHelper.getInstance().getRuleContainer();
 		
 		try {
 			LoggerFactory.setup();
@@ -75,8 +73,6 @@ public class MyListener extends Inter_InstanceBaseListener {
 	
 	public void exitFile(Inter_InstanceParser.FileContext ctx) {
 		logger.info("Exiting File");
-		esc.printToFile();
-		rc.printToFile();
 	}
 	
 	public void enterExplicitSetting(Inter_InstanceParser.ExplicitSettingContext ctx) {
@@ -323,6 +319,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 			} else {
 				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
 			}
+			if (description == null) {
+				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
+			}
 			rule.setDescription(description);
 			rc.addUserCannotDoRule(rule);
 			break;
@@ -345,6 +344,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 				rule.setHead(new CannotDoRole(user, task));
 			} else {
 				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
+			}
+			if (description == null) {
+				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
 			rule.setDescription(description);
 			rc.addRoleCannotDoRule(rule);
@@ -369,6 +371,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 			} else {
 				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
 			}
+			if (description == null) {
+				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
+			}
 			rule.setDescription(description);
 			rc.addUserMustDoRule(rule);
 			break;
@@ -392,6 +397,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 			} else {
 				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
 			}
+			if (description == null) {
+				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
+			}
 			rule.setDescription(description);
 			rc.addRoleMustDoRule(rule);
 			break;
@@ -412,6 +420,9 @@ public class MyListener extends Inter_InstanceBaseListener {
 				// TODO
 			} else {
 				logger.log(Level.SEVERE, "unexpected number of children", new RuntimeException());
+			}
+			if (description == null) {
+				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
 			rule.setDescription(description);
 			rc.addPanicRule(rule);
