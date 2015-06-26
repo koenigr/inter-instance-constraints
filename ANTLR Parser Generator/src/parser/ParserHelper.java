@@ -56,8 +56,11 @@ public class ParserHelper {
 		}
 	}
 	
-	public boolean existsClause(String name) {
-		return definedClauses.containsKey(name);
+	public void existsClause(String name) {
+		if (!definedClauses.containsKey(name)) {
+			System.out.println("Unknown clause " + name);
+			System.exit(0);
+		}
 	}
 	
 	public void addArgTypeToClause(String name, String arg) {
@@ -98,9 +101,12 @@ public class ParserHelper {
 		
 		String[] tmpArr = date.split("-");
 		int length = tmpArr.length;
-		if (length > 0) {
-			// TODO: Vielleicht ab 1970 erlauben, wenn ich so eine Repräsentation habe?
-			// TODO: prüfen, dass keine Abkürzung benutzt wurde, wie zB 1999 -> 99
+		if (length > 0) { // year
+			if (Integer.parseInt(tmpArr[0])< 1970) {
+				System.out.println("Year must be higher than 1970");
+				// TODO bessere Fehlermeldung mit Quelle angeben
+				System.exit(0);
+			}
 		} 
 		if (length > 1) { // month
 			if (Integer.parseInt(tmpArr[1]) < 1 || Integer.parseInt(tmpArr[1])>12) {

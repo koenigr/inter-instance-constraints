@@ -494,12 +494,6 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void exitCollaboratorExt(Inter_InstanceParser.CollaboratorExtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitNumSimple(Inter_InstanceParser.NumSimpleContext ctx) {
 		// TODO Auto-generated method stub
 		
@@ -563,24 +557,6 @@ public class MyListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitTt(Inter_InstanceParser.TtContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitIntra(Inter_InstanceParser.IntraContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitInter(Inter_InstanceParser.InterContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitInterp(Inter_InstanceParser.InterpContext ctx) {
 		// TODO Auto-generated method stub
 		
 	}

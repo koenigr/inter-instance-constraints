@@ -6,6 +6,7 @@ import java.util.List;
 import de.uni.freiburg.iig.telematik.sewol.log.DataAttribute;
 import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
 import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
+import storage.StorageHelper;
 import storage.container.status.ExecutedGroupStatus;
 import storage.container.status.ExecutedUserStatus;
 import storage.container.status.StatusContainer;
@@ -18,7 +19,7 @@ import storage.container.status.WorkflowName;
 public class LogTransformerToProlog {
 	
 	public void transform(List<List<LogTrace<LogEntry>>> logs) {
-		StatusContainer sc = new StatusContainer();
+		StatusContainer sc = StorageHelper.getInstance().getStatusContainer();
 		Integer wname = 0;
 		Integer wID = 0;
 		Integer tID = 0;
@@ -69,6 +70,5 @@ public class LogTransformerToProlog {
 			
 		}
 		
-		sc.printToFile();
 	}
 }

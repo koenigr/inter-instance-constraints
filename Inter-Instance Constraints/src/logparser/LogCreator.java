@@ -41,7 +41,7 @@ public class LogCreator {
 		entryB.setOriginator("Susi");
 		entryB.setGroup("Manager");
 		entryB.setTimestamp(new Date(2145405300));
-		entryB.addMetaAttribute(new DataAttribute("loan_amount", "2000"));
+		entryB.addMetaAttribute(new DataAttribute("loan_amount", 2000));
 		
 		DULogEntry entryC = new DULogEntry("send_mail");
 		entryC.setEventType(EventType.start);

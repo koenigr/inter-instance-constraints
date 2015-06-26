@@ -16,7 +16,12 @@ public static void main(String[] args) throws Exception {
 
 // TODO die Files als Arg übergeben	
 String location = "examples";
-String[] filenames = {"example2"};
+String[] filenames = {
+		"example1" , "example2", "example3" , "example_definition_file" ,
+		"IntraInstance_hierarchical" , "InterInstance_hierarchical", 
+		"InterProcess_hierarchical", "IntraInstance_nonhierarchical",
+	    "InterInstance_nonhierarchical", "InterProcess_nonhierarchical",
+		};
 
 for (String file : filenames) {
 	
@@ -40,7 +45,7 @@ ParseTreeWalker walker = new ParseTreeWalker();
 walker.walk(new MyListener(), tree);
 
 
- tree.inspect(parser);
+// tree.inspect(parser);
 
 }
 

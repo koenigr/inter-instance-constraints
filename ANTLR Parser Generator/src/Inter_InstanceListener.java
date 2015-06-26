@@ -391,18 +391,6 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitCollaborator(Inter_InstanceParser.CollaboratorContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code collaboratorExt}
-	 * labeled alternative in {@link Inter_InstanceParser#status}.
-	 * @param ctx the parse tree
-	 */
-	void enterCollaboratorExt(Inter_InstanceParser.CollaboratorExtContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code collaboratorExt}
-	 * labeled alternative in {@link Inter_InstanceParser#status}.
-	 * @param ctx the parse tree
-	 */
-	void exitCollaboratorExt(Inter_InstanceParser.CollaboratorExtContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code numSimple}
 	 * labeled alternative in {@link Inter_InstanceParser#conditional}.
 	 * @param ctx the parse tree
@@ -617,6 +605,16 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitNt(Inter_InstanceParser.NtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#st}.
+	 * @param ctx the parse tree
+	 */
+	void enterSt(Inter_InstanceParser.StContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#st}.
+	 * @param ctx the parse tree
+	 */
+	void exitSt(Inter_InstanceParser.StContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code dateTime}
 	 * labeled alternative in {@link Inter_InstanceParser#tp}.
 	 * @param ctx the parse tree
@@ -756,16 +754,6 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWi(Inter_InstanceParser.WiContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Inter_InstanceParser#vt}.
-	 * @param ctx the parse tree
-	 */
-	void enterVt(Inter_InstanceParser.VtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Inter_InstanceParser#vt}.
-	 * @param ctx the parse tree
-	 */
-	void exitVt(Inter_InstanceParser.VtContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code equal}
 	 * labeled alternative in {@link Inter_InstanceParser#equality}.

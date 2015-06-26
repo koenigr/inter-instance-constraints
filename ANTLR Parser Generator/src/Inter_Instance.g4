@@ -28,7 +28,7 @@ define 	: DEF CLAUSE {ph.addClause($CLAUSE.text);} '(' ARGS {ph.addArgTypeToClau
 		
 		; 
 			
-explicitSetting : SET (extern|specification) ((KONJ|',') (extern|specification))* ;
+explicitSetting : SET (extern|specification|definedClause) ((KONJ|',') (extern|specification|definedClause))* ;
 
 assignment 	: { context = Context.UNKNOWN;}
 			(description)? IF assignmentBody THEN assignmentHead 	
@@ -51,12 +51,10 @@ atoms			: specification
 				;
 
 definedClause	: CLAUSE '(' (CONSTANT|VARIABLE) (',' (CONSTANT|VARIABLE))* ')'
-				{ if(!ph.existsClause($CLAUSE.text)) {
-					System.out.println("Unknown clause " + $CLAUSE.text);
-				} }
+				{ ph.existsClause($CLAUSE.text);}
 				;
 
-assignmentHead : enforcement ;
+assignmentHead : enforcement|definedClause ;
 
 					
 /* Literals */
@@ -91,7 +89,6 @@ status			:  'user'? ut 'executed' tt			#executedUser
 				|  tt 'started'						#startedTask
 				| 'EventType(' tt ').' (event | unknownEvent) #flexibleEvent
 				|  ut 'is collaborator of' ut		#collaborator // TODO ??
-				|  ut 'is collaborator of' ut 'in tasks' tt ',' tt #collaboratorExt // TODO ??
 				;
 	
 conditional		: 'NUMBER' WHERE conditionalBody 'IS' nt							#numSimple
@@ -187,9 +184,14 @@ interp			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)
 				
 				
 nt				: NUMBER 
-				| '(' nt arithmetic nt ')'
 				| VARIABLE 
+				| '(' nt arithmetic nt ')'
+				| 'Num_Var(' tt ').'CONSTANT
 				;
+				
+st	    : 'String_Var(' tt ').'CONSTANT
+		| VARIABLE
+		; 
 				
 // timepoint symbols		
 tp 		:DATETIME
@@ -199,7 +201,7 @@ tp 		:DATETIME
 		| TIME		
 		{ph.checkTime($TIME.text);}									# time
 		| '(' tp ADD ts ')'    										# relativeTimepoint
-		| 'timestamp(' tt ')'  										# timestamp
+		| tt  TIMESTAMP											# timestamp
 		| VARIABLE 													# varTP
 		; 
 		
@@ -218,9 +220,7 @@ wt		: tt WORKFLOW ;
 // workflow instances
 wi 		: tt WORKFLOWINSTANCE;
 
-// task variables
-vt		: 'Var(' tt ').'CONSTANT
-		; 
+		
 
 // Comparison Cases
 equality 	: EQUAL 		#equal
@@ -250,13 +250,15 @@ THEN	: 'THEN';
 KONJ 	: 'AND' | 'and'; // TODO
 DISJ	: 'OR' | 'or'; // TODO
 DEF		: ('DEF'|'DEFINE'|'define'|'def');   
-DESC	: 'DESC';
-ARGS	: ('UT'|'RT'|'TT'|'WT'|'TauT'|'NT');
+DESC	: 'DESC' | 'desc' | 'description' ;
+ARGS	: ('UT'|'RT'|'TT'|'WT'|'TauT'|'NT'| 'STRING_VAR');
 WHERE	: 'WHERE';
 ROLE	: '.Role';
 TASKINSTANCE : '.InstanceID';
 WORKFLOWINSTANCE: .'WorkflowID';
 WORKFLOW:	'.Workflow';
+
+TIMESTAMP : '.Timestamp';
 
 // SPECIAL SYMBOLS
 EQUAL   	: '=' ;
@@ -278,6 +280,7 @@ HOURS	: NUMBER 'h';
 MINUTES	: NUMBER 'm';
 SECONDS	: NUMBER ('.' NUMBER)? 's';
 
+
 TIMEINTERVAL: 'P' [ ]? YEARS [ ]? (MONTHS)? [ ]? (DAYS)? [ ]? (HOURS)? 
 			[ ]? (MINUTES)? [ ]? (SECONDS)? 
 			| 'P' [ ]? MONTHS [ ]? (DAYS)? [ ]? (HOURS)? 
@@ -290,11 +293,13 @@ TIMEINTERVAL: 'P' [ ]? YEARS [ ]? (MONTHS)? [ ]? (DAYS)? [ ]? (HOURS)?
 		 	; // TODO im Moment ist es so, dass es keine Variable mit P geben darf
 
 DATETIME: NUMBER '-' NUMBER '-' NUMBER  'T' NUMBER (':' NUMBER (':' NUMBER ('.' NUMBER)?)? )? ;
-DATE	: NUMBER ('-' NUMBER ('-' NUMBER)? )?	;
-TIME	: NUMBER (':' NUMBER (':' NUMBER ('.' NUMBER)?)? )? ;
+DATE	: NUMBER '-' NUMBER ('-' NUMBER)? 	;
+TIME	: NUMBER ':' NUMBER (':' NUMBER ('.' NUMBER)?)?  ;
 
 // ELEMENTARY 
-CONSTANT : '\''.*?'\'' ;
+CONSTANT 	: '\''.*?'\'' 
+			|'"'.*?'"' 
+			;
 VARIABLE : [A-Z][A-Za-z0-9]* ; 
 CLAUSE	: [a-z_]+;
 NUMBER : [0-9]+ ; // Null muss auch erlaubt sein
