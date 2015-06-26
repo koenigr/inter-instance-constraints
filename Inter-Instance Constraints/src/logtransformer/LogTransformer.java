@@ -2,6 +2,7 @@ package logtransformer;
 
 import java.util.List;
 
+import storage.StorageHelper;
 import storage.container.status.ExecutedUserStatus;
 import storage.container.status.StatusContainer;
 import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
@@ -11,7 +12,7 @@ public class LogTransformer {
 	public void transform(List<List<LogTrace<LogEntry>>> logs) {
 		
 		// Status Container
-		StatusContainer sc = new StatusContainer();
+		StatusContainer sc = StorageHelper.getInstance().getStatusContainer();
 		
 		
 		System.out.println("1 " + logs.size());

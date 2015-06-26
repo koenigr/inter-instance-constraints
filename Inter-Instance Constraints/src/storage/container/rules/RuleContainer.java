@@ -21,7 +21,7 @@ public class RuleContainer {
 	private ArrayList<RoleCannotDoRule> roleCannotDo = new ArrayList<RoleCannotDoRule>();
 	private ArrayList<RoleMustDoRule> roleMustDo = new ArrayList<RoleMustDoRule>();
 	
-	public RuleContainer(String file) {
+	public void setOutputFile(String file) {
 		outputFile = file;
 	}
 

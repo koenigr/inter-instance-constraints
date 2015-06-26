@@ -62,7 +62,7 @@ public class LogTransformerToProlog {
 					for(DataAttribute a : entry.getMetaAttributes()) {
 						String attrName = a.name;
 						Object attrVal = a.value;
-						sc.addTaskAttribute(new TaskAttribute(taskID, attrName, attrVal ));
+						// TODO sc.addTaskAttribute(new TaskAttribute(taskID, attrName, attrVal ));
 					}
 					
 				}

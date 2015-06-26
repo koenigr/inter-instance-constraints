@@ -1,4 +1,4 @@
-package storage.container.rules;
+package storage.container;
 
 import java.util.ArrayList;
 

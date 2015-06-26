@@ -29,7 +29,7 @@ public class StatusContainer {
 	
 	private static ArrayList<TaskAttribute> taskAttribute = new ArrayList<TaskAttribute>();
 	
-	public StatusContainer(String file) {
+	public void setOutputFile(String file) {
 		outputFile = file;
 	}
 	
@@ -69,42 +69,49 @@ public class StatusContainer {
 
 			for (ExecutedUserStatus e : exUserStatus) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% exetuted_g status facts\n"); 
 
 			for (ExecutedGroupStatus e : exGroupStatus) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% task names \n"); 
 
 			for (TaskName e : taskName) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% timestamps\n"); 
 
 			for (Timestamp e : timestamp) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% task workflow facts\n"); 
 
 			for (TaskWorkflow e : taskWorkflow) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% workflow names facts\n"); 
 
 			for (WorkflowName e : workflowName) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% task attributes\n");
 			
 			for (TaskAttribute e : taskAttribute) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			

@@ -3,7 +3,7 @@ package storage.container;
 import java.util.ArrayList;
 
 import storage.container.Fact;
-import storage.container.rules.RuleBody;
+import storage.container.RuleBody;
 
 public abstract class Rule {
 	private RuleBody body;

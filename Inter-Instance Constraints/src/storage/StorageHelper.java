@@ -42,9 +42,13 @@ public class StorageHelper {
 	}
 
 	private StorageHelper() {
-		rc = new RuleContainer(LOCATION + OUTPUTFILE_RULES);
-		esc = new ExternAndSpecificationContainer(LOCATION + OUTPUTFILE_EXTERNSPEC);
-		sc = new StatusContainer(LOCATION + OUTPUTFILE_STATUS);
+		rc = new RuleContainer();
+		esc = new ExternAndSpecificationContainer();
+		sc = new StatusContainer();
+		
+		rc.setOutputFile(LOCATION + OUTPUTFILE_RULES);
+		esc.setOutputFile(LOCATION + OUTPUTFILE_EXTERNSPEC);
+		sc.setOutputFile(LOCATION + OUTPUTFILE_STATUS);
 	}
 	
 	

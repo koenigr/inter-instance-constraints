@@ -5,11 +5,18 @@ import storage.container.Fact;
 public class RoleTask extends Fact{
 
 	private static final int NUMBER_OF_ARGUMENTS = 2;
+	private static final String NAME = "role_task";
 	
 	/*
 	 * role_task
 	 */
 	public RoleTask() {
-		super("role_task", NUMBER_OF_ARGUMENTS);
+		super(NAME, NUMBER_OF_ARGUMENTS);
+	}
+
+	public RoleTask(String role, String task) {
+		super(NAME, NUMBER_OF_ARGUMENTS);
+		setArgument(0, role);
+		setArgument(1, task);
 	}
 }

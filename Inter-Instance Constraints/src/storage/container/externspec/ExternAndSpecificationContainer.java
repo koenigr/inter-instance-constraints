@@ -33,8 +33,8 @@ public class ExternAndSpecificationContainer {
 	
 	private static ArrayList<UserTask> userTask = new ArrayList<UserTask>();
 	
-	public ExternAndSpecificationContainer(String outputFile) { // TODO Singleton
-		this.outputFile = outputFile;
+	public void setOutputFile(String file) { 
+		outputFile = file;
 	}
 	
 	public void addCriticalTaskPair(CriticalTaskPair s) {
@@ -87,60 +87,70 @@ public class ExternAndSpecificationContainer {
 
 			for (CriticalTaskPair e : criticalTaskPair) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% dominates facts\n"); 
 
 			for (Dominates e : dominates) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% glb facts\n"); 
 
 			for (GLB e : glb) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% lub facts\n"); 
 
 			for (LUB e : lub) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% partner facts\n"); 
 
 			for (Partner e : partner) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% related facts\n"); 
 
 			for (Related e : related) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% role task facts\n"); 
 
 			for (RoleTask e : roleTask) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% same group facts\n"); 
 
 			for (SameGroup e : sameGroup) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% user role facts\n"); 
 
 			for (UserRole e : userRole) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			writer.write("% user task facts\n"); 
 
 			for (UserTask e : userTask) {
 				writer.write(e.getAsString());
+				writer.write(".\n");
 			}
 			
 			

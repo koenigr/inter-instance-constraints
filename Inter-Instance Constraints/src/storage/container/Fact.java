@@ -1,6 +1,9 @@
 package storage.container;
 
 
+import java.util.logging.Logger;
+
+import logging.LoggerFactory;
 import exceptions.InvalidPredicateFormatException;
 import utils.StringChecker;
 
@@ -9,8 +12,12 @@ public abstract class Fact{
 	String[] arguments;
 	String predicate;
 	int numberOfArguments = 0;
+
+	Logger logger = LoggerFactory.getLogger();
 	
 	public Fact(String predicate, int numberOfArguments) { 
+		
+		logger.info("Creating new predicate " + predicate);
 		/*
 		 *  TODO den String noch allerlei testen
 		 *  ob nur kleinschreibung und _ 
