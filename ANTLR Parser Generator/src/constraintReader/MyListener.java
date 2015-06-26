@@ -1,12 +1,15 @@
+package constraintReader;
+
 
 
 import java.io.IOException;
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import logging.LoggerFactory;
 
-import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -25,10 +28,11 @@ import storage.container.externspec.UserTask;
 import storage.container.rules.CannotDoRole;
 import storage.container.rules.MustDoRole;
 import storage.container.rules.MustDoUser;
+import storage.container.rules.Panic;
 import storage.container.rules.PanicRule;
 import storage.container.rules.RoleCannotDoRule;
 import storage.container.rules.RoleMustDoRule;
-import storage.container.rules.RuleBody;
+import storage.container.RuleBody;
 import storage.container.rules.RuleContainer;
 import storage.container.rules.UserCannotDoRule;
 import storage.container.rules.CannotDoUser;
@@ -96,40 +100,6 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void exitRelated(Inter_InstanceParser.RelatedContext ctx) {
-		logger.info("Exiting Related inputContext");
-		Related r = new Related("","");
-		int numOfChildren = ctx.getChildCount();
-		
-		if (numOfChildren == 3) {
-			String user1 = ctx.getChild(0).getText();
-			String user2 = ctx.getChild(2).getText();
-			r = new Related(user1, user2);
-		} else {
-			logger.log(Level.SEVERE, "unexpected number of children " + 
-					Integer.toString(numOfChildren), new RuntimeException());
-			System.exit(0);
-		}
-		
-
-		if (inputContext == InputContext.SETTING) {
-			esc.addRelated(r);
-		}
-	}
-
-	@Override
-	public void visitErrorNode(ErrorNode arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void visitTerminal(TerminalNode arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exitDescription(Inter_InstanceParser.DescriptionContext ctx) {
 		System.out.println("Number of children " + ctx.getChildCount());
 		 description = ctx.getChild(1).getText();
@@ -154,18 +124,6 @@ public class MyListener extends Inter_InstanceBaseListener {
 	}
 
 	@Override
-	public void enterClauses(Inter_InstanceParser.ClausesContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitClauses(Inter_InstanceParser.ClausesContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void enterAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) {
 		inputContext = InputContext.ASSIGNMENT_HEAD;
 		
@@ -176,6 +134,22 @@ public class MyListener extends Inter_InstanceBaseListener {
 		inputContext = InputContext.UNDEF;
 		
 	}
+
+	@Override
+	public void enterClauses(Inter_InstanceParser.ClausesContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exitClauses(Inter_InstanceParser.ClausesContext ctx) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/*
+	 * EXTERN
+	 */
 
 	@Override
 	public void exitPartnerof(Inter_InstanceParser.PartnerofContext ctx) {
@@ -206,6 +180,32 @@ public class MyListener extends Inter_InstanceBaseListener {
 		}
 	}
 
+	@Override
+	public void exitRelated(Inter_InstanceParser.RelatedContext ctx) {
+		logger.info("Exiting Related inputContext");
+		Related r = new Related("","");
+		int numOfChildren = ctx.getChildCount();
+		
+		if (numOfChildren == 3) {
+			String user1 = ctx.getChild(0).getText();
+			String user2 = ctx.getChild(2).getText();
+			r = new Related(user1, user2);
+		} else {
+			logger.log(Level.SEVERE, "unexpected number of children " + 
+					Integer.toString(numOfChildren), new RuntimeException());
+			System.exit(0);
+		}
+		
+
+		if (inputContext == InputContext.SETTING) {
+			esc.addRelated(r);
+		}
+	}
+	
+	/*
+	 * SPECIFICATION
+	 */
+	
 	@Override
 	public void exitRoleTask(Inter_InstanceParser.RoleTaskContext ctx) {
 		logger.info("Exiting Role Task inputContext");
@@ -304,6 +304,10 @@ public class MyListener extends Inter_InstanceBaseListener {
 		}
 		
 	}
+	
+	/*
+	 * ENFORCEMENT
+	 */
 
 	@Override
 	public void exitCannotUser(Inter_InstanceParser.CannotUserContext ctx) {
@@ -425,6 +429,7 @@ public class MyListener extends Inter_InstanceBaseListener {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
 			rule.setDescription(description);
+			rule.setHead(new Panic());
 			rc.addPanicRule(rule);
 			break;
 			
@@ -432,6 +437,11 @@ public class MyListener extends Inter_InstanceBaseListener {
 		default: break;
 		}	
 	}
+	
+	
+	/*
+	 * STATUS
+	 */
 
 	@Override
 	public void enterExecutedUser(Inter_InstanceParser.ExecutedUserContext ctx) {

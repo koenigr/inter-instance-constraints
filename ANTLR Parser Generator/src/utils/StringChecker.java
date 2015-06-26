@@ -14,7 +14,6 @@ public class StringChecker {
 	}
 
 	public static boolean isValidPredicate(String predicate) {
-		// TODO Auto-generated method stub
-		return false;
+		return predicate.matches("[a-z_]*");
 	}
 }

@@ -1,4 +1,4 @@
-package parser;
+package constraintReader;
 
 import java.io.IOException;
 import java.util.ArrayList;
