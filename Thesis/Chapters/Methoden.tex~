@@ -1,0 +1,34 @@
+% Chapter Template
+
+\chapter{Material und Methoden} % Main chapter title
+
+\label{Chapter4} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 4. \emph{Material und Methoden}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%-----------------------------------
+%	THEORIE
+%-----------------------------------
+\section{Theorie}
+
+1-2 Beispiele  finden, in denen man viele Constraints braucht.\\
+Dazu ein Bildchen vom Workflow.\\
+Sammlung von Constraints (Liste)\\
+Klassifizierung: Erklärung, in welche Arten von Constraints man das teilen kann\\
+Zuerst als Intra-Instance definieren und dann erklären, welche zusätzlichen Informationen man braucht, um Inter-Instance Constraints zu bekommen. Mit diesen zusätzlichen Informationen erweitern.\\
+Warum Intra Instance Constraints nicht so einfach übertragbar sind.\\
+
+Verschiedene Quellen durchsuchen und auswerten, welche Modellbeschreibung am besten ist? Vielleicht ein Buch als Zitatquelle besorgen?
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+
+\section{Auswertungsverfahren(Methoden)}
+
+
+%----------------------------------------------------------------------------------------
+%	IMPLEMENTIERUNG
+%----------------------------------------------------------------------------------------
+
+\section{Implementierung}
+Verwendete Frameworks, Mittel

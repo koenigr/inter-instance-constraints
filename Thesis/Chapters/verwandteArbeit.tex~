@@ -1,0 +1,46 @@
+% Chapter Template
+
+\chapter{Verwandte Arbeit} % Main chapter title
+
+\label{Chapter3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 3. \emph{Introduction}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%-----------------------------------
+%	SECTION
+%-----------------------------------
+
+\section{Related work}
+
+
+\subsection{Geschichte}
+Chinese Wall Modell Bewer/ Nash\\
+Business Rules und Auditierung ??
+Um die Zuverlässigkeit von Abläufen zu gewährleisten, wird schon lange Auditierung betrieben. Ursprünglich ging es darum, den korrekten Ablauf nachzuweisen. Man kann damit aber auch die zulässige Ausführung von Ereignissen prüfen.
+\subsection{Heute}
+Übergang zu Inter/instance Constraints
+Heute: verschiedene Forschungszweige: TBAC, Inter-Instance Constraints
+Allgemein eher den Inhalt auswerten, statt eine Liste von verwandten Arbeiten anzugeben
+Arten Unterscheiden, wie man Constraints spezifizieren kann
+Als logische Prädikate, GL4
+Welche Constraint-Richtungen werden behandelt?
+ZB nur Entailment, Cardinality. 
+\subsection{warner inter-Instance}
+Darauf bezieht sich die Arbeit.\\
+In dieser Arbeit wird der theoretische Ansatz von … um inter instance constraints erweitert und ist der Ausgangspunkt meiner Arbeit. Allerdings gehen sie davon aus, dass die Constraints für Authorisierungszwecke gedacht sind, und unterscheiden deswegen zwischen statischer Analyse zur Entwurfszeit und dynamischer Analyse während des Ablaufs. Bei der dynamischen Analyse werden die Informationen nach jeder Aktion  aktualisiert und unter Umständen die Liste von verbotenen Nutzern / Rollen angepasst.
+Da ich Auditierung benutze, wird statically checked weggelassen
+Erklären, was ich anders mache
+\subsection{leitner instance-spanning}
+Hat ein Framework entwickelt.
+\subsection{tan_consistency}
+Es geht eher um die Prüfung auf Konsistenz, es werden aber globale Constraints erwähnt.
+
+
+
+
+\subsection{ProM}
+\subsection{SCIFF}
+Sciff wurde von Marco Alberti, Federico Chesani und Marco Gavanelli im Rahmen des SOCS Projekts entwickelt. Es arbeitet ebenfalls mit Prolog, kann aber keine Inter Instance Constraints.
+
+
+

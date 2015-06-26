@@ -1,0 +1,43 @@
+% Chapter Template
+
+\chapter{Ergebnisse und Diskussion} % Main chapter title
+
+\label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 5. \emph{Ergebnisse}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Ergebnisse}
+
+
+%-----------------------------------
+%	SUBSECTION 1
+%-----------------------------------
+\subsection{Diskussion / Schlussfolgerungen}
+
+Zeigen, wie man die Beispiele am Anfang definiert.
+Modellchecking theoretisch
+
+Kurz ansprechen, welche Probleme es geben könnte, zB gegenseitiger Ausschluss bei Constraints. Satisfiability
+
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+
+\subsection{Vergleich zu anderen Autoren}
+%----------------------------------------------------------------------------------------
+%	SUBSECTION 3
+%----------------------------------------------------------------------------------------
+
+\subsection{Empfehlungen zu Praxis - was kann man dagegen tun?}
+
+%----------------------------------------------------------------------------------------
+%	SUBSECTION 4
+%----------------------------------------------------------------------------------------
+
+\subsection{Empfehlungen für weitere Untersuchungen}
+

@@ -1,0 +1,102 @@
+% Chapter Template
+
+\chapter{Theoretische Grundlagen} % Main chapter title
+
+\label{Chapter2} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 2. \emph{Introduction}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%-----------------------------------
+%	SECTION
+%-----------------------------------
+\section{Erklärung der Begriffe}
+ In diesem Kapitel werden wichtige Begriffe vorgestellt, die im Verlauf der weiteren Arbeit von Bedeutung sind.
+
+%-----------------------------------
+%	WORKFLOW
+%-----------------------------------
+\subsection{Workflow}
+
+Bild zu Workflow UML
+Ein Workflow ist eine definierte Abfolge von abgeschlossenen Arbeitsaufgaben, den Tasks. 
+
+TODO: suche nach einer offiziellen Definition von workflows
+
+%-----------------------------------
+%	TASKS
+%-----------------------------------
+\subsection{Tasks}
+
+Tasks sind Aufgaben, die in sich abgeschlossen sind. Sie besitzen 3 verschiedene Zustände: Assigned, Started und Completed welche durch Events getriggert werden. Das MXML Modell unterstützt 13 verschiedene Events, die sich in ihrer Bennenung bei den einzelnen Programmen unterscheiden können. Events können auch feiner gegliedert sein, bzw es kann auch sein, dass nur eine Teilmenge davon verwendet wird. In dieser Arbeit gehen wir davon aus, dass es folgende Events gibt: started, assigned, completed, ...
+
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.9\textwidth]{"Figures/Task Events"}
+	\caption{Tasks und Events}
+	\label{fig2}
+\end{figure}
+
+%-----------------------------------
+%	AUTHORISIERUNG
+%-----------------------------------
+\subsection{Authorisierung}
+
+%-----------------------------------
+%	ROLLENMODELL
+%-----------------------------------
+\subsection{Rollenmodell}
+
+%-----------------------------------
+%	ZEITMODELL
+%-----------------------------------
+\subsection{Zeitmodell}
+
+%-----------------------------------
+%	Event Logs
+%-----------------------------------
+\subsection{Event Logs}
+
+EventLogs sind Abbildungen von Workflows. Ein EventLog kann durchaus unvollständig sein bzw Fehler beinhalten.
+
+Das in dieser Thesis verwendete Format für Event Logs ist der Standard MXML
+
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.9\textwidth]{"Figures/mxml"}
+	\caption{MXML Modell}
+	\label{fig:mxml}
+\end{figure}
+
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|}
+  caseID & Task & User & Role & Timestamp & EventType\\
+  \hline
+  0 & Approach check &'Mark' &'Admin' &1999-12-13T12:22:15 & start\\
+  0 & Pay check & 'Theo' &'Azubi' &1999-12-13T12:22:16 & start\\
+  1 & Approach check &'Lucy' & 'Azubi' &1999-12-13T12:22:17 &start\\
+  1 & Pay check &'Mark' & 'Admin' &1999-12-13T12:22:18 & abort\\
+  0 & Revoke check & 'Theo' & 'Clerk' & 1999-12-13T12:22:19 & start
+  \end{tabular}
+Das ist nur ein Auszug und kein vollständiger Log. Es können auch weitere Daten vorhanden sein, die hier nicht dargestellt werden.
+  \caption{Beispiel Log Einträge. }
+  \label{tab:examplelog}
+\end{table}
+
+
+%-----------------------------------
+%	Definition Constraints
+%-----------------------------------
+\subsection{Definition Constraints}
+
+%-----------------------------------
+%	Security policy
+%-----------------------------------
+\subsection{Schutzziele}
+Die von Accorsi nehmen. Später darauf eingehen, was eingehalten wurde. Bzw schon bei Definition von Constraints darauf eingehen.
+
+
+
+
+

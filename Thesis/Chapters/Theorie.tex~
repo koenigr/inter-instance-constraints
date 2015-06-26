@@ -1,0 +1,71 @@
+% Chapter Template
+
+\chapter{Material und Methoden} % Main chapter title
+
+\label{Chapter4} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 4. \emph{Material und Methoden}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%-----------------------------------
+%	THEORIE
+%-----------------------------------
+\section{Theorie}
+
+\subsection{Ein praktisches Beispiel mit vielen Einschränkungen}
+Bild zum Workflow + Erklärung\\
+schriftliche Auflistung der Einschränkungen\\
+-Intra-Instance \\
+-Inter-Instance\\
+--User U darf Task1 nicht mehr als 5 mal im Monat ausführen\\
+--User U darf bei Task1 nicht mehr als 100000 Euro auszahlen\\
+--U1 und U2 dürfen nicht mehr als 3mal an T1 und T2 zusammen arbeiten\\
+-Inter-Process\\
+--Ein User darf nicht mehr als 100 Tasks pro Tag erledigen\\
+\subsection{Arten von Constraints - Herleitung}
+zeitliche Beschränkungen
+--absolute Einschränkungen\\
+--relative Einschränkungen\\
+Akkumulationen\\
+Separation of Duty\\
+Binding of Duty Constraints\\
+Cardinality Constraints\\
+Workflow Soundness\\
+--Bild dazu\\
+
+
+\subsection{Vorüberlegungen zur Grammatik}
+Woran erkennt man den Kontext der Constraints? \\
+Welches Rollenmodell wird benutzt, und welche Auswirkungen hat es auf die Grammatik?
+\subsection{Formale Definition}
+Zuerst Herleitung, was wir genau an Aussagen brauchen\\
+Workflows\\
+Zeitstempel\\
+Constanten\\
+Variablen\\
+Literale\\
+Regeln (Constraints sind Schlussfolgerungen, die sich aus Vorbedingungen ergeben.\\
+Fakten\\
+Status (aus Event Logs gelesen)\\
+Ableitung,...\\
+Zu Beispiel gefundene Einschränkungen definieren\\
+
+Kann ein Task mehrere Instanzen haben?\\
+Hierarchisches Rollenmodell\\
+Umgang mit Negation\\
+\subsection{Grammatik in BNF}
+Konstanten sind als 'String' , Variablen ohne \\
+Welche Zeichen darf man wo verwenden?\\
+Verfügbare Literale\\
+Syntax\\
+Fakten: SET extern|workflow \\
+Regeln: 	IF (..|..) (AND (..|..)*) \\
+THEN (..|..) \\
+WHERE t.name = t2.name AND  ...\\
+\subsection{Erklärungen zur Grammatik}
+Wenn sich etwas auf jede Instanz einzeln beziehen muss, muss Task1.workflow.instance = Task2.workflow.instance\\
+Eignet sich für hierarchisches und auch für normales Rollenmodell. Hängt nur davon ab, ob die Hierarchie als Fakt gesetzt wurde.\\
+User und ihre Rollenzuweisungen müssen nicht explizit angegeben werden. Nur wenn man das für die Vergleiche braucht.\\
+Beziehung zwischen critical_task_pair und collaborateur.
+\subsection{konkretes Beispiel}
+Die zuvor gefundenen Beispiele wären mit der neuen Grammtik:\\
+(C1): IF NUMBER OF USER executed TASK IS N AND N > 5 THEN USER cannot execute TASK

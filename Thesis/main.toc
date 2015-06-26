@@ -1,0 +1,57 @@
+\contentsline {chapter}{Declaration of Authorship}{i}{dummy.1}
+\vspace {1em}
+\contentsline {chapter}{Abstract}{iii}{dummy.2}
+\vspace {1em}
+\contentsline {chapter}{Contents}{iv}{dummy.3}
+\contentsline {chapter}{List of Figures}{vi}{dummy.5}
+\contentsline {chapter}{List of Tables}{vii}{dummy.7}
+\contentsline {chapter}{Abbreviations}{viii}{dummy.9}
+\contentsline {chapter}{Physical Constants}{ix}{dummy.12}
+\contentsline {chapter}{Symbols}{x}{dummy.15}
+\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.18}
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.19}
+\contentsline {section}{\numberline {1.2}Ziel der Arbeit}{2}{section.21}
+\contentsline {section}{\numberline {1.3}Aufbau der Arbeit}{3}{section.22}
+\contentsline {chapter}{\numberline {2}Theoretische Grundlagen}{4}{chapter.23}
+\contentsline {section}{\numberline {2.1}Erkl\IeC {\"a}rung der Begriffe}{4}{section.24}
+\contentsline {subsection}{\numberline {2.1.1}Workflow}{4}{subsection.25}
+\contentsline {subsection}{\numberline {2.1.2}Tasks}{4}{subsection.26}
+\contentsline {subsection}{\numberline {2.1.3}Authorisierung}{5}{subsection.28}
+\contentsline {subsection}{\numberline {2.1.4}Rollenmodell}{5}{subsection.29}
+\contentsline {subsection}{\numberline {2.1.5}Zeitmodell}{5}{subsection.30}
+\contentsline {subsection}{\numberline {2.1.6}Event Logs}{5}{subsection.31}
+\contentsline {subsection}{\numberline {2.1.7}Definition Constraints}{6}{subsection.34}
+\contentsline {subsection}{\numberline {2.1.8}Schutzziele}{6}{subsection.35}
+\contentsline {chapter}{\numberline {3}Verwandte Arbeit}{7}{chapter.36}
+\contentsline {section}{\numberline {3.1}Related work}{7}{section.37}
+\contentsline {subsection}{\numberline {3.1.1}Geschichte}{7}{subsection.38}
+\contentsline {subsection}{\numberline {3.1.2}Heute}{7}{subsection.39}
+\contentsline {subsection}{\numberline {3.1.3}warner inter-Instance}{7}{subsection.40}
+\contentsline {subsection}{\numberline {3.1.4}leitner instance-spanning}{8}{subsection.41}
+\contentsline {subsection}{\numberline {3.1.5}tan consistency}{8}{subsection.42}
+\contentsline {subsection}{\numberline {3.1.6}ProM}{8}{subsection.43}
+\contentsline {subsection}{\numberline {3.1.7}SCIFF}{8}{subsection.44}
+\contentsline {chapter}{\numberline {4}Material und Methoden}{9}{chapter.45}
+\contentsline {section}{\numberline {4.1}Theorie}{9}{section.46}
+\contentsline {subsection}{\numberline {4.1.1}Ein praktisches Beispiel mit vielen Einschr\IeC {\"a}nkungen}{9}{subsection.47}
+\contentsline {subsection}{\numberline {4.1.2}Arten von Constraints - Herleitung}{9}{subsection.48}
+\contentsline {subsection}{\numberline {4.1.3}Vor\IeC {\"u}berlegungen zur Grammatik}{10}{subsection.49}
+\contentsline {subsection}{\numberline {4.1.4}Formale Definition}{10}{subsection.50}
+\contentsline {subsection}{\numberline {4.1.5}Grammatik in BNF}{11}{subsection.51}
+\contentsline {subsection}{\numberline {4.1.6}Erkl\IeC {\"a}rungen zur Grammatik}{11}{subsection.52}
+\contentsline {subsection}{\numberline {4.1.7}konkretes Beispiel}{11}{subsection.53}
+\contentsline {chapter}{\numberline {5}Praxis}{12}{chapter.54}
+\contentsline {section}{\numberline {5.1}Implementierung}{12}{section.55}
+\contentsline {subsection}{\numberline {5.1.1}Algorithmus}{12}{subsection.56}
+\contentsline {subsection}{\numberline {5.1.2}Aufbau mein Programm}{12}{subsection.57}
+\contentsline {chapter}{\numberline {6}Ergebnisse und Diskussion}{14}{chapter.59}
+\contentsline {section}{\numberline {6.1}Auswertung und Aussicht}{14}{section.60}
+\contentsline {subsection}{\numberline {6.1.1}Mein Beispiel mit ein paar Logs untersuchen}{14}{subsection.61}
+\contentsline {subsection}{\numberline {6.1.2}Aussicht}{14}{subsection.62}
+\vspace {2em}
+\contentsline {chapter}{\numberline {A}Weitere Beispiele f\IeC {\"u}r die Benutzung der Grammatik}{15}{appendix.63}
+\contentsline {chapter}{\numberline {B}Argumente und Konfiguration}{16}{appendix.64}
+\contentsline {chapter}{\numberline {C}User Manual}{17}{appendix.66}
+\contentsline {chapter}{\numberline {D}Fehlermeldungen}{18}{appendix.67}
+\vspace {2em}
+\contentsline {chapter}{Bibliography}{19}{dummy.68}

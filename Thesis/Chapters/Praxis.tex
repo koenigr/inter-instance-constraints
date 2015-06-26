@@ -1,0 +1,34 @@
+% Chapter Template
+
+\chapter{Praxis} % Main chapter title
+
+\label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 5. \emph{Ergebnisse}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+%	PRAXIS
+%----------------------------------------------------------------------------------------
+
+\section{Implementierung}
+\subsection{Algorithmus}
+Zuerst aus Logs Status-Prädikate auslesen.\\
+Für jedes critical task pair entsprechende collaborateurs setzen.\\
+Schleife über Regeln\\
+--Die resultierenden Heads bestimmen und schauen, ob es für cannot do ein executed und für must do kein executed gibt-> dann wurde es verletzt. Um das herauszufinden, wird die Regel in executed $ - >$ blabla, oder not(executed) $- >$ blabla übersetzt.\\
+ 
+Einfaches Beispiel: Rule: executed(ui, t1)-> cannot do(ui,t2) und status: executed('tom', t1). Daraus wird abgeleitet: cannot do('tom', t2). Da es nicht in der DB ist, ist alles OK
+
+\subsection{Aufbau mein Programm}
+
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.9\textwidth]{"Figures/myProg"}
+	\caption{Aufbau mein Programm}
+	\label{fig: myprog}
+\end{figure}
+
+Das Programm liest mittels SEWOL MXML logs ein und übersetzt sie in Status Prädikate. 
+Die Constraints werden ebenfalls eingelesen und in Regelprädikate übersetzt. Der Parser für die Grammatik wurde mit ANTLR erzeugt.
+Die eigentliche Untersuchung kann entweder durch ein Skript oder innerhalb des Javacodes gestartet werden.
+

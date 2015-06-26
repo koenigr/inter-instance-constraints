@@ -1,0 +1,18 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[_ec()]{_eclipse_????}
+Eclipse {BPMN}2 {Modeler} {User} {Guide}.
+\newblock URL
+  \url{https://www.eclipse.org/bpmn2-modeler/documentation/BPMN2ModelerUserGuide-1.0.1.pdf}.
+
+\bibitem[jBPM Team()]{jboss_jbpm_team_jbpm_????}
+JBoss jBPM Team.
+\newblock {jBPM} v6.0 {Documentation}.
+\newblock URL \url{http://docs.jboss.org/jbpm/v6.0/userguide/index.html}.
+
+\end{thebibliography}

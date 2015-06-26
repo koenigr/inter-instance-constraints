@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: unsrtnat.bst
+Database file #1: Bibliography.bib
+Warning--empty year in _eclipse_????
+Warning--empty year in jboss_jbpm_team_jbpm_????
+You've used 2 entries,
+            2481 wiz_defined-function locations,
+            558 strings with 4679 characters,
+and the built_in function-call counts, 504 in all, are:
+= -- 40
+> -- 7
+< -- 1
++ -- 6
+- -- 2
+* -- 25
+:= -- 69
+add.period$ -- 5
+call.type$ -- 2
+change.case$ -- 4
+chr.to.int$ -- 2
+cite$ -- 5
+duplicate$ -- 28
+empty$ -- 63
+format.name$ -- 3
+if$ -- 109
+int.to.chr$ -- 1
+int.to.str$ -- 3
+missing$ -- 0
+newline$ -- 17
+num.names$ -- 3
+pop$ -- 25
+preamble$ -- 1
+purify$ -- 2
+quote$ -- 0
+skip$ -- 27
+stack$ -- 0
+substring$ -- 5
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 14
+warning$ -- 2
+while$ -- 2
+width$ -- 0
+write$ -- 27
+(There were 2 warnings)

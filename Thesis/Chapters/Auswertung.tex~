@@ -1,0 +1,24 @@
+% Chapter Template
+
+\chapter{Ergebnisse und Diskussion} % Main chapter title
+
+\label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 5. \emph{Ergebnisse}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+\section{Auswertung und Aussicht}
+\subsection{Mein Beispiel mit ein paar Logs untersuchen}
+Erklärung, woher diese Logs kommen und wie sie erzeugt wurden.\\
+Zeigen, wie der Output aussieht.\\
+Beweismethoden??\\
+Wann gibt es false Negatives, false Positives?\\
+Gibt es Fehler? Wieviele? 
+
+\subsection{Aussicht}
+Wie kann man die restlichen Constraints implementieren\\
+Compliance Checking:\\
+Cannot_do und Must_execute vergleichen.\\
+Optimierung??\\
+
+
+
