@@ -1,76 +1,38 @@
 package main;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Logger;
+import java.util.logging.Level;
 
-import logging.LoggerFactory;
-import logparser.LogCreator;
-import logtransformer.LogTransformerToProlog;
-import modelchecker.Modelchecker;
-
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-
-import storage.container.externspec.Dominates;
-import storage.container.rules.RuleContainer;
-import constraintsParser.ConstraintsParser;
-import de.invation.code.toval.parser.ParserException;
-import de.invation.code.toval.validate.CompatibilityException;
-import de.invation.code.toval.validate.ParameterException;
-import de.uni.freiburg.iig.telematik.sewol.log.LockingException;
-import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
-import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
-import de.uni.freiburg.iig.telematik.sewol.writer.PerspectiveException;
-import examples.MyListener;
-import examples.MyVisitor;
+import iicmchecker.IICMChecker;
 
 public class Main {
 	
-	Logger logger = LoggerFactory.getLogger();
-
-	public static void main(String[] args) {
-		
-		try {
-		
-		ConstraintsParser cparser = new ConstraintsParser();
-		ParseTree tree = cparser.parse();
-		
-		System.out.println(tree.toStringTree());
-			
-		MyVisitor visitor = new MyVisitor();
-		visitor.visit(tree);
-		
-		ParseTreeWalker walker = new ParseTreeWalker();
-		walker.walk(new MyListener(), tree);
-		
-		LogCreator lcreator = new LogCreator();
-		List<List<LogTrace<LogEntry>>> logs = lcreator.createLog();
-		
-		LogTransformerToProlog ltransformer = new LogTransformerToProlog();
-		ltransformer.transform(logs);
-		
-		Modelchecker mc = new Modelchecker(tree, logs);
-		
-		} catch (IOException e) {
-			
-		} catch (CompatibilityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParameterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LockingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (PerspectiveException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
+private static String rulelocation = "rulefiles";
+private static String[] rulefiles = {
+				"example1" , "example2", "example3" , "example_definition_file" ,
+				"IntraInstance_hierarchical" , "InterInstance_hierarchical", 
+				"InterProcess_hierarchical", "IntraInstance_nonhierarchical",
+			    "InterInstance_nonhierarchical", "InterProcess_nonhierarchical",
+			    "negationrules"
+};
+private static String loglocation = "logfiles";
+private static String[] logfiles = {"logfile1"};
+private static String outputlocation = "prologfiles";
+private static Level loggerLevel = Level.SEVERE;
+// TODO Logger Outputlocation
+	
+static IICMChecker checker;
+  
+public static void main(String[] args) {
+	
+	// TODO parse from args
+	
+	checker = new IICMChecker();
+	checker.setLoggerLevel(loggerLevel);
+	checker.setRuleLocation(rulelocation);
+	checker.setRuleFiles(rulefiles);
+	checker.setLogLocation(loglocation);
+	checker.setLogFiles(logfiles);
+	checker.setOutputLocation(outputlocation);
+	checker.run();
+}
 }
