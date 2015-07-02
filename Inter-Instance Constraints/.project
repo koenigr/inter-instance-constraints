@@ -14,4 +14,31 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>jagalsrc</name>
+			<type>2</type>
+			<location>/home/koenigr/Eclipse/sewol_libs/JAGAL/jagal-code/JAGAL/src</location>
+		</link>
+		<link>
+			<name>sewolext</name>
+			<type>2</type>
+			<location>/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/ext</location>
+		</link>
+		<link>
+			<name>sewolsrc</name>
+			<type>2</type>
+			<location>/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/src</location>
+		</link>
+		<link>
+			<name>tovalres</name>
+			<type>2</type>
+			<location>/home/koenigr/Eclipse/sewol_libs/TOVAL/toval-code/TOVAL/res</location>
+		</link>
+		<link>
+			<name>tovalsrc</name>
+			<type>2</type>
+			<location>/home/koenigr/Eclipse/sewol_libs/TOVAL/toval-code/TOVAL/src</location>
+		</link>
+	</linkedResources>
 </projectDescription>

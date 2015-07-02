@@ -1,0 +1,10 @@
+
+/* Falsch!! Hier sollte es darum gehen, dass im Workflow mehr als 3 Rollen sind */
+IF NUMBER WHERE role R can execute T IS N AND N < 3 THEN panic
+
+IF role RJ executed T1 AND RJ > RI AND RJ = RI AND RI != 'General Manager' 
+	THEN role RI cannot execute T
+	
+IF role RJ executed T1 AND RJ < RI AND RI < RJ THEN role RI cannot execute T2
+
+IF UI executed 'task2' THEN UI cannot execute 'task3'

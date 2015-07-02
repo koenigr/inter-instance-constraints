@@ -1,0 +1,47 @@
+<define>
+	<clause name='mother_of'>
+		<arg type=UT>
+		<arg type=UT>
+	</clause>
+</define>
+
+<set>
+	<specification name='critical_task_pair'>
+		<arg value='task1'>
+		<arg value='task2'>
+</set>
+<rule name="Task t darf nur 1x pro Tag ausgeführt werden">
+	<conditions>
+	  <clause name="count">
+	  
+	  </clause>
+	  <clause ...
+	</conditions>
+	<action>
+		<clause name="cannot_do">
+			<arg variable='USER2'>
+			<arg value='task7'>
+		</clause>
+	</action>
+</rule>
+
+IF count(executed_u(USER1, 'task7'), N) AND N > 0
+	THEN cannot_do_u(USER2, 'task7')
+	
+/* UserU darf Task1 nicht mehr als 5mal im Monat ausführen */
+IF count(executed_u(USER, 'task3'.ID1), N) AND N > 5
+	THEN cannot_do_u(USER, 'task3'.ID2)
+	
+/* User U darf bei T1 nicht mehr als 5000 Euro auszahlen */
+IF executed_u(USER, 'task1'.ID1) AND sum(ID1, Output('task1'.ID1).LOAN, N) AND N >= 5000
+	THEN cannot_do_u(USER, 'task1'.ID2)
+	
+/* U1 und U2 dürfen nicht mehr als 3mal an T1 und T2 zusammen arbeiten*/
+IF count(collaborator(USER1, USER2), N) AND N >= 3 AND executed_u(USER1, 'task1')
+	THEN cannot_do_u(USER2, 'task2')
+IF count(collaborator(USER1, USER2), N) AND N >= 3 AND executed_u(USER1, 'task2')
+	THEN cannot_do_u(USER2, 'task1')
+		
+/* Ein User darf nicht mehr als 100 Tasks pro Tag erledigen */
+IF count(executed_u(USER, TASK.WORKFLOW.INSTANCE), N) AND N >= 100
+	THEN cannot_do_u(USER, TASK.WORKFLOW.INSTANCE)

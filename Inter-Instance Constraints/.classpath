@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="sewolext"/>
+	<classpathentry kind="src" path="tovalres"/>
+	<classpathentry kind="src" path="jagalsrc"/>
+	<classpathentry kind="src" path="sewolsrc"/>
+	<classpathentry kind="src" path="tovalsrc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="/home/koenigr/Eclipse/ANTLR/antlr-4.5-complete.jar"/>
-	<classpathentry kind="lib" path="/home/koenigr/Eclipse/Guava/guava-18.0.jar"/>
-	<classpathentry kind="lib" path="/home/koenigr/Eclipse/JAGAL/jagal-0.1.5-consistent.jar"/>
-	<classpathentry kind="lib" path="/home/koenigr/Eclipse/SEWOL/jawl-0.1.4-consistent.jar"/>
-	<classpathentry kind="lib" path="/home/koenigr/Eclipse/TOVAL/toval-0.1.5.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/lib/xstream-1.4.8.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/lib/jung-visualization-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/lib/jung-graph-impl-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/lib/jung-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/lib/jung-algorithms-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/lib/guava-16.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Eclipse/sewol_libs/SEWOL/jawl-code-0/SEWOL/lib/collections-generic-4.01.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Eclipse/sewol_libs/JAGAL/jagal-code/JAGAL/lib/jgraphXwithsources.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Desktop/Inter-instance constraints/git/projog-core.jar"/>
+	<classpathentry kind="lib" path="/home/koenigr/Desktop/Inter-instance constraints/git/inter-instance-constraints/Inter-Instance Constraints/projogGeneratedClasses"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

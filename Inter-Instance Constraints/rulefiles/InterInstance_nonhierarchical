@@ -1,0 +1,26 @@
+
+
+
+DESC "If more than 4 activities of t1 executed by one single user aborts, 
+then the same person cannot execute t1 anymore"
+IF NUMBER OF WID WHERE 't1'.WID aborted AND USER1 executed 't1'.WID IS N AND N > 4
+THEN USER1 cannot execute 't1'.WID2
+
+
+DESC 'Task t darf nur 1x pro Tag ausgeführt werden'
+IF NUMBER WHERE USER1 executed 'task7' IS N AND N > 0
+	THEN USER2 cannot execute 'task7'
+
+DESC 'UserU darf Task1 nicht mehr als 5mal im Monat ausführen'
+IF NUMBER WHERE USER executed 'task3'.ID1 IS N AND N > 5
+	THEN USER cannot execute 'task3'.ID2
+	
+DESC 'User U darf bei T1 nicht mehr als 5000 Euro auszahlen'
+IF USER executed 'task1'.ID1 AND SUM OF L WHERE Num_Var('task1'.ID1).'loan' = L IS N AND N >= 5000
+	THEN USER cannot execute 'task1'.ID2
+
+DESC 'U1 und U2 dürfen nicht mehr als 3mal an T1 und T2 zusammen arbeiten'
+IF NUMBER WHERE USER1 is collaborator of USER2 IS N AND N >= 3 AND USER1 executed 'task1'
+	THEN USER2 cannot execute 'task2'
+IF NUMBER WHERE USER1 is collaborator of USER2 IS N AND N >= 3 AND USER1 executed 'task2'
+	THEN USER2 cannot execute 'task1'

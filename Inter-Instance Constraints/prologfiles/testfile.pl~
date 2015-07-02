@@ -1,0 +1,10 @@
+:- multifile(test/1).
+
+test(a).
+test(b).
+test('asd asd').
+test('asdf').
+
+versuch('asd').
+
+testRun(X) :- test(X).

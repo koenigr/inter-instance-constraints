@@ -1,0 +1,53 @@
+DEFINE mother_of(UT,UT) /* TODO eigene Funktionen dürfen nur diese Form haben*/
+
+SET critical_task_pair('task1','task2') // mother_of
+
+/*
+Intra Instance Constraints
+*/
+DESC ' t1 und t2 duerfen  nicht vom selben U ausgefuehrt werden '
+IF USER executed 'task1' THEN USER cannot execute 't2'
+
+DESC 'User that approves a purchase order must be more senior than 
+the user creates it.'
+IF USER1 executed 'create_order' AND USER1.Role > USER2.Role
+	THEN USER2 cannot execute 'approve order'
+
+DESC 'If a user belongs to role refund Clerk and has performed 
+task "create purchase", then he cannot perform T4'
+
+IF USER executed 'create purchase' AND USER.Role = 'refund clerk'
+	THEN USER cannot execute 'quit purchase'
+	
+DESC 'Wenn Tim t1 mit der Rolle R2 und t2 mit der Rolle R3 ausgeführt hat,
+muss er t4 mit der Rolle R1 ausführen'
+If 'Tim' executed 't1' 
+THEN 'Tim' must execute 't4' // TODO wie zeigen, dass er das mit Rolle soundso machen muss
+
+DESC 't1 und t2 müssen vom selben User ausgeführt werden'
+IF USER executed 't1' THEN USER must execute 't2'
+
+DESC 'Mindestens 3 Rollen müssen mit dem Workflow verbunden sein'
+IF NUMBER OF DIFF User WHERE User executed Task  IS N AND N < 3
+THEN panic
+
+DESC 'If a user has performed t2, then cannot perform t3'
+IF USER executed 't2' THEN USER cannot execute 't3'
+
+/* DESC "Each activation of Task T2 must be performed by a different user" TODO Gibt es versch Task IDs?*/
+
+DESC 'If Bob executed t2, then he cannot execute t4'
+IF  user 'Bob' executed 't2' THEN 'Bob' cannot execute 't4'
+IF 'Bob' executed 't1' THEN 'Bob' cannot execute 't4'
+
+DESC 't3 und t5 dürfen nicht von der selben Rolle ausgeführt werden'
+IF User1 executed 't3' AND User1.Role = User2.Role THEN User2 cannot execute 't4' 
+
+DESC 'TASK t2 must be executed by a role dominating the roles 
+which execute tasks t1 and t4, unless T1, T2 and T4 are executed by 
+the role general manager'
+IF USER1 executed 't1' AND USER1.Role != 'General Manager' AND User2.Role <= User1.Role
+THEN User2 cannot execute 't2'
+
+IF USER1 executed 't1' AND USER1.Role = 'General Manager' AND User2.Role != 'General Manager'
+THEN User2 cannot execute 't2'

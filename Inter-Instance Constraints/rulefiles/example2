@@ -1,0 +1,44 @@
+set critical_task_pair('ex2','ASD')
+
+/* C1 - C2 */
+IF USER executed 'task1'
+THEN USER cannot execute 'task2'
+
+/* C3 */
+IF USER1 executed 'task2' AND USER1 is related to USER2
+THEN USER2 cannot execute 'task3'
+
+/* C4 */
+IF NUMBER WHERE USER1 is collaborator of USER2 IS N AND N = 3 AND USER1 executed 'task1'
+THEN USER2 cannot execute 'task2'
+
+/* C5 ?????? */
+
+IF timeinterval('task2'.I, 'task2'.K) = P30D AND
+	SUM OF X WHERE USER executed 'task2'.I IS N AND N < 1000000 AND Num_Var('task2'.I).'loanamount' = X
+THEN USER cannot execute 'task2'.K
+
+IF timeinterval('task2'.I, 'task2'.K)  < P24h AND 
+	N < 1000000
+THEN USER cannot execute 'task2'.K
+
+/* C6 Das gleiche wie C5*/
+/*
+IF 
+THEN abort('W');*/
+
+/* C7 */
+
+/*
+IF
+THEN cannot_do_u(USER1, 'task2'.K);*/
+
+/* C8 */
+
+IF NUMBER OF USER WHERE USER executed TASK.W.I IS N1  AND
+	MIN OF X WHERE USER executed TASK.W.I AND TASK.W.I.Timestamp = X IS N2 AND
+	MAX OF Y WHERE USER executed TASK.W.I AND TASK.W.I.Timestamp = Y IS N3 AND
+	N1 > 100 AND
+	(N3 - N2) < P24h
+	AND (X-Y) = 12
+THEN USER cannot execute TASK.W.K

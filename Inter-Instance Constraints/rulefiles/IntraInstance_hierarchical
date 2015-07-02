@@ -1,0 +1,23 @@
+set 'Manager' dominates 'Secretary', 'Secretary' dominates 'Azubi'
+set 'Manager' dominates 'Teamleader' and 'Teamleader' dominates 'clerk'
+
+DESC 'Task2 has to be executed within 3 days after task1 has been executed'
+IF USER executed 'task1' AND timeinterval('task1', 'task2') > P3D
+	THEN USER1 cannot execute 'Task2'
+	
+DESC 'Task3 should be executed by a role more dominating than 
+   role of task2 unless both are executed by the manager'
+IF role R1 executed 'task2' AND R1 != 'Manager' AND R1 dominates R2
+	THEN role R2 cannot execute 'task3'
+	
+DESC 'Task1, task2 and task3 must be executed by at least 2 different roles'
+IF NUMBER OF USER WHERE USER executed TASK AND (TASK = 'task1' OR TASK = 'task2' OR TASK = 'task3') IS N
+AND N < 2 AND 'task1'.Timestamp > 1999-12-13T15
+	THEN panic
+	
+DESC 'If a user performs task1 and it aborts, then a user with a higher role has to perform it.'
+IF EventType('task1').'abort' AND 'task1'.Role > 'task2'.Role
+	THEN panic
+
+IF ROLE1 executed 'task1' AND 'task1' aborted AND ROLE2 < ROLE1
+	THEN ROLE2 cannot execute 'task2'

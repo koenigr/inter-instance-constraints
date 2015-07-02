@@ -17,7 +17,7 @@ private static String[] rulefiles = {
 private static String loglocation = "logfiles";
 private static String[] logfiles = {"logfile1"};
 private static String outputlocation = "prologfiles";
-private static Level loggerLevel = Level.SEVERE;
+private static Level loggerLevel = Level.SEVERE; // TODO das funktioniert gar nicht
 // TODO Logger Outputlocation
 	
 static IICMChecker checker;

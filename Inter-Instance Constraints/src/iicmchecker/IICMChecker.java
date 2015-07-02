@@ -65,9 +65,9 @@ private void init() {
 public void run() {
 logger.entering("IICMChecker", "run()");
 init();
-parseRuleFiles();	
-parseLogFiles();
-storeKnowledgeBase();
+// parseRuleFiles();	
+// parseLogFiles();
+// storeKnowledgeBase();
 runComplianceChecker();
 }
 
@@ -145,18 +145,22 @@ ltransformer.transform(logs);
 }
 
 private void storeKnowledgeBase() {
+logger.entering("IICMChecker", "storeKnowledgeBase()");
 // TODO die location angeben
 StorageHelper.getInstance().printToFile();
 }
 
 
 private void runComplianceChecker() {
+logger.severe("agadfgadf");
+logger.entering("IICMChecker", "runComplianceChecker()");
+logger.severe("agadfgadf");
 
 /*
  * Run the Modelchecker
  */
 Compliancechecker mc = new Compliancechecker();
-	
+	mc.run();
 }
 
 }

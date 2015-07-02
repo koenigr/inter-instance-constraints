@@ -1,0 +1,7 @@
+test('a').
+
+start(X) :- 
+	open('results.txt', append, Stream),
+	write(Stream, 'sdfs'),
+	test(X),
+	close(Stream).

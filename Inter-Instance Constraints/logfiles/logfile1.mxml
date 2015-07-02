@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkflowLog>
+<Process id="">
+<ProcessInstance id="1">
+<AuditTrailEntry>
+<WorkflowModelElement>check</WorkflowModelElement>
+<EventType>start</EventType>
+<Timestamp>3915-06-02T10:17:03.093+0200</Timestamp>
+<Originator>Mark</Originator>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>pay</WorkflowModelElement>
+<EventType>complete</EventType>
+<Timestamp>1970-01-25T20:56:45.300+0100</Timestamp>
+<Originator>Susi</Originator>
+<Data>
+<Attribute name="loan_amount">2000</Attribute>
+</Data>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>pay</WorkflowModelElement>
+<EventType>complete</EventType>
+<Timestamp>1970-01-25T20:56:45.300+0100</Timestamp>
+<Originator>Susi</Originator>
+<Data>
+<Attribute name="loan_amount">2000</Attribute>
+</Data>
+</AuditTrailEntry>
+</ProcessInstance>
+<ProcessInstance id="2">
+<AuditTrailEntry>
+<WorkflowModelElement>send_mail</WorkflowModelElement>
+<EventType>start</EventType>
+<Timestamp>3915-06-02T10:17:03.093+0200</Timestamp>
+<Originator>Bob</Originator>
+<Data>
+</Data>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>check</WorkflowModelElement>
+<EventType>start</EventType>
+<Timestamp>3915-06-02T10:17:03.093+0200</Timestamp>
+<Originator>Mark</Originator>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>send_mail</WorkflowModelElement>
+<EventType>complete</EventType>
+<Timestamp>1970-01-25T20:56:45.300+0100</Timestamp>
+<Originator>Stefania</Originator>
+<Data>
+<Attribute name="recipient">chef</Attribute>
+</Data>
+</AuditTrailEntry>
+</ProcessInstance>
+<ProcessInstance id="3">
+<AuditTrailEntry>
+<WorkflowModelElement>check</WorkflowModelElement>
+<EventType>start</EventType>
+<Timestamp>3915-06-02T10:17:03.093+0200</Timestamp>
+<Originator>Mark</Originator>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>pay</WorkflowModelElement>
+<EventType>complete</EventType>
+<Timestamp>1970-01-25T20:56:45.300+0100</Timestamp>
+<Originator>Susi</Originator>
+<Data>
+<Attribute name="loan_amount">2000</Attribute>
+</Data>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>send_mail</WorkflowModelElement>
+<EventType>complete</EventType>
+<Timestamp>1970-01-25T20:56:45.300+0100</Timestamp>
+<Originator>Lorenzo</Originator>
+<Data>
+<Attribute name="recipient">customer</Attribute>
+</Data>
+</AuditTrailEntry>
+<AuditTrailEntry>
+<WorkflowModelElement>call_customer</WorkflowModelElement>
+<EventType>complete</EventType>
+<Timestamp>1970-01-25T20:56:45.300+0100</Timestamp>
+<Originator>Lorenzo</Originator>
+<Data>
+<Attribute name="recipient">customer</Attribute>
+</Data>
+</AuditTrailEntry>
+</ProcessInstance>
+</Process>
+</WorkflowLog>

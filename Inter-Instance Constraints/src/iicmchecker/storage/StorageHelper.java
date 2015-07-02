@@ -37,9 +37,10 @@ public class StorageHelper {
 		esc = new ExternAndSpecificationContainer();
 		sc = new StatusContainer();
 		
-		rc.setOutputFile(LOCATION + OUTPUTFILE_RULES);
-		esc.setOutputFile(LOCATION + OUTPUTFILE_EXTERNSPEC);
-		sc.setOutputFile(LOCATION + OUTPUTFILE_STATUS);
+		// TODO was ist, wenn die location leer ist?
+		rc.setOutputFile(LOCATION + "/" +  OUTPUTFILE_RULES);
+		esc.setOutputFile(LOCATION + "/" +  OUTPUTFILE_EXTERNSPEC);
+		sc.setOutputFile(LOCATION + "/" + OUTPUTFILE_STATUS);
 	}
 	
 	

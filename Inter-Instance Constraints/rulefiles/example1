@@ -1,0 +1,20 @@
+SET 'Tom' is related to 'Susi', 'Mimi' is partner of 'Jimmy K', 'Timo' is in same group as 'Susanne Vogt'
+SET  role 'Manager' can execute 'TASKA', 'Manager' is glb of 'task2'
+SET  role 'Admin' can execute 'Shutdown PCs' and user 'Terence Par' can execute 'defrag' 	
+SET  user 'Mark Twain' belongs to role 'author' , 'author' is glb of 'write book' 				
+SET  'artist' is lub 'paint picture' , 'CEO' dominates 'Secretary' , critical_task_pair('book flight','pay flight')
+set critical_task_pair('ex1','ASD')
+
+DESC      'Tom cannot execute task A if he is related to Susi'
+IF 'Tom' is related to 'Susi' THEN 'Tom' cannot execute 'TASKA'
+
+desc 'Separation Of Duty with task 1 and task2'
+IF  UI executed 'Task1' THEN UI cannot execute 'Task2'
+
+description 'Separation Of Duty with task 1 and task2'
+IF  UI executed 'Task1' THEN UI cannot execute 'Task2'
+
+DESC 'Separation of duty with task2 and task3 only for related user
+sdsdfgdfg dfgdfg dfg df
+dfg dfgd fg dfg dfgdgdf'
+IF UJ executed 'Task2' AND UI is related to UJ THEN UI cannot execute 'Task3'
