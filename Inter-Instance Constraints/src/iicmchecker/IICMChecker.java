@@ -65,9 +65,9 @@ private void init() {
 public void run() {
 logger.entering("IICMChecker", "run()");
 init();
-// parseRuleFiles();	
-// parseLogFiles();
-// storeKnowledgeBase();
+parseRuleFiles();	
+parseLogFiles();
+storeKnowledgeBase();
 runComplianceChecker();
 }
 

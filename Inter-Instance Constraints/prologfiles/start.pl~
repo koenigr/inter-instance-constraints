@@ -10,7 +10,6 @@ main :-
 	format('Example script~n'),
 	current_prolog_flag(argv, Argv),
 	format('Called with ~q~n', [Argv]),
-	write('run checker'),
 	run_checker,
 	halt.
 main :-
