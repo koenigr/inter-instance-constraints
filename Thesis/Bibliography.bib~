@@ -80,13 +80,3 @@
 	title = {Checking {Compliance} of {Execution} {Traces} to {Business} {Rules}},
 	author = {Chesani, Federico and Mello, Paola and Montali, Marco and Riguzzi, Fabrizio and Sebastianis, Maurizio and Storari, Sergio}
 }
-
-@INPROCEEDINGS{wolter_modeling_of_TBAC_in_BPMN,
-	author = {C Wolter and A Schaad},
-	title = {Modeling of Task-Based Authorization Constraints in BPMN},
-	booktitle = {of Lecture Notes in Computer Science},
-	year = {2007},
-	pages = {64--79},
-	publisher = {Springer}
-}
-

@@ -1,18 +1,29 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{3}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[_ec()]{_eclipse_????}
-Eclipse {BPMN}2 {Modeler} {User} {Guide}.
-\newblock URL
-  \url{https://www.eclipse.org/bpmn2-modeler/documentation/BPMN2ModelerUserGuide-1.0.1.pdf}.
+\bibitem[Wolter and Schaad(2007)]{wolter_modeling_of_TBAC_in_BPMN}
+C~Wolter and A~Schaad.
+\newblock Modeling of task-based authorization constraints in bpmn.
+\newblock In \emph{of Lecture Notes in Computer Science}, pages 64--79.
+  Springer, 2007.
 
-\bibitem[jBPM Team()]{jboss_jbpm_team_jbpm_????}
-JBoss jBPM Team.
-\newblock {jBPM} v6.0 {Documentation}.
-\newblock URL \url{http://docs.jboss.org/jbpm/v6.0/userguide/index.html}.
+\bibitem[Warner and Atluri(2006)]{warner_inter_instance}
+Janice Warner and Vijayalakshmi Atluri.
+\newblock Inter-instance {Authorization} {Constraints} for {Secure} {Workflow}
+  {Management}.
+\newblock In \emph{Proceedings of the {Eleventh} {ACM} {Symposium} on {Access}
+  {Control} {Models} and {Technologies}}, {SACMAT} '06, pages 190--199, New
+  York, NY, USA, 2006. ACM.
+\newblock ISBN 1-59593-353-0.
+
+\bibitem[Parr(2013)]{antlr}
+Terence Parr.
+\newblock \emph{The {Definitve} {ANTLR} {Reference} - {Building}
+  {Domain}-{Specific} {Languages}}.
+\newblock The Pragmatic Programmers, 2013.
 
 \end{thebibliography}

@@ -10,24 +10,27 @@
 %	SECTION
 %-----------------------------------
 \section{Erklärung der Begriffe}
- In diesem Kapitel werden wichtige Begriffe vorgestellt, die im Verlauf der weiteren Arbeit von Bedeutung sind.
+In diesem Kapitel werden wichtige Begriffe vorgestellt, die im Verlauf der weiteren Arbeit von Bedeutung sind.
 
 %-----------------------------------
-%	WORKFLOW
+%	WORKFLOW CASES
 %-----------------------------------
-\subsection{Workflow}
+\subsection{Workflow und Cases}
 
 Bild zu Workflow UML
-Ein Workflow ist eine definierte Abfolge von abgeschlossenen Arbeitsaufgaben, den Tasks. 
+Ein Workflow Schema W = $\{t_1,t_2,...,t_n\}$ mit n $\in \mathbb{N}$ ist eine Menge von Tasks. Ein Workflow Case ist eine konkrete Instanz eines Workflow Schemas...
 
-TODO: suche nach einer offiziellen Definition von workflows
+TODO: suche nach einer offiziellen Definition von workflows, Beachte, dass es für mich keine Rolle spielt, ob es ein bereits definierter Workflow ist. Also nicht auf Workflow Models eingehen. Und vielleicht auch nicht so sehr den Begriff Workflow benutzen
 
 %-----------------------------------
-%	TASKS
+%	ACTIVITIES TASKS
 %-----------------------------------
-\subsection{Tasks}
+\subsection{Tasks und Activities}
+Ein Task ist ein atomares Event im KOntext eines Workflows.
+Tasks sind Aufgaben, die in sich abgeschlossen sind. Sie besitzen 3 verschiedene Zustände: Assigned, Started und Completed welche durch Activities/Events in den nächsten Zustand übergeleitet werden. Das MXML Modell unterstützt 13 verschiedene Events, die sich in ihrer Bennenung bei den einzelnen Programmen unterscheiden können. Events können auch feiner gegliedert sein, bzw es kann auch sein, dass nur eine Teilmenge davon verwendet wird. In dieser Arbeit gehen wir davon aus, dass es folgende Events gibt: started, assigned, completed, ...
+Eine Activity ist eine Aktion, die zu einem eindeutigen Task gehört und einen Eventtyp besitzt.
 
-Tasks sind Aufgaben, die in sich abgeschlossen sind. Sie besitzen 3 verschiedene Zustände: Assigned, Started und Completed welche durch Events getriggert werden. Das MXML Modell unterstützt 13 verschiedene Events, die sich in ihrer Bennenung bei den einzelnen Programmen unterscheiden können. Events können auch feiner gegliedert sein, bzw es kann auch sein, dass nur eine Teilmenge davon verwendet wird. In dieser Arbeit gehen wir davon aus, dass es folgende Events gibt: started, assigned, completed, ...
+Tasks haben auch eine Ordnung $<T, \leq>$. Es gilt nämlich $t_1 < t_2 $, wenn $t_1$ vor $t_2$ ausgeführt wurde.
 
 \begin{figure}[ht]
 	\centering
@@ -36,20 +39,48 @@ Tasks sind Aufgaben, die in sich abgeschlossen sind. Sie besitzen 3 verschiedene
 	\label{fig2}
 \end{figure}
 
-%-----------------------------------
-%	AUTHORISIERUNG
-%-----------------------------------
-\subsection{Authorisierung}
+\subsubsection{sich gegenseitig ausschließende Tasks (Conflicting Tasks)}
+TODO: kommt das zur Constraint Sammlung?
+In manchen Fällen kann man Tasks nicht verschiedenen Rollen zuweisen  ohne die exisitierenden Rollen derart zu segmentieren, dass die schwer zu verwalten sind in Bezug auf das organsiatorische Modell. Außerdem können Rollenhierarchien dazu verwendet werden, in zwei verschiedenen Rollen zu agieren, die eigentlich getrennt waren. ZB könnte ein Manager als ein Clerk und gleichzeitig als sein eigenener Supervisor handeln.\\
+Deswegen definieren wir \textbf{TC} $\subset$ T als eine Menge von \textbf{kollidierenden Tasks}. TC beinhaltet Tasks, deren Allokation von der Allokation von vorhergehend ausgeführten Tasks aus TC abhängt. Diese Abhängigkeit wird als Abhängigkeit zwischen Tasks aus TC beschrieben. $t_c\in TC$ gilt als entailed Task von $t_m\in TC$, wenn die Allokation von $t_n$ von der Allokation von $t_m$ eingeschränkt wird, mit $t_m<t_n$.
+\cite{wolter_modeling_of_TBAC_in_BPMN}
 
 %-----------------------------------
 %	ROLLENMODELL
 %-----------------------------------
-\subsection{Rollenmodell}
+\subsection{Rollenmodell und Authorisierung}
+Sei T = $\{t_1,t_2,...t_m\}$, $m\in\mathbb{N}$ eine Menge von Tasks, R = $\{r_1,r_2,...t_n\}$, $n\in\mathbb{N}$ eine Menge von Rollen, und U = $\{u_1,u_2,...u_l\}$,$l\in\mathbb{N}$ eine Menge von Usern.
+
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.9\textwidth]{"Figures/Rollenmodell"}
+	\caption{Beispiel Rollenmodell}
+	\label{fig:examplerolemodel}
+\end{figure}
+
+Eine \textbf{Authorisierung} ist eine Menge von potentiellen Usern und Rollen, denen es erlaubt ist, einen Task auszuführen. Eine Authorisierung besteht aus den Tupeln $$\textbf{TR} = (T\times R)$$ und $$\textbf{UR} = (U\times R)$$, welche eine n:m-Beziehung zwischen Tasks und Rollen, bzw zwischen Usern und Rollen kennzeichnen. Das bedeutet, dass User mit Rollen in der User-Rollen Beziehung assoziiert werden und Tasks mit Rollen in der Tast-Rollen Beziehung assoziiert werden.\\
+Sei nun $$\textbf{R(t)} = \{r_m \in R: \exists(t_k, r_m) \in TR(t)\}$$
+$$\textbf{U(t)} = \{u_n \in U: \exists(u_n, r_m) \in UR, r_m \in R(t)\}$$
+Mit anderen Worten ist R(t) die Menge aller Rollen, die authorisiert sind, einen Task auszuführen und U(t) die Menge alles User, die authorisiert sind, einem Task zugeteilt zu werden.\\
+Eine \textbf{Zuweisung} ist die konkrete Ausführung eines Tasks durch einen User.
+
+Ein \textbf{hierarchisches Rollenmodell} ist eine geordnete Menge von Beziehungen zwischen Rollen $<R, \leq>$. Wenn $r_1, r_2 \in R$ und $r_1 < r_2$, dann dominiert die Rolle $r_2$ die Rolle $r_1$ in Bezug auf die organisatorische Rollenhierarchie. In Abb. \ref{fig:examplerolemodel} dominiert die Rolle "Projektleiter" die Rolle "Angestellter", das bedeutet, dass der "Projektleiter" alle Tasks ausführen darf, die der Rolle "Angestellter" zugeordnet wurde.
+Die Rolle und all ihre Elternrollen bis zur Wurzel können einem Task zugewiesen werden.
+
+\cite{wolter_modeling_of_TBAC_in_BPMN}
 
 %-----------------------------------
 %	ZEITMODELL
 %-----------------------------------
 \subsection{Zeitmodell}
+Das Zeitmodell ist ein Tupel T = ($\Tau;\leq$).\\
+$\Tau$ ist eine Menge von \textit{Zeitpunkten} $\tau$ und $\leq$ eine total Ordnung auf $\Tau$.
+Ein \textit{Zeitinterval}$[\tau_a, \tau_b]$ ist eine Menge von Zeitpunkten $\tau \in \Tau$ mit $\tau_a \leq \tau \leq \tau_b$.
+Ein Zeitinterval $[\tau_a, \tau_b]$ wird als leer bezeichnet, falss $\tau_b \leq \tau_a$.
+
+
+TODO darauf achten, dass hier Konsistenz herrscht mit ts, tp, ... in der späteren Grammatikdefinition.
+\cite{warner_inter_instance}
 
 %-----------------------------------
 %	Event Logs
@@ -79,7 +110,8 @@ Das in dieser Thesis verwendete Format für Event Logs ist der Standard MXML
   1 & Pay check &'Mark' & 'Admin' &1999-12-13T12:22:18 & abort\\
   0 & Revoke check & 'Theo' & 'Clerk' & 1999-12-13T12:22:19 & start
   \end{tabular}
-  \caption{Beispiel Log Einträge. Das ist nur ein Auszug und kein vollständiger Log. Es können auch weitere Daten vorhanden sein, die hier nicht dargestellt werden.}
+Das ist nur ein Auszug und kein vollständiger Log. Es können auch weitere Daten vorhanden sein, die hier nicht dargestellt werden.
+  \caption{Beispiel Log Einträge. }
   \label{tab:examplelog}
 \end{table}
 
@@ -88,6 +120,7 @@ Das in dieser Thesis verwendete Format für Event Logs ist der Standard MXML
 %	Definition Constraints
 %-----------------------------------
 \subsection{Definition Constraints}
+Constraints sind Regeln bzw Einschränkungen, die aus dem Verlauf von vorhergehenden Tasks resultieren.
 
 %-----------------------------------
 %	Security policy

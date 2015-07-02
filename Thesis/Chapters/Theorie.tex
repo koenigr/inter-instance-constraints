@@ -22,6 +22,16 @@ schriftliche Auflistung der Einschränkungen\\
 -Inter-Process\\
 --Ein User darf nicht mehr als 100 Tasks pro Tag erledigen\\
 \subsection{Arten von Constraints - Herleitung}
+\subsubsection{sich gegenseitig ausschließende Tasks (Conflicting Tasks)}
+TODO: kommt das zur Constraint Sammlung?
+In manchen Fällen kann man Tasks nicht verschiedenen Rollen zuweisen  ohne die exisitierenden Rollen derart zu segmentieren, dass die schwer zu verwalten sind in Bezug auf das organsiatorische Modell. Außerdem können Rollenhierarchien dazu verwendet werden, in zwei verschiedenen Rollen zu agieren, die eigentlich getrennt waren. ZB könnte ein Manager als ein Clerk und gleichzeitig als sein eigenener Supervisor handeln.\\
+Deswegen definieren wir \textbf{TC} $\subset$ T als eine Menge von \textbf{kollidierenden Tasks}. TC beinhaltet Tasks, deren Allokation von der Allokation von vorhergehend ausgeführten Tasks aus TC abhängt. Diese Abhängigkeit wird als Abhängigkeit zwischen Tasks aus TC beschrieben. $t_c\in TC$ gilt als entailed Task von $t_m\in TC$, wenn die Allokation von $t_n$ von der Allokation von $t_m$ eingeschränkt wird, mit $t_m<t_n$.
+\cite{wolter_modeling_of_TBAC_in_BPMN}
+
+\subsubsection{Entailment Constraint}
+c=(TC, $n_u$,$m_{th}$) mit $n_u$ als minimale Anzahl an verschiedenen Usern, die einem Task zugewiesen werden müssen. Wenn $t_{ki}$ eine Instanz des Tasks $t_k$ ist, dann ist $m_th$ der Grenzwert von der Summe der Task Instanzen, denen ein User zugewiesen sein darf.
+\cite{wolter_modeling_of_TBAC_in_BPMN}
+
 zeitliche Beschränkungen
 --absolute Einschränkungen\\
 --relative Einschränkungen\\
@@ -35,24 +45,49 @@ Workflow Soundness\\
 
 \subsection{Vorüberlegungen zur Grammatik}
 Woran erkennt man den Kontext der Constraints? \\
-Welches Rollenmodell wird benutzt, und welche Auswirkungen hat es auf die Grammatik?
-\subsection{Formale Definition}
+Welches Rollenmodell wird benutzt, und welche Auswirkungen hat es auf die Grammatik?\\
+Was passiert bei fehlenden Einträgen, oder falschen Einträgen?\\
+Soll Negation erlaubt sein?\\
+Was definiert der Timestamp, wenn es sich doch nur auf verschiedene Events bezieht?
+\subsection{Basis von Werten, Aussagen...}
 Zuerst Herleitung, was wir genau an Aussagen brauchen\\
-Workflows\\
-Zeitstempel\\
-Constanten\\
-Variablen\\
-Literale\\
-Regeln (Constraints sind Schlussfolgerungen, die sich aus Vorbedingungen ergeben.\\
-Fakten\\
-Status (aus Event Logs gelesen)\\
-Ableitung,...\\
-Zu Beispiel gefundene Einschränkungen definieren\\
+\subsubsection{Parameter - Variablen und Konstanten}
+\textbf{User}
 
-Kann ein Task mehrere Instanzen haben?\\
-Hierarchisches Rollenmodell\\
-Umgang mit Negation\\
+\textbf{Rollen}
+
+\textbf{zeitliche Parameter}
+
+\subsubsection{Prädikate}
+Prädikate sind Aussagen über bestimmte Zustände. Es gibt verschiedene Typen. \\
+\begin{table}
+\begin{tabular} {|c|c|c|}
+Prädikat & Aurgumente & Beschreibung\\
+\hline
+\end{tabular}
+\caption{sdf}
+\label{tab:specification}
+\end{table}
+
+Statusprädikate sind Aussagen über Events
+
+\subsubsection{Regeln}
+Regeln (Constraints sind Schlussfolgerungen, die sich aus Vorbedingungen ergeben. Es gibt positive und negative. Die positiven sagen, dass etwas passieren muss, die negativen verbieten, dass etwas passiert)\\
+Ableitung,...\\
+
 \subsection{Grammatik in BNF}
+Für ein besseres Verständnis der Definition erst einmal ein kurzes Beispiel:\\
+
+\begin{verbatim}
+SET 'Mark Maier' is related to 'Max Mueller'
+IF USER_A executed 'Kredit beantragen' AND USER_A is related to USER_B
+  THEN USER_B cannot execute 'Kredit prüfen'
+\end{verbatim}
+\begin{figure}[!h]
+\caption{Beispiel Spezifikation einer einfachen Regel}
+\label{fig:demorulefile}
+\end{figure}
+
 Konstanten sind als 'String' , Variablen ohne \\
 Welche Zeichen darf man wo verwenden?\\
 Verfügbare Literale\\
@@ -68,4 +103,12 @@ User und ihre Rollenzuweisungen müssen nicht explizit angegeben werden. Nur wen
 Beziehung zwischen critical task pair und collaborateur.
 \subsection{konkretes Beispiel}
 Die zuvor gefundenen Beispiele wären mit der neuen Grammtik:\\
-(C1): IF NUMBER OF USER executed TASK IS N AND N > 5 THEN USER cannot execute TASK
+\begin{verbatim}
+/* C1 */
+IF NUMBER OF USER executed TASK IS N AND N > 5
+  THEN USER cannot execute TASK
+\end{verbatim}
+\begin{figure}[!h]
+\caption{Regeln für unsere gefundenen Beispiele}
+\label{fig:resultrulefile}
+\end{figure}

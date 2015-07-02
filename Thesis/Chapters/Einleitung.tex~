@@ -14,14 +14,15 @@
 
 \section{Motivation}
 TODO: Motivation, Beispiel, Konventionen in Arbeit, Gliederung der Arbeit\\
-Um internen Betrug in Unternehmen zu verhindern, wird bei vielen Authorisierungsmodellen das separation of duty Prinzip beachtet. Dieses besagt, dass es bestimmte Aufgaben gibt, die nicht von ein un der selben Person erledigt werden können. Dazu gibt es verschiedene Ansätze, die ermögliche, Einschränkungen auf die Authorisierung zu definieren, die je nach Art bereits in der Entwurfphase des Workflows oder dynamisch während der Laufzeit erzwungen wird, indem sich die Informationen dynamisch aktualisieren (Hier ein paas Quellen angeben). Alelrdings erlauben die aktuellen Modelle nur Einschränkungen innerhalb eines Workflows, was aber nicht ausreicheng ist.\\
+Wo werden alles EventLogs benutzt? Erklären, warum es wichtig wäre, genau dort Constraints zu benutzen? Außer dem Verhindern von Betrug ist auch das Vermeiden von Fehlern wichtig. -\\
+Um internen Betrug in Unternehmen zu verhindern, wird bei vielen Authorisierungsmodellen das separation of duty Prinzip beachtet. Dieses besagt, dass es bestimmte Aufgaben gibt, die nicht von ein un der selben Person erledigt werden können. Dazu gibt es verschiedene Ansätze, die ermögliche, Einschränkungen auf die Authorisierung zu definieren, die je nach Art bereits in der Entwurfphase des Workflows oder dynamisch während der Laufzeit erzwungen wird, indem sich die Informationen dynamisch aktualisieren (Hier ein paas Quellen angeben). Allerdings erlauben die aktuellen Modelle nur Einschränkungen innerhalb eines Workflows, was aber nicht ausreicheng ist.\\
 Betrachten wir folgendes Beispiel:\\
 
 \begin{figure}[ht]
 	\centering
   \includegraphics[width=0.9\textwidth]{"Figures/Workflow"}
 	\caption{Beispiel Workflow}
-	\label{fig1}
+	\label{fig: exampleworkflow}
 \end{figure}
 
 Um eine Zahlung zu tätigen, muss die Zahlung zuerst beantragt werden. Dieser Antrag muss zweimal geprüft werden. Sollte die Prüfung positiv verlaufen, wird der Antrag bewilligt und die Zahlung wird getätigt.

@@ -11,13 +11,6 @@
 %----------------------------------------------------------------------------------------
 
 \section{Implementierung}
-\subsection{Algorithmus}
-Zuerst aus Logs Status-Prädikate auslesen.\\
-Für jedes critical task pair entsprechende collaborateurs setzen.\\
-Schleife über Regeln\\
---Die resultierenden Heads bestimmen und schauen, ob es für cannot do ein executed und für must do kein executed gibt-> dann wurde es verletzt. Um das herauszufinden, wird die Regel in executed → blabla, oder not(executed) → blabla übersetzt.\\
- 
-Einfaches Beispiel: Rule: executed(ui, t1)-> cannot do(ui,t2) und status: executed('tom', t1). Daraus wird abgeleitet: cannot do('tom', t2). Da es nicht in der DB ist, ist alles OK
 
 \subsection{Aufbau mein Programm}
 
@@ -29,6 +22,41 @@ Einfaches Beispiel: Rule: executed(ui, t1)-> cannot do(ui,t2) und status: execut
 \end{figure}
 
 Das Programm liest mittels SEWOL MXML logs ein und übersetzt sie in Status Prädikate. 
-Die Constraints werden ebenfalls eingelesen und in Regelprädikate übersetzt. Der Parser für die Grammatik wurde mit ANTLR erzeugt.
+Die Constraints werden ebenfalls eingelesen und in Regelprädikate übersetzt. Der Parser für die Grammatik wurde mit ANTLR\cite{antlr} erzeugt.
 Die eigentliche Untersuchung kann entweder durch ein Skript oder innerhalb des Javacodes gestartet werden.
 
+\subsection{Wissensbasis}
+Die Wissensbasis wird aus den Logs herausgelesen und in entsprechende Prädikate übersetzt. Auf Basis dieser Prädikate arbeitet der Modelchecker. Die Wissensbasis besteht aus genau 7 möglichen Prädikaten, welche ausreichen, um die Events vollständig wiederzugeben:\\
+
+\begin{enumerate}
+\item \textbf{workflow{\_}name(caseID, workflowName)}: Weist einer Case ID einen eindeutigen Namen hinzu, welcher der Workflow Spezifikation entspricht. Die Case ID kennzeichnet die Instanz, konkrete Ausführung eines Workflows. Dieses Prädikat dient jedoch nur zur Vollständigkeit. Sollte es für den Arbeitsablauf keinen eindeutigen Namen geben, wird dieses Prädikat nicht gesetzt. Es kann im Modelchecker dann auch nicht darauf zugegriffen werden.
+\item \textbf{activity{\_}workflow(activityID, caseID)}: Setzt fest, zu welcher case ID die Activity gehört. TaskID wird intern vom Transformer gesetzt.
+\item \textbf{activity{\_}name(taskID, taskName)}: Legt den Namen der Activity fest. Dieser ist im MXML Modell als WorkflowModelElement zu finden.
+\item \textbf{timestamp(taskID, timestamp in ms)}: Zeitpunkt der Aktivität in ms nach 1970. Sollte kein Zeitpunkt eingetragen sein, wird entweder kein Fakt gesetzt, oder es wird die Reihenfolge der Einträge genommen. Dazu wird der letzte Wert + 1 ms gesetzt.
+\item \textbf{eventtype(taskID, eventtype)}: Der Eventtyp der Aktivität. Im Grundmodell sind es start, accept, abort, ... Kann jedoch varriieren.
+\item \textbf{executed{\_}user(user, taskID)}: Der Nutzer, der die Activity ausgeführt hat.
+\item \textbf{executed{\_}group(group, taskID)}: Die Rolle, in der die Activity ausgeführt wurde. Man beachte, dass ein Nutzer mehrere Rollen haben kann.
+\item \textbf{task{\_}attribute(taskID, attrName, attrType, attrValue)}: In dieser Wissensbasis wird zwischen zwei Typen unterschieden. String-Attributen, welche nur Vergleichsoperatoren kennen. Hat das Attribut im ürsprünglichen Event ein anderes Format, muss es für die Analyse in eine passende String Darstellung konvertiert werden. 
+\end{enumerate}
+
+Die erste Zeile aus dem Eventlog aus Tabelle \ref{tab:examplelog} wird in folgende Wissensbasis konvertiert:
+\begin{table}
+\begin{tabular}{ccc}
+activity_workflow(0,0) & activity_name(0,'Approach check') & timestamp(0, 123)\\ 
+eventtype(0, start) & executed_user(0, 'Mark') & executed_role(0, 'Admin') 
+\end{tabular}
+\caption{fd}
+\label{tab:knowledge}
+\end{table}
+
+
+
+TODO: Closed World, was passiert mit nicht angegebenen Zeiten,.
+
+\subsection{Algorithmus}
+Zuerst aus Logs Status-Prädikate auslesen.\\
+Für jedes critical task pair entsprechende collaborateurs setzen.\\
+Schleife über Regeln\\
+--Die resultierenden Heads bestimmen und schauen, ob es für cannot do ein executed und für must do kein executed gibt-> dann wurde es verletzt. Um das herauszufinden, wird die Regel in executed $ - >$ blabla, oder not(executed) $- >$ blabla übersetzt.\\
+ 
+Einfaches Beispiel: Rule: executed(ui, t1)-> cannot do(ui,t2) und status: executed('tom', t1). Daraus wird abgeleitet: cannot do('tom', t2). Da es nicht in der DB ist, ist alles OK

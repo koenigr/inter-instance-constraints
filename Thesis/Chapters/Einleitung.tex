@@ -14,7 +14,8 @@
 
 \section{Motivation}
 TODO: Motivation, Beispiel, Konventionen in Arbeit, Gliederung der Arbeit\\
-Um internen Betrug in Unternehmen zu verhindern, wird bei vielen Authorisierungsmodellen das separation of duty Prinzip beachtet. Dieses besagt, dass es bestimmte Aufgaben gibt, die nicht von ein un der selben Person erledigt werden können. Dazu gibt es verschiedene Ansätze, die ermögliche, Einschränkungen auf die Authorisierung zu definieren, die je nach Art bereits in der Entwurfphase des Workflows oder dynamisch während der Laufzeit erzwungen wird, indem sich die Informationen dynamisch aktualisieren (Hier ein paas Quellen angeben). Alelrdings erlauben die aktuellen Modelle nur Einschränkungen innerhalb eines Workflows, was aber nicht ausreicheng ist.\\
+Wo werden alles EventLogs benutzt? Erklären, warum es wichtig wäre, genau dort Constraints zu benutzen? Außer dem Verhindern von Betrug ist auch das Vermeiden von Fehlern wichtig. -\\
+Um internen Betrug in Unternehmen zu verhindern, wird bei vielen Authorisierungsmodellen das separation of duty Prinzip beachtet. Dieses besagt, dass es bestimmte Aufgaben gibt, die nicht von ein un der selben Person erledigt werden können. Dazu gibt es verschiedene Ansätze, die ermögliche, Einschränkungen auf die Authorisierung zu definieren, die je nach Art bereits in der Entwurfphase des Workflows oder dynamisch während der Laufzeit erzwungen wird, indem sich die Informationen dynamisch aktualisieren (Hier ein paas Quellen angeben). Allerdings erlauben die aktuellen Modelle nur Einschränkungen innerhalb eines Workflows, was aber nicht ausreicheng ist.\\
 Betrachten wir folgendes Beispiel:\\
 
 \begin{figure}[ht]
@@ -52,6 +53,7 @@ In dieser Arbeit wird eine Grammatik entwickelt, die es erlaubt, solche Einschr�
 
 \section{Aufbau der Arbeit}
 Folgende Konventionen werden hier eingehalten: kursive Begriffe  bezeichnen Fachbegriffe, Blockschrift kennzeichnet Pseudocode,...
+Begriffe, die zum ersten mal definiert werden, werden beim ersten Vorkommen \textbf{fett} geschrieben.
 
 In Kapitel 2 werden wichtige Begriffe erläutert. In Kapitel 3 widmen wir uns der  Herleitung von Einschränkungen und der Definition einer antsprechenden Grammatik. Diese wird in Kapitel 4 in ein Programm integriert, welches Event Logs auf die Verletzung von Einschränkungen prüft. Dazu wird der Algorithmus vorgestellt. Kapitel 5 und 6 schließen mit einer Untersuchung der Korrektheit und einem Ausblick in weitere Forschung.
 

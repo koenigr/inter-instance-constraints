@@ -26,13 +26,13 @@ Als logische Prädikate, GL4
 Welche Constraint-Richtungen werden behandelt?
 ZB nur Entailment, Cardinality. 
 \subsection{warner inter-Instance}
-Darauf bezieht sich die Arbeit.\\
-In dieser Arbeit wird der theoretische Ansatz von … um inter instance constraints erweitert und ist der Ausgangspunkt meiner Arbeit. Allerdings gehen sie davon aus, dass die Constraints für Authorisierungszwecke gedacht sind, und unterscheiden deswegen zwischen statischer Analyse zur Entwurfszeit und dynamischer Analyse während des Ablaufs. Bei der dynamischen Analyse werden die Informationen nach jeder Aktion  aktualisiert und unter Umständen die Liste von verbotenen Nutzern / Rollen angepasst.
-Da ich Auditierung benutze, wird statically checked weggelassen
-Erklären, was ich anders mache
+Diese Arbeit bezieht sich hauptsächlich auf die Arbeit von Warner und Atluri \cite{warner_inter_instance}.
+In dieser Arbeit wird der theoretische Ansatz von Bertino et al. um inter instance constraints erweitert und ist der Ausgangspunkt meiner Arbeit. Allerdings gehen sie davon aus, dass die Constraints für Authorisierungszwecke gedacht sind, und unterscheiden deswegen zwischen statischer Analyse zur Entwurfszeit und dynamischer Analyse während des Ablaufs. Bei der dynamischen Analyse werden die Informationen nach jeder Aktion  aktualisiert und unter Umständen die Liste von verbotenen Nutzern / Rollen angepasst.
+Da ich Auditierung benutze, wird statically checked weggelassen und weitere Regeln, die zur Laufzeit nötig sind.\\
+Das Paper ist allerdings nur ein theoretischer Ansatz und behandelt zB die verschiedenen Eventtypen nicht ausreichen. Des weiteren wird nicht darauf eingegangen, was passiert, wenn  manche Informationen fehlen.
 \subsection{leitner instance-spanning}
 Hat ein Framework entwickelt.
-\subsection{tan_consistency}
+\subsection{tan consistency}
 Es geht eher um die Prüfung auf Konsistenz, es werden aber globale Constraints erwähnt.
 
 
