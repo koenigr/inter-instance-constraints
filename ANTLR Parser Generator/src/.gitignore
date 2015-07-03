@@ -14,3 +14,5 @@
 /Version1_5_15_Inter_InstanceListener.java
 /Version1_5_15_Inter_InstanceParser.java
 /Version1_5_15_Inter_InstanceVisitor.java
+/LexerRules.tokens
+/LexerRules.java

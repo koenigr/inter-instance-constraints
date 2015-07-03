@@ -32,7 +32,7 @@ define 	: DEF CLAUSE {ph.addClause($CLAUSE.text);} '(' ARGS {ph.addArgTypeToClau
 		
 		; 
 			
-explicitSetting : SET (extern|specification|definedClause) ((KONJ|',') (extern|specification|definedClause))* ; // TODO Konj und . sollten schon das selbe sein
+explicitSetting : SET (extern|specification|definedClause) ((KONJ|',') (extern|specification|definedClause))* ;
 
 assignment 	: { context = Context.UNKNOWN;}
 			(description)? IF assignmentBody THEN assignmentHead 	
