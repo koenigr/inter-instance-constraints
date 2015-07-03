@@ -22,6 +22,8 @@ public class StatusContainer {
 	private static ArrayList<Timestamp> timestamp = new ArrayList<Timestamp>();
 	
 	private static ArrayList<TaskName> taskName = new ArrayList<TaskName>();
+
+	private static ArrayList<TaskEvent> taskEvent = new ArrayList<TaskEvent>();
 	
 	private static ArrayList<TaskWorkflow> taskWorkflow = new ArrayList<TaskWorkflow>();
 	
@@ -47,6 +49,10 @@ public class StatusContainer {
 	
 	public void addTaskName(TaskName s) {
 		taskName.add(s);
+	}
+
+	public void addTaskEvent(TaskEvent s) {
+		taskEvent.add(s);
 	}
 	
 	public void addTaskWorkflow(TaskWorkflow s) {
@@ -82,6 +88,13 @@ public class StatusContainer {
 			writer.write("% task names \n"); 
 
 			for (TaskName e : taskName) {
+				writer.write(e.getAsString());
+				writer.write(".\n");
+			}
+			
+			writer.write("% event types \n"); 
+
+			for (TaskEvent e : taskEvent) {
 				writer.write(e.getAsString());
 				writer.write(".\n");
 			}

@@ -9,8 +9,11 @@ public class LUB extends Fact {
 	/*
 	 * lub(RT,TT)
 	 */
-	public LUB(String r, String t) {
+	public LUB(String role, String task) {
 		super("lub", NUMBER_OF_ARGUMENTS);
+		setArgument(0, role);
+		setArgument(1, task);
+		
 	}
 	
 }

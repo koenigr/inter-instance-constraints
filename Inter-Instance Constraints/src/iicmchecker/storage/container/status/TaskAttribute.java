@@ -16,16 +16,11 @@ public class TaskAttribute extends Fact{
 	public TaskAttribute(AttrType at) {
 		super(NAME, NUMBER_OF_ARGUMENTS);
 		switch(at) {
-		case STRING: setArgument(2, "String"); break;
-		case NUMBER: setArgument(2, "Number"); break;
+		case STRING: setArgument(2, "string"); break;
+		case NUMBER: setArgument(2, "number"); break;
 		default: //TODO
 			System.exit(0);
 		}
-	}
-	
-	public TaskAttribute() {
-		super("k", 2); // TODO
-		System.exit(0);
 	}
 
 	public TaskAttribute(String taskID, String attrName, String attrValue) {
@@ -33,14 +28,18 @@ public class TaskAttribute extends Fact{
 		setArgument(0, taskID);
 		setArgument(1, attrName);
 		setArgument(2, "String");
-		setArgument(3, attrValue);
+		setArgument(3, "'" + attrValue + "'");
 	}
 	
 	public TaskAttribute(String taskID, String attrName, Integer attrValue) {
 		super(NAME, NUMBER_OF_ARGUMENTS);
-		// TODO Wie soll man das mit dem Integer machen?
-		// Wahrscheinlich muss ich hier die asString Methode überschreiben, um das mit dem Integer behandeln zu können
+		setArgument(0, taskID);
+		setArgument(1, attrName);
+		setArgument(2, "Number");
+		setArgument(3, String.valueOf(attrValue));
 	}
+	
+	
 
 
 }

@@ -2,23 +2,32 @@ package iicmchecker.logtransformer;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import de.uni.freiburg.iig.telematik.sewol.log.DataAttribute;
 import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
 import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
+import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.StorageHelper;
 import iicmchecker.storage.container.status.ExecutedGroupStatus;
 import iicmchecker.storage.container.status.ExecutedUserStatus;
 import iicmchecker.storage.container.status.StatusContainer;
 import iicmchecker.storage.container.status.TaskAttribute;
+import iicmchecker.storage.container.status.TaskEvent;
 import iicmchecker.storage.container.status.TaskName;
 import iicmchecker.storage.container.status.TaskWorkflow;
 import iicmchecker.storage.container.status.Timestamp;
 import iicmchecker.storage.container.status.WorkflowName;
+import iicmchecker.utils.StringChecker;
 
 public class LogTransformer {
 	
+	private static Logger logger = LoggerFactory.getLogger();
+	
 	public void transform(List<List<LogTrace<LogEntry>>> logs) {
+		
+		logger.severe("Starting log transformer...");
+		
 		StatusContainer sc = StorageHelper.getInstance().getStatusContainer();
 		Integer wname = 0;
 		Integer wID = 0;
@@ -44,14 +53,14 @@ public class LogTransformer {
 					String name = entry.getActivity();
 					String group = entry.getGroup();
 					String user = entry.getOriginator();
-					
+					String eventType = entry.getEventType().toString();
 					Date timestamp = entry.getTimestamp();
+					
 					if (timestamp == null) { 
 					/*
 					 *  TODO wie wird das behandelt?
 					 *  Einfach null setzen oder das letzte Datum  + 1 nehmen?
 					 */
-					
 						timestamp = new Date();
 					}
 					
@@ -65,12 +74,16 @@ public class LogTransformer {
 					    new ExecutedUserStatus(user, taskID));
 					}
 					
-					if (timestamp != null && taskID != null) {
+					if (timestamp != null && taskID != null) {	
 					  sc.addTimestamp(new Timestamp(taskID, timestamp));
 					}
 					
 					if (name != null && taskID != null) {
 					  sc.addTaskName(new TaskName(taskID, name));
+					}
+
+					if (eventType != null && taskID != null) {
+					  sc.addTaskEvent(new TaskEvent(taskID, eventType));
 					}
 					
 					if (workflowID != null && taskID != null) {
@@ -84,7 +97,16 @@ public class LogTransformer {
 					for(DataAttribute a : entry.getMetaAttributes()) {
 						String attrName = a.name;
 						Object attrVal = a.value;
-						// TODO sc.addTaskAttribute(new TaskAttribute(taskID, attrName, attrVal ));
+						String val = attrVal.toString();
+						boolean b = StringChecker.isValidNumber(val);
+
+						if (b) {
+							sc.addTaskAttribute(new TaskAttribute(taskID, attrName, Integer.valueOf(val)));
+						} else {
+							sc.addTaskAttribute(new TaskAttribute(taskID, attrName, val ));
+						}
+						
+						
 					}
 					
 				}
@@ -92,5 +114,6 @@ public class LogTransformer {
 			
 		}
 		
+		logger.severe("Log transformation finished.");
 	}
 }

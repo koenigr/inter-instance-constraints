@@ -156,10 +156,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(3, ctx.getChildCount());
 		
+		String user1 = ctx.getChild(0).getText();
+		String user2 = ctx.getChild(2).getText();
+		
 		if (inputContext == InputContext.SETTING) {
-			String user1 = ctx.getChild(0).getText();
-			String user2 = ctx.getChild(2).getText();
 			esc.addPartner(new Partner(user1, user2));
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(new Partner(user1, user2));
 		}
 		
 	}
@@ -169,12 +172,14 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting sameGroup inputContext");
 		
 		lh.checkChildCount(3, ctx.getChildCount());
+		String user1 = ctx.getChild(0).getText();
+		String user2 = ctx.getChild(2).getText();
 		
 		if (inputContext == InputContext.SETTING) {
-			String user1 = ctx.getChild(0).getText();
-			String user2 = ctx.getChild(2).getText();
 			esc.addSameGroup(new SameGroup(user1, user2));
-		}
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(new SameGroup(user1, user2));
+	    }
 	}
 
 	@Override
@@ -183,16 +188,16 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(3, ctx.getChildCount());
 		
-		Related r = new Related("","");
-		
-			String user1 = ctx.getChild(0).getText();
-			String user2 = ctx.getChild(2).getText();
-			r = new Related(user1, user2);
+		String user1 = ctx.getChild(0).getText();
+		String user2 = ctx.getChild(2).getText();
+		Related r = new Related(user1, user2);
 		
 
 		if (inputContext == InputContext.SETTING) {
 			esc.addRelated(r);
-		}
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(r);
+	    }
 	}
 	
 	/*
@@ -204,12 +209,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting Role Task inputContext");
 
 		lh.checkChildCount(4, ctx.getChildCount());
+		String role = ctx.getChild(1).getText();
+		String task = ctx.getChild(3).getText();
+		RoleTask r = new RoleTask(role, task);
 		
 		if (inputContext == InputContext.SETTING) {
-			String role = ctx.getChild(1).getText();
-			String task = ctx.getChild(3).getText();
-			esc.addRoleTask(new RoleTask(role, task));
-		}	
+			esc.addRoleTask(r);
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(r);
+	    }	
 	}
 
 	@Override
@@ -217,12 +225,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting User Task inputContext");
 
 		lh.checkChildCount(4, ctx.getChildCount());
+		String user = ctx.getChild(1).getText();
+		String task = ctx.getChild(3).getText();
+		UserTask r = new UserTask(user, task);
 		
 		if (inputContext == InputContext.SETTING) {
-			String user = ctx.getChild(1).getText();
-			String task = ctx.getChild(3).getText();
-			esc.addUserTask(new UserTask(user, task));
-		}	
+			esc.addUserTask(r);
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) { // TODO Switch oder anderes..
+			body.addFact(r);
+	    }	
 	}
 
 	@Override
@@ -230,12 +241,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting User Role inputContext");
 
 		lh.checkChildCount(4, ctx.getChildCount());
+		String user = ctx.getChild(1).getText();
+		String role = ctx.getChild(3).getText();
+		UserRole r = new UserRole(user, role);
 		
 		if (inputContext == InputContext.SETTING) {
-			String user = ctx.getChild(1).getText();
-			String role = ctx.getChild(3).getText();
-			esc.addUserRole(new UserRole(user, role));
-		}	
+			esc.addUserRole(r);
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(r);
+	    }
 	}
 
 	@Override
@@ -243,25 +257,30 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting Glb inputContext");
 
 		lh.checkChildCount(3, ctx.getChildCount());
+		String role = ctx.getChild(0).getText();
+		String task = ctx.getChild(2).getText();
+		GLB r = new GLB(role, task);
 		
 		if (inputContext == InputContext.SETTING) {
-			String role = ctx.getChild(0).getText();
-			String task = ctx.getChild(2).getText();
-			esc.addGLB(new GLB(role, task));
-		}		
+			esc.addGLB(r);
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(r);
+	    }	
 	}
 
 	@Override
 	public void exitLub(Inter_InstanceParser.LubContext ctx) {
 		logger.info("Exiting Lub inputContext");
-
 		lh.checkChildCount(3, ctx.getChildCount());
+		String role = ctx.getChild(0).getText();
+		String task = ctx.getChild(2).getText();
+		LUB r = new LUB(role, task);
 		
 		if (inputContext == InputContext.SETTING) {
-			String role = ctx.getChild(0).getText();
-			String task = ctx.getChild(2).getText();
-			esc.addLUB(new LUB(role, task));
-		}		
+			esc.addLUB(r);
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(r);
+	    }	
 	}
 
 	@Override
@@ -269,12 +288,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting Dominate inputContext");
 
 		lh.checkChildCount(3, ctx.getChildCount());
+		String role1 = ctx.getChild(0).getText();
+		String role2 = ctx.getChild(2).getText();
+		Dominates r = new Dominates(role1, role2);
 		
 		if (inputContext == InputContext.SETTING) {
-				String role1 = ctx.getChild(0).getText();
-				String role2 = ctx.getChild(2).getText();
-				esc.addDominates(new Dominates(role1, role2));
-		}	
+				esc.addDominates(r);
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(r);
+	    }
 	}
 
 	@Override
@@ -282,12 +304,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting Critical Task Pair inputContext");
 
 		lh.checkChildCount(5, ctx.getChildCount());
+		String task1 = ctx.getChild(1).getText();
+		String task2 = ctx.getChild(3).getText();
+		CriticalTaskPair r = new CriticalTaskPair(task1, task2);
 		
 		if (inputContext == InputContext.SETTING) {
-				String task1 = ctx.getChild(1).getText();
-				String task2 = ctx.getChild(3).getText();
-				esc.addCriticalTaskPair(new CriticalTaskPair(task1, task2));
-		}
+				esc.addCriticalTaskPair(r);
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			body.addFact(r);
+	    }
 		
 	}
 	
@@ -340,6 +365,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				String user = ctx.getChild(1).getText();
 				String task = ctx.getChild(3).getText();
 				rule.setHead(new CannotDoRole(user, task));
+				rule.setBody(body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
@@ -367,6 +393,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				String user = ctx.getChild(0).getText();
 				String task = ctx.getChild(2).getText();
 				rule.setHead(new MustDoUser(user, task));
+				rule.setBody(body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
@@ -394,6 +421,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				String user = ctx.getChild(0).getText();
 				String task = ctx.getChild(2).getText();
 				rule.setHead(new MustDoRole(user, task));
+				rule.setBody(body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
@@ -423,6 +451,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 			}
 			rule.setDescription(description);
 			rule.setHead(new Panic());
+			rule.setBody(body);
 			rc.addPanicRule(rule);
 			break;
 			

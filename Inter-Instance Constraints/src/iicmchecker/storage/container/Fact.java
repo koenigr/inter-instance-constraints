@@ -4,6 +4,7 @@ package iicmchecker.storage.container;
 import java.util.logging.Logger;
 
 import iicmchecker.logging.LoggerFactory;
+import iicmchecker.exceptions.IllegalArgumentsPositionException;
 import iicmchecker.exceptions.InvalidPredicateFormatException;
 import iicmchecker.utils.StringChecker;
 
@@ -30,13 +31,18 @@ public abstract class Fact{
 		this.predicate = predicate;
 	}
 	
-	public void setArgument(int pos, String arg) {
+	protected void setArgument(int pos, String arg) {
 		/*
 		 *  TODO den String noch allerlei testen
 		 *  Darf entweder nur eine Variable sein oder ein String mit einfachen Strichen
 		 *  Das macht der String Checker
 		 *  Ebenfalls Error ausgeben, wenn der Wert schon gesetzt wurde
 		 */
+		
+		if (pos >= numberOfArguments) {
+			new IllegalArgumentsPositionException(pos, numberOfArguments - 1);
+		}
+		
 		System.out.println(arg);
 		if (StringChecker.isValidVariable(arg) || StringChecker.isValidConstant(arg)) {
 				// TODO Exception

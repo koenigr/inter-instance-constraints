@@ -20,19 +20,11 @@ public class Timestamp extends Fact {
 	
 	public Timestamp(String taskID, Date timestamp) {
 		super("timestamp", NUMBER_OF_ARGUMENTS);
+		
+		long ms = timestamp.getTime();
+			
 		setArgument(0, taskID);
+		setArgument(1, String.valueOf(ms));
 	}
 
-	@Override
-	public void setArgument(int pos, String arg) {
-		if (pos == 0) {
-			// TODO taskID
-		}
-		else if (pos == 1) {
-			// TODO Datum
-		}
-		else if (pos >= NUMBER_OF_ARGUMENTS) {
-			new IllegalArgumentsPositionException(pos, NUMBER_OF_ARGUMENTS - 1);
-		}
-	}
 }

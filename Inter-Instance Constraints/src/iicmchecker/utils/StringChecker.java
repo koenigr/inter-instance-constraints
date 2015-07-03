@@ -16,4 +16,14 @@ public class StringChecker {
 	public static boolean isValidPredicate(String predicate) {
 		return predicate.matches("[a-z_]*");
 	}
+	
+	public static boolean isValidNumber( String input ) {
+	    try {
+	        Integer.parseInt( input );
+	        return true;
+	    }
+	    catch( Exception e ) {
+	        return false;
+	    }
+	}
 }
