@@ -106,6 +106,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void enterAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) {
+		logger.info("Entering assignmentbody");
 		inputContext = InputContext.ASSIGNMENT_BODY;
 		body = new RuleBody();
 		
@@ -113,6 +114,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) {
+		logger.info("Exiting assignmentbody");
 		inputContext = InputContext.UNDEF;
 		
 	}
@@ -332,10 +334,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 		case ASSIGNMENT_HEAD : 
 			System.out.println("Head User Cannot do");
 			UserCannotDoRule rule = new UserCannotDoRule();
-				String user = ctx.getChild(0).getText();
-				String task = ctx.getChild(2).getText();
-				rule.setHead(new CannotDoUser(user, task));
-				rule.setBody(body);
+			String user = ctx.getChild(0).getText();
+			String task = ctx.getChild(2).getText();
+			rule.setHead(new CannotDoUser(user, task));
+			System.out.println("BBODY " + body.size());
+			rule.setBody(body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
@@ -365,6 +368,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				String user = ctx.getChild(1).getText();
 				String task = ctx.getChild(3).getText();
 				rule.setHead(new CannotDoRole(user, task));
+				System.out.println("BBODY " + body.size());
 				rule.setBody(body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
@@ -393,6 +397,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				String user = ctx.getChild(0).getText();
 				String task = ctx.getChild(2).getText();
 				rule.setHead(new MustDoUser(user, task));
+				System.out.println("BBODY " + body.size());
 				rule.setBody(body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
@@ -421,6 +426,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				String user = ctx.getChild(0).getText();
 				String task = ctx.getChild(2).getText();
 				rule.setHead(new MustDoRole(user, task));
+				System.out.println("BBODY " + body.size());
 				rule.setBody(body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
@@ -451,6 +457,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 			}
 			rule.setDescription(description);
 			rule.setHead(new Panic());
+			System.out.println("BBODY " + body.size());
 			rule.setBody(body);
 			rc.addPanicRule(rule);
 			break;
@@ -530,6 +537,36 @@ public class IIListener extends Inter_InstanceBaseListener {
 	public void enterConditionalBody(Inter_InstanceParser.ConditionalBodyContext ctx) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void enterNumSimple(Inter_InstanceParser.NumSimpleContext ctx) {
+		// TODO
+	}
+	
+	@Override
+	public void enterNumVars(Inter_InstanceParser.NumVarsContext ctx) {
+		// TODO
+	}
+	
+	@Override
+	public void enterSum(Inter_InstanceParser.SumContext ctx) {
+		// TODO
+	}
+	
+	@Override
+	public void enterAvg(Inter_InstanceParser.AvgContext ctx) {
+		// TODO
+	}
+	
+	@Override
+	public void enterMin(Inter_InstanceParser.MinContext ctx) {
+		// TODO
+	}
+	
+	@Override
+	public void enterMax(Inter_InstanceParser.MaxContext ctx) {
+		// TODO
 	}
 
 }

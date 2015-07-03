@@ -6,11 +6,6 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
-import org.projog.api.Projog;
-import org.projog.api.QueryResult;
-import org.projog.api.QueryStatement;
-import org.projog.core.term.Atom;
-
 import iicmchecker.logging.LoggerFactory;
 
 

@@ -7,6 +7,7 @@ import iicmchecker.IICMChecker;
 public class Main {
 	
 private static String rulelocation = "rulefiles";
+/*
 private static String[] rulefiles = {
 				"example1" , "example2", "example3" , "example_definition_file" ,
 				"IntraInstance_hierarchical" , "InterInstance_hierarchical", 
@@ -14,6 +15,9 @@ private static String[] rulefiles = {
 			    "InterInstance_nonhierarchical", "InterProcess_nonhierarchical",
 			    "negationrules"
 };
+*/
+
+private static String[] rulefiles = {"rule"};
 private static String loglocation = "logfiles";
 private static String[] logfiles = {"logfile1"};
 private static String outputlocation = "prologfiles";

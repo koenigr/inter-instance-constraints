@@ -1,7 +1,9 @@
 package iicmchecker.storage.container;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.container.Fact;
 import iicmchecker.storage.container.RuleBody;
 
@@ -9,12 +11,15 @@ public abstract class Rule {
 	private RuleBody body;
 	private Fact head;
 	private ArrayList<String> description;
+	private Logger logger = LoggerFactory.getLogger();
 	
 	public void setHead(Fact head) {
+		logger.info("Rule:setHead() set head " + head.getAsString());
 		this.head = head;
 	}
 
 	public void setBody(RuleBody body) {
+		logger.info("Rule:setBody() set body " + body.getAsString());
 		this.body = body;
 	}
 	

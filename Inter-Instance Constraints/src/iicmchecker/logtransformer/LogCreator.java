@@ -40,7 +40,8 @@ d.setDate(2);
 LogEntry entryA = new LogEntry("check");
 entryA.setEventType(EventType.start);
 entryA.setOriginator("Mark");
-entryA.setGroup("Clerk");
+entryA.setGroup("Group");
+entryA.setRole("Role");
 entryA.setTimestamp(d);
 		
 		
@@ -135,6 +136,9 @@ log.addTrace(traceA);
 log.addTrace(traceB);
 log.addTrace(traceC);
 		
+System.out.println("BBB" + traceA);
+System.out.println("BBB" + traceA.getEntries().get(0).getRole());
+System.out.println("BBB" + traceA.getDistinctRoles());
 		
 // Serialize Logs
 String fileName = loglocation + "/" + logfile;
