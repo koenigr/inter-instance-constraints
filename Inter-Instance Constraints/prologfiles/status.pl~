@@ -1,0 +1,4 @@
+% exetuted_u status facts
+executed_user('Mark',0).
+executed_user('Susi',1).
+task_name(asd,asd).

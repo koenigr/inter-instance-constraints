@@ -12,6 +12,7 @@ public class LoggerFactory {
 	  static private CFormatter formatter;
 	  private static final String LOGGER_NAME = "kjjkhkj"; // TODO
 	  private static Level level = Level.ALL;
+	  private static Logger logger = Logger.getLogger(LOGGER_NAME);
 	  
 	  public static void setLevel(Level level) {
 		  LoggerFactory.level = level;
@@ -19,9 +20,8 @@ public class LoggerFactory {
 
 	  static public void setup() throws IOException {
 
-		  System.out.println("Wo wird das aufgerufen??"); // TODO
+		logger.info("Setup Logger");
 	    // get the global logger to configure it
-	    Logger logger = Logger.getLogger(LOGGER_NAME);
 	    logger.setUseParentHandlers(false);
 
 	    // remove standard handler
@@ -32,9 +32,9 @@ public class LoggerFactory {
 	    	}
 	    }
 
-	    logger.setLevel(Level.ALL);
+	    logger.setLevel(level);
 	    handler = new ConsoleHandler();
-	    handler.setLevel(Level.ALL);
+	    handler.setLevel(level);
 
 	    // create a formatter
 	    formatter = new CFormatter();
@@ -46,6 +46,6 @@ public class LoggerFactory {
 	  
 	  static public Logger getLogger() {
 		  // TODO sind das verschiedene Logger?
-		return Logger.getLogger(LOGGER_NAME);		  
+		return logger;  
 	  }
 }

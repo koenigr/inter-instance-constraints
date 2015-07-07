@@ -15,7 +15,7 @@ public class ExecutedUserStatus extends Fact {
 	}
 
 	public ExecutedUserStatus(String user, String taskID) {
-		super("executed_user", NUMBER_OF_ARGUMENTS);
+		super("user_executed", NUMBER_OF_ARGUMENTS);
 		setArgument(0, user);
 		setArgument(1, taskID);
 	}

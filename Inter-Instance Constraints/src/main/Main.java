@@ -14,14 +14,19 @@ private static String[] rulefiles = {
 				"InterProcess_hierarchical", "IntraInstance_nonhierarchical",
 			    "InterInstance_nonhierarchical", "InterProcess_nonhierarchical",
 			    "negationrules"
-};
-*/
+};*/
 
-private static String[] rulefiles = {"rule"};
+private static String[] rulefiles = {"rule", "negationrules", "orrules"};
 private static String loglocation = "logfiles";
 private static String[] logfiles = {"logfile1"};
 private static String outputlocation = "prologfiles";
-private static Level loggerLevel = Level.SEVERE; // TODO das funktioniert gar nicht
+/*
+ * severe Grundlegender Ablauf
+ * warning 
+ * info  Methodenbeginn
+ * fine  Argumente
+ */
+private static Level loggerLevel = Level.WARNING; 
 // TODO Logger Outputlocation
 	
 static IICMChecker checker;

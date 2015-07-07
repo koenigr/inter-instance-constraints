@@ -13,4 +13,11 @@ public class Panic extends Fact {
 		super("illegal_execution", NUMBER_OF_ARGUMENTS);
 	}
 
+	@Override
+	public String getAsString() {
+		String result;
+		result = predicate;
+		result += "(Stream)";
+		return result;
+	}
 }

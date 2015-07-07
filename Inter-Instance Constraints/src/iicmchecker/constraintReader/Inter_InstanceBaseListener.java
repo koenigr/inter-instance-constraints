@@ -1,7 +1,7 @@
-package iicmchecker.constraintReader;
-
 // Generated from Inter_Instance.g4 by ANTLR 4.5
 
+  package iicmchecker.constraintReader;
+	
   import iicmchecker.constraintReader.ParserHelper;
   import java.util.logging.Logger;
   import java.util.logging.Level;
@@ -104,6 +104,30 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitClauses(Inter_InstanceParser.ClausesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDisjunction(Inter_InstanceParser.DisjunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDisjunction(Inter_InstanceParser.DisjunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNegation(Inter_InstanceParser.NegationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNegation(Inter_InstanceParser.NegationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

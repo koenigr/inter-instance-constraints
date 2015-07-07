@@ -27,7 +27,7 @@ public class TaskAttribute extends Fact{
 		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, taskID);
 		setArgument(1, attrName);
-		setArgument(2, "String");
+		setArgument(2, "'string'");
 		setArgument(3, "'" + attrValue + "'");
 	}
 	
@@ -35,7 +35,7 @@ public class TaskAttribute extends Fact{
 		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, taskID);
 		setArgument(1, attrName);
-		setArgument(2, "Number");
+		setArgument(2, "'number'");
 		setArgument(3, String.valueOf(attrValue));
 	}
 	

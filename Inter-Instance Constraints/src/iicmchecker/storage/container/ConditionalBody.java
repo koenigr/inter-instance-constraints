@@ -1,12 +1,12 @@
 package iicmchecker.storage.container;
 
-import java.util.ArrayList;
-import java.util.logging.Logger;
-
 import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.container.Fact;
 
-public class RuleBody {
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+public class ConditionalBody {
 
 	private Logger logger = LoggerFactory.getLogger();
 	private ArrayList<Fact> body = new ArrayList<Fact>();
@@ -25,12 +25,13 @@ public class RuleBody {
 	}
 	
 	public String getAsString() { // TODO hier ein paar weitere Prolog interne Sachen einfügen
-		String bodyStr = " ";
+		String bodyStr = "(";
 		for (Fact f : body) {
 			String fact = f.getAsString();
 			bodyStr = bodyStr.concat(fact + ",");
 		}
 		bodyStr = bodyStr.substring(0, bodyStr.length() - 1);
+		bodyStr += ")";
 		return bodyStr;
 	}
 	

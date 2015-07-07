@@ -50,10 +50,10 @@ public class LogTransformer {
 					tID++;
 
 					
-					String name = entry.getActivity();
-					String group = entry.getGroup();
-					String user = entry.getOriginator();
-					String eventType = entry.getEventType().toString();
+					String name = StringChecker.convertToValidConstant(entry.getActivity());
+					String group = StringChecker.convertToValidConstant(entry.getGroup());
+					String user = StringChecker.convertToValidConstant(entry.getOriginator());
+					String eventType = StringChecker.convertToValidConstant(entry.getEventType().toString());
 					Date timestamp = entry.getTimestamp();
 					
 					if (timestamp == null) { 
@@ -95,7 +95,7 @@ public class LogTransformer {
 					}
 					
 					for(DataAttribute a : entry.getMetaAttributes()) {
-						String attrName = a.name;
+						String attrName = StringChecker.convertToValidConstant(a.name);
 						Object attrVal = a.value;
 						String val = attrVal.toString();
 						boolean b = StringChecker.isValidNumber(val);

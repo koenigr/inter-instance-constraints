@@ -1,0 +1,39 @@
+Modelchecker startet...
+Searching for illegal executions by user...
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 1
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 1
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 1
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 2
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 2
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 2
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 7
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 7
+
+"check and pay cannot be executed by related actors"
+Illegal execution found: 
+User Susi executed Task 7
+Modelchecker finished...

@@ -3,8 +3,17 @@ package iicmchecker.constraintReader;
 
 
 import iicmchecker.logging.LoggerFactory;
+import iicmchecker.storage.EventHelper;
 import iicmchecker.storage.StorageHelper;
+import iicmchecker.storage.container.Fact;
 import iicmchecker.storage.container.RuleBody;
+import iicmchecker.storage.container.ConditionalBody;
+import iicmchecker.storage.container.conditional.Avg;
+import iicmchecker.storage.container.conditional.Max;
+import iicmchecker.storage.container.conditional.Min;
+import iicmchecker.storage.container.conditional.NumSimple;
+import iicmchecker.storage.container.conditional.NumVars;
+import iicmchecker.storage.container.conditional.Sum;
 import iicmchecker.storage.container.externspec.CriticalTaskPair;
 import iicmchecker.storage.container.externspec.Dominates;
 import iicmchecker.storage.container.externspec.ExternAndSpecificationContainer;
@@ -27,13 +36,14 @@ import iicmchecker.storage.container.rules.RoleMustDoRule;
 import iicmchecker.storage.container.rules.RuleContainer;
 import iicmchecker.storage.container.rules.UserCannotDoRule;
 import iicmchecker.storage.container.rules.UserMustDoRule;
+import iicmchecker.storage.container.status.ExecutedGroupStatus;
+import iicmchecker.storage.container.status.ExecutedUserStatus;
+import iicmchecker.storage.container.status.TaskEvent;
+import iicmchecker.storage.container.status.TaskName;
 
-import java.io.IOException;
-import java.util.logging.Level;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import org.antlr.v4.runtime.tree.ErrorNode;
-import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class IIListener extends Inter_InstanceBaseListener {
 	
@@ -43,15 +53,21 @@ public class IIListener extends Inter_InstanceBaseListener {
 	
 	private Logger logger = LoggerFactory.getLogger();
 	
-	private enum InputContext {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY, CONDITIONAL_BODY}
+	private enum InputContext {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY, CONDITIONAL_BODY, NEGATION, DISJUNCTION}
 	
 	private InputContext inputContext = InputContext.UNDEF;
 	
 	private enum RuleContext {UNDEF, INTRAINSTANCE, INTERINSTANCE, INTERPROCESS}
 	
-	private RuleContext ruleContext = RuleContext.UNDEF;
+	private RuleContext ruleContext = RuleContext.UNDEF; // TODO prüfen, ob der Kontext eingehalten wurde
 	
-	private RuleBody body;
+	private RuleBody rule_body;
+	
+	private ConditionalBody conditional_body;
+	
+	private ArrayList<Fact> negation_body;
+	
+	private ArrayList<Fact> disjunction_body;
 	
 	private String description;
 	
@@ -59,23 +75,19 @@ public class IIListener extends Inter_InstanceBaseListener {
 	
 	public IIListener() {
 		
+		logger.severe("IIListener initialized");
+		
 		esc = StorageHelper.getInstance().getExternSpecContainer();
 		
 		rc = StorageHelper.getInstance().getRuleContainer();
-		
-		try {
-			LoggerFactory.setup();
-		} catch (IOException e) {
-			logger.severe("Failed to initialize logger properly");
-		}
 	}
 
 	public void enterFile(Inter_InstanceParser.FileContext ctx) {
-		logger.info("Entering File");
+		logger.severe("Entering File...");
 	}
 	
 	public void exitFile(Inter_InstanceParser.FileContext ctx) {
-		logger.info("Exiting File");
+		logger.severe("Exiting File...");
 	}
 	
 	public void enterExplicitSetting(Inter_InstanceParser.ExplicitSettingContext ctx) {
@@ -100,15 +112,14 @@ public class IIListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitDescription(Inter_InstanceParser.DescriptionContext ctx) {
-		System.out.println("Number of children " + ctx.getChildCount());
-		 description = ctx.getChild(1).getText();
+		description = ctx.getChild(1).getText();
 	}
 
 	@Override
 	public void enterAssignmentBody(Inter_InstanceParser.AssignmentBodyContext ctx) {
 		logger.info("Entering assignmentbody");
 		inputContext = InputContext.ASSIGNMENT_BODY;
-		body = new RuleBody();
+		rule_body = new RuleBody();
 		
 	}
 
@@ -132,19 +143,8 @@ public class IIListener extends Inter_InstanceBaseListener {
 
 	@Override
 	public void exitAssignmentHead(Inter_InstanceParser.AssignmentHeadContext ctx) {
+		logger.info("Exiting assignment head");
 		inputContext = InputContext.UNDEF;
-		
-	}
-
-	@Override
-	public void enterClauses(Inter_InstanceParser.ClausesContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void exitClauses(Inter_InstanceParser.ClausesContext ctx) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -164,8 +164,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 			esc.addPartner(new Partner(user1, user2));
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(new Partner(user1, user2));
-		}
+			rule_body.addFact(new Partner(user1, user2));
+		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(new Partner(user1, user2));
+		} else {System.out.println("Fehler"); System.exit(0);}
 		
 	}
 	
@@ -180,8 +182,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 			esc.addSameGroup(new SameGroup(user1, user2));
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(new SameGroup(user1, user2));
-	    }
+			rule_body.addFact(new SameGroup(user1, user2));
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(new SameGroup(user1, user2));
+		} else {System.out.println("Fehler"); System.exit(0);}
+		
 	}
 
 	@Override
@@ -198,8 +203,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 			esc.addRelated(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(r);
-	    }
+			rule_body.addFact(r);
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(r);
+		} else {System.out.println("Fehler"); System.exit(0);}
+		
 	}
 	
 	/*
@@ -208,7 +216,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 	
 	@Override
 	public void exitRoleTask(Inter_InstanceParser.RoleTaskContext ctx) {
-		logger.info("Exiting Role Task inputContext");
+		logger.info("Exiting Role Task Context");
 
 		lh.checkChildCount(4, ctx.getChildCount());
 		String role = ctx.getChild(1).getText();
@@ -218,13 +226,16 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 			esc.addRoleTask(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(r);
-	    }	
+			rule_body.addFact(r);
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(r);
+		} else {System.out.println("Fehler"); System.exit(0);}
+		
 	}
 
 	@Override
 	public void exitUserTask(Inter_InstanceParser.UserTaskContext ctx) {
-		logger.info("Exiting User Task inputContext");
+		logger.info("Exiting User Task Context");
 
 		lh.checkChildCount(4, ctx.getChildCount());
 		String user = ctx.getChild(1).getText();
@@ -234,13 +245,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 			esc.addUserTask(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) { // TODO Switch oder anderes..
-			body.addFact(r);
-	    }	
+			rule_body.addFact(r);
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(r);
+		} else {System.out.println("Fehler"); System.exit(0);}	
 	}
 
 	@Override
 	public void exitUserRole(Inter_InstanceParser.UserRoleContext ctx) {
-		logger.info("Exiting User Role inputContext");
+		logger.info("Exiting User Role Context");
 
 		lh.checkChildCount(4, ctx.getChildCount());
 		String user = ctx.getChild(1).getText();
@@ -250,13 +263,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 			esc.addUserRole(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(r);
-	    }
+			rule_body.addFact(r);
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(r);
+		} else {System.out.println("Fehler"); System.exit(0);}
 	}
 
 	@Override
 	public void exitGlb(Inter_InstanceParser.GlbContext ctx) {
-		logger.info("Exiting Glb inputContext");
+		logger.info("Exiting Glb Context");
 
 		lh.checkChildCount(3, ctx.getChildCount());
 		String role = ctx.getChild(0).getText();
@@ -266,13 +281,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 			esc.addGLB(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(r);
-	    }	
+			rule_body.addFact(r);
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(r);
+		} else {System.out.println("Fehler"); System.exit(0);}	
 	}
 
 	@Override
 	public void exitLub(Inter_InstanceParser.LubContext ctx) {
-		logger.info("Exiting Lub inputContext");
+		logger.info("Exiting Lub Context");
 		lh.checkChildCount(3, ctx.getChildCount());
 		String role = ctx.getChild(0).getText();
 		String task = ctx.getChild(2).getText();
@@ -281,13 +298,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 			esc.addLUB(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(r);
-	    }	
+			rule_body.addFact(r);
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(r);
+		} else {System.out.println("Fehler"); System.exit(0);}	
 	}
 
 	@Override
 	public void exitDominate(Inter_InstanceParser.DominateContext ctx) {
-		logger.info("Exiting Dominate inputContext");
+		logger.info("Exiting Dominate Context");
 
 		lh.checkChildCount(3, ctx.getChildCount());
 		String role1 = ctx.getChild(0).getText();
@@ -297,13 +316,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 				esc.addDominates(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(r);
-	    }
+			rule_body.addFact(r);
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(r);
+		} else {System.out.println("Fehler"); System.exit(0);}
 	}
 
 	@Override
 	public void exitCritTaskPair(Inter_InstanceParser.CritTaskPairContext ctx) {
-		logger.info("Exiting Critical Task Pair inputContext");
+		logger.info("Exiting Critical Task Pair Context");
 
 		lh.checkChildCount(5, ctx.getChildCount());
 		String task1 = ctx.getChild(1).getText();
@@ -313,8 +334,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		if (inputContext == InputContext.SETTING) {
 				esc.addCriticalTaskPair(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			body.addFact(r);
-	    }
+			rule_body.addFact(r);
+	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(r);
+		} else {System.out.println("Fehler"); System.exit(0);}
 		
 	}
 	
@@ -332,13 +355,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		switch(inputContext) {
 		
 		case ASSIGNMENT_HEAD : 
-			System.out.println("Head User Cannot do");
 			UserCannotDoRule rule = new UserCannotDoRule();
 			String user = ctx.getChild(0).getText();
-			String task = ctx.getChild(2).getText();
-			rule.setHead(new CannotDoUser(user, task));
-			System.out.println("BBODY " + body.size());
-			rule.setBody(body);
+			String taskID = ListenerHelper.getStringForVar();
+			String taskName = ctx.getChild(2).getText();
+			rule.setHead(new CannotDoUser(user, taskID));
+			rule_body.setFirst(new TaskName(taskID, taskName));
+			rule.setBody(rule_body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
@@ -347,7 +370,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 			break;
 			
 		case ASSIGNMENT_BODY :
-		default: break;
+		default:System.out.println("Fehler"); System.exit(0); break;
 		}
 		
 	}
@@ -363,13 +386,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		
 		case ASSIGNMENT_HEAD : 
-			System.out.println("Head");
 			RoleCannotDoRule rule = new RoleCannotDoRule();
 				String user = ctx.getChild(1).getText();
 				String task = ctx.getChild(3).getText();
 				rule.setHead(new CannotDoRole(user, task));
-				System.out.println("BBODY " + body.size());
-				rule.setBody(body);
+				rule.setBody(rule_body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
@@ -392,13 +413,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		switch(inputContext) {
 		case ASSIGNMENT_HEAD : 
-			System.out.println("Head");
 			UserMustDoRule rule = new UserMustDoRule();
 				String user = ctx.getChild(0).getText();
 				String task = ctx.getChild(2).getText();
 				rule.setHead(new MustDoUser(user, task));
-				System.out.println("BBODY " + body.size());
-				rule.setBody(body);
+				rule.setBody(rule_body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
@@ -421,13 +440,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		switch(inputContext) {
 		case ASSIGNMENT_HEAD : 
-			System.out.println("Head");
 			RoleMustDoRule rule = new RoleMustDoRule();
 				String user = ctx.getChild(0).getText();
 				String task = ctx.getChild(2).getText();
 				rule.setHead(new MustDoRole(user, task));
-				System.out.println("BBODY " + body.size());
-				rule.setBody(body);
+				rule.setBody(rule_body);
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
@@ -450,15 +467,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		switch(inputContext) {
 		case ASSIGNMENT_HEAD : 
-			System.out.println("Head");
 			PanicRule rule = new PanicRule();
 			if (description == null) {
 				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
 			}
 			rule.setDescription(description);
 			rule.setHead(new Panic());
-			System.out.println("BBODY " + body.size());
-			rule.setBody(body);
+			rule.setBody(rule_body);
 			rc.addPanicRule(rule);
 			break;
 			
@@ -472,100 +487,245 @@ public class IIListener extends Inter_InstanceBaseListener {
 	 * STATUS
 	 */
 
-	@Override
-	public void enterExecutedUser(Inter_InstanceParser.ExecutedUserContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void exitExecutedUser(Inter_InstanceParser.ExecutedUserContext ctx) {
-		// TODO Auto-generated method stub
+		logger.info("Exiting Executed User Context");
+		String user = "";
+		String taskID = ListenerHelper.getStringForVar();
+		String taskName = "";
+		
+		if(ctx.getChildCount() == 3) {
+		      user = ctx.getChild(0).getText();
+		      taskName = ctx.getChild(2).getText();
+		} else if (ctx.getChildCount() == 4) {
+			  user = ctx.getChild(1).getText();
+			  taskName = ctx.getChild(3).getText();
+		} else {
+			// TODO
+			System.exit(0);
+		}
+		
+		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new ExecutedUserStatus(user, taskID));
+			rule_body.addFact(new TaskName(taskID, taskName));
+		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(new ExecutedUserStatus(user, taskID));
+			conditional_body.addFact(new TaskName(taskID, taskName));
+		} else {System.out.println("Fehler"); System.exit(0);}
 		
 	}
-
-	@Override
-	public void enterExecutedRole(Inter_InstanceParser.ExecutedRoleContext ctx) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void exitExecutedRole(Inter_InstanceParser.ExecutedRoleContext ctx) {
-		// TODO Auto-generated method stub
+		logger.info("Exiting Executed Role Context");
 		
-	}
-
-	@Override
-	public void enterAssignedUser(Inter_InstanceParser.AssignedUserContext ctx) {
-		// TODO Auto-generated method stub
+		lh.checkChildCount(4, ctx.getChildCount());
 		
+		String role = ctx.getChild(1).getText();
+		String taskID = ListenerHelper.getStringForVar();
+		String taskName = ctx.getChild(3).getText();
+		
+		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new ExecutedGroupStatus(role, taskID));
+			rule_body.addFact(new TaskName(taskID, taskName));
+		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(new ExecutedGroupStatus(role, taskID));
+			conditional_body.addFact(new TaskName(taskID, taskName));
+		} else {System.out.println("Fehler"); System.exit(0);}
 	}
-
+	
 	@Override
 	public void exitAssignedUser(Inter_InstanceParser.AssignedUserContext ctx) {
-		// TODO Auto-generated method stub
+		logger.info("Assigned User Context");
 		
-	}
-
-	@Override
-	public void enterAbortedTask(Inter_InstanceParser.AbortedTaskContext ctx) {
-		// TODO Auto-generated method stub
+		lh.checkChildCount(3, ctx.getChildCount());
 		
+		String user = ctx.getChild(0).getText();
+		String taskID = ListenerHelper.getStringForVar();
+		String taskName = ctx.getChild(2).getText();
+		EventHelper.EventTypes event = EventHelper.EventTypes.ASSIGN;
+		
+		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new TaskName(taskID, taskName));
+			rule_body.addFact(new ExecutedUserStatus(taskID, user));
+			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(new ExecutedUserStatus(user, taskID));
+			conditional_body.addFact(new TaskName(taskID, taskName));
+			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		} else {System.out.println("Fehler"); System.exit(0);}
 	}
 
 	@Override
 	public void exitAbortedTask(Inter_InstanceParser.AbortedTaskContext ctx) {
-		// TODO Auto-generated method stub
+		logger.info("Aborted Task Context");
 		
+		lh.checkChildCount(2, ctx.getChildCount());
+		
+		String taskName = ctx.getChild(0).getText();
+		String taskID = ListenerHelper.getStringForVar();
+		EventHelper.EventTypes event = EventHelper.EventTypes.ATE_ABORT;
+		
+		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new TaskName(taskID, taskName));
+			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(new TaskName(taskID, taskName));
+			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		} else {System.out.println("Fehler"); System.exit(0);}
 	}
 
 	@Override
 	public void exitSucceededTask(Inter_InstanceParser.SucceededTaskContext ctx) {
-		// TODO Auto-generated method stub
+		logger.info("Succeeded Task Context");
+		
+		lh.checkChildCount(2, ctx.getChildCount());
+		
+		String taskName = ctx.getChild(0).getText();
+		String taskID = ListenerHelper.getStringForVar();
+		EventHelper.EventTypes event = EventHelper.EventTypes.COMPLETE;
+		
+		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new TaskName(taskID, taskName));
+			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			conditional_body.addFact(new TaskName(taskID, taskName));
+			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		} else {System.out.println("Fehler"); System.exit(0);}
 		
 	}
 
 	@Override
 	public void exitCollaborator(Inter_InstanceParser.CollaboratorContext ctx) {
-		// TODO Auto-generated method stub
+		logger.info("Collaborator Context");
 		
+		lh.checkChildCount(3, ctx.getChildCount());
+		
+		String user1 = ctx.getChild(0).getText();
+		String taskID1 = ListenerHelper.getStringForVar();
+		String taskID2 = ListenerHelper.getStringForVar();
+		String user2 = ctx.getChild(2).getText();
+		EventHelper.EventTypes event = EventHelper.EventTypes.COMPLETE;
+		
+		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new UserTask(user1, taskID1));
+			rule_body.addFact(new UserTask(user2, taskID2));
+			rule_body.addFact(new CriticalTaskPair(taskID1, taskID2));
+			rule_body.addFact(new TaskEvent(taskID1, EventHelper.getAsString(event)));
+			rule_body.addFact(new TaskEvent(taskID2, EventHelper.getAsString(event)));
+		} else if (inputContext == InputContext.CONDITIONAL_BODY){
+				rule_body.addFact(new UserTask(user1, taskID1));
+				rule_body.addFact(new UserTask(user2, taskID2));
+				rule_body.addFact(new CriticalTaskPair(taskID1, taskID2));
+				rule_body.addFact(new TaskEvent(taskID1, EventHelper.getAsString(event)));
+				rule_body.addFact(new TaskEvent(taskID2, EventHelper.getAsString(event)));
+		}  else {System.out.println("Fehler"); System.exit(0);}
 	}
 
 
+	/*
+	 * CONDITIONAL
+	 */
+	
 	@Override
 	public void enterConditionalBody(Inter_InstanceParser.ConditionalBodyContext ctx) {
-		// TODO Auto-generated method stub
+		inputContext = InputContext.CONDITIONAL_BODY;
+		conditional_body = new ConditionalBody();
+	}
+	
+	@Override
+	public void exitConditionalBody(Inter_InstanceParser.ConditionalBodyContext ctx) {
+		inputContext = InputContext.ASSIGNMENT_BODY;
 		
 	}
+
 	
 	@Override
-	public void enterNumSimple(Inter_InstanceParser.NumSimpleContext ctx) {
-		// TODO
+	public void exitNumSimple(Inter_InstanceParser.NumSimpleContext ctx) {
+		logger.info("Num Simple Context");
+		lh.checkChildCount(5, ctx.getChildCount());
+		
+		String result = ctx.getChild(4).getText();
+		NumSimple ns = new NumSimple(result);
+		ns.setBody(conditional_body);
+		rule_body.addFact(ns);
 	}
 	
 	@Override
-	public void enterNumVars(Inter_InstanceParser.NumVarsContext ctx) {
-		// TODO
+	public void exitNumVars(Inter_InstanceParser.NumVarsContext ctx) {
+		// TODO prüfen, ob die Variable auch im Body vorkommt?? Oder ich lass es, wenn die Zeit knapp wird
+		logger.info("Num Vars Context");
+		lh.checkChildCount(6, ctx.getChildCount());
+		
+		String var = ctx.getChild(1).getText();
+		String result = ctx.getChild(5).getText();
+		NumVars ns = new NumVars(var, result);
+		ns.setBody(conditional_body);
+		rule_body.addFact(ns);
 	}
 	
 	@Override
-	public void enterSum(Inter_InstanceParser.SumContext ctx) {
-		// TODO
+	public void exitSum(Inter_InstanceParser.SumContext ctx) {
+		logger.info("Sum Context");
+		lh.checkChildCount(6, ctx.getChildCount());
+		
+		String var = ctx.getChild(1).getText();
+		String result = ctx.getChild(5).getText();
+		Sum ns = new Sum(var, result);
+		ns.setBody(conditional_body);
+		rule_body.addFact(ns);
 	}
 	
 	@Override
-	public void enterAvg(Inter_InstanceParser.AvgContext ctx) {
-		// TODO
+	public void exitAvg(Inter_InstanceParser.AvgContext ctx) {
+		logger.info("Num Vars Context");
+		lh.checkChildCount(6, ctx.getChildCount());
+		
+		String var = ctx.getChild(1).getText();
+		String result = ctx.getChild(5).getText();
+		Avg ns = new Avg(var, result);
+		ns.setBody(conditional_body);
+		rule_body.addFact(ns);
 	}
 	
 	@Override
-	public void enterMin(Inter_InstanceParser.MinContext ctx) {
-		// TODO
+	public void exitMin(Inter_InstanceParser.MinContext ctx) {
+		logger.info("Num Vars Context");
+		lh.checkChildCount(6, ctx.getChildCount());
+		
+		String var = ctx.getChild(1).getText();
+		String result = ctx.getChild(5).getText();
+		Min ns = new Min(var, result);
+		ns.setBody(conditional_body);
+		rule_body.addFact(ns);
 	}
 	
 	@Override
-	public void enterMax(Inter_InstanceParser.MaxContext ctx) {
+	public void exitMax(Inter_InstanceParser.MaxContext ctx) {
+		logger.info("Num Vars Context");
+		lh.checkChildCount(6, ctx.getChildCount());
+		
+		String var = ctx.getChild(1).getText();
+		String result = ctx.getChild(5).getText();
+		Max ns = new Max(var, result);
+		ns.setBody(conditional_body);
+		rule_body.addFact(ns);
+	}
+	
+	/*
+	 * DISJUNCTION
+	 */
+	@Override
+	public void exitDisjunction(Inter_InstanceParser.DisjunctionContext ctx) {
+		// TODO
+	}
+	
+	/*
+	 * NEGATION
+	 */
+	@Override
+	public void exitNegation(Inter_InstanceParser.NegationContext ctx) {
 		// TODO
 	}
 

@@ -19,5 +19,17 @@ public class CannotDoUser extends Fact{
 		setArgument(0, user);
 		setArgument(1, task);
 	}
+	
+	@Override
+	public String getAsString() {
+		String result;
+		result = predicate;
+		result += "(Stream,";
+		result +=  arguments[0];
+		result += ",";
+		result +=  arguments[1];
+		result += ")";	
+		return result;
+	}
 
 }

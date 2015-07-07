@@ -8,7 +8,9 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.container.Rule;
 
 public class RuleContainer {
@@ -20,6 +22,8 @@ public class RuleContainer {
 	private ArrayList<UserMustDoRule> userMustDo = new ArrayList<UserMustDoRule>();
 	private ArrayList<RoleCannotDoRule> roleCannotDo = new ArrayList<RoleCannotDoRule>();
 	private ArrayList<RoleMustDoRule> roleMustDo = new ArrayList<RoleMustDoRule>();
+	
+	Logger logger = LoggerFactory.getLogger();
 	
 	public void setOutputFile(String file) {
 		outputFile = file;
@@ -74,7 +78,8 @@ public class RuleContainer {
 			}
 		
 			writer.close();
-			System.out.println("Written Rule?");
+
+			logger.severe("Rules are written to " + outputFile);
 		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

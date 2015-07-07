@@ -16,7 +16,7 @@ public class ExecutedGroupStatus extends Fact {
 
 	public ExecutedGroupStatus(String group, String taskID) {
 
-		super("executed_group", NUMBER_OF_ARGUMENTS);
+		super("group_executed", NUMBER_OF_ARGUMENTS);
 		setArgument(0, group);
 		setArgument(1, taskID);
 		

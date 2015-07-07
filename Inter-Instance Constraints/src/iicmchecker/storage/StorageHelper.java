@@ -1,5 +1,8 @@
 package iicmchecker.storage;
 
+import java.util.logging.Logger;
+
+import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.container.externspec.ExternAndSpecificationContainer;
 import iicmchecker.storage.container.rules.RuleContainer;
 import iicmchecker.storage.container.status.StatusContainer;
@@ -15,6 +18,8 @@ public class StorageHelper {
 	static RuleContainer rc;
 	static ExternAndSpecificationContainer esc;
 	static StatusContainer sc;
+	
+	private Logger logger = LoggerFactory.getLogger();
 	
 	public static StorageHelper getInstance() {
 
@@ -59,8 +64,10 @@ public class StorageHelper {
 	
 	// TODO testen was passiert, wenn es nicht geht
 	public void printToFile() {
+		logger.severe("Writing rules to file...");
 		rc.printToFile();
 		esc.printToFile();
 		sc.printToFile();
+		logger.severe("Writing completed...");
 	}
 }

@@ -4,4 +4,5 @@ import iicmchecker.storage.container.Rule;
 
 public class UserMustDoRule extends Rule{
 
+
 }

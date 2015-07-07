@@ -35,15 +35,6 @@ public class ParserHelper {
 		}
 	}
 	
-	public ParserHelper() {
-			try {
-				LoggerFactory.setup();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	
-	
 	public void addClause(String name) {
 		
 		logger.info("Defining new clause " + name);
@@ -58,7 +49,7 @@ public class ParserHelper {
 	
 	public void existsClause(String name) {
 		if (!definedClauses.containsKey(name)) {
-			System.out.println("Unknown clause " + name);
+			logger.warning("Unknown clause " + name);
 			System.exit(0);
 		}
 	}
@@ -66,10 +57,10 @@ public class ParserHelper {
 	public void addArgTypeToClause(String name, String arg) {
 		logger.info("Adding argument type " + arg + " to clause " + name);
 		if (definedClauses.containsKey(name)) {
-			System.out.println("Successed");
 			definedClauses.get(name).addArgType(arg);
 		} else {
-			System.out.println("Shit happened");
+			logger.warning("Shit happened in ParserHelper");
+			System.exit(0);
 		}
 	}
 	

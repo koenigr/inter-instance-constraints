@@ -9,8 +9,21 @@ public class StringChecker {
 	}
 
 	public static boolean isValidConstant(String arg) {
-		// TODO Auto-generated method stub
-		return false;
+		return arg.matches("'.*'"); // TODO testen, ob das stimmt
+	}
+	
+	public static String convertToValidConstant(String arg) {
+		if (arg == null) {
+			return null;
+		}
+		
+		if (arg.matches("'.*'")) {// TODO testen, ob das stimmt
+			return arg;
+		} else if (arg.matches("\".*\"")) {
+			return "'" + arg.substring(1, arg.length() - 1) + "'";
+		} else {
+			return "'" + arg + "'";
+		} 
 	}
 
 	public static boolean isValidPredicate(String predicate) {

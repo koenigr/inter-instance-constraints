@@ -50,7 +50,7 @@ public void setLogFiles(String[] logfiles) {this.logfiles = logfiles;}
 public void setOutputLocation(String outputlocation) {this.outputlocation = outputlocation;}
 
 private void init() {
-	logger.entering("IICMChecker", "init()");
+	logger.info("Initializing IICMChecker");
 	StorageHelper.setOutputLocation(outputlocation);
 	LoggerFactory.setLevel(loggerLevel);
 	try {
@@ -66,15 +66,14 @@ public void run() {
 logger.entering("IICMChecker", "run()");
 init();
 parseRuleFiles();	
-//parseLogFiles();
+parseLogFiles();
 storeKnowledgeBase();
-//runComplianceChecker();
+runComplianceChecker();
 }
 
 
 
 private void parseRuleFiles() {
-logger.entering("IICMChecker", "parseRuleFiles()");
 	
 /*
 * Parse the rule files and write the rules to prologfiles
@@ -94,7 +93,6 @@ CommonTokenStream tokens = new CommonTokenStream(lexer);
 // create a parser that feeds off the tokens buffer
 Inter_InstanceParser parser = new Inter_InstanceParser(tokens);
 // begin parsing at rule file
-
 Inter_InstanceParser.FileContext tree = parser.file();
 
 fs.close();
@@ -113,7 +111,6 @@ walker.walk(new IIListener(), tree);
 }
 
 private void parseLogFiles() {
-logger.entering("IICMChecker", "parseLogFiles()");
 for (String logfile : logfiles) {
 
 try {
@@ -145,16 +142,12 @@ ltransformer.transform(logs);
 }
 
 private void storeKnowledgeBase() {
-logger.entering("IICMChecker", "storeKnowledgeBase()");
 // TODO die location angeben
 StorageHelper.getInstance().printToFile();
 }
 
 
 private void runComplianceChecker() {
-logger.severe("agadfgadf");
-logger.entering("IICMChecker", "runComplianceChecker()");
-logger.severe("agadfgadf");
 
 /*
  * Run the Modelchecker

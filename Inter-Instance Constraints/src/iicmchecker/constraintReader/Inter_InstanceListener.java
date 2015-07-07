@@ -1,7 +1,7 @@
-package iicmchecker.constraintReader;
-
 // Generated from Inter_Instance.g4 by ANTLR 4.5
 
+  package iicmchecker.constraintReader;
+	
   import iicmchecker.constraintReader.ParserHelper;
   import java.util.logging.Logger;
   import java.util.logging.Level;
@@ -86,6 +86,26 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitClauses(Inter_InstanceParser.ClausesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#disjunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterDisjunction(Inter_InstanceParser.DisjunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#disjunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitDisjunction(Inter_InstanceParser.DisjunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Inter_InstanceParser#negation}.
+	 * @param ctx the parse tree
+	 */
+	void enterNegation(Inter_InstanceParser.NegationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Inter_InstanceParser#negation}.
+	 * @param ctx the parse tree
+	 */
+	void exitNegation(Inter_InstanceParser.NegationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#atoms}.
 	 * @param ctx the parse tree

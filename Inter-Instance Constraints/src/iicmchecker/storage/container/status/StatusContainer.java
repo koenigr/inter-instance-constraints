@@ -1,5 +1,7 @@
 package iicmchecker.storage.container.status;
 
+import iicmchecker.logging.LoggerFactory;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,6 +11,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class StatusContainer {
 	
@@ -30,6 +33,8 @@ public class StatusContainer {
 	private static ArrayList<WorkflowName> workflowName = new ArrayList<WorkflowName>();
 	
 	private static ArrayList<TaskAttribute> taskAttribute = new ArrayList<TaskAttribute>();
+	
+	Logger logger = LoggerFactory.getLogger();
 	
 	public void setOutputFile(String file) {
 		outputFile = file;
@@ -71,14 +76,14 @@ public class StatusContainer {
 		try {
 			
 			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile), "utf-8"));
-			writer.write("% exetuted_u status facts\n"); 
+			writer.write("% executed_u status facts\n"); 
 
 			for (ExecutedUserStatus e : exUserStatus) {
 				writer.write(e.getAsString());
 				writer.write(".\n");
 			}
 			
-			writer.write("% exetuted_g status facts\n"); 
+			writer.write("% executed_g status facts\n"); 
 
 			for (ExecutedGroupStatus e : exGroupStatus) {
 				writer.write(e.getAsString());
@@ -132,7 +137,9 @@ public class StatusContainer {
 			
 			
 			writer.close();
-			System.out.println("Written??");
+			
+			logger.severe("Status Predicates are written to " + outputFile);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

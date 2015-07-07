@@ -10,9 +10,9 @@ import iicmchecker.utils.StringChecker;
 
 public abstract class Fact{
 	
-	String[] arguments;
-	String predicate;
-	int numberOfArguments = 0;
+	protected String[] arguments;
+	protected String predicate;
+	protected int numberOfArguments = 0;
 
 	Logger logger = LoggerFactory.getLogger();
 	
@@ -42,8 +42,6 @@ public abstract class Fact{
 		if (pos >= numberOfArguments) {
 			new IllegalArgumentsPositionException(pos, numberOfArguments - 1);
 		}
-		
-		System.out.println(arg);
 		if (StringChecker.isValidVariable(arg) || StringChecker.isValidConstant(arg)) {
 				// TODO Exception
 		}

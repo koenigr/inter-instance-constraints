@@ -3,7 +3,6 @@
 :- dynamic role_cannot_execute/2.
 :- dynamic user_must_execute/2.
 :- dynamic role_must_execute/2.
-:- dyna
 
 
 :- multifile relatives/2.

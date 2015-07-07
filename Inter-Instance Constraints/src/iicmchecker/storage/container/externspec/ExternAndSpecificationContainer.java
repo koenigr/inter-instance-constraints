@@ -1,5 +1,7 @@
 package iicmchecker.storage.container.externspec;
 
+import iicmchecker.logging.LoggerFactory;
+
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class ExternAndSpecificationContainer {
 	
@@ -32,6 +35,8 @@ public class ExternAndSpecificationContainer {
 	private static ArrayList<UserRole> userRole = new ArrayList<UserRole>();
 	
 	private static ArrayList<UserTask> userTask = new ArrayList<UserTask>();
+	
+	Logger logger = LoggerFactory.getLogger();
 	
 	public void setOutputFile(String file) { 
 		outputFile = file;
@@ -155,7 +160,9 @@ public class ExternAndSpecificationContainer {
 			
 			
 			writer.close();
-			System.out.println("Written??");
+
+			logger.severe("Extern and Specification Predicates are written to " + outputFile);
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
