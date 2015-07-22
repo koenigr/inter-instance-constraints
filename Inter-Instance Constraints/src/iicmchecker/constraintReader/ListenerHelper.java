@@ -4,7 +4,8 @@ import iicmchecker.exceptions.UnexpectedNumberOfChildrenException;
 
 public class ListenerHelper {
 	
-	private static int variable = 0;
+	private static int variable_for_vars = 0;
+	private static int variable_for_ruleIDs = 0;
 
 	public void checkChildCount(int expected, int actual) {
 		if (expected != actual) {
@@ -14,8 +15,13 @@ public class ListenerHelper {
 		
 	}
 	
-	public static String getStringForVar() {
-		variable++;
-		return "GENERATED" + String.valueOf(variable);
+	public static String generateStringForVar() {
+		variable_for_vars++;
+		return "GENERATED" + String.valueOf(variable_for_vars);
+	}
+	
+	public static String generateRuleID() {
+		variable_for_ruleIDs++;
+		return "'RULEID" + String.valueOf(variable_for_ruleIDs) + "'";
 	}
 }

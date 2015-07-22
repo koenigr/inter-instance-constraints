@@ -25,6 +25,7 @@ import iicmchecker.storage.container.externspec.RoleTask;
 import iicmchecker.storage.container.externspec.SameGroup;
 import iicmchecker.storage.container.externspec.UserRole;
 import iicmchecker.storage.container.externspec.UserTask;
+import iicmchecker.storage.container.logical.Disjunction;
 import iicmchecker.storage.container.rules.CannotDoRole;
 import iicmchecker.storage.container.rules.CannotDoUser;
 import iicmchecker.storage.container.rules.MustDoRole;
@@ -44,6 +45,8 @@ import iicmchecker.storage.container.status.TaskName;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import de.uni.freiburg.iig.telematik.sewol.log.EventType;
+
 
 public class IIListener extends Inter_InstanceBaseListener {
 	
@@ -53,7 +56,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 	
 	private Logger logger = LoggerFactory.getLogger();
 	
-	private enum InputContext {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY, CONDITIONAL_BODY, NEGATION, DISJUNCTION}
+	private enum InputContext {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY, CONDITIONAL_BODY}
+	
+	private boolean negation = false;
+	
+	private boolean disjunction = false;
 	
 	private InputContext inputContext = InputContext.UNDEF;
 	
@@ -61,11 +68,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 	
 	private RuleContext ruleContext = RuleContext.UNDEF; // TODO prüfen, ob der Kontext eingehalten wurde
 	
-	private RuleBody rule_body;
+	private RuleBody rule_body = new RuleBody();
 	
 	private ConditionalBody conditional_body;
 	
-	private ArrayList<Fact> negation_body;
+	private ArrayList<Fact> negation_body; // TODO es vielleicht doch so machen?
 	
 	private ArrayList<Fact> disjunction_body;
 	
@@ -161,12 +168,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String user1 = ctx.getChild(0).getText();
 		String user2 = ctx.getChild(2).getText();
 		
-		if (inputContext == InputContext.SETTING) {
-			esc.addPartner(new Partner(user1, user2));
+		if (disjunction) {
+		//	disjunction_body.add(new Partner(user1, user2, negation));
+		}
+		else if (inputContext == InputContext.SETTING) {
+			esc.addPartner(new Partner(user1, user2, negation));
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new Partner(user1, user2));
+			rule_body.addFact(new Partner(user1, user2, negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(new Partner(user1, user2));
+			conditional_body.addFact(new Partner(user1, user2, negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
 		
 	}
@@ -179,12 +189,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String user1 = ctx.getChild(0).getText();
 		String user2 = ctx.getChild(2).getText();
 		
-		if (inputContext == InputContext.SETTING) {
-			esc.addSameGroup(new SameGroup(user1, user2));
+		if (disjunction) {
+		//	disjunction_body.add(new Partner(user1, user2, negation));
+		}
+		else if (inputContext == InputContext.SETTING) {
+			esc.addSameGroup(new SameGroup(user1, user2, negation));
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new SameGroup(user1, user2));
+			rule_body.addFact(new SameGroup(user1, user2, negation));
 	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(new SameGroup(user1, user2));
+			conditional_body.addFact(new SameGroup(user1, user2, negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
 		
 	}
@@ -197,10 +210,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		String user1 = ctx.getChild(0).getText();
 		String user2 = ctx.getChild(2).getText();
-		Related r = new Related(user1, user2);
+		Related r = new Related(user1, user2, negation);
 		
 
-		if (inputContext == InputContext.SETTING) {
+		if (disjunction) {
+		//	disjunction_body.add(new Partner(user1, user2, negation));
+		}
+		else if (inputContext == InputContext.SETTING) {
 			esc.addRelated(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(r);
@@ -221,9 +237,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(4, ctx.getChildCount());
 		String role = ctx.getChild(1).getText();
 		String task = ctx.getChild(3).getText();
-		RoleTask r = new RoleTask(role, task);
+		RoleTask r = new RoleTask(role, task, negation);
 		
-		if (inputContext == InputContext.SETTING) {
+		if (disjunction) {
+		//	disjunction_body.add(r);
+		}
+		else if (inputContext == InputContext.SETTING) {
 			esc.addRoleTask(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(r);
@@ -240,9 +259,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(4, ctx.getChildCount());
 		String user = ctx.getChild(1).getText();
 		String task = ctx.getChild(3).getText();
-		UserTask r = new UserTask(user, task);
+		UserTask r = new UserTask(user, task, negation);
 		
-		if (inputContext == InputContext.SETTING) {
+		if (disjunction) {
+		//	disjunction_body.add(r);
+		}
+		else if (inputContext == InputContext.SETTING) {
 			esc.addUserTask(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) { // TODO Switch oder anderes..
 			rule_body.addFact(r);
@@ -258,9 +280,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(4, ctx.getChildCount());
 		String user = ctx.getChild(1).getText();
 		String role = ctx.getChild(3).getText();
-		UserRole r = new UserRole(user, role);
+		UserRole r = new UserRole(user, role, negation);
 		
-		if (inputContext == InputContext.SETTING) {
+		if (disjunction) {
+		//	disjunction_body.add(r);
+		}
+		else if (inputContext == InputContext.SETTING) {
 			esc.addUserRole(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(r);
@@ -276,9 +301,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(3, ctx.getChildCount());
 		String role = ctx.getChild(0).getText();
 		String task = ctx.getChild(2).getText();
-		GLB r = new GLB(role, task);
+		GLB r = new GLB(role, task, negation);
 		
-		if (inputContext == InputContext.SETTING) {
+		if (disjunction) {
+		//	disjunction_body.add(r);
+		}
+		else if (inputContext == InputContext.SETTING) {
 			esc.addGLB(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(r);
@@ -293,9 +321,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(3, ctx.getChildCount());
 		String role = ctx.getChild(0).getText();
 		String task = ctx.getChild(2).getText();
-		LUB r = new LUB(role, task);
+		LUB r = new LUB(role, task, negation);
 		
-		if (inputContext == InputContext.SETTING) {
+		if (disjunction) {
+		//	disjunction_body.add(r);
+		}
+		else if (inputContext == InputContext.SETTING) {
 			esc.addLUB(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(r);
@@ -311,9 +342,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(3, ctx.getChildCount());
 		String role1 = ctx.getChild(0).getText();
 		String role2 = ctx.getChild(2).getText();
-		Dominates r = new Dominates(role1, role2);
+		Dominates r = new Dominates(role1, role2, negation);
 		
-		if (inputContext == InputContext.SETTING) {
+		if (disjunction) {
+		//	disjunction_body.add(r);
+		}
+		else if (inputContext == InputContext.SETTING) {
 				esc.addDominates(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(r);
@@ -329,9 +363,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(5, ctx.getChildCount());
 		String task1 = ctx.getChild(1).getText();
 		String task2 = ctx.getChild(3).getText();
-		CriticalTaskPair r = new CriticalTaskPair(task1, task2);
+		CriticalTaskPair r = new CriticalTaskPair(task1, task2, negation);
 		
-		if (inputContext == InputContext.SETTING) {
+		if (disjunction) {
+		//	disjunction_body.add(r);
+		}
+		else if (inputContext == InputContext.SETTING) {
 				esc.addCriticalTaskPair(r);
 		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(r);
@@ -357,13 +394,14 @@ public class IIListener extends Inter_InstanceBaseListener {
 		case ASSIGNMENT_HEAD : 
 			UserCannotDoRule rule = new UserCannotDoRule();
 			String user = ctx.getChild(0).getText();
-			String taskID = ListenerHelper.getStringForVar();
+			String taskID = ListenerHelper.generateStringForVar();
 			String taskName = ctx.getChild(2).getText();
 			rule.setHead(new CannotDoUser(user, taskID));
-			rule_body.setFirst(new TaskName(taskID, taskName));
+			rule_body.setFirst(new TaskName(taskID, taskName, false));
+			rule_body.setFirst(new TaskEvent(taskID, "completed", false));
 			rule.setBody(rule_body);
 			if (description == null) {
-				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
+				description = ListenerHelper.generateRuleID();
 			}
 			rule.setDescription(description);
 			rc.addUserCannotDoRule(rule);
@@ -384,22 +422,24 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		switch(inputContext) {
 		
-		
 		case ASSIGNMENT_HEAD : 
 			RoleCannotDoRule rule = new RoleCannotDoRule();
 				String user = ctx.getChild(1).getText();
-				String task = ctx.getChild(3).getText();
-				rule.setHead(new CannotDoRole(user, task));
+				String taskID = ListenerHelper.generateStringForVar();
+				String taskName = ctx.getChild(3).getText();
+				rule.setHead(new CannotDoRole(user, taskID));
+				rule_body.setFirst(new TaskName(taskID, taskName, false));
+				rule_body.setFirst(new TaskEvent(taskID, "completed", false));
 				rule.setBody(rule_body);
 			if (description == null) {
-				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
+				description = ListenerHelper.generateRuleID();
 			}
 			rule.setDescription(description);
 			rc.addRoleCannotDoRule(rule);
 			break;
 			
 		case ASSIGNMENT_BODY :
-		default: break;
+		default: System.out.println("Fehler"); System.exit(0); break;
 		}
 		
 	}
@@ -415,11 +455,14 @@ public class IIListener extends Inter_InstanceBaseListener {
 		case ASSIGNMENT_HEAD : 
 			UserMustDoRule rule = new UserMustDoRule();
 				String user = ctx.getChild(0).getText();
-				String task = ctx.getChild(2).getText();
-				rule.setHead(new MustDoUser(user, task));
+				String taskID = ListenerHelper.generateStringForVar();
+				String taskName = ctx.getChild(2).getText();
+				rule.setHead(new MustDoUser(user, taskID));
+				rule_body.setFirst(new TaskName(taskID, taskName, false));
+				rule_body.setFirst(new TaskEvent(taskID, "completed", false));
 				rule.setBody(rule_body);
 			if (description == null) {
-				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
+				description = ListenerHelper.generateRuleID();
 			}
 			rule.setDescription(description);
 			rc.addUserMustDoRule(rule);
@@ -436,17 +479,20 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		logger.info("Exiting Cannot Role Context");
 		
-		lh.checkChildCount(3, ctx.getChildCount());
+		lh.checkChildCount(4, ctx.getChildCount());
 		
 		switch(inputContext) {
 		case ASSIGNMENT_HEAD : 
 			RoleMustDoRule rule = new RoleMustDoRule();
-				String user = ctx.getChild(0).getText();
-				String task = ctx.getChild(2).getText();
-				rule.setHead(new MustDoRole(user, task));
+				String user = ctx.getChild(1).getText();
+				String taskID = ListenerHelper.generateStringForVar();
+				String taskName = ctx.getChild(3).getText();
+				rule.setHead(new MustDoRole(user, taskID));
+				rule_body.setFirst(new TaskName(taskID, taskName, false));
+				rule_body.setFirst(new TaskEvent(taskID, EventHelper.getAsString(EventHelper.EventTypes.COMPLETE), false));
 				rule.setBody(rule_body);
 			if (description == null) {
-				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
+				description = ListenerHelper.generateRuleID();
 			}
 			rule.setDescription(description);
 			rc.addRoleMustDoRule(rule);
@@ -469,7 +515,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		case ASSIGNMENT_HEAD : 
 			PanicRule rule = new PanicRule();
 			if (description == null) {
-				description = "12354"; // TODO Hier über alle Durchgänge eine fortlaufende Nummer
+				description = ListenerHelper.generateRuleID();
 			}
 			rule.setDescription(description);
 			rule.setHead(new Panic());
@@ -492,7 +538,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 	public void exitExecutedUser(Inter_InstanceParser.ExecutedUserContext ctx) {
 		logger.info("Exiting Executed User Context");
 		String user = "";
-		String taskID = ListenerHelper.getStringForVar();
+		String taskID = ListenerHelper.generateStringForVar();
 		String taskName = "";
 		
 		if(ctx.getChildCount() == 3) {
@@ -506,12 +552,15 @@ public class IIListener extends Inter_InstanceBaseListener {
 			System.exit(0);
 		}
 		
-		if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new ExecutedUserStatus(user, taskID));
-			rule_body.addFact(new TaskName(taskID, taskName));
+		if (disjunction) {
+		//	disjunction_body.add(new ExecutedUserStatus(user, taskID, negation));
+		}
+		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new ExecutedUserStatus(user, taskID, negation));
+			rule_body.addFact(new TaskName(taskID, taskName, negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(new ExecutedUserStatus(user, taskID));
-			conditional_body.addFact(new TaskName(taskID, taskName));
+			conditional_body.addFact(new ExecutedUserStatus(user, taskID, negation));
+			conditional_body.addFact(new TaskName(taskID, taskName, negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
 		
 	}
@@ -523,15 +572,18 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(4, ctx.getChildCount());
 		
 		String role = ctx.getChild(1).getText();
-		String taskID = ListenerHelper.getStringForVar();
+		String taskID = ListenerHelper.generateStringForVar();
 		String taskName = ctx.getChild(3).getText();
 		
-		if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new ExecutedGroupStatus(role, taskID));
-			rule_body.addFact(new TaskName(taskID, taskName));
+		if (disjunction) {
+		//	disjunction_body.add(new ExecutedGroupStatus(role, taskID, negation));
+		}
+		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new ExecutedGroupStatus(role, taskID, negation));
+			rule_body.addFact(new TaskName(taskID, taskName, negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(new ExecutedGroupStatus(role, taskID));
-			conditional_body.addFact(new TaskName(taskID, taskName));
+			conditional_body.addFact(new ExecutedGroupStatus(role, taskID, negation));
+			conditional_body.addFact(new TaskName(taskID, taskName, negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
 	}
 	
@@ -542,18 +594,21 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(3, ctx.getChildCount());
 		
 		String user = ctx.getChild(0).getText();
-		String taskID = ListenerHelper.getStringForVar();
+		String taskID = ListenerHelper.generateStringForVar();
 		String taskName = ctx.getChild(2).getText();
 		EventHelper.EventTypes event = EventHelper.EventTypes.ASSIGN;
 		
-		if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new TaskName(taskID, taskName));
-			rule_body.addFact(new ExecutedUserStatus(taskID, user));
-			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		if (disjunction) {
+		//	disjunction_body.add(new TaskName(taskID, taskName, negation));
+		}
+		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new TaskName(taskID, taskName, negation));
+			rule_body.addFact(new ExecutedUserStatus(taskID, user, negation));
+			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(new ExecutedUserStatus(user, taskID));
-			conditional_body.addFact(new TaskName(taskID, taskName));
-			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+			conditional_body.addFact(new ExecutedUserStatus(user, taskID, negation));
+			conditional_body.addFact(new TaskName(taskID, taskName, negation));
+			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
 	}
 
@@ -564,15 +619,18 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(2, ctx.getChildCount());
 		
 		String taskName = ctx.getChild(0).getText();
-		String taskID = ListenerHelper.getStringForVar();
+		String taskID = ListenerHelper.generateStringForVar();
 		EventHelper.EventTypes event = EventHelper.EventTypes.ATE_ABORT;
 		
-		if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new TaskName(taskID, taskName));
-			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		if (disjunction) {
+		//	disjunction_body.add(new TaskName(taskID, taskName, negation));
+		}
+		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new TaskName(taskID, taskName, negation));
+			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(new TaskName(taskID, taskName));
-			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+			conditional_body.addFact(new TaskName(taskID, taskName, negation));
+			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
 	}
 
@@ -583,15 +641,18 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(2, ctx.getChildCount());
 		
 		String taskName = ctx.getChild(0).getText();
-		String taskID = ListenerHelper.getStringForVar();
+		String taskID = ListenerHelper.generateStringForVar();
 		EventHelper.EventTypes event = EventHelper.EventTypes.COMPLETE;
 		
-		if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new TaskName(taskID, taskName));
-			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+		if (disjunction) {
+		//	disjunction_body.add(new Partner(user1, user2, negation));
+		}
+		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new TaskName(taskID, taskName, negation));
+			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(new TaskName(taskID, taskName));
-			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event)));
+			conditional_body.addFact(new TaskName(taskID, taskName, negation));
+			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
 		
 	}
@@ -603,23 +664,26 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(3, ctx.getChildCount());
 		
 		String user1 = ctx.getChild(0).getText();
-		String taskID1 = ListenerHelper.getStringForVar();
-		String taskID2 = ListenerHelper.getStringForVar();
+		String taskID1 = ListenerHelper.generateStringForVar();
+		String taskID2 = ListenerHelper.generateStringForVar();
 		String user2 = ctx.getChild(2).getText();
 		EventHelper.EventTypes event = EventHelper.EventTypes.COMPLETE;
 		
-		if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new UserTask(user1, taskID1));
-			rule_body.addFact(new UserTask(user2, taskID2));
-			rule_body.addFact(new CriticalTaskPair(taskID1, taskID2));
-			rule_body.addFact(new TaskEvent(taskID1, EventHelper.getAsString(event)));
-			rule_body.addFact(new TaskEvent(taskID2, EventHelper.getAsString(event)));
+		if (disjunction) {
+		//	disjunction_body.add(new Partner(user1, user2, negation));
+		}
+		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			rule_body.addFact(new UserTask(user1, taskID1, negation));
+			rule_body.addFact(new UserTask(user2, taskID2, negation));
+			rule_body.addFact(new CriticalTaskPair(taskID1, taskID2, negation));
+			rule_body.addFact(new TaskEvent(taskID1, EventHelper.getAsString(event), negation));
+			rule_body.addFact(new TaskEvent(taskID2, EventHelper.getAsString(event), negation));
 		} else if (inputContext == InputContext.CONDITIONAL_BODY){
-				rule_body.addFact(new UserTask(user1, taskID1));
-				rule_body.addFact(new UserTask(user2, taskID2));
-				rule_body.addFact(new CriticalTaskPair(taskID1, taskID2));
-				rule_body.addFact(new TaskEvent(taskID1, EventHelper.getAsString(event)));
-				rule_body.addFact(new TaskEvent(taskID2, EventHelper.getAsString(event)));
+				rule_body.addFact(new UserTask(user1, taskID1, negation));
+				rule_body.addFact(new UserTask(user2, taskID2, negation));
+				rule_body.addFact(new CriticalTaskPair(taskID1, taskID2, negation));
+				rule_body.addFact(new TaskEvent(taskID1, EventHelper.getAsString(event), negation));
+				rule_body.addFact(new TaskEvent(taskID2, EventHelper.getAsString(event), negation));
 		}  else {System.out.println("Fehler"); System.exit(0);}
 	}
 
@@ -647,7 +711,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(5, ctx.getChildCount());
 		
 		String result = ctx.getChild(4).getText();
-		NumSimple ns = new NumSimple(result);
+		NumSimple ns = new NumSimple(result, negation);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
 	}
@@ -660,7 +724,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		String var = ctx.getChild(1).getText();
 		String result = ctx.getChild(5).getText();
-		NumVars ns = new NumVars(var, result);
+		NumVars ns = new NumVars(var, result, negation);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
 	}
@@ -672,7 +736,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		String var = ctx.getChild(1).getText();
 		String result = ctx.getChild(5).getText();
-		Sum ns = new Sum(var, result);
+		Sum ns = new Sum(var, result, negation);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
 	}
@@ -684,7 +748,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		String var = ctx.getChild(1).getText();
 		String result = ctx.getChild(5).getText();
-		Avg ns = new Avg(var, result);
+		Avg ns = new Avg(var, result, negation);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
 	}
@@ -696,7 +760,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		String var = ctx.getChild(1).getText();
 		String result = ctx.getChild(5).getText();
-		Min ns = new Min(var, result);
+		Min ns = new Min(var, result, negation);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
 	}
@@ -708,7 +772,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		String var = ctx.getChild(1).getText();
 		String result = ctx.getChild(5).getText();
-		Max ns = new Max(var, result);
+		Max ns = new Max(var, result, negation);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
 	}
@@ -716,17 +780,42 @@ public class IIListener extends Inter_InstanceBaseListener {
 	/*
 	 * DISJUNCTION
 	 */
+	
+	@Override
+	public void enterDisjunction(Inter_InstanceParser.DisjunctionContext ctx) {
+		logger.info("Enter Disjunction Context");
+		disjunction = true;
+		disjunction_body = new ArrayList<Fact>();
+	}
+	
 	@Override
 	public void exitDisjunction(Inter_InstanceParser.DisjunctionContext ctx) {
-		// TODO
+		logger.info("Exit Disjunction Context");
+		disjunction = false;
+		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+		//	rule_body.addFact(new Disjunction(disjunction_body));
+		} else if (inputContext == InputContext.CONDITIONAL_BODY) {
+			//conditional_body.addFact(new Disjunction(disjunction_body));
+		} else {
+			System.out.println("Problem bei Exit Disjunction");
+			System.exit(0);
+		}
 	}
 	
 	/*
 	 * NEGATION
 	 */
+	
+	@Override
+	public void enterNegation(Inter_InstanceParser.NegationContext ctx) {
+		logger.info("Enter Negation Context");
+		negation = true;
+	}
+	
 	@Override
 	public void exitNegation(Inter_InstanceParser.NegationContext ctx) {
-		// TODO
+		logger.info("Exit Negation Context");
+		negation = false;
 	}
 
 }

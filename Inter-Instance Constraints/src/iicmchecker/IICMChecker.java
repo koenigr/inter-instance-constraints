@@ -13,7 +13,6 @@ import iicmchecker.constraintReader.IIListener;
 import iicmchecker.constraintReader.Inter_InstanceLexer;
 import iicmchecker.constraintReader.Inter_InstanceParser;
 import iicmchecker.logging.LoggerFactory;
-import iicmchecker.logtransformer.LogCreator;
 import iicmchecker.logtransformer.LogParser;
 import iicmchecker.logtransformer.LogTransformer;
 import iicmchecker.storage.StorageHelper;
@@ -114,13 +113,6 @@ private void parseLogFiles() {
 for (String logfile : logfiles) {
 
 try {
-/*
-* Create some test logs		
- */
-// TODO der LogCreator muss hier später raus, weil er nichts mit dem Programm zu tun hat
-LogCreator lcreator = new LogCreator(loglocation, logfile);
-lcreator.createLog();
-
 
 /*
 * Parse logs

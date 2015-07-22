@@ -10,12 +10,9 @@ public class CannotDoUser extends Fact{
 	/*
 	 * user_cannot_execute(UT,TT)
 	 */
-	public CannotDoUser() {
-		super(NAME , NUMBER_OF_ARGUMENTS);
-	}
 
 	public CannotDoUser(String user, String task) {
-		super(NAME , NUMBER_OF_ARGUMENTS);
+		super(NAME , NUMBER_OF_ARGUMENTS, false);
 		setArgument(0, user);
 		setArgument(1, task);
 	}

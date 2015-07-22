@@ -14,12 +14,9 @@ public class Timestamp extends Fact {
 	/*
 	 * timestamp(TID, Timestamp)
 	 */
-	public Timestamp() {
-		super("timestamp", NUMBER_OF_ARGUMENTS);
-	}
 	
-	public Timestamp(String taskID, Date timestamp) {
-		super("timestamp", NUMBER_OF_ARGUMENTS);
+	public Timestamp(String taskID, Date timestamp, boolean neg) {
+		super("timestamp", NUMBER_OF_ARGUMENTS, neg);
 		
 		long ms = timestamp.getTime();
 			

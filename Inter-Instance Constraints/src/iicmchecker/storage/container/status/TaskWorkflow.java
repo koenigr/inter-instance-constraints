@@ -10,12 +10,9 @@ public class TaskWorkflow extends Fact{
 	/*
 	 * task_workflow(TT,WID)
 	 */
-	public TaskWorkflow() {
-		super( NAME, NUMBER_OF_ARGUMENTS);
-	}
 
-	public TaskWorkflow(String taskID, String workflowID) {
-		super( NAME, NUMBER_OF_ARGUMENTS);
+	public TaskWorkflow(String taskID, String workflowID, boolean neg) {
+		super( NAME, NUMBER_OF_ARGUMENTS, neg);
 		setArgument(0, taskID);
 		setArgument(1, workflowID);
 	}

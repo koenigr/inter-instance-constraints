@@ -27,7 +27,7 @@ public abstract class Rule {
 		System.out.println(description);
 		String result;
 		result = head.getAsString() + " :- "
-				+ body.getAsString() + ","
+				+ body.getAsString()
 				+ "write(Stream, '\n')";
 		for (String e : description) {
 			result += ", write(Stream, '" + description.get(0) + "\n')";

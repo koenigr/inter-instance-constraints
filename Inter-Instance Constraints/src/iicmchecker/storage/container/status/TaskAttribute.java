@@ -13,8 +13,8 @@ public class TaskAttribute extends Fact{
 	/*
 	 * String_var(TT, AttrName, AttrType, AttrValue)
 	 */
-	public TaskAttribute(AttrType at) {
-		super(NAME, NUMBER_OF_ARGUMENTS);
+	public TaskAttribute(AttrType at, boolean neg) {
+		super(NAME, NUMBER_OF_ARGUMENTS, neg);
 		switch(at) {
 		case STRING: setArgument(2, "string"); break;
 		case NUMBER: setArgument(2, "number"); break;
@@ -23,16 +23,16 @@ public class TaskAttribute extends Fact{
 		}
 	}
 
-	public TaskAttribute(String taskID, String attrName, String attrValue) {
-		super(NAME, NUMBER_OF_ARGUMENTS);
+	public TaskAttribute(String taskID, String attrName, String attrValue, boolean neg) {
+		super(NAME, NUMBER_OF_ARGUMENTS, neg);
 		setArgument(0, taskID);
 		setArgument(1, attrName);
 		setArgument(2, "'string'");
 		setArgument(3, "'" + attrValue + "'");
 	}
 	
-	public TaskAttribute(String taskID, String attrName, Integer attrValue) {
-		super(NAME, NUMBER_OF_ARGUMENTS);
+	public TaskAttribute(String taskID, String attrName, Integer attrValue, boolean neg) {
+		super(NAME, NUMBER_OF_ARGUMENTS, neg);
 		setArgument(0, taskID);
 		setArgument(1, attrName);
 		setArgument(2, "'number'");

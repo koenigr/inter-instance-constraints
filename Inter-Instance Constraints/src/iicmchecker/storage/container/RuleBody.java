@@ -30,7 +30,7 @@ public class RuleBody {
 			String fact = f.getAsString();
 			bodyStr = bodyStr.concat(fact + ",");
 		}
-		bodyStr = bodyStr.substring(0, bodyStr.length() - 1);
+		// bodyStr = bodyStr.substring(0, bodyStr.length() - 1);
 		return bodyStr;
 	}
 	

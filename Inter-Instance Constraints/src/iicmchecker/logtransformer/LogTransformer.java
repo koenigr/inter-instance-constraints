@@ -66,32 +66,32 @@ public class LogTransformer {
 					
 					if (group != null && taskID != null) {
 					  sc.addExecutedGroupStatus(
-					    new ExecutedGroupStatus(group, taskID));
+					    new ExecutedGroupStatus(group, taskID, false));
 					}
 					
 					if (user != null && taskID != null) {
 					  sc.addExecutedUserStatus(
-					    new ExecutedUserStatus(user, taskID));
+					    new ExecutedUserStatus(user, taskID, false));
 					}
 					
 					if (timestamp != null && taskID != null) {	
-					  sc.addTimestamp(new Timestamp(taskID, timestamp));
+					  sc.addTimestamp(new Timestamp(taskID, timestamp, false));
 					}
 					
 					if (name != null && taskID != null) {
-					  sc.addTaskName(new TaskName(taskID, name));
+					  sc.addTaskName(new TaskName(taskID, name, false));
 					}
 
 					if (eventType != null && taskID != null) {
-					  sc.addTaskEvent(new TaskEvent(taskID, eventType));
+					  sc.addTaskEvent(new TaskEvent(taskID, eventType, false));
 					}
 					
 					if (workflowID != null && taskID != null) {
-					  sc.addTaskWorkflow(new TaskWorkflow(taskID, workflowID));
+					  sc.addTaskWorkflow(new TaskWorkflow(taskID, workflowID, false));
 					}
 					
 					if (workflowID != null && workflowname != null) {
-					  sc.addWorkflowName(new WorkflowName(workflowID, workflowname));
+					  sc.addWorkflowName(new WorkflowName(workflowID, workflowname, false));
 					}
 					
 					for(DataAttribute a : entry.getMetaAttributes()) {
@@ -101,9 +101,9 @@ public class LogTransformer {
 						boolean b = StringChecker.isValidNumber(val);
 
 						if (b) {
-							sc.addTaskAttribute(new TaskAttribute(taskID, attrName, Integer.valueOf(val)));
+							sc.addTaskAttribute(new TaskAttribute(taskID, attrName, Integer.valueOf(val), false));
 						} else {
-							sc.addTaskAttribute(new TaskAttribute(taskID, attrName, val ));
+							sc.addTaskAttribute(new TaskAttribute(taskID, attrName, val, false));
 						}
 						
 						

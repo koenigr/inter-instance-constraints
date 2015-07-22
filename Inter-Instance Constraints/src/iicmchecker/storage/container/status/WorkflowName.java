@@ -10,12 +10,9 @@ public class WorkflowName extends Fact{
 	/*
 	 * workflowName( WID, WName)
 	 */
-	public WorkflowName() {
-		super(NAME, NUMBER_OF_ARGUMENTS);
-	}
 
-	public WorkflowName(String workflowID, String workflowname) {
-		super(NAME, NUMBER_OF_ARGUMENTS);
+	public WorkflowName(String workflowID, String workflowname, boolean neg) {
+		super(NAME, NUMBER_OF_ARGUMENTS, neg);
 		setArgument(0, workflowID);
 		setArgument(1, workflowname);
 	}

@@ -12,7 +12,7 @@ public class EventHelper {
 		case ASSIGN		:    return "'assigned'"; 
 		case ATE_ABORT	:    return "'aborted'"; 
 	    case AUTOSKIP	:    return "'skipped'";
-	    case COMPLETE	:    return "'completed'";
+	    case COMPLETE	:    return "'complete'";
 	    case MANUAL_SKIP:    return "'skipped'";
 	    case PI_ABORT	:    return "'aborted'";
 	    case REASSIGN	:    return "'reassigned'"; 

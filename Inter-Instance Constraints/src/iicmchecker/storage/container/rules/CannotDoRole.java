@@ -10,12 +10,9 @@ public class CannotDoRole extends Fact{
 	/*
 	 * role_cannot_execute(RT,TT)
 	 */
-	public CannotDoRole() {
-		super(NAME, NUMBER_OF_ARGUMENTS);
-	}
 
 	public CannotDoRole(String user, String task) {
-		super(NAME, NUMBER_OF_ARGUMENTS);
+		super(NAME, NUMBER_OF_ARGUMENTS, false);
 		setArgument(0,user);
 		setArgument(1, task);
 	}

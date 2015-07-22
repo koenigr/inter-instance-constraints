@@ -10,7 +10,7 @@ public class Panic extends Fact {
 	 * illegal_execution
 	 */
 	public Panic() {
-		super("illegal_execution", NUMBER_OF_ARGUMENTS);
+		super("illegal_execution", NUMBER_OF_ARGUMENTS, false);
 	}
 
 	@Override

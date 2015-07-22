@@ -13,12 +13,12 @@ private static String[] rulefiles = {
 				"IntraInstance_hierarchical" , "InterInstance_hierarchical", 
 				"InterProcess_hierarchical", "IntraInstance_nonhierarchical",
 			    "InterInstance_nonhierarchical", "InterProcess_nonhierarchical",
-			    "negationrules"
+			    "negationrules", "rules", "orrules"
 };*/
 
-private static String[] rulefiles = {"rule", "negationrules", "orrules"};
+private static String[] rulefiles = {"concrete"};
 private static String loglocation = "logfiles";
-private static String[] logfiles = {"logfile1"};
+private static String[] logfiles = {"logfile"};
 private static String outputlocation = "prologfiles";
 /*
  * severe Grundlegender Ablauf

@@ -13,16 +13,20 @@ public abstract class Fact{
 	protected String[] arguments;
 	protected String predicate;
 	protected int numberOfArguments = 0;
+	protected boolean negation = false;
 
 	Logger logger = LoggerFactory.getLogger();
 	
-	public Fact(String predicate, int numberOfArguments) { 
+	public Fact(String predicate, int numberOfArguments, boolean neg) { 
 		
 		logger.info("Creating new predicate " + predicate);
 		/*
 		 *  TODO den String noch allerlei testen
 		 *  ob nur kleinschreibung und _ 
 		 */
+		
+		negation = neg;
+		
 		if(!StringChecker.isValidPredicate(predicate)) {
 			new InvalidPredicateFormatException(predicate);
 		}
@@ -52,6 +56,7 @@ public abstract class Fact{
 	public String getArgument(int pos) {
 		return arguments[pos];
 	}
+	
 
 	public String getAsString() {
 		// TODO testen, ob alles gesetzt wurde
@@ -69,7 +74,11 @@ public abstract class Fact{
 			result = result.substring(0, result.length()-1);
 			result += ")";
 		}
-				
+		
+		if(negation) {
+			result = "not(" + result + ")";
+		}
+		
 		return result;
 	}
 }

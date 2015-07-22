@@ -10,14 +10,22 @@ public class MustDoRole extends Fact{
 	/*
 	 * role_must_execute(RT,TT)
 	 */
-	public MustDoRole() {
-		super(NAME, NUMBER_OF_ARGUMENTS);
-	}
 
-	public MustDoRole(String user, String task) {
-		super(NAME, NUMBER_OF_ARGUMENTS);
-		setArgument(0, user);
+	public MustDoRole(String role, String task) {
+		super(NAME, NUMBER_OF_ARGUMENTS, false);
+		setArgument(0, role);
 		setArgument(1, task);
 	}
 
+	@Override
+	public String getAsString() {
+		String result;
+		result = predicate;
+		result += "(Stream,";
+		result +=  arguments[0];
+		result += ",";
+		result +=  arguments[1];
+		result += ")";	
+		return result;
+	}
 }

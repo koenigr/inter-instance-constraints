@@ -13,8 +13,8 @@ import iicmchecker.storage.container.ConditionalBody;
 import iicmchecker.utils.StringChecker;
 
 public abstract class Conditional extends Fact{
-	public Conditional(String predicate, int numberOfArguments) {
-		super(predicate, numberOfArguments);
+	public Conditional(String predicate, int numberOfArguments, boolean neg) {
+		super(predicate, numberOfArguments, neg);
 		// TODO Auto-generated constructor stub
 	}
 
