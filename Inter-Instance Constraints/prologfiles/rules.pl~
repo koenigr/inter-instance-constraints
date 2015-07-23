@@ -1,2 +1,4 @@
 % Rules
-user_cannot_execute(C,GENERATED2) :-  task_name(GENERATED2,'pay'),user_executed(A,GENERATED1),task_name(GENERATED1,'check'),related(A,C),write(Stream, 'null').
+role_must_execute(role,must execute) :-  write(Stream, '
+'), write(Stream, '12354
+').

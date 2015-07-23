@@ -1,4 +1,35 @@
-% exetuted_u status facts
-executed_user('Mark',0).
-executed_user('Susi',1).
-task_name(asd,asd).
+% executed_u status facts
+user_executed('Mark',0).
+user_executed('Mark',1).
+user_executed('Susi',2).
+user_executed('Susi',3).
+% executed_g status facts
+role_executed('Manager', 29.
+% task names 
+task_name(0,'Antrag empfangen').
+task_name(1,'Antrag empfangen').
+task_name(2,'Antrag prüfen').
+task_name(3,'Antrag prüfen').
+% event types 
+task_name(0,'start').
+task_name(1,'complete').
+task_name(2,'complete').
+task_name(3,'complete').
+% timestamps
+timestamp(0,499161600000).
+timestamp(1,1445405280000).
+timestamp(2,499136600000).
+timestamp(3,499461600000).
+% task workflow facts
+task_workflow(0,0).
+task_workflow(1,0).
+task_workflow(2,0).
+task_workflow(3,0).
+% workflow names facts
+workflow_name(0,0).
+workflow_name(0,0).
+workflow_name(0,0).
+workflow_name(0,0).
+% task attributes
+attribute(0,'Kreditwunsch','number',50000).
+attribute(1,'Kreditwunsch','number',50000).
