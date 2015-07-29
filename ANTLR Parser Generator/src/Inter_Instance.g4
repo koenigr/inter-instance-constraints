@@ -204,7 +204,7 @@ tp 		:DATETIME
 		| TIME		
 		{ph.checkTime($TIME.text);}									# time
 		| '(' tp ADD ts ')'    										# relativeTimepoint
-		| tt  TIMESTAMP											# timestamp
+		| 'timestamp of' tt										    # timestamp
 		| VARIABLE 													# varTP
 		; 
 		
@@ -212,7 +212,7 @@ tp 		:DATETIME
 ts		: TIMEINTERVAL		
 		{ph.checkTimeInterval($TIMEINTERVAL.text);}					# absoluteInterval
 		| '(' tp SUB tp ')'											# timedifference
-		| 'timeinterval(' tt ',' tt ')'								# timeinterval
+		| 'timeinterval of' tt 'and' tt 							# timeinterval
 		| VARIABLE													# varTS
 		; 
 	

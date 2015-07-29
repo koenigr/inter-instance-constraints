@@ -1,0 +1,9 @@
+7  [Mark,Mark,Susi,Mark,Mark,Mark,Susi]
+7  [Mark,Mark,Susi,Mark,Mark,Mark,Susi]
+7  [Mark,Mark,Susi,Mark,Mark,Mark,Susi]
+7  [Antrag empfangen,Antrag prüfen 1,Vertrag vorbereiten,Antrag empfangen,Antrag prüfen 1,Antrag prüfen 2,Vertrag vorbereiten]
+7  [Mark,Mark,Susi,Mark,Mark,Mark,Susi]
+7  [Antrag empfangen,Antrag prüfen 1,Vertrag vorbereiten,Antrag empfangen,Antrag prüfen 1,Antrag prüfen 2,Vertrag vorbereiten]
+4  [Mark,Susi,Mark,Susi]
+4  [Mark,Susi,Mark,Susi]
+4  [Mark,Susi,Mark,Susi]was für ein Mist

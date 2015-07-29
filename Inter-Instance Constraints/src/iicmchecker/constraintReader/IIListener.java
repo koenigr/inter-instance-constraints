@@ -82,6 +82,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 	
 	private ConditionalBody conditional_body;
 	
+	private enum VarType {NOTNUM, TIMESTAMP_VAR, TIMESTAMP, TIMEINTERVAL_VAR, 
+		TIMEINTERVAL, NUM_VAR, STRING_VAR};
+	
+	private VarType varType = VarType.NOTNUM;
+	
 	private ArrayList<Fact> negation_body; // TODO es vielleicht doch so machen?
 	
 	private ArrayList<Fact> disjunction_body;
@@ -718,14 +723,24 @@ public class IIListener extends Inter_InstanceBaseListener {
 		}
 		
 		if (disjunction) {
-		//	disjunction_body.add(new ExecutedUserStatus(user, taskID, negation));
+		//TODO	disjunction_body.add(new ExecutedUserStatus(user, taskID, negation));
 		}
 		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(new ExecutedUserStatus(user, taskID, negation));
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			rule_body.addFact(new TaskName(taskID, taskName, negation));
 			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), false));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
 			conditional_body.addFact(new ExecutedUserStatus(user, taskID, negation));
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				conditional_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			conditional_body.addFact(new TaskName(taskID, taskName, negation));
 			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), false));
 		} else {System.out.println("Fehler"); System.exit(0);}
@@ -751,9 +766,19 @@ public class IIListener extends Inter_InstanceBaseListener {
 		}
 		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			rule_body.addFact(new ExecutedGroupStatus(role, taskID, negation));
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			rule_body.addFact(new TaskName(taskID, taskName, negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
 			conditional_body.addFact(new ExecutedGroupStatus(role, taskID, negation));
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			conditional_body.addFact(new TaskName(taskID, taskName, negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
 	}
@@ -777,11 +802,21 @@ public class IIListener extends Inter_InstanceBaseListener {
 		//	disjunction_body.add(new TaskName(taskID, taskName, negation));
 		}
 		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			rule_body.addFact(new TaskName(taskID, taskName, negation));
 			rule_body.addFact(new ExecutedUserStatus(taskID, user, negation));
 			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
 			conditional_body.addFact(new ExecutedUserStatus(user, taskID, negation));
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			conditional_body.addFact(new TaskName(taskID, taskName, negation));
 			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
@@ -805,9 +840,19 @@ public class IIListener extends Inter_InstanceBaseListener {
 		//	disjunction_body.add(new TaskName(taskID, taskName, negation));
 		}
 		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			rule_body.addFact(new TaskName(taskID, taskName, negation));
 			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			conditional_body.addFact(new TaskName(taskID, taskName, negation));
 			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
@@ -831,9 +876,19 @@ public class IIListener extends Inter_InstanceBaseListener {
 		//	disjunction_body.add(new Partner(user1, user2, negation));
 		}
 		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			rule_body.addFact(new TaskName(taskID, taskName, negation));
 			rule_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
+			if(ruleContext == RuleContext.INTERINSTANCE) {
+				String workflowID = taskName.split("\\.")[1];
+				taskName = taskName.split("\\.")[0];
+				rule_body.addFact(new TaskWorkflow(taskID, workflowID, false));
+			}
 			conditional_body.addFact(new TaskName(taskID, taskName, negation));
 			conditional_body.addFact(new TaskEvent(taskID, EventHelper.getAsString(event), negation));
 		} else {System.out.println("Fehler"); System.exit(0);}
@@ -1016,8 +1071,11 @@ public class IIListener extends Inter_InstanceBaseListener {
 	public void exitEqualityExpr(Inter_InstanceParser.EqualityExprContext ctx) {
 		logger.info("Exit Equality Expression");
 		lh.checkChildCount(3, ctx.getChildCount());
+		
 		String left = ctx.getChild(0).getText();
 		String right = ctx.getChild(2).getText();
+		
+		
 		
 		if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			if (ctx.getChild(1).getText().equals("=")) {
@@ -1054,6 +1112,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String left = ctx.getChild(0).getText();
 		String right = ctx.getChild(2).getText();
 		
+
+		switch(varType) {
+		case TIMEINTERVAL_VAR: System.out.println("ja");
+		default: System.out.println("Ne");
+		}
+			
 		if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			if (ctx.getChild(1).getText().equals("<")) {
 				System.out.println("kleiner");
@@ -1105,6 +1169,16 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitArithmetic(Inter_InstanceParser.ArithmeticContext ctx) {
 		
+	}
+	
+	@Override
+	public void enterTimestamp(Inter_InstanceParser.TimestampContext ctx) {
+		varType = VarType.TIMESTAMP_VAR;
+	}
+	
+	@Override
+	public void exitTimestamp(Inter_InstanceParser.TimestampContext ctx) {
+		varType = VarType.NOTNUM;
 	}
 	
 	@Override

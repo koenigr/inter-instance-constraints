@@ -1,4 +1,4 @@
 % Rules
-role_must_execute(role,must execute) :-  write(Stream, '
-'), write(Stream, '12354
+illegal_execution(Stream) :-  count(Task,(user_executed(User,GENERATED1),task_workflow(GENERATED1,ID),task_name(GENERATED1,Task),task_event(GENERATED1,'start')),N),N > 2,task_workflow(GENERATED1,GENERATED3),workflow_name(GENERATED3,GENERATED2),write(Stream, '
+'), write(Stream, 'RULEID1
 ').

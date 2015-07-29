@@ -37,7 +37,6 @@ public abstract class Rule {
 	}
 
 	public void setDescription(String desc) {
-		// TODO vielleicht die Wörter ganz lassen
 		int partitionSize = 80;
 		desc = desc.replaceAll("[\'\n]", "");
 

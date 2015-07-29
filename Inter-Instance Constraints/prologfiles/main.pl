@@ -114,19 +114,26 @@ addrelated :- related(A,B), related(B,C), asserta(related(A,C)).
 %
 
 % count TODO Count/3 sollte nur verschiedene Lösungen für x finden, count/2 findet ALLE Lösungen für P
-count(X, P,N) :- findall(X, P, L),
-	length(L,N),
-	open('results.txt', append, Stream),
-	write(Stream, N),
-	tab(Stream, 2),
-	write(Stream, L),
-	nl(Stream),
-	close(Stream).
+count(X, P,N) :- 
+	write('Starting count/3 '),
+	findall(X, P, L),
+	sort(L, L2),
+	compress(L2, ResList),
+	length(ResList,N),
+	write(N),
+	tab(2),
+	write(ResList),
+	nl.
 
-count(P,N).
+count(P,N):- 
+        findall(1,P,L),
+        length(L,N).
 
-sumlist([ ], 0).
-sumlist([H | Rest], Total) :- sumlist(Rest, S), Total is (S + H) .
+compress([],[]).
+compress([X],[X]).
+compress([X,X|Xs],Zs) :- compress([X|Xs],Zs).
+compress([X,Y|Ys],[X|Zs]) :- X \= Y, compress([Y|Ys],Zs).
+
 
 % sum
 sum(X,P,N) :- findall(X, P, L),
@@ -138,6 +145,8 @@ sum(X,P,N) :- findall(X, P, L),
 	nl(Stream),
 	close(Stream).
 
+sumlist([ ], 0).
+sumlist([H | Rest], Total) :- sumlist(Rest, S), Total is (S + H) .
 
 % avg
 avg(X,P,N) :- findall(X,P,List),
