@@ -673,25 +673,85 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNt(Inter_InstanceParser.NtContext ctx) { }
+	@Override public void enterNum(Inter_InstanceParser.NumContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNt(Inter_InstanceParser.NtContext ctx) { }
+	@Override public void exitNum(Inter_InstanceParser.NumContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSt(Inter_InstanceParser.StContext ctx) { }
+	@Override public void enterVar(Inter_InstanceParser.VarContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSt(Inter_InstanceParser.StContext ctx) { }
+	@Override public void exitVar(Inter_InstanceParser.VarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArithm(Inter_InstanceParser.ArithmContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArithm(Inter_InstanceParser.ArithmContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNum_var(Inter_InstanceParser.Num_varContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNum_var(Inter_InstanceParser.Num_varContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStr_var(Inter_InstanceParser.Str_varContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStr_var(Inter_InstanceParser.Str_varContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVar1(Inter_InstanceParser.Var1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVar1(Inter_InstanceParser.Var1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNum1(Inter_InstanceParser.Num1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNum1(Inter_InstanceParser.Num1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -841,121 +901,37 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEqual(Inter_InstanceParser.EqualContext ctx) { }
+	@Override public void enterEquality(Inter_InstanceParser.EqualityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEqual(Inter_InstanceParser.EqualContext ctx) { }
+	@Override public void exitEquality(Inter_InstanceParser.EqualityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNoteual(Inter_InstanceParser.NoteualContext ctx) { }
+	@Override public void enterInequality(Inter_InstanceParser.InequalityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNoteual(Inter_InstanceParser.NoteualContext ctx) { }
+	@Override public void exitInequality(Inter_InstanceParser.InequalityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLower(Inter_InstanceParser.LowerContext ctx) { }
+	@Override public void enterArithmetic(Inter_InstanceParser.ArithmeticContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLower(Inter_InstanceParser.LowerContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterLeq(Inter_InstanceParser.LeqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLeq(Inter_InstanceParser.LeqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGreater(Inter_InstanceParser.GreaterContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGreater(Inter_InstanceParser.GreaterContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterGeq(Inter_InstanceParser.GeqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitGeq(Inter_InstanceParser.GeqContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterMul(Inter_InstanceParser.MulContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMul(Inter_InstanceParser.MulContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDiv(Inter_InstanceParser.DivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDiv(Inter_InstanceParser.DivContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAdd(Inter_InstanceParser.AddContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAdd(Inter_InstanceParser.AddContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSub(Inter_InstanceParser.SubContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSub(Inter_InstanceParser.SubContext ctx) { }
+	@Override public void exitArithmetic(Inter_InstanceParser.ArithmeticContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

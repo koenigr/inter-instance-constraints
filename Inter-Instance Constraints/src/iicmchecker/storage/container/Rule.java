@@ -30,7 +30,7 @@ public abstract class Rule {
 				+ body.getAsString()
 				+ "write(Stream, '\n')";
 		for (String e : description) {
-			result += ", write(Stream, '" + description.get(0) + "\n')";
+			result += ", write(Stream, '" + e + "\n')";
 		}
 		result += 	 ".\n";
 		return result;

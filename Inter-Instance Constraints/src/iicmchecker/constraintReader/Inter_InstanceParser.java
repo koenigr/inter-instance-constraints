@@ -480,7 +480,7 @@ public class Inter_InstanceParser extends Parser {
 			match(IF);
 			setState(137);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__6) | (1L << T__8) | (1L << T__13) | (1L << T__22) | (1L << T__25) | (1L << T__27) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__34) | (1L << T__36) | (1L << NEG))) != 0) || ((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (TIMEINTERVAL - 72)) | (1L << (DATETIME - 72)) | (1L << (DATE - 72)) | (1L << (TIME - 72)) | (1L << (CONSTANT - 72)) | (1L << (VARIABLE - 72)) | (1L << (CLAUSE - 72)) | (1L << (NUMBER - 72)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__6) | (1L << T__8) | (1L << T__13) | (1L << T__22) | (1L << T__25) | (1L << T__27) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << NEG))) != 0) || ((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (TIMEINTERVAL - 72)) | (1L << (DATETIME - 72)) | (1L << (DATE - 72)) | (1L << (TIME - 72)) | (1L << (CONSTANT - 72)) | (1L << (VARIABLE - 72)) | (1L << (CLAUSE - 72)) | (1L << (NUMBER - 72)))) != 0)) {
 				{
 				setState(136);
 				assignmentBody();
@@ -2292,6 +2292,12 @@ public class Inter_InstanceParser extends Parser {
 		public UtContext ut(int i) {
 			return getRuleContext(UtContext.class,i);
 		}
+		public List<StContext> st() {
+			return getRuleContexts(StContext.class);
+		}
+		public StContext st(int i) {
+			return getRuleContext(StContext.class,i);
+		}
 		public EqualityExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2310,7 +2316,7 @@ public class Inter_InstanceParser extends Parser {
 		EqualityExprContext _localctx = new EqualityExprContext(_ctx, getState());
 		enterRule(_localctx, 38, RULE_equalityExpr);
 		try {
-			setState(402);
+			setState(406);
 			switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
@@ -2400,6 +2406,17 @@ public class Inter_InstanceParser extends Parser {
 				ut();
 				}
 				break;
+			case 9:
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(402);
+				st();
+				setState(403);
+				equality();
+				setState(404);
+				st();
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -2445,6 +2462,12 @@ public class Inter_InstanceParser extends Parser {
 		public TsContext ts(int i) {
 			return getRuleContext(TsContext.class,i);
 		}
+		public List<StContext> st() {
+			return getRuleContexts(StContext.class);
+		}
+		public StContext st(int i) {
+			return getRuleContext(StContext.class,i);
+		}
 		public InequalityExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2463,61 +2486,72 @@ public class Inter_InstanceParser extends Parser {
 		InequalityExprContext _localctx = new InequalityExprContext(_ctx, getState());
 		enterRule(_localctx, 40, RULE_inequalityExpr);
 		try {
-			setState(424);
+			setState(432);
 			switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(404);
+				setState(408);
 				match(VARIABLE);
-				setState(405);
+				setState(409);
 				inequality();
-				setState(406);
+				setState(410);
 				match(VARIABLE);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(408);
+				setState(412);
 				nt();
-				setState(409);
+				setState(413);
 				inequality();
-				setState(410);
+				setState(414);
 				nt();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(412);
+				setState(416);
 				rt();
-				setState(413);
+				setState(417);
 				inequality();
-				setState(414);
+				setState(418);
 				rt();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(416);
+				setState(420);
 				tp();
-				setState(417);
+				setState(421);
 				inequality();
-				setState(418);
+				setState(422);
 				tp();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(420);
+				setState(424);
 				ts();
-				setState(421);
+				setState(425);
 				inequality();
-				setState(422);
+				setState(426);
 				ts();
+				}
+				break;
+			case 6:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(428);
+				st();
+				setState(429);
+				inequality();
+				setState(430);
+				st();
 				}
 				break;
 			}
@@ -2555,7 +2589,7 @@ public class Inter_InstanceParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(426);
+			setState(434);
 			match(EVENTTYPE);
 			}
 		}
@@ -2592,7 +2626,7 @@ public class Inter_InstanceParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(428);
+			setState(436);
 			match(CONSTANT);
 			}
 		}
@@ -2631,7 +2665,7 @@ public class Inter_InstanceParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(430);
+			setState(438);
 			_la = _input.LA(1);
 			if ( !(_la==CONSTANT || _la==VARIABLE) ) {
 			_errHandler.recoverInline(this);
@@ -2679,37 +2713,37 @@ public class Inter_InstanceParser extends Parser {
 		RtContext _localctx = new RtContext(_ctx, getState());
 		enterRule(_localctx, 48, RULE_rt);
 		try {
-			setState(440);
+			setState(448);
 			switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(432);
+				setState(440);
 				match(CONSTANT);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(433);
+				setState(441);
 				match(VARIABLE);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(434);
+				setState(442);
 				ut();
-				setState(435);
+				setState(443);
 				match(ROLE);
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(437);
+				setState(445);
 				tt();
-				setState(438);
+				setState(446);
 				match(ROLE);
 				}
 				break;
@@ -2757,12 +2791,12 @@ public class Inter_InstanceParser extends Parser {
 		TtContext _localctx = new TtContext(_ctx, getState());
 		enterRule(_localctx, 50, RULE_tt);
 		try {
-			setState(451);
+			setState(459);
 			switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(442);
+				setState(450);
 				((TtContext)_localctx).intra = intra();
 				 
 									if (context == Context.UNKNOWN) {
@@ -2778,7 +2812,7 @@ public class Inter_InstanceParser extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(445);
+				setState(453);
 				((TtContext)_localctx).inter = inter();
 				 
 									if (context == Context.UNKNOWN) {
@@ -2794,7 +2828,7 @@ public class Inter_InstanceParser extends Parser {
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(448);
+				setState(456);
 				((TtContext)_localctx).interp = interp();
 				 
 									if (context == Context.UNKNOWN) {
@@ -2844,7 +2878,7 @@ public class Inter_InstanceParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(453);
+			setState(461);
 			_la = _input.LA(1);
 			if ( !(_la==CONSTANT || _la==VARIABLE) ) {
 			_errHandler.recoverInline(this);
@@ -2894,16 +2928,16 @@ public class Inter_InstanceParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(455);
+			setState(463);
 			_la = _input.LA(1);
 			if ( !(_la==CONSTANT || _la==VARIABLE) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
 			}
-			setState(456);
+			setState(464);
 			match(T__33);
-			setState(457);
+			setState(465);
 			_la = _input.LA(1);
 			if ( !(_la==CONSTANT || _la==VARIABLE) ) {
 			_errHandler.recoverInline(this);
@@ -2953,25 +2987,25 @@ public class Inter_InstanceParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(459);
+			setState(467);
 			_la = _input.LA(1);
 			if ( !(_la==CONSTANT || _la==VARIABLE) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
 			}
-			setState(460);
+			setState(468);
 			match(T__33);
-			setState(461);
+			setState(469);
 			_la = _input.LA(1);
 			if ( !(_la==CONSTANT || _la==VARIABLE) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
 			}
-			setState(462);
+			setState(470);
 			match(T__33);
-			setState(463);
+			setState(471);
 			_la = _input.LA(1);
 			if ( !(_la==CONSTANT || _la==VARIABLE) ) {
 			_errHandler.recoverInline(this);
@@ -2992,8 +3026,56 @@ public class Inter_InstanceParser extends Parser {
 	}
 
 	public static class NtContext extends ParserRuleContext {
+		public NtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_nt; }
+	 
+		public NtContext() { }
+		public void copyFrom(NtContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class NumContext extends NtContext {
 		public TerminalNode NUMBER() { return getToken(Inter_InstanceParser.NUMBER, 0); }
+		public NumContext(NtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterNum(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitNum(this);
+		}
+	}
+	public static class VarContext extends NtContext {
 		public TerminalNode VARIABLE() { return getToken(Inter_InstanceParser.VARIABLE, 0); }
+		public VarContext(NtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterVar(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitVar(this);
+		}
+	}
+	public static class Num_varContext extends NtContext {
+		public TtContext tt() {
+			return getRuleContext(TtContext.class,0);
+		}
+		public TerminalNode CONSTANT() { return getToken(Inter_InstanceParser.CONSTANT, 0); }
+		public Num_varContext(NtContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterNum_var(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitNum_var(this);
+		}
+	}
+	public static class ArithmContext extends NtContext {
 		public List<NtContext> nt() {
 			return getRuleContexts(NtContext.class);
 		}
@@ -3003,21 +3085,14 @@ public class Inter_InstanceParser extends Parser {
 		public ArithmeticContext arithmetic() {
 			return getRuleContext(ArithmeticContext.class,0);
 		}
-		public TtContext tt() {
-			return getRuleContext(TtContext.class,0);
-		}
-		public TerminalNode CONSTANT() { return getToken(Inter_InstanceParser.CONSTANT, 0); }
-		public NtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_nt; }
+		public ArithmContext(NtContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterNt(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterArithm(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitNt(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitArithm(this);
 		}
 	}
 
@@ -3025,47 +3100,51 @@ public class Inter_InstanceParser extends Parser {
 		NtContext _localctx = new NtContext(_ctx, getState());
 		enterRule(_localctx, 58, RULE_nt);
 		try {
-			setState(478);
+			setState(486);
 			switch (_input.LA(1)) {
 			case NUMBER:
+				_localctx = new NumContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(465);
+				setState(473);
 				match(NUMBER);
 				}
 				break;
 			case VARIABLE:
+				_localctx = new VarContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(466);
+				setState(474);
 				match(VARIABLE);
 				}
 				break;
 			case T__0:
+				_localctx = new ArithmContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(467);
+				setState(475);
 				match(T__0);
-				setState(468);
+				setState(476);
 				nt();
-				setState(469);
+				setState(477);
 				arithmetic();
-				setState(470);
+				setState(478);
 				nt();
-				setState(471);
+				setState(479);
 				match(T__2);
 				}
 				break;
 			case T__34:
+				_localctx = new Num_varContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(473);
+				setState(481);
 				match(T__34);
-				setState(474);
+				setState(482);
 				tt();
-				setState(475);
+				setState(483);
 				match(T__23);
-				setState(476);
+				setState(484);
 				match(CONSTANT);
 				}
 				break;
@@ -3085,22 +3164,53 @@ public class Inter_InstanceParser extends Parser {
 	}
 
 	public static class StContext extends ParserRuleContext {
-		public TtContext tt() {
-			return getRuleContext(TtContext.class,0);
-		}
-		public TerminalNode CONSTANT() { return getToken(Inter_InstanceParser.CONSTANT, 0); }
-		public TerminalNode VARIABLE() { return getToken(Inter_InstanceParser.VARIABLE, 0); }
 		public StContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_st; }
+	 
+		public StContext() { }
+		public void copyFrom(StContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class Str_varContext extends StContext {
+		public TtContext tt() {
+			return getRuleContext(TtContext.class,0);
+		}
+		public TerminalNode CONSTANT() { return getToken(Inter_InstanceParser.CONSTANT, 0); }
+		public Str_varContext(StContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterSt(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterStr_var(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitSt(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitStr_var(this);
+		}
+	}
+	public static class Var1Context extends StContext {
+		public TerminalNode VARIABLE() { return getToken(Inter_InstanceParser.VARIABLE, 0); }
+		public Var1Context(StContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterVar1(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitVar1(this);
+		}
+	}
+	public static class Num1Context extends StContext {
+		public TerminalNode CONSTANT() { return getToken(Inter_InstanceParser.CONSTANT, 0); }
+		public Num1Context(StContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterNum1(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitNum1(this);
 		}
 	}
 
@@ -3108,26 +3218,36 @@ public class Inter_InstanceParser extends Parser {
 		StContext _localctx = new StContext(_ctx, getState());
 		enterRule(_localctx, 60, RULE_st);
 		try {
-			setState(486);
+			setState(495);
 			switch (_input.LA(1)) {
 			case T__35:
+				_localctx = new Str_varContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(480);
+				setState(488);
 				match(T__35);
-				setState(481);
+				setState(489);
 				tt();
-				setState(482);
+				setState(490);
 				match(T__23);
-				setState(483);
+				setState(491);
 				match(CONSTANT);
 				}
 				break;
 			case VARIABLE:
+				_localctx = new Var1Context(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(485);
+				setState(493);
 				match(VARIABLE);
+				}
+				break;
+			case CONSTANT:
+				_localctx = new Num1Context(_localctx);
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(494);
+				match(CONSTANT);
 				}
 				break;
 			default:
@@ -3245,13 +3365,13 @@ public class Inter_InstanceParser extends Parser {
 		TpContext _localctx = new TpContext(_ctx, getState());
 		enterRule(_localctx, 62, RULE_tp);
 		try {
-			setState(504);
+			setState(513);
 			switch ( getInterpreter().adaptivePredict(_input,31,_ctx) ) {
 			case 1:
 				_localctx = new DateTimeContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(488);
+				setState(497);
 				((DateTimeContext)_localctx).DATETIME = match(DATETIME);
 				ph.checkDateTime((((DateTimeContext)_localctx).DATETIME!=null?((DateTimeContext)_localctx).DATETIME.getText():null));
 				}
@@ -3260,7 +3380,7 @@ public class Inter_InstanceParser extends Parser {
 				_localctx = new DateContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(490);
+				setState(499);
 				((DateContext)_localctx).DATE = match(DATE);
 				ph.checkDate((((DateContext)_localctx).DATE!=null?((DateContext)_localctx).DATE.getText():null));
 				}
@@ -3269,7 +3389,7 @@ public class Inter_InstanceParser extends Parser {
 				_localctx = new TimeContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(492);
+				setState(501);
 				((TimeContext)_localctx).TIME = match(TIME);
 				ph.checkTime((((TimeContext)_localctx).TIME!=null?((TimeContext)_localctx).TIME.getText():null));
 				}
@@ -3278,15 +3398,15 @@ public class Inter_InstanceParser extends Parser {
 				_localctx = new RelativeTimepointContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(494);
+				setState(503);
 				match(T__0);
-				setState(495);
+				setState(504);
 				tp();
-				setState(496);
+				setState(505);
 				match(ADD);
-				setState(497);
+				setState(506);
 				ts();
-				setState(498);
+				setState(507);
 				match(T__2);
 				}
 				break;
@@ -3294,9 +3414,9 @@ public class Inter_InstanceParser extends Parser {
 				_localctx = new TimestampContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(500);
+				setState(509);
 				tt();
-				setState(501);
+				setState(510);
 				match(TIMESTAMP);
 				}
 				break;
@@ -3304,7 +3424,7 @@ public class Inter_InstanceParser extends Parser {
 				_localctx = new VarTPContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(503);
+				setState(512);
 				match(VARIABLE);
 				}
 				break;
@@ -3397,13 +3517,13 @@ public class Inter_InstanceParser extends Parser {
 		TsContext _localctx = new TsContext(_ctx, getState());
 		enterRule(_localctx, 64, RULE_ts);
 		try {
-			setState(521);
+			setState(530);
 			switch (_input.LA(1)) {
 			case TIMEINTERVAL:
 				_localctx = new AbsoluteIntervalContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(506);
+				setState(515);
 				((AbsoluteIntervalContext)_localctx).TIMEINTERVAL = match(TIMEINTERVAL);
 				ph.checkTimeInterval((((AbsoluteIntervalContext)_localctx).TIMEINTERVAL!=null?((AbsoluteIntervalContext)_localctx).TIMEINTERVAL.getText():null));
 				}
@@ -3412,15 +3532,15 @@ public class Inter_InstanceParser extends Parser {
 				_localctx = new TimedifferenceContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(508);
+				setState(517);
 				match(T__0);
-				setState(509);
+				setState(518);
 				tp();
-				setState(510);
+				setState(519);
 				match(SUB);
-				setState(511);
+				setState(520);
 				tp();
-				setState(512);
+				setState(521);
 				match(T__2);
 				}
 				break;
@@ -3428,15 +3548,15 @@ public class Inter_InstanceParser extends Parser {
 				_localctx = new TimeintervalContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(514);
+				setState(523);
 				match(T__36);
-				setState(515);
+				setState(524);
 				tt();
-				setState(516);
+				setState(525);
 				match(T__1);
-				setState(517);
+				setState(526);
 				tt();
-				setState(518);
+				setState(527);
 				match(T__2);
 				}
 				break;
@@ -3444,7 +3564,7 @@ public class Inter_InstanceParser extends Parser {
 				_localctx = new VarTSContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(520);
+				setState(529);
 				match(VARIABLE);
 				}
 				break;
@@ -3488,9 +3608,9 @@ public class Inter_InstanceParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(523);
+			setState(532);
 			tt();
-			setState(524);
+			setState(533);
 			match(WORKFLOW);
 			}
 		}
@@ -3530,9 +3650,9 @@ public class Inter_InstanceParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(526);
+			setState(535);
 			tt();
-			setState(527);
+			setState(536);
 			match(WORKFLOWINSTANCE);
 			}
 		}
@@ -3548,65 +3668,36 @@ public class Inter_InstanceParser extends Parser {
 	}
 
 	public static class EqualityContext extends ParserRuleContext {
+		public TerminalNode EQUAL() { return getToken(Inter_InstanceParser.EQUAL, 0); }
+		public TerminalNode NOTEQUAL() { return getToken(Inter_InstanceParser.NOTEQUAL, 0); }
 		public EqualityContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_equality; }
-	 
-		public EqualityContext() { }
-		public void copyFrom(EqualityContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class NoteualContext extends EqualityContext {
-		public TerminalNode NOTEQUAL() { return getToken(Inter_InstanceParser.NOTEQUAL, 0); }
-		public NoteualContext(EqualityContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterNoteual(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterEquality(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitNoteual(this);
-		}
-	}
-	public static class EqualContext extends EqualityContext {
-		public TerminalNode EQUAL() { return getToken(Inter_InstanceParser.EQUAL, 0); }
-		public EqualContext(EqualityContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterEqual(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitEqual(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitEquality(this);
 		}
 	}
 
 	public final EqualityContext equality() throws RecognitionException {
 		EqualityContext _localctx = new EqualityContext(_ctx, getState());
 		enterRule(_localctx, 70, RULE_equality);
+		int _la;
 		try {
-			setState(531);
-			switch (_input.LA(1)) {
-			case EQUAL:
-				_localctx = new EqualContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(529);
-				match(EQUAL);
-				}
-				break;
-			case NOTEQUAL:
-				_localctx = new NoteualContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(530);
-				match(NOTEQUAL);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(538);
+			_la = _input.LA(1);
+			if ( !(_la==EQUAL || _la==NOTEQUAL) ) {
+			_errHandler.recoverInline(this);
+			} else {
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -3621,105 +3712,38 @@ public class Inter_InstanceParser extends Parser {
 	}
 
 	public static class InequalityContext extends ParserRuleContext {
+		public TerminalNode LOWER() { return getToken(Inter_InstanceParser.LOWER, 0); }
+		public TerminalNode LEQ() { return getToken(Inter_InstanceParser.LEQ, 0); }
+		public TerminalNode GREATER() { return getToken(Inter_InstanceParser.GREATER, 0); }
+		public TerminalNode GEQ() { return getToken(Inter_InstanceParser.GEQ, 0); }
 		public InequalityContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_inequality; }
-	 
-		public InequalityContext() { }
-		public void copyFrom(InequalityContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class GeqContext extends InequalityContext {
-		public TerminalNode GEQ() { return getToken(Inter_InstanceParser.GEQ, 0); }
-		public GeqContext(InequalityContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterGeq(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterInequality(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitGeq(this);
-		}
-	}
-	public static class GreaterContext extends InequalityContext {
-		public TerminalNode GREATER() { return getToken(Inter_InstanceParser.GREATER, 0); }
-		public GreaterContext(InequalityContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterGreater(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitGreater(this);
-		}
-	}
-	public static class LowerContext extends InequalityContext {
-		public TerminalNode LOWER() { return getToken(Inter_InstanceParser.LOWER, 0); }
-		public LowerContext(InequalityContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterLower(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitLower(this);
-		}
-	}
-	public static class LeqContext extends InequalityContext {
-		public TerminalNode LEQ() { return getToken(Inter_InstanceParser.LEQ, 0); }
-		public LeqContext(InequalityContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterLeq(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitLeq(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitInequality(this);
 		}
 	}
 
 	public final InequalityContext inequality() throws RecognitionException {
 		InequalityContext _localctx = new InequalityContext(_ctx, getState());
 		enterRule(_localctx, 72, RULE_inequality);
+		int _la;
 		try {
-			setState(537);
-			switch (_input.LA(1)) {
-			case LOWER:
-				_localctx = new LowerContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(533);
-				match(LOWER);
-				}
-				break;
-			case LEQ:
-				_localctx = new LeqContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(534);
-				match(LEQ);
-				}
-				break;
-			case GREATER:
-				_localctx = new GreaterContext(_localctx);
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(535);
-				match(GREATER);
-				}
-				break;
-			case GEQ:
-				_localctx = new GeqContext(_localctx);
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(536);
-				match(GEQ);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(540);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LOWER) | (1L << LEQ) | (1L << GREATER) | (1L << GEQ))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			} else {
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -3734,105 +3758,38 @@ public class Inter_InstanceParser extends Parser {
 	}
 
 	public static class ArithmeticContext extends ParserRuleContext {
+		public TerminalNode MUL() { return getToken(Inter_InstanceParser.MUL, 0); }
+		public TerminalNode DIV() { return getToken(Inter_InstanceParser.DIV, 0); }
+		public TerminalNode ADD() { return getToken(Inter_InstanceParser.ADD, 0); }
+		public TerminalNode SUB() { return getToken(Inter_InstanceParser.SUB, 0); }
 		public ArithmeticContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arithmetic; }
-	 
-		public ArithmeticContext() { }
-		public void copyFrom(ArithmeticContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class SubContext extends ArithmeticContext {
-		public TerminalNode SUB() { return getToken(Inter_InstanceParser.SUB, 0); }
-		public SubContext(ArithmeticContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterSub(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterArithmetic(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitSub(this);
-		}
-	}
-	public static class DivContext extends ArithmeticContext {
-		public TerminalNode DIV() { return getToken(Inter_InstanceParser.DIV, 0); }
-		public DivContext(ArithmeticContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterDiv(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitDiv(this);
-		}
-	}
-	public static class AddContext extends ArithmeticContext {
-		public TerminalNode ADD() { return getToken(Inter_InstanceParser.ADD, 0); }
-		public AddContext(ArithmeticContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterAdd(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitAdd(this);
-		}
-	}
-	public static class MulContext extends ArithmeticContext {
-		public TerminalNode MUL() { return getToken(Inter_InstanceParser.MUL, 0); }
-		public MulContext(ArithmeticContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).enterMul(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitMul(this);
+			if ( listener instanceof Inter_InstanceListener ) ((Inter_InstanceListener)listener).exitArithmetic(this);
 		}
 	}
 
 	public final ArithmeticContext arithmetic() throws RecognitionException {
 		ArithmeticContext _localctx = new ArithmeticContext(_ctx, getState());
 		enterRule(_localctx, 74, RULE_arithmetic);
+		int _la;
 		try {
-			setState(543);
-			switch (_input.LA(1)) {
-			case MUL:
-				_localctx = new MulContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(539);
-				match(MUL);
-				}
-				break;
-			case DIV:
-				_localctx = new DivContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(540);
-				match(DIV);
-				}
-				break;
-			case ADD:
-				_localctx = new AddContext(_localctx);
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(541);
-				match(ADD);
-				}
-				break;
-			case SUB:
-				_localctx = new SubContext(_localctx);
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(542);
-				match(SUB);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(542);
+			_la = _input.LA(1);
+			if ( !(((((_la - 61)) & ~0x3f) == 0 && ((1L << (_la - 61)) & ((1L << (MUL - 61)) | (1L << (DIV - 61)) | (1L << (ADD - 61)) | (1L << (SUB - 61)))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			} else {
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -3847,7 +3804,7 @@ public class Inter_InstanceParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3T\u0224\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3T\u0223\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3876,27 +3833,27 @@ public class Inter_InstanceParser extends Parser {
 		"\3\22\3\22\5\22\u0167\n\22\3\23\3\23\3\23\7\23\u016c\n\23\f\23\16\23\u016f"+
 		"\13\23\3\24\3\24\5\24\u0173\n\24\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3"+
 		"\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3"+
-		"\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\5\25\u0195\n\25"+
+		"\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3"+
+		"\25\5\25\u0199\n\25\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26"+
 		"\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26"+
-		"\3\26\3\26\3\26\3\26\3\26\3\26\5\26\u01ab\n\26\3\27\3\27\3\30\3\30\3\31"+
-		"\3\31\3\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32\5\32\u01bb\n\32\3\33\3\33"+
-		"\3\33\3\33\3\33\3\33\3\33\3\33\3\33\5\33\u01c6\n\33\3\34\3\34\3\35\3\35"+
-		"\3\35\3\35\3\36\3\36\3\36\3\36\3\36\3\36\3\37\3\37\3\37\3\37\3\37\3\37"+
-		"\3\37\3\37\3\37\3\37\3\37\3\37\3\37\5\37\u01e1\n\37\3 \3 \3 \3 \3 \3 "+
-		"\5 \u01e9\n \3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\5!\u01fb"+
-		"\n!\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\5\"\u020c"+
-		"\n\"\3#\3#\3#\3$\3$\3$\3%\3%\5%\u0216\n%\3&\3&\3&\3&\5&\u021c\n&\3\'\3"+
-		"\'\3\'\3\'\5\'\u0222\n\'\3\'\2\2(\2\4\6\b\n\f\16\20\22\24\26\30\32\34"+
-		"\36 \"$&(*,.\60\62\64\668:<>@BDFHJL\2\4\4\2\4\4..\3\2NO\u0254\2N\3\2\2"+
-		"\2\4d\3\2\2\2\6t\3\2\2\2\b\u0085\3\2\2\2\n\u0090\3\2\2\2\f\u0093\3\2\2"+
-		"\2\16\u009e\3\2\2\2\20\u00a0\3\2\2\2\22\u00ab\3\2\2\2\24\u00b4\3\2\2\2"+
-		"\26\u00b6\3\2\2\2\30\u00c5\3\2\2\2\32\u00d3\3\2\2\2\34\u00f6\3\2\2\2\36"+
-		"\u010e\3\2\2\2 \u0134\3\2\2\2\"\u0166\3\2\2\2$\u0168\3\2\2\2&\u0172\3"+
-		"\2\2\2(\u0194\3\2\2\2*\u01aa\3\2\2\2,\u01ac\3\2\2\2.\u01ae\3\2\2\2\60"+
-		"\u01b0\3\2\2\2\62\u01ba\3\2\2\2\64\u01c5\3\2\2\2\66\u01c7\3\2\2\28\u01c9"+
-		"\3\2\2\2:\u01cd\3\2\2\2<\u01e0\3\2\2\2>\u01e8\3\2\2\2@\u01fa\3\2\2\2B"+
-		"\u020b\3\2\2\2D\u020d\3\2\2\2F\u0210\3\2\2\2H\u0215\3\2\2\2J\u021b\3\2"+
-		"\2\2L\u0221\3\2\2\2NR\b\2\1\2OQ\5\4\3\2PO\3\2\2\2QT\3\2\2\2RP\3\2\2\2"+
+		"\5\26\u01b3\n\26\3\27\3\27\3\30\3\30\3\31\3\31\3\32\3\32\3\32\3\32\3\32"+
+		"\3\32\3\32\3\32\5\32\u01c3\n\32\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
+		"\3\33\5\33\u01ce\n\33\3\34\3\34\3\35\3\35\3\35\3\35\3\36\3\36\3\36\3\36"+
+		"\3\36\3\36\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37"+
+		"\3\37\5\37\u01e9\n\37\3 \3 \3 \3 \3 \3 \3 \5 \u01f2\n \3!\3!\3!\3!\3!"+
+		"\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\5!\u0204\n!\3\"\3\"\3\"\3\"\3\"\3\""+
+		"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\5\"\u0215\n\"\3#\3#\3#\3$\3$\3$\3"+
+		"%\3%\3&\3&\3\'\3\'\3\'\2\2(\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \""+
+		"$&(*,.\60\62\64\668:<>@BDFHJL\2\7\4\2\4\4..\3\2NO\3\29:\3\2;>\3\2?B\u024f"+
+		"\2N\3\2\2\2\4d\3\2\2\2\6t\3\2\2\2\b\u0085\3\2\2\2\n\u0090\3\2\2\2\f\u0093"+
+		"\3\2\2\2\16\u009e\3\2\2\2\20\u00a0\3\2\2\2\22\u00ab\3\2\2\2\24\u00b4\3"+
+		"\2\2\2\26\u00b6\3\2\2\2\30\u00c5\3\2\2\2\32\u00d3\3\2\2\2\34\u00f6\3\2"+
+		"\2\2\36\u010e\3\2\2\2 \u0134\3\2\2\2\"\u0166\3\2\2\2$\u0168\3\2\2\2&\u0172"+
+		"\3\2\2\2(\u0198\3\2\2\2*\u01b2\3\2\2\2,\u01b4\3\2\2\2.\u01b6\3\2\2\2\60"+
+		"\u01b8\3\2\2\2\62\u01c2\3\2\2\2\64\u01cd\3\2\2\2\66\u01cf\3\2\2\28\u01d1"+
+		"\3\2\2\2:\u01d5\3\2\2\2<\u01e8\3\2\2\2>\u01f1\3\2\2\2@\u0203\3\2\2\2B"+
+		"\u0214\3\2\2\2D\u0216\3\2\2\2F\u0219\3\2\2\2H\u021c\3\2\2\2J\u021e\3\2"+
+		"\2\2L\u0220\3\2\2\2NR\b\2\1\2OQ\5\4\3\2PO\3\2\2\2QT\3\2\2\2RP\3\2\2\2"+
 		"RS\3\2\2\2SX\3\2\2\2TR\3\2\2\2UW\5\6\4\2VU\3\2\2\2WZ\3\2\2\2XV\3\2\2\2"+
 		"XY\3\2\2\2Y^\3\2\2\2ZX\3\2\2\2[]\5\b\5\2\\[\3\2\2\2]`\3\2\2\2^\\\3\2\2"+
 		"\2^_\3\2\2\2_a\3\2\2\2`^\3\2\2\2ab\7\2\2\3bc\b\2\1\2c\3\3\2\2\2de\7\60"+
@@ -3988,66 +3945,64 @@ public class Inter_InstanceParser extends Parser {
 		"\u016b\3\2\2\2\u016d\u016e\3\2\2\2\u016e%\3\2\2\2\u016f\u016d\3\2\2\2"+
 		"\u0170\u0173\5(\25\2\u0171\u0173\5*\26\2\u0172\u0170\3\2\2\2\u0172\u0171"+
 		"\3\2\2\2\u0173\'\3\2\2\2\u0174\u0175\7O\2\2\u0175\u0176\5H%\2\u0176\u0177"+
-		"\7O\2\2\u0177\u0195\3\2\2\2\u0178\u0179\5<\37\2\u0179\u017a\5H%\2\u017a"+
-		"\u017b\5<\37\2\u017b\u0195\3\2\2\2\u017c\u017d\5\62\32\2\u017d\u017e\5"+
-		"H%\2\u017e\u017f\5\62\32\2\u017f\u0195\3\2\2\2\u0180\u0181\5@!\2\u0181"+
-		"\u0182\5H%\2\u0182\u0183\5@!\2\u0183\u0195\3\2\2\2\u0184\u0185\5B\"\2"+
-		"\u0185\u0186\5H%\2\u0186\u0187\5B\"\2\u0187\u0195\3\2\2\2\u0188\u0189"+
-		"\5D#\2\u0189\u018a\5H%\2\u018a\u018b\5D#\2\u018b\u0195\3\2\2\2\u018c\u018d"+
-		"\5F$\2\u018d\u018e\5H%\2\u018e\u018f\5F$\2\u018f\u0195\3\2\2\2\u0190\u0191"+
-		"\5\60\31\2\u0191\u0192\5H%\2\u0192\u0193\5\60\31\2\u0193\u0195\3\2\2\2"+
-		"\u0194\u0174\3\2\2\2\u0194\u0178\3\2\2\2\u0194\u017c\3\2\2\2\u0194\u0180"+
-		"\3\2\2\2\u0194\u0184\3\2\2\2\u0194\u0188\3\2\2\2\u0194\u018c\3\2\2\2\u0194"+
-		"\u0190\3\2\2\2\u0195)\3\2\2\2\u0196\u0197\7O\2\2\u0197\u0198\5J&\2\u0198"+
-		"\u0199\7O\2\2\u0199\u01ab\3\2\2\2\u019a\u019b\5<\37\2\u019b\u019c\5J&"+
-		"\2\u019c\u019d\5<\37\2\u019d\u01ab\3\2\2\2\u019e\u019f\5\62\32\2\u019f"+
-		"\u01a0\5J&\2\u01a0\u01a1\5\62\32\2\u01a1\u01ab\3\2\2\2\u01a2\u01a3\5@"+
-		"!\2\u01a3\u01a4\5J&\2\u01a4\u01a5\5@!\2\u01a5\u01ab\3\2\2\2\u01a6\u01a7"+
-		"\5B\"\2\u01a7\u01a8\5J&\2\u01a8\u01a9\5B\"\2\u01a9\u01ab\3\2\2\2\u01aa"+
-		"\u0196\3\2\2\2\u01aa\u019a\3\2\2\2\u01aa\u019e\3\2\2\2\u01aa\u01a2\3\2"+
-		"\2\2\u01aa\u01a6\3\2\2\2\u01ab+\3\2\2\2\u01ac\u01ad\7T\2\2\u01ad-\3\2"+
-		"\2\2\u01ae\u01af\7N\2\2\u01af/\3\2\2\2\u01b0\u01b1\t\3\2\2\u01b1\61\3"+
-		"\2\2\2\u01b2\u01bb\7N\2\2\u01b3\u01bb\7O\2\2\u01b4\u01b5\5\60\31\2\u01b5"+
-		"\u01b6\7\64\2\2\u01b6\u01bb\3\2\2\2\u01b7\u01b8\5\64\33\2\u01b8\u01b9"+
-		"\7\64\2\2\u01b9\u01bb\3\2\2\2\u01ba\u01b2\3\2\2\2\u01ba\u01b3\3\2\2\2"+
-		"\u01ba\u01b4\3\2\2\2\u01ba\u01b7\3\2\2\2\u01bb\63\3\2\2\2\u01bc\u01bd"+
-		"\5\66\34\2\u01bd\u01be\b\33\1\2\u01be\u01c6\3\2\2\2\u01bf\u01c0\58\35"+
-		"\2\u01c0\u01c1\b\33\1\2\u01c1\u01c6\3\2\2\2\u01c2\u01c3\5:\36\2\u01c3"+
-		"\u01c4\b\33\1\2\u01c4\u01c6\3\2\2\2\u01c5\u01bc\3\2\2\2\u01c5\u01bf\3"+
-		"\2\2\2\u01c5\u01c2\3\2\2\2\u01c6\65\3\2\2\2\u01c7\u01c8\t\3\2\2\u01c8"+
-		"\67\3\2\2\2\u01c9\u01ca\t\3\2\2\u01ca\u01cb\7$\2\2\u01cb\u01cc\t\3\2\2"+
-		"\u01cc9\3\2\2\2\u01cd\u01ce\t\3\2\2\u01ce\u01cf\7$\2\2\u01cf\u01d0\t\3"+
-		"\2\2\u01d0\u01d1\7$\2\2\u01d1\u01d2\t\3\2\2\u01d2;\3\2\2\2\u01d3\u01e1"+
-		"\7Q\2\2\u01d4\u01e1\7O\2\2\u01d5\u01d6\7\3\2\2\u01d6\u01d7\5<\37\2\u01d7"+
-		"\u01d8\5L\'\2\u01d8\u01d9\5<\37\2\u01d9\u01da\7\5\2\2\u01da\u01e1\3\2"+
-		"\2\2\u01db\u01dc\7%\2\2\u01dc\u01dd\5\64\33\2\u01dd\u01de\7\32\2\2\u01de"+
-		"\u01df\7N\2\2\u01df\u01e1\3\2\2\2\u01e0\u01d3\3\2\2\2\u01e0\u01d4\3\2"+
-		"\2\2\u01e0\u01d5\3\2\2\2\u01e0\u01db\3\2\2\2\u01e1=\3\2\2\2\u01e2\u01e3"+
-		"\7&\2\2\u01e3\u01e4\5\64\33\2\u01e4\u01e5\7\32\2\2\u01e5\u01e6\7N\2\2"+
-		"\u01e6\u01e9\3\2\2\2\u01e7\u01e9\7O\2\2\u01e8\u01e2\3\2\2\2\u01e8\u01e7"+
-		"\3\2\2\2\u01e9?\3\2\2\2\u01ea\u01eb\7K\2\2\u01eb\u01fb\b!\1\2\u01ec\u01ed"+
-		"\7L\2\2\u01ed\u01fb\b!\1\2\u01ee\u01ef\7M\2\2\u01ef\u01fb\b!\1\2\u01f0"+
-		"\u01f1\7\3\2\2\u01f1\u01f2\5@!\2\u01f2\u01f3\7A\2\2\u01f3\u01f4\5B\"\2"+
-		"\u01f4\u01f5\7\5\2\2\u01f5\u01fb\3\2\2\2\u01f6\u01f7\5\64\33\2\u01f7\u01f8"+
-		"\78\2\2\u01f8\u01fb\3\2\2\2\u01f9\u01fb\7O\2\2\u01fa\u01ea\3\2\2\2\u01fa"+
-		"\u01ec\3\2\2\2\u01fa\u01ee\3\2\2\2\u01fa\u01f0\3\2\2\2\u01fa\u01f6\3\2"+
-		"\2\2\u01fa\u01f9\3\2\2\2\u01fbA\3\2\2\2\u01fc\u01fd\7J\2\2\u01fd\u020c"+
-		"\b\"\1\2\u01fe\u01ff\7\3\2\2\u01ff\u0200\5@!\2\u0200\u0201\7B\2\2\u0201"+
-		"\u0202\5@!\2\u0202\u0203\7\5\2\2\u0203\u020c\3\2\2\2\u0204\u0205\7\'\2"+
-		"\2\u0205\u0206\5\64\33\2\u0206\u0207\7\4\2\2\u0207\u0208\5\64\33\2\u0208"+
-		"\u0209\7\5\2\2\u0209\u020c\3\2\2\2\u020a\u020c\7O\2\2\u020b\u01fc\3\2"+
-		"\2\2\u020b\u01fe\3\2\2\2\u020b\u0204\3\2\2\2\u020b\u020a\3\2\2\2\u020c"+
-		"C\3\2\2\2\u020d\u020e\5\64\33\2\u020e\u020f\7\67\2\2\u020fE\3\2\2\2\u0210"+
-		"\u0211\5\64\33\2\u0211\u0212\7\66\2\2\u0212G\3\2\2\2\u0213\u0216\79\2"+
-		"\2\u0214\u0216\7:\2\2\u0215\u0213\3\2\2\2\u0215\u0214\3\2\2\2\u0216I\3"+
-		"\2\2\2\u0217\u021c\7;\2\2\u0218\u021c\7<\2\2\u0219\u021c\7=\2\2\u021a"+
-		"\u021c\7>\2\2\u021b\u0217\3\2\2\2\u021b\u0218\3\2\2\2\u021b\u0219\3\2"+
-		"\2\2\u021b\u021a\3\2\2\2\u021cK\3\2\2\2\u021d\u0222\7?\2\2\u021e\u0222"+
-		"\7@\2\2\u021f\u0222\7A\2\2\u0220\u0222\7B\2\2\u0221\u021d\3\2\2\2\u0221"+
-		"\u021e\3\2\2\2\u0221\u021f\3\2\2\2\u0221\u0220\3\2\2\2\u0222M\3\2\2\2"+
-		"&RX^ox~\u0082\u0087\u008b\u0098\u009e\u00a6\u00b4\u00bd\u00c5\u00d3\u00f6"+
-		"\u00f9\u010e\u0111\u012e\u0134\u0166\u016d\u0172\u0194\u01aa\u01ba\u01c5"+
-		"\u01e0\u01e8\u01fa\u020b\u0215\u021b\u0221";
+		"\7O\2\2\u0177\u0199\3\2\2\2\u0178\u0179\5<\37\2\u0179\u017a\5H%\2\u017a"+
+		"\u017b\5<\37\2\u017b\u0199\3\2\2\2\u017c\u017d\5\62\32\2\u017d\u017e\5"+
+		"H%\2\u017e\u017f\5\62\32\2\u017f\u0199\3\2\2\2\u0180\u0181\5@!\2\u0181"+
+		"\u0182\5H%\2\u0182\u0183\5@!\2\u0183\u0199\3\2\2\2\u0184\u0185\5B\"\2"+
+		"\u0185\u0186\5H%\2\u0186\u0187\5B\"\2\u0187\u0199\3\2\2\2\u0188\u0189"+
+		"\5D#\2\u0189\u018a\5H%\2\u018a\u018b\5D#\2\u018b\u0199\3\2\2\2\u018c\u018d"+
+		"\5F$\2\u018d\u018e\5H%\2\u018e\u018f\5F$\2\u018f\u0199\3\2\2\2\u0190\u0191"+
+		"\5\60\31\2\u0191\u0192\5H%\2\u0192\u0193\5\60\31\2\u0193\u0199\3\2\2\2"+
+		"\u0194\u0195\5> \2\u0195\u0196\5H%\2\u0196\u0197\5> \2\u0197\u0199\3\2"+
+		"\2\2\u0198\u0174\3\2\2\2\u0198\u0178\3\2\2\2\u0198\u017c\3\2\2\2\u0198"+
+		"\u0180\3\2\2\2\u0198\u0184\3\2\2\2\u0198\u0188\3\2\2\2\u0198\u018c\3\2"+
+		"\2\2\u0198\u0190\3\2\2\2\u0198\u0194\3\2\2\2\u0199)\3\2\2\2\u019a\u019b"+
+		"\7O\2\2\u019b\u019c\5J&\2\u019c\u019d\7O\2\2\u019d\u01b3\3\2\2\2\u019e"+
+		"\u019f\5<\37\2\u019f\u01a0\5J&\2\u01a0\u01a1\5<\37\2\u01a1\u01b3\3\2\2"+
+		"\2\u01a2\u01a3\5\62\32\2\u01a3\u01a4\5J&\2\u01a4\u01a5\5\62\32\2\u01a5"+
+		"\u01b3\3\2\2\2\u01a6\u01a7\5@!\2\u01a7\u01a8\5J&\2\u01a8\u01a9\5@!\2\u01a9"+
+		"\u01b3\3\2\2\2\u01aa\u01ab\5B\"\2\u01ab\u01ac\5J&\2\u01ac\u01ad\5B\"\2"+
+		"\u01ad\u01b3\3\2\2\2\u01ae\u01af\5> \2\u01af\u01b0\5J&\2\u01b0\u01b1\5"+
+		"> \2\u01b1\u01b3\3\2\2\2\u01b2\u019a\3\2\2\2\u01b2\u019e\3\2\2\2\u01b2"+
+		"\u01a2\3\2\2\2\u01b2\u01a6\3\2\2\2\u01b2\u01aa\3\2\2\2\u01b2\u01ae\3\2"+
+		"\2\2\u01b3+\3\2\2\2\u01b4\u01b5\7T\2\2\u01b5-\3\2\2\2\u01b6\u01b7\7N\2"+
+		"\2\u01b7/\3\2\2\2\u01b8\u01b9\t\3\2\2\u01b9\61\3\2\2\2\u01ba\u01c3\7N"+
+		"\2\2\u01bb\u01c3\7O\2\2\u01bc\u01bd\5\60\31\2\u01bd\u01be\7\64\2\2\u01be"+
+		"\u01c3\3\2\2\2\u01bf\u01c0\5\64\33\2\u01c0\u01c1\7\64\2\2\u01c1\u01c3"+
+		"\3\2\2\2\u01c2\u01ba\3\2\2\2\u01c2\u01bb\3\2\2\2\u01c2\u01bc\3\2\2\2\u01c2"+
+		"\u01bf\3\2\2\2\u01c3\63\3\2\2\2\u01c4\u01c5\5\66\34\2\u01c5\u01c6\b\33"+
+		"\1\2\u01c6\u01ce\3\2\2\2\u01c7\u01c8\58\35\2\u01c8\u01c9\b\33\1\2\u01c9"+
+		"\u01ce\3\2\2\2\u01ca\u01cb\5:\36\2\u01cb\u01cc\b\33\1\2\u01cc\u01ce\3"+
+		"\2\2\2\u01cd\u01c4\3\2\2\2\u01cd\u01c7\3\2\2\2\u01cd\u01ca\3\2\2\2\u01ce"+
+		"\65\3\2\2\2\u01cf\u01d0\t\3\2\2\u01d0\67\3\2\2\2\u01d1\u01d2\t\3\2\2\u01d2"+
+		"\u01d3\7$\2\2\u01d3\u01d4\t\3\2\2\u01d49\3\2\2\2\u01d5\u01d6\t\3\2\2\u01d6"+
+		"\u01d7\7$\2\2\u01d7\u01d8\t\3\2\2\u01d8\u01d9\7$\2\2\u01d9\u01da\t\3\2"+
+		"\2\u01da;\3\2\2\2\u01db\u01e9\7Q\2\2\u01dc\u01e9\7O\2\2\u01dd\u01de\7"+
+		"\3\2\2\u01de\u01df\5<\37\2\u01df\u01e0\5L\'\2\u01e0\u01e1\5<\37\2\u01e1"+
+		"\u01e2\7\5\2\2\u01e2\u01e9\3\2\2\2\u01e3\u01e4\7%\2\2\u01e4\u01e5\5\64"+
+		"\33\2\u01e5\u01e6\7\32\2\2\u01e6\u01e7\7N\2\2\u01e7\u01e9\3\2\2\2\u01e8"+
+		"\u01db\3\2\2\2\u01e8\u01dc\3\2\2\2\u01e8\u01dd\3\2\2\2\u01e8\u01e3\3\2"+
+		"\2\2\u01e9=\3\2\2\2\u01ea\u01eb\7&\2\2\u01eb\u01ec\5\64\33\2\u01ec\u01ed"+
+		"\7\32\2\2\u01ed\u01ee\7N\2\2\u01ee\u01f2\3\2\2\2\u01ef\u01f2\7O\2\2\u01f0"+
+		"\u01f2\7N\2\2\u01f1\u01ea\3\2\2\2\u01f1\u01ef\3\2\2\2\u01f1\u01f0\3\2"+
+		"\2\2\u01f2?\3\2\2\2\u01f3\u01f4\7K\2\2\u01f4\u0204\b!\1\2\u01f5\u01f6"+
+		"\7L\2\2\u01f6\u0204\b!\1\2\u01f7\u01f8\7M\2\2\u01f8\u0204\b!\1\2\u01f9"+
+		"\u01fa\7\3\2\2\u01fa\u01fb\5@!\2\u01fb\u01fc\7A\2\2\u01fc\u01fd\5B\"\2"+
+		"\u01fd\u01fe\7\5\2\2\u01fe\u0204\3\2\2\2\u01ff\u0200\5\64\33\2\u0200\u0201"+
+		"\78\2\2\u0201\u0204\3\2\2\2\u0202\u0204\7O\2\2\u0203\u01f3\3\2\2\2\u0203"+
+		"\u01f5\3\2\2\2\u0203\u01f7\3\2\2\2\u0203\u01f9\3\2\2\2\u0203\u01ff\3\2"+
+		"\2\2\u0203\u0202\3\2\2\2\u0204A\3\2\2\2\u0205\u0206\7J\2\2\u0206\u0215"+
+		"\b\"\1\2\u0207\u0208\7\3\2\2\u0208\u0209\5@!\2\u0209\u020a\7B\2\2\u020a"+
+		"\u020b\5@!\2\u020b\u020c\7\5\2\2\u020c\u0215\3\2\2\2\u020d\u020e\7\'\2"+
+		"\2\u020e\u020f\5\64\33\2\u020f\u0210\7\4\2\2\u0210\u0211\5\64\33\2\u0211"+
+		"\u0212\7\5\2\2\u0212\u0215\3\2\2\2\u0213\u0215\7O\2\2\u0214\u0205\3\2"+
+		"\2\2\u0214\u0207\3\2\2\2\u0214\u020d\3\2\2\2\u0214\u0213\3\2\2\2\u0215"+
+		"C\3\2\2\2\u0216\u0217\5\64\33\2\u0217\u0218\7\67\2\2\u0218E\3\2\2\2\u0219"+
+		"\u021a\5\64\33\2\u021a\u021b\7\66\2\2\u021bG\3\2\2\2\u021c\u021d\t\4\2"+
+		"\2\u021dI\3\2\2\2\u021e\u021f\t\5\2\2\u021fK\3\2\2\2\u0220\u0221\t\6\2"+
+		"\2\u0221M\3\2\2\2#RX^ox~\u0082\u0087\u008b\u0098\u009e\u00a6\u00b4\u00bd"+
+		"\u00c5\u00d3\u00f6\u00f9\u010e\u0111\u012e\u0134\u0166\u016d\u0172\u0198"+
+		"\u01b2\u01c2\u01cd\u01e8\u01f1\u0203\u0214";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

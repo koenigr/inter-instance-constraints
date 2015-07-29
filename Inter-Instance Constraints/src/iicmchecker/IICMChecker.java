@@ -99,7 +99,7 @@ fs.close();
 ParseTreeWalker walker = new ParseTreeWalker();
 walker.walk(new IIListener(), tree);
 
-// tree.inspect(parser);
+ tree.inspect(parser);
 
 
 } catch(Exception e) {
