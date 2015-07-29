@@ -13,7 +13,6 @@
 :- dynamic related/2.
 
 :- multifile related/2.
-:- multifile related/2.
 :- multifile dominates/2.
 
 

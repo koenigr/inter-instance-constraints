@@ -5,7 +5,7 @@
 :- [externspec].
 
 :- set_prolog_flag(verbose, silent). % TODO was macht das????
-:- initialization(main).
+%:- initialization(main).
 
 
 % Hier Konfigurationen. Von diesem Punkt aus startet der Modelchecker

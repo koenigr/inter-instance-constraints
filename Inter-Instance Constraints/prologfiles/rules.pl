@@ -1,10 +1,6 @@
 % Rules
-user_cannot_execute(Stream,USER,GENERATED3) :-  task_event(GENERATED3,'completed'),task_name(GENERATED3,'Antrag prüfen 1'),user_executed(USER,GENERATED2),task_name(GENERATED2,'Antrag annehmen'),write(Stream, '
-'), write(Stream, '"4 Augen Prinzip bei T1 und T2"
+illegal_execution(Stream) :-  count((user_executed(User,GENERATED6),task_name(GENERATED6,Task.ID),task_event(GENERATED6,'start')),N),N > 2,task_workflow(GENERATED6,GENERATED8),workflow_name(GENERATED8,GENERATED7),write(Stream, '
 ').
-user_cannot_execute(Stream,USER,GENERATED5) :-  task_event(GENERATED5,'completed'),task_name(GENERATED5,'Antrag prüfen 2'),user_executed(USER,GENERATED4),task_name(GENERATED4,'T1'),write(Stream, '
-'), write(Stream, '"4 Augen Prinzip bei T1 und T3"
-').
-role_must_execute(Stream,'Manager',GENERATED1) :-  task_event(GENERATED1,'complete'),task_name(GENERATED1,'Antrag prüfen 2'),write(Stream, '
-'), write(Stream, '"Role Manager must execute Task Antrag prüfen"
+user_cannot_execute(Stream,User,GENERATED2) :-  task_event(GENERATED2,'start'),task_name(GENERATED2,Task),task_workflow(GENERATED2,ID2),count((user_executed(User,GENERATED1),task_name(GENERATED1,Task.ID1),task_event(GENERATED1,'start')),N),N > 3,task_workflow(GENERATED1,GENERATED4),workflow_name(GENERATED4,GENERATED3),task_workflow(GENERATED2,GENERATED5),workflow_name(GENERATED5,GENERATED3),write(Stream, '
+'), write(Stream, 'RULEID1
 ').

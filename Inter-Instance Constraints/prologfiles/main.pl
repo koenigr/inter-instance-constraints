@@ -156,43 +156,23 @@ avglist( List, Avg ):-
 
 %%%%%%% max
 max(X,P,N) :- findall(X, P, List),
-	maxlist(List, N),
+	max_list(List, N),
 	open('results.txt', append, Stream),
 	write(Stream, N),
 	tab(Stream, 2),
 	write(Stream, List),
 	nl(Stream),
 	close(Stream).
-
-
-%maxlist(List, Max).                 % We ve found the minimum
-maxlist([H,K|T],M) :-
-    H < K,                             % H is less than or equal to K
-    maxlist([H|T],M).               % so use H
-
-maxlist([H,K|T],M) :-
-    H >= K,                              % H is greater than K
-    maxlist([K|T],M).               % so use K
 
 %%%%%%%%% min
 min(X,P,N) :- findall(X, P, List),
-	minlist(List, N),
+	min_list(List, N),
 	open('results.txt', append, Stream),
 	write(Stream, N),
 	tab(Stream, 2),
 	write(Stream, List),
 	nl(Stream),
 	close(Stream).
-
-
-%minlist(List, Max).                 % We ve found the minimum
-minlist([H,K|T],M) :-
-    H =< K,                             % H is less than or equal to K
-    minlist([H|T],M).               % so use H
-
-minlist([H,K|T],M) :-
-    H > K,                              % H is greater than K
-    minlist([K|T],M).               % so use K
 
 % time interval
 time_interval(TASK1, TASK2, N) :-
