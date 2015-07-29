@@ -2,6 +2,8 @@ lexer grammar LexerRules;
 
 
 @lexer::header {
+package iicmchecker.constraintReader;
+	
 import java.util.HashMap;
 import java.util.ArrayList;
 }
@@ -63,6 +65,9 @@ DIV			: '/' ;
 ADD			: '+' ;
 SUB			: '-' ;
 
+// This keyword is reserved for generated vars. 
+// Its not possible to use it in the grammar.
+GEN			: 'GENERATED'; 
 
 YEARS 	: NUMBER 'Y';
 MONTHS	: NUMBER 'M';

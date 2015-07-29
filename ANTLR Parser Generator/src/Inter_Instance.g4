@@ -3,11 +3,13 @@ grammar Inter_Instance;
 import LexerRules;
 
 @parser::header{
-  import constraintReader.ParserHelper;
+  package iicmchecker.constraintReader;
+	
+  import iicmchecker.constraintReader.ParserHelper;
   import java.util.logging.Logger;
   import java.util.logging.Level;
-  import logging.LoggerFactory;
-  import exceptions.UnexpectedContextException;
+  import iicmchecker.logging.LoggerFactory;
+  import iicmchecker.exceptions.UnexpectedContextException;
 }
 
 @parser::members{
@@ -35,16 +37,22 @@ define 	: DEF CLAUSE {ph.addClause($CLAUSE.text);} '(' ARGS {ph.addArgTypeToClau
 explicitSetting : SET (extern|specification|definedClause) ((KONJ|',') (extern|specification|definedClause))* ; // TODO Konj und . sollten schon das selbe sein
 
 assignment 	: { context = Context.UNKNOWN;}
-			(description)? IF assignmentBody THEN assignmentHead 	
+			(description)? IF (assignmentBody)? THEN assignmentHead 	
 			;
 			
 description		: DESC CONSTANT;
 
-assignmentBody 	: (NEG)? clauses ( KONJ (NEG)? clauses)* ; 
+assignmentBody 	: clauses ( KONJ clauses)* ; 
 
 clauses			: atoms
-				| '(' atoms (DISJ atoms)* ')'
+				| disjunction
+				| negation
 				;
+				
+disjunction		: '(' atoms (DISJ atoms)* ')'
+				; 
+				
+negation		: NEG atoms;
 
 atoms			: specification		
 				| status
@@ -77,11 +85,9 @@ specification	: 'role' rt 'can execute' tt  		#roleTask // TODO bessere Bezeichn
 				;
 
 enforcement		: 'user'? ut 'cannot execute' tt	#cannotUser
-				| 'role' r=rt 'cannot execute' tt	
-				{System.out.println($r.text);}
-				#cannotRole
+				| 'role' rt 'cannot execute' tt	#cannotRole
 				|  ut 'must execute' tt				#mustUser
-				| 'mrole' rt 'must execute' tt 		#mustRole
+				| 'role' rt 'must execute' tt 		#mustRole
 				| 'panic'							#panic
 				;
 			
@@ -95,9 +101,9 @@ status			:  'user'? ut 'executed' tt			#executedUser
 				|  ut 'is collaborator of' ut		#collaborator // TODO ??
 				;
 	
-conditional		: 'NUMBER' WHERE conditionalBody 'IS' nt							#numSimple
+conditional		: 'NUMBER' WHERE conditionalBody 'IS' nt					#numSimple
 				| 'NUMBER OF' VARIABLE WHERE conditionalBody 'IS' nt		#numVars
-				| 'NUMBER OF DIFF' VARIABLE  WHERE conditionalBody 'IS' nt	#numDiff
+				| 'NUMBER OF DIFF' VARIABLE  WHERE conditionalBody 'IS' nt	#numDiff // TODO das müsste doch eigentlich schon numVars sein
 				| 'SUM OF' VARIABLE  WHERE conditionalBody 'IS' nt			#sum
 				| 'AVG OF' VARIABLE  WHERE conditionalBody 'IS' nt			#avg
 				| 'MIN OF' VARIABLE WHERE conditionalBody 'IS' nt			#min
@@ -118,6 +124,7 @@ equalityExpr	: VARIABLE equality VARIABLE
 				| wt equality wt // TODO wegmachen?
 				| wi equality wi // TODO wegmachen?
 				| ut equality ut
+				| st equality st
 				;
 
 inequalityExpr	: VARIABLE inequality VARIABLE
@@ -125,6 +132,7 @@ inequalityExpr	: VARIABLE inequality VARIABLE
 				| rt inequality rt
 				| tp inequality tp
 				| ts inequality ts
+				| st inequality st
 				;
 				
 	
@@ -177,14 +185,15 @@ interp			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)
 				;
 				
 				
-nt				: NUMBER 
-				| VARIABLE 
-				| '(' nt arithmetic nt ')'
-				| 'Num_Var(' tt ').'CONSTANT
+nt				: NUMBER 										#num
+				| VARIABLE 										#var
+				| '(' nt arithmetic nt ')'						# arithm
+				| 'Num_Var(' tt ').'CONSTANT					# num_var
 				;
 				
-st	    : 'String_Var(' tt ').'CONSTANT
-		| VARIABLE
+st	    : 'String_Var(' tt ').'CONSTANT							#str_var
+		| VARIABLE												#var1
+		| CONSTANT												#num1
 		; 
 				
 // timepoint symbols		
@@ -217,19 +226,19 @@ wi 		: tt WORKFLOWINSTANCE;
 		
 
 // Comparison Cases
-equality 	: EQUAL 		#equal
-			| NOTEQUAL		#noteual
+equality 	: EQUAL 		
+			| NOTEQUAL		
 			;
-inequality	: LOWER			#lower
-			| LEQ			#leq
-			| GREATER		#greater
-			| GEQ			#geq
+inequality	: LOWER			
+			| LEQ		
+			| GREATER		
+			| GEQ			
 			;
 
-arithmetic	: MUL 			#mul
-			| DIV			#div
-			| ADD			#add
-			| SUB			#sub
+arithmetic	: MUL 			
+			| DIV			
+			| ADD			
+			| SUB			
 			;
 
 
