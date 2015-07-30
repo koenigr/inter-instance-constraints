@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.6.30)  30 JUN 2015 20:48
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.6.30)  30 JUL 2015 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -35,7 +35,11 @@ Package: vmargin 2004/07/15 V2.5 set document margins (VK)
 Package: vmargin 2004/07/15 V2.5 set document margins (VK)
 \PaperWidth=\dimen103
 \PaperHeight=\dimen104
-) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/threeparttable/threeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box26
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
@@ -293,8 +297,8 @@ LaTeX Info: Redefining \overline on input line 306.
 LaTeX Info: Redefining \ldots on input line 378.
 LaTeX Info: Redefining \dots on input line 381.
 LaTeX Info: Redefining \cdots on input line 466.
-\Mathstrutbox@=\box26
-\strutbox@=\box27
+\Mathstrutbox@=\box27
+\strutbox@=\box28
 \big@size=\dimen107
 LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
@@ -376,6 +380,7 @@ Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \caption@hangindent=\dimen123
 )
 \c@ContinuedFloat=\count102
+Package caption Info: threeparttable package is loaded.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
@@ -486,12 +491,12 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \c@r@tfl@t=\count108
 \rotFPtop=\skip58
 \rotFPbot=\skip59
-\rot@float@box=\box28
+\rot@float@box=\box29
 \rot@mess@toks=\toks29
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count109
-\lst@gtempboxa=\box29
+\lst@gtempboxa=\box30
 \lst@token=\toks30
 \lst@length=\count110
 \lst@currlwidth=\dimen139
@@ -515,7 +520,7 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
 \c@lstnumber=\count115
 \lst@skipnumbers=\count116
-\lst@framebox=\box30
+\lst@framebox=\box31
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2013/08/26 1.5b listings configuration
@@ -658,47 +663,68 @@ Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \LTpost=\skip64
 \LTchunksize=\count128
 \LTcapwidth=\dimen147
-\LT@head=\box31
-\LT@firsthead=\box32
-\LT@foot=\box33
-\LT@lastfoot=\box34
+\LT@head=\box32
+\LT@firsthead=\box33
+\LT@foot=\box34
+\LT@lastfoot=\box35
 \LT@cols=\count129
 \LT@rows=\count130
 \c@LT@tables=\count131
 \c@LT@chunks=\count132
 \LT@p@ftn=\toks31
 ))
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2013/12/03 3.9h The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-german/germanb.ldf
+Language: germanb 2013/12/13 v2.7 German support for babel (traditional orthogr
+aphy)
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2013/12/03 3.9h Babel common definitions
+\babel@savecnt=\count133
+\U@D=\dimen148
+)
+\l@austrian = a dialect from \language\l@german 
+Package babel Info: Making " an active character on input line 107.
+))
 (/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip65
 \bibsep=\skip66
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count133
+\c@NAT@ctr=\count134
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 33.
+Package hyperref Info: Option `colorlinks' set `true' on input line 35.
  (./main.aux
+
+LaTeX Warning: Label `fig2' multiply defined.
+
+
+LaTeX Warning: Label `fig:Workflow' multiply defined.
+
 
 LaTeX Warning: Label `Chapter5' multiply defined.
 
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
@@ -711,20 +737,20 @@ Package caption Info: End \AtBeginDocument code.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count134
-\scratchdimen=\dimen148
-\scratchbox=\box35
-\nofMPsegments=\count135
-\nofMParguments=\count136
+\scratchcounter=\count135
+\scratchdimen=\dimen149
+\scratchbox=\box36
+\nofMPsegments=\count136
+\nofMParguments=\count137
 \everyMPshowfont=\toks32
-\MPscratchCnt=\count137
-\MPscratchDim=\dimen149
-\MPnumerator=\count138
-\makeMPintoPDFobject=\count139
+\MPscratchCnt=\count138
+\MPscratchDim=\dimen150
+\MPnumerator=\count139
+\makeMPintoPDFobject=\count140
 \everyMPtoPDFconversion=\toks33
 )
-\c@lstlisting=\count140
-\AtBeginShipoutBox=\box36
+\c@lstlisting=\count141
+\AtBeginShipoutBox=\box37
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
@@ -733,7 +759,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-Package hyperref Info: Link coloring ON on input line 36.
+Package hyperref Info: Link coloring ON on input line 38.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -741,22 +767,22 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count141
+\c@section@level=\count142
 )
-LaTeX Info: Redefining \ref on input line 36.
-LaTeX Info: Redefining \pageref on input line 36.
-LaTeX Info: Redefining \nameref on input line 36.
+LaTeX Info: Redefining \ref on input line 38.
+LaTeX Info: Redefining \pageref on input line 38.
+LaTeX Info: Redefining \nameref on input line 38.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 78.
+LaTeX Font Info:    Try loading font information for U+msa on input line 83.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 78.
+LaTeX Font Info:    Try loading font information for U+msb on input line 83.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -769,7 +795,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  Declaration of Authorship
 ------------------------------------------------------------------------------
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--123
+Underfull \hbox (badness 10000) in paragraph at lines 128--128
 
  []
 
@@ -814,8 +840,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 123--123
  [7
 
 
+]
+------------------------------------------------------------------------------
+ Symbols
+------------------------------------------------------------------------------
+[8
+
+
+
 ] (./Chapters/Einleitung.tex
-Chapter 1.
+Kapitel 1.
 ------------------------------------------------------------------------------
  1 Einleitung
 ------------------------------------------------------------------------------
@@ -829,233 +863,325 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--20
 
  []
 
-<"Figures/Workflow".png, id=350, 642.4pt x 481.8pt>
-File: "Figures/Workflow".png Graphic file (type png)
+<Figures/Workflow.jpeg, id=437, 974.64125pt x 164.615pt>
+File: Figures/Workflow.jpeg Graphic file (type jpg)
 
-<use "Figures/Workflow".png>
-Package pdftex.def Info: "Figures/Workflow".png used on input line 23.
-(pdftex.def)             Requested size: 375.7232pt x 281.79672pt.
+<use Figures/Workflow.jpeg>
+Package pdftex.def Info: Figures/Workflow.jpeg used on input line 23.
+(pdftex.def)             Requested size: 408.24449pt x 68.95195pt.
  [1
 
 
 
-] [2 <./Figures/Workflow.png>])
-(./Chapters/Grundlagen.tex [3]
-Chapter 2.
+ <./Figures/Workflow.jpeg>])
+(./Chapters/Theorie.tex [2]
+Kapitel 2.
 ------------------------------------------------------------------------------
- 2 Theoretische Grundlagen
-------------------------------------------------------------------------------
-
-Overfull \hbox (0.71596pt too wide) in paragraph at lines 20--22
-\OT1/cmr/m/n/10.95 Menge von Tasks. Ein Work-flow Case ist eine konkrete In-sta
-nz eines Work-flow Schemas... 
- []
-
-<"Figures/Task Events".png, id=365, 642.4pt x 481.8pt>
-File: "Figures/Task Events".png Graphic file (type png)
-
-<use "Figures/Task Events".png>
-Package pdftex.def Info: "Figures/Task Events".png used on input line 37.
-(pdftex.def)             Requested size: 375.7232pt x 281.79672pt.
- [4
-
-]
-<"Figures/Rollenmodell".jpeg, id=375, 545.03625pt x 207.77625pt>
-File: "Figures/Rollenmodell".jpeg Graphic file (type jpg)
-
-<use "Figures/Rollenmodell".jpeg>
-Package pdftex.def Info: "Figures/Rollenmodell".jpeg used on input line 51.
-(pdftex.def)             Requested size: 375.7232pt x 143.22942pt.
- [5 <./Figures/Task Events.png> <./Figures/Rollenmodell.jpeg>] [6] <"Figures/mx
-ml".jpeg, id=391, 292.4526pt x 229.3368pt>
-File: "Figures/mxml".jpeg Graphic file (type jpg)
-
-<use "Figures/mxml".jpeg>
-Package pdftex.def Info: "Figures/mxml".jpeg used on input line 91.
-(pdftex.def)             Requested size: 375.7232pt x 294.64891pt.
-) (./Chapters/verwandteArbeit.tex [7 <./Figures/mxml.jpeg>] [8]
-Chapter 3.
-------------------------------------------------------------------------------
- 3 Verwandte Arbeit
+ 2 Theorie
 ------------------------------------------------------------------------------
 
-Overfull \hbox (5.43068pt too wide) in paragraph at lines 17--20
-\OT1/cmr/m/n/10.95 Business Rules und Au-di-tierung ?? Um die Zu-verl^^?assigke
-it von Abl^^?aufen zu gew^^?ahrleisten,
- []
-
-[9
-
-]) (./Chapters/Theorie.tex [10]
-Chapter 4.
-------------------------------------------------------------------------------
- 4 Material und Methoden
-------------------------------------------------------------------------------
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--24
+Underfull \hbox (badness 10000) in paragraph at lines 21--23
 
  []
 
-[11
+<Figures/sampleW.jpeg, id=446, 694.595pt x 243.91125pt>
+File: Figures/sampleW.jpeg Graphic file (type jpg)
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 35--44
+<use Figures/sampleW.jpeg>
+Package pdftex.def Info: Figures/sampleW.jpeg used on input line 26.
+(pdftex.def)             Requested size: 317.52426pt x 111.50455pt.
+ [3
+
+ <./Figures/sampleW.jpeg>]
+<Figures/Taskevents.jpeg, id=451, 925.4575pt x 612.2875pt>
+File: Figures/Taskevents.jpeg Graphic file (type jpg)
+
+<use Figures/Taskevents.jpeg>
+Package pdftex.def Info: Figures/Taskevents.jpeg used on input line 52.
+(pdftex.def)             Requested size: 408.24449pt x 270.0987pt.
+
+<Figures/Rollenmodell.jpeg, id=452, 545.03625pt x 207.77625pt>
+File: Figures/Rollenmodell.jpeg Graphic file (type jpg)
+
+<use Figures/Rollenmodell.jpeg>
+Package pdftex.def Info: Figures/Rollenmodell.jpeg used on input line 66.
+(pdftex.def)             Requested size: 408.24449pt x 155.62888pt.
+ [4 <./Figures/Taskevents.jpeg>] [5 <./Figures/Rollenmodell.jpeg>]
+<Figures/WorkflowOntology.jpeg, id=466, 807.015pt x 508.90125pt>
+File: Figures/WorkflowOntology.jpeg Graphic file (type jpg)
+
+<use Figures/WorkflowOntology.jpeg>
+Package pdftex.def Info: Figures/WorkflowOntology.jpeg used on input line 105.
+(pdftex.def)             Requested size: 408.24449pt x 257.4396pt.
+ [6 <./Figures/WorkflowOntology.jpeg>]
+Underfull \hbox (badness 10000) in paragraph at lines 141--155
+
+ []
+
+File: Figures/Workflow.jpeg Graphic file (type jpg)
+<use Figures/Workflow.jpeg>
+Package pdftex.def Info: Figures/Workflow.jpeg used on input line 170.
+(pdftex.def)             Requested size: 408.24449pt x 68.95195pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--175
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 195--196
+
+ []
+
+<Figures/Constraints.jpeg, id=480, 918.43124pt x 464.73625pt>
+File: Figures/Constraints.jpeg Graphic file (type jpg)
+
+<use Figures/Constraints.jpeg>
+Package pdftex.def Info: Figures/Constraints.jpeg used on input line 199.
+(pdftex.def)             Requested size: 408.24449pt x 206.5765pt.
+ [8 <./Figures/Constraints.jpeg>]
+Underfull \hbox (badness 10000) in paragraph at lines 214--223
+
+ []
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 53--54
+Underfull \hbox (badness 10000) in paragraph at lines 268--269
 
  []
 
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 75--77
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 79--80
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 91--99
-
- []
-
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
-
- []
-
-) (./Chapters/Praxis.tex [14]
-Chapter 5.
-------------------------------------------------------------------------------
- 5 Praxis
-------------------------------------------------------------------------------
-<"Figures/myProg".png, id=430, 642.4pt x 481.8pt>
-File: "Figures/myProg".png Graphic file (type png)
- <use "Figures/myProg".png>
-Package pdftex.def Info: "Figures/myProg".png used on input line 19.
-(pdftex.def)             Requested size: 375.7232pt x 281.79672pt.
-
-Overfull \hbox (6.16844pt too wide) in paragraph at lines 24--27
-[]\OT1/cmr/m/n/10.95 Das Pro-gramm li-est mit-tels SE-WOL MXML logs ein und ^^?
-ubersetzt sie in Sta-tus Pr^^?adikate.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 29--30
-
- []
-
-[15
-
- <./Figures/myProg.png>]
-Overfull \hbox (10.65305pt too wide) in paragraph at lines 44--48
+[10]
+Overfull \hbox (25.636pt too wide) in paragraph at lines 272--283
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 57--61
+Overfull \hbox (25.636pt too wide) in paragraph at lines 289--308
+[][] 
+ []
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 317--334
+[][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 340--358
+[][]
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 365--374
+[][]
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 380--389
+[][]
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 395--407
+[][]
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 414--417
 
  []
 
-[16]) (./Chapters/Auswertung.tex [17]
-Chapter 6.
-------------------------------------------------------------------------------
- 6 Ergebnisse und Diskussion
-------------------------------------------------------------------------------
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--22
+[11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 426--427
 
  []
 
-) (./Appendices/FurtherConstraints.tex [18
+
+Underfull \hbox (badness 10000) in paragraph at lines 438--446
+
+ []
+
+[13]
+Overfull \hbox (63.77382pt too wide) in paragraph at lines 461--461
+[]\OT1/cmtt/m/n/10.95 IF ACTOR executed ACTIVITY AND EventType(ACTIVITY).'abort
+ed' THEN aborted(ACTOR, ACTIVITY)[] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 514--515
+
+ []
+
+) (./Chapters/Praxis.tex [15]
+Kapitel 3.
+------------------------------------------------------------------------------
+ 3 Praxis
+------------------------------------------------------------------------------
+<Figures/myProg.png, id=540, 642.4pt x 481.8pt>
+File: Figures/myProg.png Graphic file (type png)
+ <use Figures/myProg.png>
+Package pdftex.def Info: Figures/myProg.png used on input line 23.
+(pdftex.def)             Requested size: 408.24449pt x 306.18954pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--34
+
+ []
+
+[16
+
+ <./Figures/myProg.png>]
+<Figures/Container.jpeg, id=552, 985.6825pt x 709.65125pt>
+File: Figures/Container.jpeg Graphic file (type jpg)
+
+<use Figures/Container.jpeg>
+Package pdftex.def Info: Figures/Container.jpeg used on input line 68.
+(pdftex.def)             Requested size: 408.24449pt x 293.92587pt.
+ [17] [18 <./Figures/Container.jpeg>]
+Underfull \hbox (badness 10000) in paragraph at lines 102--106
+
+ []
+
+) (./Chapters/Auswertung.tex [19]
+Kapitel 4.
+------------------------------------------------------------------------------
+ 4 Ergebnisse und Diskussion
+------------------------------------------------------------------------------
+) (./Chapters/verwandteArbeit.tex [20
 
 ]
-Appendix A.
+Kapitel 5.
+------------------------------------------------------------------------------
+ 5 Verwandte Arbeit
+------------------------------------------------------------------------------
+[21
+
+]) (./Chapters/Ausblick.tex [22]
+Kapitel 6.
+------------------------------------------------------------------------------
+ 6 Ausblick
+------------------------------------------------------------------------------
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--13
+
+ []
+
+) (./Appendices/FurtherConstraints.tex [23
+
+]
+Anhang A.
 ------------------------------------------------------------------------------
  A Weitere Beispiele f\IeC {\"u}r die Benutzung der Grammatik
 ------------------------------------------------------------------------------
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--11
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 12--14
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 15--16
+Overfull \hbox (29.2817pt too wide) in paragraph at lines 31--31
+[]\OT1/cmtt/m/n/10.95 DESC "Wenn etwas bestellt wurde, sollte es innerhalb von 
+3 Tagen verschickt werden."[] 
+ []
+
+
+Overfull \hbox (12.03563pt too wide) in paragraph at lines 31--31
+[]\OT1/cmtt/m/n/10.95 DESC "Mitarbeiter aus dem Unternehmen d^^?urfen nicht an 
+dem Gewinnspiel teilnehmen"[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
 ) (./Appendices/Kommandozeilenargumente.tex
-Underfull \hbox (badness 10000) in paragraph at lines 17--2
+Underfull \hbox (badness 10000) in paragraph at lines 34--2
 
  []
 
-[19
+[24
 
-]
-Appendix B.
+] [25]
+Anhang B.
 ------------------------------------------------------------------------------
  B Argumente und Konfiguration
 ------------------------------------------------------------------------------
-) (./Appendices/Programm starten.tex [20
+) (./Appendices/Programmstarten.tex [26
 
 ]
-Appendix C.
+Anhang C.
 ------------------------------------------------------------------------------
  C User Manual
 ------------------------------------------------------------------------------
+) (./Appendices/Grammatik.tex [27
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--11
+]
+Anhang D.
+------------------------------------------------------------------------------
+ D Grammatik
+------------------------------------------------------------------------------
 
+Overfull \hbox (7.22224pt too wide) in paragraph at lines 10--37
+[] 
  []
 
-) (./Appendices/Fehlermeldungen.tex [21
-
-]
-Appendix D.
-------------------------------------------------------------------------------
- D Fehlermeldungen
-------------------------------------------------------------------------------
-) [22
+) [28
 
 ]
 ------------------------------------------------------------------------------
- Bibliography
+ Literaturverzeichnis
 ------------------------------------------------------------------------------
 (./main.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 227.
- [23
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 253.
+ [29
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 227.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 253.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 227.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 227.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 253.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 253.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 8B6B73DA31FBB4AF90129E9C323EBE9D;9765.
+(rerunfilecheck)             Checksum: 5966516206EA83E88E00A592CD5FDB2F;11676.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 227.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 253.
  ) 
 Here is how much of TeX's memory you used:
- 13196 strings out of 494976
- 184743 string characters out of 6179137
- 252374 words of memory out of 5000000
- 16090 multiletter control sequences out of 15000+600000
- 14997 words of font info for 55 fonts, out of 8000000 for 9000
+ 13780 strings out of 494976
+ 192637 string characters out of 6179137
+ 279476 words of memory out of 5000000
+ 16598 multiletter control sequences out of 15000+600000
+ 15296 words of font info for 56 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 49i,12n,45p,718b,428s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 49i,12n,45p,1032b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
@@ -1064,16 +1190,17 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
-b>
-Output written on main.pdf (31 pages, 790662 bytes).
+amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (38 pages, 496917 bytes).
 PDF statistics:
- 554 PDF objects out of 1000 (max. 8388607)
- 494 compressed objects within 5 object streams
- 112 named destinations out of 1000 (max. 500000)
- 458 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 716 PDF objects out of 1000 (max. 8388607)
+ 644 compressed objects within 7 object streams
+ 165 named destinations out of 1000 (max. 500000)
+ 545 words of extra memory for PDF output out of 10000 (max. 10000000)
 

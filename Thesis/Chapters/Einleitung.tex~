@@ -21,8 +21,8 @@ Betrachten wir folgendes Beispiel:\\
 \begin{figure}[ht]
 	\centering
   \includegraphics[width=0.9\textwidth]{"Figures/Workflow"}
-	\caption{Beispiel Workflow}
-	\label{fig: exampleworkflow}
+	\caption{Workflow}
+	\label{fig:Workflow}
 \end{figure}
 
 Um eine Zahlung zu tätigen, muss die Zahlung zuerst beantragt werden. Dieser Antrag muss zweimal geprüft werden. Sollte die Prüfung positiv verlaufen, wird der Antrag bewilligt und die Zahlung wird getätigt.
@@ -53,6 +53,7 @@ In dieser Arbeit wird eine Grammatik entwickelt, die es erlaubt, solche Einschr�
 
 \section{Aufbau der Arbeit}
 Folgende Konventionen werden hier eingehalten: kursive Begriffe  bezeichnen Fachbegriffe, Blockschrift kennzeichnet Pseudocode,...
+Begriffe, die zum ersten mal definiert werden, werden beim ersten Vorkommen \textbf{fett} geschrieben.
 
 In Kapitel 2 werden wichtige Begriffe erläutert. In Kapitel 3 widmen wir uns der  Herleitung von Einschränkungen und der Definition einer antsprechenden Grammatik. Diese wird in Kapitel 4 in ein Programm integriert, welches Event Logs auf die Verletzung von Einschränkungen prüft. Dazu wird der Algorithmus vorgestellt. Kapitel 5 und 6 schließen mit einer Untersuchung der Korrektheit und einem Ausblick in weitere Forschung.
 

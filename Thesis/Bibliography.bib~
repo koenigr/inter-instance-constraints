@@ -35,7 +35,6 @@
 	author = {Tan, K. and Crampton, J. and Gunter, C.A.},
 	month = jun,
 	year = {2004},
-	keywords = {Access control, authorisation, Authorization, Automation, Business process re-engineering, business process specification, cardinality constraints, computational complexity, Computer science, constraint handling, constraint model, duty constraints, formal specification, History, Information security, Permission, role-based access control, security administration complexity, security policies, Sufficient conditions, task-based authorization constraints, workflow authorization, workflow management software, workflow management systems, workflow specification, workflow system constraints},
 	pages = {155--169}
 }
 
@@ -54,18 +53,16 @@
 	pages = {319--338}
 }
 
-@incollection{wang_definition_????,
+@incollection{wang_definition,
 	series = {Lecture {Notes} in {Computer} {Science}},
 	title = {Definition and {Enactment} of {Instance}-{Spanning} {Process} {Constraints}},
 	volume = {7651},
 	isbn = {978-3-642-35062-7},
-	url = {http://dx.doi.org/10.1007/978-3-642-35063-4_49},
 	language = {English},
 	booktitle = {Web {Information} {Systems} {Engineering} - {WISE} 2012},
 	publisher = {Springer Berlin Heidelberg},
 	author = {Leitner, Maria and Mangler, Juergen and Rinderle-Ma, Stefanie},
 	editor = {Wang, X.Sean and Cruz, Isabel and Delis, Alex and Huang, Guangyan},
-	keywords = {Instance-spanning Process Constraints, Process-based Compliance Management, Process Engine, Web-based Business Processes},
 	pages = {652--658}
 }
 
@@ -79,4 +76,35 @@
 	address = {Italy},
 	title = {Checking {Compliance} of {Execution} {Traces} to {Business} {Rules}},
 	author = {Chesani, Federico and Mello, Paola and Montali, Marco and Riguzzi, Fabrizio and Sebastianis, Maurizio and Storari, Sergio}
+}
+
+
+@incollection{mueller_accorsi,
+year={2013},
+isbn={978-3-642-42000-9},
+booktitle={Number Theory and Cryptography},
+volume={8260},
+series={Lecture Notes in Computer Science},
+editor={Fischlin, Marc and Katzenbeisser, Stefan},
+title={Why Are Business Processes Not Secure?},
+publisher={Springer Berlin Heidelberg},
+author={Müller, Günter and Accorsi, Rafael},
+pages={240-254},
+language={English}
+}
+
+
+@incollection{wolter_modeling_of_TBAC_in_BPMN,
+year={2007},
+isbn={978-3-540-75182-3},
+booktitle={Business Process Management},
+volume={4714},
+series={Lecture Notes in Computer Science},
+editor={Alonso, Gustavo and Dadam, Peter and Rosemann, Michael},
+title={Modeling of Task-Based Authorization Constraints in BPMN},
+publisher={Springer Berlin Heidelberg},
+keywords={Security in business processes; Business process modeling and analysis},
+author={Wolter, Christian and Schaad, Andreas},
+pages={64-79},
+language={English}
 }

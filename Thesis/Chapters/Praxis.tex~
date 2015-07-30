@@ -12,6 +12,10 @@
 
 \section{Implementierung}
 
+
+%
+% AUFBAU
+%
 \subsection{Aufbau mein Programm}
 
 \begin{figure}[ht]
@@ -40,10 +44,10 @@ Die Wissensbasis wird aus den Logs herausgelesen und in entsprechende Prädikate
 \end{enumerate}
 
 Die erste Zeile aus dem Eventlog aus Tabelle \ref{tab:examplelog} wird in folgende Wissensbasis konvertiert:
-\begin{table}
+\begin{table}[h]
 \begin{tabular}{ccc}
-activity_workflow(0,0) & activity_name(0,'Approach check') & timestamp(0, 123)\\ 
-eventtype(0, start) & executed_user(0, 'Mark') & executed_role(0, 'Admin') 
+activity{\_}workflow(0,0) & activity{\_}name(0,'Approach check') & timestamp(0, 123)\\ 
+eventtype(0, start) & executed{\_}user(0, 'Mark') & executed{\_}role(0, 'Admin') 
 \end{tabular}
 \caption{fd}
 \label{tab:knowledge}
@@ -53,7 +57,48 @@ eventtype(0, start) & executed_user(0, 'Mark') & executed_role(0, 'Admin')
 
 TODO: Closed World, was passiert mit nicht angegebenen Zeiten,.
 
-\subsection{Algorithmus}
+%
+% EINGABE DER REGELN
+%
+\subsection{Übersetzung der Regeln}
+Die Regeln werden in einer oder mehreren Dateien definiert und von dem ConstraintReader zuerst in speziellen Containern gespeichert, dort sortiert und angepasst und anschließend in zwei Prologdateien geschrieben, die später vom eigentlichen modelchecker verwendet werden.
+
+\begin{figure}[ht]
+	\centering
+  \includegraphics[width=0.9\textwidth]{"Figures/Container"}
+	\caption{Interne Datenstruktur}
+	\label{fig:container}
+\end{figure}
+
+%
+% ALGORITHMUS
+%
+\subsection{Algorithmus Modelchecker}
+
+
+\begin{verbatim}
+3. Add Collaborators
+4. Adddominates
+   Addrelated
+5. For each cannot_execute_user(Actor, Activity): 
+6.	If exists executed_user(Actor, Activity) 
+7. 	then write trace
+8. For each cannot_execute_role(Role, Activity):
+9. 	If exists executed_role(Role, Activity)
+10.	then write trace
+11. For each must_execute_user(Actor, Activity): 
+12.	If not exists executed_user(Actor, Activity) 
+13. 	then write trace
+14. For each must_execute_role(Role, Activity):
+15. 	If not exists executed_role(Role, Activity)
+16.	then write trace
+17. For each panic write trace
+\end{verbatim}
+\begin{figure}[!h]
+\caption{Pseudocode des Modelchecker}
+\label{fig:pseudocode}
+\end{figure}
+
 Zuerst aus Logs Status-Prädikate auslesen.\\
 Für jedes critical task pair entsprechende collaborateurs setzen.\\
 Schleife über Regeln\\

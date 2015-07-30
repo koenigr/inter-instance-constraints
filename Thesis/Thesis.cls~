@@ -69,12 +69,15 @@
 \setlength{\parskip}{2.0ex plus0.5ex minus0.2ex}
 \usepackage{vmargin}
 
+\usepackage[english,ngerman]{babel}
+\usepackage{setspace}\usepackage{threeparttable}
+
 \RequirePackage[utf8]{inputenc} % Allows the use of international characters (e.g. Umlauts)
 
 %----------------------------------------------------------------------------------------
 %	MARGINS
 %----------------------------------------------------------------------------------------
-\setmarginsrb  { 1.5in}  % left margin
+\setmarginsrb  		{ 1.0in}  % left margin
                         { 0.6in}  % top margin
                         { 1.0in}  % right margin
                         { 0.8in}  % bottom margin
@@ -202,8 +205,8 @@
                 {University Name}}
 %-------------------------------------------------   
 \UNIVERSITY{\texorpdfstring{\href{University Web Site URL Here (include http://)} % Your university's URL
-                {ALBERT-LUDWIGS UNIVERSITY OF FREIBURG}} % Your university's name in capitals - this is currently used in the abstract page
-                {ALBERT-LUDWIGS UNIVERSITY OF FREIBURG}}
+                {ALBERT-LUDWIGS-UNIVERSITÄT FREIBURG}} % Your university's name in capitals - this is currently used in the abstract page
+                {ALBERT-LUDWIGS-UNIVERSITÄT FREIBURG}}
 %-------------------------------------------------                
 \department{\texorpdfstring{\href{Department or School Web Site URL Here (include http://)} % Your department's URL
                 {Department or School Name}} % Your department's name - used in the title page and abstract

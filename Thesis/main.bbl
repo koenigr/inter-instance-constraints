@@ -1,15 +1,9 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{5}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
-
-\bibitem[Wolter and Schaad(2007)]{wolter_modeling_of_TBAC_in_BPMN}
-C~Wolter and A~Schaad.
-\newblock Modeling of task-based authorization constraints in bpmn.
-\newblock In \emph{of Lecture Notes in Computer Science}, pages 64--79.
-  Springer, 2007.
 
 \bibitem[Warner and Atluri(2006)]{warner_inter_instance}
 Janice Warner and Vijayalakshmi Atluri.
@@ -19,6 +13,33 @@ Janice Warner and Vijayalakshmi Atluri.
   {Control} {Models} and {Technologies}}, {SACMAT} '06, pages 190--199, New
   York, NY, USA, 2006. ACM.
 \newblock ISBN 1-59593-353-0.
+
+\bibitem[Leitner et~al.(2012)Leitner, Mangler, and
+  Rinderle-Ma]{wang_definition}
+Maria Leitner, Juergen Mangler, and Stefanie Rinderle-Ma.
+\newblock Definition and {Enactment} of {Instance}-{Spanning} {Process}
+  {Constraints}.
+\newblock In X.Sean Wang, Isabel Cruz, Alex Delis, and Guangyan Huang, editors,
+  \emph{Web {Information} {Systems} {Engineering} - {WISE} 2012}, volume 7651
+  of \emph{Lecture {Notes} in {Computer} {Science}}, pages 652--658. Springer
+  Berlin Heidelberg, 2012.
+\newblock ISBN 978-3-642-35062-7.
+
+\bibitem[Wolter and Schaad(2007)]{wolter_modeling_of_TBAC_in_BPMN}
+Christian Wolter and Andreas Schaad.
+\newblock Modeling of task-based authorization constraints in bpmn.
+\newblock In Gustavo Alonso, Peter Dadam, and Michael Rosemann, editors,
+  \emph{Business Process Management}, volume 4714 of \emph{Lecture Notes in
+  Computer Science}, pages 64--79. Springer Berlin Heidelberg, 2007.
+\newblock ISBN 978-3-540-75182-3.
+
+\bibitem[Müller and Accorsi(2013)]{mueller_accorsi}
+Günter Müller and Rafael Accorsi.
+\newblock Why are business processes not secure?
+\newblock In Marc Fischlin and Stefan Katzenbeisser, editors, \emph{Number
+  Theory and Cryptography}, volume 8260 of \emph{Lecture Notes in Computer
+  Science}, pages 240--254. Springer Berlin Heidelberg, 2013.
+\newblock ISBN 978-3-642-42000-9.
 
 \bibitem[Parr(2013)]{antlr}
 Terence Parr.

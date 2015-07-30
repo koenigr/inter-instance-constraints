@@ -1,14 +1,21 @@
+\select@language {german}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Beispiel Log Eintr\IeC {\"a}ge. \relax }}{7}{table.caption.24}
+\contentsline {table}{\numberline {2.1}{\ignorespaces Beispiel Log Eintr\IeC {\"a}ge. \relax }}{6}{table.caption.28}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r externe Informationen. Das sind nur drei Vorlagen. Dem Programmierer ist selbst \IeC {\"u}berlassen, wie er diese Pr\IeC {\"a}dikate interpretieren will.\relax }}{11}{table.caption.60}
+\contentsline {table}{\numberline {2.3}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r die Spezifikation von ...\relax }}{11}{table.caption.61}
+\contentsline {table}{\numberline {2.4}{\ignorespaces Pr\IeC {\"a}dikate, um Aussgen \IeC {\"u}ber den Status in die Regeln mit einbeziehen zu k\IeC {\"o}nnen\relax }}{12}{table.caption.62}
+\contentsline {table}{\numberline {2.5}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r Aussagen \IeC {\"u}ber die Akkumulation von Werten\relax }}{12}{table.caption.63}
+\contentsline {table}{\numberline {2.6}{\ignorespaces Vergleiche\relax }}{12}{table.caption.64}
+\contentsline {table}{\numberline {2.7}{\ignorespaces Operationsn\relax }}{12}{table.caption.65}
+\contentsline {table}{\numberline {2.8}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r den Kopf einer Regel\relax }}{13}{table.caption.66}
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces fd\relax }}{17}{table.caption.93}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces sdf\relax }}{13}{table.caption.45}
-\addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces fd\relax }}{17}{table.caption.65}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Kommandozeilenparameter\relax }}{20}{table.caption.73}
+\contentsline {table}{\numberline {B.1}{\ignorespaces Kommandozeilenparameter\relax }}{26}{table.caption.112}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
