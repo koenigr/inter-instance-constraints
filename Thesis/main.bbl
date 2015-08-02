@@ -1,9 +1,17 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{6}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Wolter and Schaad(2007)]{wolter_modeling_of_TBAC_in_BPMN}
+Christian Wolter and Andreas Schaad.
+\newblock Modeling of task-based authorization constraints in bpmn.
+\newblock In Gustavo Alonso, Peter Dadam, and Michael Rosemann, editors,
+  \emph{Business Process Management}, volume 4714 of \emph{Lecture Notes in
+  Computer Science}, pages 64--79. Springer Berlin Heidelberg, 2007.
+\newblock ISBN 978-3-540-75182-3.
 
 \bibitem[Warner and Atluri(2006)]{warner_inter_instance}
 Janice Warner and Vijayalakshmi Atluri.
@@ -13,6 +21,25 @@ Janice Warner and Vijayalakshmi Atluri.
   {Control} {Models} and {Technologies}}, {SACMAT} '06, pages 190--199, New
   York, NY, USA, 2006. ACM.
 \newblock ISBN 1-59593-353-0.
+
+\bibitem[Müller and Accorsi(2013)]{mueller_accorsi}
+Günter Müller and Rafael Accorsi.
+\newblock Why are business processes not secure?
+\newblock In Marc Fischlin and Stefan Katzenbeisser, editors, \emph{Number
+  Theory and Cryptography}, volume 8260 of \emph{Lecture Notes in Computer
+  Science}, pages 240--254. Springer Berlin Heidelberg, 2013.
+\newblock ISBN 978-3-642-42000-9.
+
+\bibitem[SEW()]{SEWOL}
+Sewol documentation.
+\newblock \url{http://doku.telematik.uni-freiburg.de/sewol}.
+\newblock Accessed: 2015-07-30.
+
+\bibitem[Parr(2013)]{antlr}
+Terence Parr.
+\newblock \emph{The {Definitve} {ANTLR} {Reference} - {Building}
+  {Domain}-{Specific} {Languages}}.
+\newblock The Pragmatic Programmers, 2013.
 
 \bibitem[Leitner et~al.(2012)Leitner, Mangler, and
   Rinderle-Ma]{wang_definition}
@@ -24,27 +51,5 @@ Maria Leitner, Juergen Mangler, and Stefanie Rinderle-Ma.
   of \emph{Lecture {Notes} in {Computer} {Science}}, pages 652--658. Springer
   Berlin Heidelberg, 2012.
 \newblock ISBN 978-3-642-35062-7.
-
-\bibitem[Wolter and Schaad(2007)]{wolter_modeling_of_TBAC_in_BPMN}
-Christian Wolter and Andreas Schaad.
-\newblock Modeling of task-based authorization constraints in bpmn.
-\newblock In Gustavo Alonso, Peter Dadam, and Michael Rosemann, editors,
-  \emph{Business Process Management}, volume 4714 of \emph{Lecture Notes in
-  Computer Science}, pages 64--79. Springer Berlin Heidelberg, 2007.
-\newblock ISBN 978-3-540-75182-3.
-
-\bibitem[Müller and Accorsi(2013)]{mueller_accorsi}
-Günter Müller and Rafael Accorsi.
-\newblock Why are business processes not secure?
-\newblock In Marc Fischlin and Stefan Katzenbeisser, editors, \emph{Number
-  Theory and Cryptography}, volume 8260 of \emph{Lecture Notes in Computer
-  Science}, pages 240--254. Springer Berlin Heidelberg, 2013.
-\newblock ISBN 978-3-642-42000-9.
-
-\bibitem[Parr(2013)]{antlr}
-Terence Parr.
-\newblock \emph{The {Definitve} {ANTLR} {Reference} - {Building}
-  {Domain}-{Specific} {Languages}}.
-\newblock The Pragmatic Programmers, 2013.
 
 \end{thebibliography}

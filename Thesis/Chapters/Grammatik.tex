@@ -1,0 +1,336 @@
+% Chapter Template
+
+\chapter{Grammatik} % Main chapter title
+
+\label{GrammatikKapitel} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 4. \emph{Grammatik}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+In diesem Kapitel wird die Grammatik vorgestellt, die es ermöglichen soll, Regeln innerhalb von Prozessinstanzen aber auch Instanzübergreifend zu definieren. Zuerst muss geklärt werden, welche Anforderungen an die Grammatik gestellt werden und welche Fragen auftauchen. Im zweiten Teil wird die Syntax und Semantik der Grammatik erläutert. Schließlich wird aufgezeigt, wie die vorgestellten Regeln aus Kapitel \ref{sec:exampleconstraints} mithilfe der zuvor definierten Grammatik beschrieben werden können.
+
+%
+% Anforderungen an die Grammatik
+%
+\section{Anforderungen an die Grammatik}
+Um eine ausdrucksstarke Grammatik zu definieren, die möglichst viele Fälle abdeckt, muss zuerst untersucht werden, welche genauen Anforderungen an sie gestellt wird.
+
+Grundsätzlich ist das Ziel, Regeln zur Ausführung bestimmter Aktivitäten auf Basis bereits abgeschlossener Aktivitäten aufzustellen. Es muss also einen Teil geben, in dem man die Bedingungen festlegen kann um dann anzugeben, welche gewünschte Aktion daraus resultiert. Die Bedingungen bilden in den meisten Fällen eine Disjunktion. Werden alle Bedingungen erfüllt, tritt die Regel in Kraft. Zur Vollständigkeit wird hier auch die Option mit aufgenommen, absolute Regeln aufzustellen, die in jedem Fall gelten sollen.
+
+Für alle Regeltypen, die in \ref{sec:ArtenConstraints} gefunden wurden, ist Disjunktion von positiven Bedingungen erlaubt. Um dem Nutzer größtmögliche Freiheit zu lassen, sollte Konjunktion und Negation von Bedingungen ebenfalls angeboten werden.
+
+Das Ziel der Arbeit ist es, Regeln in Instanz-übergreifendem Kontext aufstellen zu können. Trotzdem muss es auch möglich sein, Regeln wie in bisherigen Compliancecheckern auch innerhalb einer Instanz zu prüfen. Es ist deswegen eine eindeutige Konvention notwendig, die deutlich macht, in welchem Kontext die Regel arbeitet.
+
+Im Rollenbasierten Authorisierungsmodell existiert das einfache Rollenmodell, in welchem dem Nutzer nur die Rollen zur Verfügung stehen, die ihm explizit zugewiesen wurden. Es gibt keine eindeutig festgelegten Hierarchien zwischen den Rollen. Im hierarchischen Rollenmodell hingegen kann ein Nutzer jede Rolle annehmen, die gleich oder unter der ihm zugewiesenen Rolle steht. Die Grammatik sollte beide Modelle behandeln können.
+
+Da es Bedingungen in Bezug auf Zeitpunkte, Zeitunterschiede und Werte von Attributen gibt, müssen zumindest grundlegende arithmetische Operationen erlaubt sein.
+
+Eventlogs speichern zu jeder Aktivität jedes einzelne Event. Das könnte entweder die Eingabe der Regeln unnötig kompliziert machen (indem der Anwender zu jeder einzelnen Aktivität immer das Event angeben muss) oder es würde zu multiplen Ergebnissen führen. Es muss deshalb eine Einigung geben, auf welches Event sich eine Bedingung bezieht und gleichzeitig die Möglichkeit offenlassen, auch weitere Events zu untersuchen. Zum Beispiel besteht die Frage, auf welches Event einer Aktivität sich der Zeitpunkt der Aktivität bezieht.
+
+Unter Berücksichtigung aller gestellten Forderungen sollte trotzdem eine möglichst intuitive, leicht zu lernende und leicht zu verstehende Notation gewährleistet sein. Im folgenden wird die entwickelte Grammatik vorgestellt und im Anschluss geklärt, inwiefer die hier aufgeführten Fragen und Anforderungen gelöst wurden.
+%
+% Definition der Grammatik
+%
+\section{Definition der Grammatik}
+Für ein besseres Verständnis der Definition wird hier zuerst ein kleines, intuitiv zu verstehendes Beispiel aufgezeigt (Abb. \ref{fig:demorulefile}). Am Anfang wird spezifiziert, dass Mark Maier und Max Mueller Verwandte sind. In der nächsten Zeile wird die Regel aufgestellt, dass Verwandte nicht gemeinsam and den Aktivitäten 'Kredit beantragen' und 'Kredit prüfen' arbeiten dürfen. Sollte Mark Maier den Kredit beantragt haben, wird Max Mueller die Prüfung des Kredits untersagt.\\
+
+\begin{verbatim}
+SET 'Mark Maier' is related to 'Max Mueller'
+
+DESC "'Kredit beantragen' und 'Kredit prüfen' darf nicht von Verwandten ausgeführt werden"
+IF USER_A executed 'Kredit beantragen' AND USER_A is related to USER_B
+  THEN USER_B cannot execute 'Kredit prüfen'
+\end{verbatim}
+\begin{figure}[!h]
+\caption{Beispiel Spezifikation einer einfachen Regel}
+\label{fig:demorulefile}
+\end{figure}
+
+
+Das Ziel der Grammatik ist es, gewünschte oder unerwünscht Aktionen in Abhängigkeit von zuvor stattgefundenen Aktivitäten zu definieren. Zu diesem Zweck werden die Bedingungen als eine Disjunktion von Prädikaten über den Verlauf gebildet. Sollten diese Aussagen alle zu einem positiven Ergebnis führen, tritt die Einschränkung in Kraft. Diese Einschränkung macht eine Aussage darüber, ob eine bestimmte Aktivität von einem Nutzer / Rolle ausgeführt werden muss bzw dass sie von einem Nutzer/Rolle nicht ausgeführt werden darf. Es gibt auch Regeln, die aufzeigen, wann ein Verlauf nicht der Spezifikation entsprach (\texttt{illegal\_execution}).\\
+In den nächsten Abschnitten werden zuerst die Variablen, Konstanten und Prädikate vorgestellt, bevor dann im Anschluss die Syntax und Semantik der Grammatik genauer erläutert wird.
+
+\subsection{Argumente - Variablen und Konstanten}
+
+Prädikate sind Aussagen über Parameter einer Aktivität oder über Beziehungen zwischen Rollen oder Nutzern. Außer dem Prädikat \texttt{illegal execution} muss jedem mindestens ein Argument übergeben werden. Die Argumente sind entweder Variablen oder Konstanten in Form einer Zeichenkette oder einem numerischen Wert. Der Typ des Argumentes wird in der Grammatik nicht explizit deklariert, sondern erschließt sich aus dem Kontext des jeweiligen Prädikates. In diesem Abschnitt werden alle verwendbaren Typen vorgestellt. Sollte ein Argument als Variable übergeben werden, beginnt das Argument für jeden Typ mit einem Großbuchstaben. Die Form der Konstanten hängt von dem entsprechenden Typ ab. Grundsätzlich gilt, dass alle Typen außer den Zeiten und numerischen Werten einen String als Konstante haben, der mit einfachen Anführungszeichen umschlossen sein muss. Innerhalb der Anführungszeichen sind alle Zeichen erlaubt.
+
+\begin{table}[h]
+\begin{tabular} {|p{2cm}|p{13cm}|}
+\hline
+\textbf{Typ}&\textbf{Beschreibung}\\
+\hline
+UT& Variablen und Konstanten über Nutzer. Als Konstante sind Nutzer ein String.\\
+\hline
+RT& Variablen und Konstanten über Rollen. Als Konstante sind Rollen ein String.\\
+\hline
+TT& Variablen und Konstanten über Aktivitäten. Als Konstante sind Aktivitäten ein String.\\
+\hline
+WT& Variablen und Konstanten über Prozesse. Dieser Typ bezeichnet das Prozessschema. Als Konstante sind Prozesse ein String.\\
+\hline
+WIT& Variablen und Konstanten über Prozessinstanzen. Als Konstante sind Prozessinstanzen ein String.\\
+\hline
+ET&  Variablen und Konstanten über Eventtypen. Als Konstante sind Events aus der Menge $\{$'started', 'completed',..$\}$ (siehe \ref{sec:activities}).\\
+\hline
+TP& Variablen und Konstanten über Zeitpunkte. Als Konstante // TODO ISO und Verweise auf genaue Definition.. oder doch lieber hier genau deifnieren?.\\
+\hline
+TS& Variablen und Konstanten über Zeitspannen. Als Konstante // TODO.\\
+\hline
+NT&  Variablen und Konstanten über numerische Werte. Als Konstante sind numerische Werte eine Zahl größer Null.\\
+\hline
+\end{tabular}
+\caption{Argument Typen, die bei Prädikaten vorkommen können}
+\label{tab:args}
+\end{table}
+
+\subsection{Prädikate}
+Prädikate sind Aussagen über bestimmte Zustände. (TODO Ich wiederhole mich hier!!) Es gibt verschiedene Typen. Externe Informationen, Spezifikation, Status, Enforcement und Konditionell. \\
+
+Externe Informationen (Tabelle \ref{tab:extern}) sind Aussagen, die nicht direkt mit der Workflow Spezifikation zu tun haben aber dennoch relevant für den Ablauf sein könnten. Diese Prädikate müssen explizit in den Regeln gesetzt werden, da es sonst zu keinem Ergebnis führt.
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+UT is related to UT 		& Beide User sind verwandt \\
+\hline
+UT is partner fo UT		& Beide Akteure sind Partner \\
+\hline
+UT is in same group as UT	& Beide Akteure sind in der selben Gruppe, Abteilung\\
+\hline
+\end{tabular}
+\caption{Prädikate für externe Informationen. Das sind nur drei Vorlagen. Dem Programmierer ist selbst überlassen, wie er diese Prädikate interpretieren will.}
+\label{tab:extern}
+\end{table}
+
+Spezifikationsprädikate (Tabelle \ref{tab:specification}) bestimmen die Beziehungen und Zugehörigkeit zwischen Nutzern, Rollen und Tasks. Sie Sollten genauso gesetzt werden, wie die Spezifikation war, als der Workflow ausgeführt wurde.
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+'role' RT 'can execute' TT	& RT ist in  R(TT)\\
+\hline
+'user' UT 'can execute' TT 	& UT ist in U(TT)\\
+\hline
+'user' UT 'belongs to role' RT  & (UT,RT) ist in UR\\
+\hline
+RT 'is glb of' TT 		& greatest lower bound. TT muss mindestens mit Rolle RT ausgeführt werden\tnote{1}\\
+\hline
+RT 'is lub' TT 			& lowest upper bound. TT darf höchstens mit Rolle RT ausgeführt werden\tnote{1}\\
+\hline
+RT 'dominates' RT 		& Rolle 1 dominiert Rolle 2\tnote{1}\\
+\hline
+'critical{\_}task{\_}pair(' TT ',' TT ')'& Die beiden Tasks sind ein kritisches Paar. Die User werden markiert, die dieses Paar ausführen\\
+\hline
+\end{tabular}
+\begin{tablenotes}\footnotesize 
+\item[1] In Bezug auf die jeweilige Rollenhierarchie 
+\end{tablenotes}
+\caption{Prädikate für die Spezifikation von ...}
+\label{tab:specification}
+\end{table}
+
+Statusprädikate (Tabelle \ref{tab:status}) sind Aussagen über Aktivitäten. Diese werden später mit den Informationen aus den Logs verglichen. 
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+('user')? UT 'executed' TT      & Ut hat TT so ausgeführt, dass TT completed ??\\
+\hline
+'role' RT 'executed' TT		& RT hat TT ausgeführt\\
+\hline
+UT 'is assigned to' TT		& UT wurde TT zugewiesen\\
+\hline
+TT 'aborted'			& TT ist abgebrochen\\
+\hline
+TT 'succeeded'			& TT hat geklappt \\
+\hline
+UT 'is collaborator of' UT	& UT sind alle Akteure, die an criticalTaskPair gearbeitet haben\\
+\hline
+\end{tabular}
+\caption{Prädikate, um Aussgen über den Status in die Regeln mit einbeziehen zu können}
+\label{tab:status}
+\end{table}
+
+Konditionelle Prädikate (Tabelle \ref{tab:conditional})
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+number where body is RES		& Zählt die Anzahl der verschiedenen Lösungen für body \\
+\hline
+number of VAR where body is RES	& Zählt die Anzahl der verschiedenen Lösungen für VAR, die body erfüllen. VAR muss mindestens einmal in body vorkommen.\\
+\hline
+sum of NT where body is RES		& Gibt die Summe von NT zurück. NT muss im body enthalten sein und zählt alle Lösungen mit. NT muss\\
+\hline
+avg of NT ?TauT? where body is RES		& Gibt den Durchschnitt von NT zurück.\\
+\hline
+min of NT ?TauT? where body is RES		& Gibt das Minimum von NT zurück.\\
+\hline
+max of NT ?TauT? where body is RES		& Gibt das Maximum von NT zurück.\\
+\hline
+\end{tabular}
+Das Resultat wird in der Variable gespeichtert, die anstelle von RES definiert wurde. Body ist eine Konjunktion von Status- , Externen und Spezifikationsprädikaten.
+\caption{Prädikate für Aussagen über die Akkumulation von Werten}
+\label{tab:conditional}
+\end{table}
+
+
+Vergleiche (Tabelle \ref{tab:comparison})
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+ $= | !=$		& ww \\
+ $< | <= | > | >=$   	& dd \\
+\hline
+\end{tabular}
+...
+\caption{Vergleiche}
+\label{tab:comparison}
+\end{table}
+
+Operationen (Tabelle \ref{tab:operations})
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+ $+ |-$		& bb \\
+ $ * | / $   	& bb \\
+\hline
+\end{tabular}
+...
+\caption{Operationsn}
+\label{tab:operations}
+\end{table}
+
+Kopfprädikate. Diese müssen im Kopf einer Regel stehen, und dürfen nicht im Körper vorkommen. (Tabelle \ref{tab:head})
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+UT cannot execute TT		& ww \\
+UT must execute TT  		& dd \\
+RT cannot execute TT		& \\
+RT must execute TT		& \\
+illegal execution		& \\
+\hline
+\end{tabular}
+...
+\caption{Prädikate für den Kopf einer Regel}
+\label{tab:head}
+\end{table}
+
+
+
+\subsection{Regeln}
+Regeln (Constraints sind Schlussfolgerungen, die sich aus Vorbedingungen ergeben. Es gibt positive und negative. Die positiven sagen, dass etwas passieren muss, die negativen verbieten, dass etwas passiert)\\
+Ableitung,...\\
+Die Köper der Regel werden als Konjunktion (Disjunktion ist ebenfalls möglich, jedoch nicht zwingend notwendig - siehe Kapitel \ref{sec:disjunction}) von Prädikaten gebildet.\\
+
+\begin{verbatim}
+IF body THEN head
+\end{verbatim}
+
+Der Körper - body ...\\
+Der Kopf der Regel - head darf nur aus 
+
+\subsection{Grammatik - Syntax und Semantik}
+
+\textbf{Reservierte Keywords}\\
+
+
+
+
+Konstanten sind als 'String' , Variablen ohne \\
+Welche Zeichen darf man wo verwenden?\\
+Verfügbare Literale\\
+Syntax\\
+Fakten: SET extern|workflow \\
+Regeln: 	IF (..|..) (AND (..|..)*) \\
+THEN (..|..) \\
+WHERE t.name = t2.name AND  ...\\
+
+
+%
+% Erklärungen zur Grammatik
+%
+\section{Verwendung der Grammatik, Erklärungen}
+Wenn sich etwas auf jede Instanz einzeln beziehen muss, muss Task1.workflow.instance = Task2.workflow.instance\\
+Eignet sich für hierarchisches und auch für normales Rollenmodell. Hängt nur davon ab, ob die Hierarchie als Fakt gesetzt wurde.\\
+User und ihre Rollenzuweisungen müssen nicht explizit angegeben werden. Nur wenn man das für die Vergleiche braucht.\\
+Beziehung zwischen critical task pair und collaborateur.
+\subsection{Disjunktion}
+\label{sec:disjunction}
+Es wird wenige Fälle geben, in denen eine Disjunktion von Klauseln notwendig ist. Um besser nachvollziehen zu können, zu welchem Fall eine Regelverletzung gehört, ist es oft sogar sinnvoller, eine Regel, die mehrere Fälle erlaubt, und mehrere Regeln aufzuteilen. Jedoch kann es verwendet werden, um Kardinalitätsaussagen einfacher darstelen zu können (TODO: mein Beispiel auf einem Zettel suchen), deswegen wird Disjunktion in der Grammatik erlaubt. Um die ??Assoziativität?? deutlich zumachen, müssen Disjunktionen in einer Klammer stehen. Disjunktion ohne umgebende Klammern ist nicht erlaubt. Disjunktionen von Konjunktionstermen ist nicht erlaubt.
+
+\begin{verbatim}
+IF (User executed 'task1' OR USER executed 'task2')
+THEN User cannot execute 'task3'
+\end{verbatim}
+\begin{figure}[!h]
+\caption{Disjunktion im Körper einer Regel. Man beachte, dass jede Disjunktion von umschließenden Klammern umgeben sein muss.}
+\label{fig:disjunction1}
+\end{figure}
+
+Im Kopf einer Regel ist Disjunktion nicht erlaubt. Die Regel muss in zwei getrennte Regeln gespalten werden.
+
+\begin{verbatim}
+IF User executed 'task1'
+THEN User cannot execute 'task2'
+
+IF User executed 'task1'
+THEN User cannot execute 'task3'
+\end{verbatim}
+\begin{figure}[!h]
+\caption{Disjunktion im Kopfbereich ist nicht erlaubt. Es müssen zwei getrennte Regeln erstellt werden.}
+\label{fig:disjunction2}
+\end{figure}
+
+\subsection{Umgang mit verschiedenen Rollenmodellen}
+In den meisten Systemen wird ein hierarchisches Rollenmodell eingesetzt. Man ist bei der Analyse mit diesem Modelchecker nicht daran gebunden.
+
+
+\subsubsection{Definition eigener Prädikate}
+Es kann nötig erscheinen, eigene Prädikate zu definieren. Zum Beispiel um weitere Personengruppen anzulegen oder um Abkürzungen für Zusammenhänge zu erstellen. Dafür gibt es die Möglichkeit, ein Prädikat mittels des Schlüsselwortes "Def" zu Beginn der Regeldefinitionen zu setzen. In der Definition wird der Typ der Argumente gesetzt. Man hat die Wahl zwischen UT,RT,TT,...
+Um die eigenen Prädikate nutzen zu können, muss man jedoch beachten, dass sie bei der Definition noch keinen "Wert" haben. Entweder muss man sie dann mit "SET" setzen oder mann kann ihnen eine Regel erstellen. Um die Prädikate für den Parser und die weitere Verarbeitung eindeutig sind, sind sie an eine spezielle Form gebunden: predicate{\_}name( ARGType,...).
+
+\begin{verbatim}
+DEF suspicious(UT)
+DEF skipped(TT)
+DEF aborted(UT,TT)
+
+SET suspicous('Max Neuer')
+SET suspicous('Tom Weisser')
+
+IF EventType(ACTIVITY).'skipped' THEN skipped(ACTIVITY)
+IF ACTOR executed ACTIVITY AND EventType(ACTIVITY).'aborted' THEN aborted(ACTOR, ACTIVITY)
+\end{verbatim}
+\begin{figure}[!h]
+\caption{Definition eigener Prädikate. .. wurde gesetzt, .. hat eine eigene Regel}
+\label{fig:define}
+\end{figure}
+
+\subsection{Negation}
+Negation wird ebenfalls für die Bildung der meisten Regeln nicht benötigt, wird hier aber der Vollständigkeit halber erlaubt. Dabei gilt hier das Prinzip der \textbf{negation as failure}. Da nicht garantiert werden kann, dass ein Arbeitsablauf vollständig und korrekt geloggt wurde, muss man sich hier darauf einigen, dass das "nicht-vorhandensein" einer Klausel trotzdem mit der Negation dieser Klausel gleichzusetzen ist. Sollte das ein Fehler sein, entsteht ein False-positive Eintrag, dh. es wird ein Fehler zuviel angezeigt.
+
+
+
+%
+% Nochmal konkretes Beispiel
+%
+\section{konkretes Beispiel}
+Die zuvor gefundenen Beispiele wären mit der neuen Grammtik:\\
+\begin{verbatim}
+/* C1 */
+IF NUMBER OF USER executed TASK IS N AND N > 5
+  THEN USER cannot execute TASK
+\end{verbatim}
+\begin{figure}[!h]
+\caption{Regeln für unsere gefundenen Beispiele}
+\label{fig:resultrulefile}
+\end{figure}

@@ -1,10 +1,10 @@
 % Appendix D
 
-\chapter{Grammatik} % Main appendix title
+\chapter{Grammatik in BNF Form} % Main appendix title
 
 \label{Grammatik} % For referencing this appendix elsewhere, use \ref{AppendixA}
 
-\lhead{Appendix R. \emph{Grammatik}} % This is for the header on each page - perhaps a shortened title
+\lhead{Appendix R. \emph{Grammatik in BNF Form}} % This is for the header on each page - perhaps a shortened title
 
 
 \begin{tabular}{lll}
@@ -31,7 +31,7 @@ $<$uppercase letter$>$  &::=& A $|$ B $|$ C $|$ ... $|$ X $|$ Y $|$ Z \\
 $<$numeral$>$  		&::=& $<$digit$> | <$numeral$> <$digit$>$\\
 $<$digit$>$  		&::=& 0 $|$ 1 $|$ 2 $|$ 3 $|$ 4 $|$ 5 $|$ 6 $|$ 7 $|$ 8 $|$ 9\\
 $<$character$>$  	&::=& $<$lowercase letter$> | <$uppercase letter$> | <$digit$> | <$special$>$\\
-$<$special$>$  		&::=& + $|$ - $|$ * $|$ / $|$ \ $| ^ | ~ | : |$ . $|$ ? $|$  $| # |$ \$ $|$ \&\\
+$<$special$>$  		&::=& + $|$ - $|$ * $|$ / $|$ \ $| ^ | ~ | : |$ . $|$ ? $|$  $| \# |$ \$ $|$ \&\\
 $<$string$>$  		&::=& $<$character$> | <$string$> <$character$>$
 \end{tabular}
 

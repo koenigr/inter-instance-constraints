@@ -1,80 +1,132 @@
 % Chapter Template
 
-\chapter{Praxis} % Main chapter title
+\chapter{Implementierung} % Main chapter title
 
 \label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-\lhead{Chapter 5. \emph{Ergebnisse}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+\lhead{Chapter 5. \emph{Implementierung}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
 %----------------------------------------------------------------------------------------
 %	PRAXIS
 %----------------------------------------------------------------------------------------
 
-\section{Implementierung}
-
-
 %
 % AUFBAU
 %
-\subsection{Aufbau mein Programm}
+In diesem Kapitel wird darauf eingegangen, aus welchen Komponenten der im Rahmen dieser Arbeit entwickelte IICMChecker (\textbf{I}nter-\textbf{I}nstance \textbf{C}onstraints \textbf{M}odel \textbf{C}hecker) zur Überprüfung auf Einhaltung von Einschränkungen bei Prozessen auf Log-Basis aufgebaut ist und welche Funktion sie haben. Das Programm ermöglicht die Eingabe von Einschränkungen und Regeln im Intra-Instance sowie im Inter-Instance Kontext in einer intuitiven, an die natürliche Sprache angelehnte Eingabesprache. Diese Regeln werden in einem Container abgelegt, der sie in Klauseln im Prolog Format konvertiert. Ebenfalls werden einige Optimierungen und zusätzliche Prädikate hinzugefügt, die sicher stellen, dass die Regeln im richtigen Kontext angewandt werden.
 
 \begin{figure}[ht]
 	\centering
-  \includegraphics[width=0.9\textwidth]{"Figures/myProg"}
-	\caption{Aufbau mein Programm}
+  \includegraphics[width=0.9\textwidth]{Figures/myProg}
+	\caption{Aufbau des IICMCheckers}
 	\label{fig: myprog}
 \end{figure}
+Das Programm besteht aus drei Teilen die über Prologdateien miteinander kommunizieren, wobei die Lesenden Teile in Java implementiert sind und der ausführende Teil (der eigentliche Modelchecker) in Prolog ausgeführt wird.
+Der Logtransformer liest Logs im SEWOL \cite{SEWOL} Format ein und übersetzt sie in Status Prädikate (siehe Abschnitt \ref{sec:logtransformer}). 
+Die Constraints werden ebenfalls vom Constraintreader (siehe Abschnitt \ref{sec:constraintreader}) eingelesen und in Regelprädikate übersetzt.
+Der Compliancechecker selbst ist in Prolog geschrieben und liest dazu die zuvor erstellten Statusprädikate und Regeln (für näheres siehe Abschnitt \ref{sec:compliancechecker}. Im letzten Abschnitt \ref{sec:results} wird noch kurz darauf eingegangen, wie die Ergebnisse des compliancecheckers interpretiert werden müssen.
 
-Das Programm liest mittels SEWOL MXML logs ein und übersetzt sie in Status Prädikate. 
-Die Constraints werden ebenfalls eingelesen und in Regelprädikate übersetzt. Der Parser für die Grammatik wurde mit ANTLR\cite{antlr} erzeugt.
-Die eigentliche Untersuchung kann entweder durch ein Skript oder innerhalb des Javacodes gestartet werden.
+\section{Verwendete Hilfsmittel}
+\subsection{SEWOL}
+SEWOL (\textbf{SE}curity-oriented \textbf{WO}rkflow \textbf{L}ib) wird am Institut für Informatik und Gesellschaft an der Universität Freiburg entwickelt. SEWOL ist eine Bibliothek, die das Arbeiten mit Prozesslogs unterstützt. Es bietet unter anderem die Möglichkeit, Logs in einfacher Text-Form, MXML und XES Format zu parsen und auch zu serialisieren. Ein Log besteht aus mehreren \textit{traces}, wechels wiederum eine Liste von Log Einträgen enthält. Ein einzelner Eintrag repräsentiert dabei ein Event einer einzelnen Aktivität in einem Prozess. Zu jedem Logeintrag können zusätzliche Informationen hinzugefügt werden, wie der Zeitpunkt der Ausführung, der Nutzer (die Person oder das System, welcher für die Ausführung verantwortlich ist), die Rolle des Nutzers, den Typen des Events (start, complete,..) und weiteren Meta Informationen, die in Form von \textit{DataAttributes} hinzugefügt werden können. \cite{SEWOL} // TODO: ACHTUNG! SATZSTELLUNGEN ÄNDERN
+\subsection{ANTLR}
+ANTLR (\textbf{AN}other \textbf{T}ool for \textbf{L}anguage \textbf{R}ecognition) ist ein objektorientierter Parser Generator, der dazu geeignet ist, strukturierten Text zu lesen, zu bearbeiten, zu übersetzen und auszuführen. Die Applikation wird seit 1989 von Terence Parr an der Universität von San Francisco entwickelt und ist als freie Software verfügbar.\\
+Eine vom Nutzer definierte Grammatik wird zuerst von einem Lexer verarbeitet und der entstehende Tokenstream anschließend geparst. Die Grammatik selbst ist in Parser und Lexer Regeln aufgeteilt. Zu der Grammatik erstellt ANTLR einen \textit{parse tree}, welcher eine Datenstruktur ist, die repräsentiert, wie eine Grammatik den gelesenen Text interpretiert. Zudem wird ein entsprechender \textit{parse tree walker} und \textit{listener} erzeugt, die den \textit{parse tree} durchlaufen und gemäß der Implementierung des \textit{listeners} verarbeiten.\\
+ANTLR selbst in in Java geschrieben.\cite{antlr}
+\subsection{Programmiersprachen} 
+Die Regeldefinition erfolgt in der eigens dafür entwickelten Grammatik (Kapitel \ref{GrammatikKapitel}). Das Einlesen der Logs sowie deren Konvertierung als auch das Übersetzen der Grammatik wurde in Java implementiert. Alle Informationen werden in Prolog Klauseln und Regeln übersetzt, welche mit dem Compliancechecker in Prolog ausgewertet werden.
 
-\subsection{Wissensbasis}
-Die Wissensbasis wird aus den Logs herausgelesen und in entsprechende Prädikate übersetzt. Auf Basis dieser Prädikate arbeitet der Modelchecker. Die Wissensbasis besteht aus genau 7 möglichen Prädikaten, welche ausreichen, um die Events vollständig wiederzugeben:\\
+%
+% ARCHITEKTUR UND UMSETZUNG
+%
+\section{Architektur und Umsetzung der Analyse}
+\subsection{Erstellen der Wissensbasis - Einlesen der Logs}
+\label{sec:logtransformer}
+Um dem Compliancechecker die Informationen in einem verwendbaren Format als Prolog Klauseln liefern zu können, werden die Logs mittels SEWOL eingelesen. Der Logtransformer erstellt daraufhin für jeden einzelnen Eintrag je nach enthaltenen Informationen Klauseln aus sieben möglichen Prädikaten her, die in der Datei \textit{Status.pl} im Ordner \textit{prologfiles} gespeichert werden. 
+Die \textbf{taskID} wird dabei automatisch generiert, um zusammengehörige Einträge zu identifizieren. Die restlichen Argumente entsprechen den Informationen, die zu den jeweiligen Aktivitäten herausgelesen werden konnten. Sollte ein Eintrag nicht vorhanden sein, wird er nicht gesetzt und gilt bei der späteren Untersuchung bei einer Anfrage \textbf{false} zurück.
 
-\begin{enumerate}
-\item \textbf{workflow{\_}name(caseID, workflowName)}: Weist einer Case ID einen eindeutigen Namen hinzu, welcher der Workflow Spezifikation entspricht. Die Case ID kennzeichnet die Instanz, konkrete Ausführung eines Workflows. Dieses Prädikat dient jedoch nur zur Vollständigkeit. Sollte es für den Arbeitsablauf keinen eindeutigen Namen geben, wird dieses Prädikat nicht gesetzt. Es kann im Modelchecker dann auch nicht darauf zugegriffen werden.
-\item \textbf{activity{\_}workflow(activityID, caseID)}: Setzt fest, zu welcher case ID die Activity gehört. TaskID wird intern vom Transformer gesetzt.
-\item \textbf{activity{\_}name(taskID, taskName)}: Legt den Namen der Activity fest. Dieser ist im MXML Modell als WorkflowModelElement zu finden.
-\item \textbf{timestamp(taskID, timestamp in ms)}: Zeitpunkt der Aktivität in ms nach 1970. Sollte kein Zeitpunkt eingetragen sein, wird entweder kein Fakt gesetzt, oder es wird die Reihenfolge der Einträge genommen. Dazu wird der letzte Wert + 1 ms gesetzt.
-\item \textbf{eventtype(taskID, eventtype)}: Der Eventtyp der Aktivität. Im Grundmodell sind es start, accept, abort, ... Kann jedoch varriieren.
-\item \textbf{executed{\_}user(user, taskID)}: Der Nutzer, der die Activity ausgeführt hat.
-\item \textbf{executed{\_}group(group, taskID)}: Die Rolle, in der die Activity ausgeführt wurde. Man beachte, dass ein Nutzer mehrere Rollen haben kann.
-\item \textbf{task{\_}attribute(taskID, attrName, attrType, attrValue)}: In dieser Wissensbasis wird zwischen zwei Typen unterschieden. String-Attributen, welche nur Vergleichsoperatoren kennen. Hat das Attribut im ürsprünglichen Event ein anderes Format, muss es für die Analyse in eine passende String Darstellung konvertiert werden. 
-\end{enumerate}
 
-Die erste Zeile aus dem Eventlog aus Tabelle \ref{tab:examplelog} wird in folgende Wissensbasis konvertiert:
-\begin{table}[h]
-\begin{tabular}{ccc}
-activity{\_}workflow(0,0) & activity{\_}name(0,'Approach check') & timestamp(0, 123)\\ 
-eventtype(0, start) & executed{\_}user(0, 'Mark') & executed{\_}role(0, 'Admin') 
+\begin{table}[h!]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+\small workflow{\_}name(caseID,workflowName)& Weist einer Case ID einen eindeutigen Namen hinzu, welcher der Workflow Spezifikation entspricht. Die Case ID kennzeichnet die Instanz, konkrete Ausführung eines Workflows. Dieses Prädikat dient jedoch nur zur Vollständigkeit. Sollte es für den Arbeitsablauf keinen eindeutigen Namen geben, wird dieses Prädikat nicht gesetzt. Es kann im Modelchecker dann auch nicht darauf zugegriffen werden.\\
+\hline
+\small task{\_}workflow(taskID, caseID)& Setzt fest, zu welcher case ID die Activity gehört. TaskID wird intern vom Transformer gesetzt.\\
+\hline
+\small task{\_}name(taskID,taskName)&Legt den Namen der Activity fest. Dieser ist im MXML Modell als WorkflowModelElement zu finden. \\
+\hline
+\small timestamp(taskID,timestamp)&Zeitpunkt der Aktivität in ms nach 1970. \\
+\hline
+\small eventtype(taskID,eventtype)& Events, wie sie in Abschnitt \ref{sec:activities} - Aktivitäten vorgestellt werden. Es ist möglich, die Events neu zu definieren.\\
+\hline
+\small executed{\_}user(user,taskID)&Der Nutzer, der die Activity ausgeführt hat. \\
+\hline
+\small executed{\_}group(group,taskID)&Die Rolle, in der die Activity ausgeführt wurde. Man beachte, dass ein Nutzer mehrere Rollen haben kann.\\
+\hline
+\small task{\_}attribute(taskID, attrName, attrValue)& Alle weiteren Attribute, die in SEWOL unter MetaAttributes stehen. Das zweite Argument ist der Name des Attributs und das dritte Argument der Wert des Attributs. Die Werte werden entweder als String gespeichert, oder - wenn möglich - als Nummer, um später Vergleiche und arithmetische Operationen zu ermöglichen. \\
+
+\hline
 \end{tabular}
-\caption{fd}
+Diese Statusprädikate werden aus den Logs extrahiert.
+\caption{Statusprädikate}
+\label{tab:statuspr}
+\end{table}
+
+Die ersten 2 Zeilen aus Tabelle \ref{tab:examplelog} werden somit in die Wissensbasis aus Tabelle \ref{tab:knowledge} konvertiert.
+\begin{table}[h!]
+\begin{tabular}{ccc}
+task{\_}workflow(0,0)&task{\_}workflow(1,0)\\
+task{\_}name(0,'Approach check')&task{\_}name(1,'Pay check')\\
+timestamp(0, 123)&timestamp(1, 123)\\
+eventtype(0, start)&eventtype(1, start)\\
+executed{\_}user(0, 'Mark')&executed{\_}user(1, 'Theo')\\
+executed{\_}role(0, 'Admin')&executed{\_}role(1, 'Azubi')\\
+task\_attribute(0, 'amount', 3000)& task\_attribute(0, 'amount', '3000Euro')\\
+\end{tabular}
+\caption{Aus einem Log herausgelesene Klauseln in Prolog. Die TaskID wird für jeden Eintrag automatisch generiert. Die restlichen Informationen stammen aus dem Log. Diejenigen Attributswerte, die eine valide Zahl darstellen, werden auch als Zahl gespeichert, um arithmetische Operationen zu erlauben. Die restlichen Werte werden als String im Prolog Format (zwei einfach Striche) gespeichert. }
 \label{tab:knowledge}
 \end{table}
 
-
-
-TODO: Closed World, was passiert mit nicht angegebenen Zeiten,.
 
 %
 % EINGABE DER REGELN
 %
 \subsection{Übersetzung der Regeln}
-Die Regeln werden in einer oder mehreren Dateien definiert und von dem ConstraintReader zuerst in speziellen Containern gespeichert, dort sortiert und angepasst und anschließend in zwei Prologdateien geschrieben, die später vom eigentlichen modelchecker verwendet werden.
+\label{sec:constraintreader}
+
+Der Parser und Listener für die Grammatik wurde mit ANTLR 4.5 \cite{antlr} erzeugt. Die Grammatik selbst wird in einfachen Textdateien ohne Endung im Ordner \textit{rulefiles} abgelegt \footnote{Im Anhang B - Argumente und Konfiguration wird beschrieben, wie sich der Quellordner und Dateinamen manuell anpassen lassen.}. Während der Parse Tree Walker den Parse Tree durchläuft, fügt der Listener die gefundenen Klauseln und Regeln den entsprechenden Containern hinzu. Gleichzeitig werden weitere Klauseln gesetzt, die notwendig sind, um den entsprechenden Kontext sicherzustellen. Sobald alle Regeln gesetzt sind, lässt der StorageHelper alle Container die enthaltenen Informationen in geordneter Reihenfolge in Prologdateien ablegen. Aus der Grammatik entstehen zwei Dateien \textit{externspec.pl}(hier stehen alle Klauseln aus den \texttt{SET} Operationen) und \textit{rules.pl} ( die Regeln im \texttt{IF} body \texttt{THEN} head Abschnitt) im Ordner \textit{prologfiles}.\\
+
+\textbf{Container Datenstruktur}\\
+Die Container sind eine Datenstruktur, in der alle Klauseln und Regeln zuerst abgelegt werden, um sie später geordnet und geprüft als Prologklauseln in Dateien ablegen zu können. Es gibt drei Container: \texttt{ExternAndSpecificationContainer}, \texttt{StatusContainer} und der \texttt{RuleContainer}. Im \texttt{StatusContainer} liegen alle Informationen, die aus den Logs gelesen werden. \newline
+Der \texttt{ExternAndSpecificationContainer} enthält alle Klauseln, die in den Rulefiles gesetzt werden. Es sind nur Prädikate aus den Tabellen \ref{tab:extern} und \ref{tab:specification} erlaubt. Zusätzlich ist es möglich, eigene Prädikate zu definieren, die ebenfalls in diesem Container abgelegt werden. Zuletzt wird der \texttt{RuleContainer} mit den eigentlichen Einschränkungen befüllt. Diese widerum können nur Prädikate aus Tabelle \ref{tab:head} im Kopf der Regel enthalten, und werden nach diesen fünf Prädikaten gegliedert (\texttt{UserCannotDoRule}, \texttt{UserMustDoRule}, \texttt{RoleCannotDoRule}, \texttt{RoleMustDoRule} und \newline
+\texttt{IllegalExecutionRule}), die alle die abstrakte Klasse \texttt{Rule} erweitern. Jede Regel enthält einen \texttt{Rule\_Body} in welchem alle Klauseln abgelegt werden, die in dem Körper der Regeln gesetzt wurden. 
+
 
 \begin{figure}[ht]
 	\centering
-  \includegraphics[width=0.9\textwidth]{"Figures/Container"}
+  \includegraphics[width=0.9\textwidth]{Figures/Container}
 	\caption{Interne Datenstruktur}
+TODO ganzes Bild stimmt nicht mehr
 	\label{fig:container}
 \end{figure}
+
+\textbf{Transformation und Ergänzung der Regeln}\\
+Nachfolgend wird ein Einblick gegeben, welche Transformationen und Ergänzungen der Listener vollzieht. Die Auflistung ist nicht vollständig sondern skizziert nur die wichtigsten Anpassungen.
+
+Um dem Nutzer eine möglichst intuitive Definition der Regeln zu ermöglichen, wird in den Regeln direkt der Name der Aktivität verwendet. Da es jedoch theoretisch erlaubt ist, mehrere Aktivitäten mit dem selben Namen zu versehen, wird intern für jede Aktivität eine taskID generiert, über die zusammengehörige Informationen identifiziert werden. So müssen alle Klauseln, die einen Namen für die Aktivität tragen, in zwei Klauseln geteilt werden.\newline \texttt{'Mark' executed 'Auftrag annehmen'} wird somit zu\newline \texttt{user\_executed(taskID, 'Mark'), task\_name(taskID, 'Auftrag annehmen')}.
+
+Die wichtigste Aufgabe des Listeners ist es, den Regeln entsprechende Klauseln hinzuzufügen, die sicherstellen, dass die Regeln im richtigen Kontext angewandt werden - Intra-Instance, Inter-Instance oder Inter-Process. Intra-Instance Regeln gelten für Activities in der selben Prozessinstanz. Inter-Instance Regeln betrachten auch Aktivitäten, die aus unterschiedlichen Prozessinstanzen gehören, jedoch aus dem selben Prozessschema. Inter-Process Regeln gelten für alle Aktivitäten, unabhängig davon, zu welchem Prozess sie gehören...
+
+Da Logs die Events einer Aktivität speichern, die Untersuchung in den meisten Fällen aber nicht die einzelnen Events einzeln betrachtet, werden bei den executed-Klauseln das Event start betrachtet.
 
 %
 % ALGORITHMUS
 %
-\subsection{Algorithmus Modelchecker}
-
+\subsection{Algorithmus Compliance Checker}
+\label{sec:compliancechecker}
+In diesem Abschnitt wird betrachtet, wie der Compliance Checker die Logs auf die Einhaltung der definierten Regeln prüft. Der Checker selber besteht aus \textit{start.pl} und \textit{main.pl}. Die Datei \textit{start.pl} enthält die Routine zum Starten der Untersuchung. In \textit{main.pl} sind alle nötigen Funktionen, um implizite Beziehungen herzustellen und die einzelnen Routinen für die verschiedenen Regeltypen.
 
 \begin{verbatim}
 3. Add Collaborators
@@ -92,16 +144,25 @@ Die Regeln werden in einer oder mehreren Dateien definiert und von dem Constrain
 14. For each must_execute_role(Role, Activity):
 15. 	If not exists executed_role(Role, Activity)
 16.	then write trace
-17. For each panic write trace
+17. For each illegal_execution write trace
 \end{verbatim}
 \begin{figure}[!h]
 \caption{Pseudocode des Modelchecker}
 \label{fig:pseudocode}
 \end{figure}
 
-Zuerst aus Logs Status-Prädikate auslesen.\\
-Für jedes critical task pair entsprechende collaborateurs setzen.\\
-Schleife über Regeln\\
---Die resultierenden Heads bestimmen und schauen, ob es für cannot do ein executed und für must do kein executed gibt-> dann wurde es verletzt. Um das herauszufinden, wird die Regel in executed $ - >$ blabla, oder not(executed) $- >$ blabla übersetzt.\\
- 
-Einfaches Beispiel: Rule: executed(ui, t1)-> cannot do(ui,t2) und status: executed('tom', t1). Daraus wird abgeleitet: cannot do('tom', t2). Da es nicht in der DB ist, ist alles OK
+Bevor die eigentliche Untersuchung beginnt, werden zuerst noch einige implizierte Klauseln die Prolog-Datenbank hinzugefügt. Es werden alle \textit{collaborators} berechnet, die an {critical\_task\_pairs} gearbeitet haben, weitere Beziehung aus dem Rollenmodell und Verwandschaften ermittelt....
+Für jede cannot execute Regel wird gefragt, ob der User das ausgeführt hat,...
+
+%
+% ERGEBNISSE
+%
+\subsection{Darstellung der Ergebnisse}
+\label{sec:results}
+Sollte eine ungewollte Aktivität im Log gefunden sein, 
+
+%
+% Struktur der Pakete
+%
+\subsection{Struktur der Pakete}
+Hilfsklassen wie ... befinden sich im Paket utils

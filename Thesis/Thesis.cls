@@ -46,12 +46,12 @@
 \newcommand\bhrule{\typeout{------------------------------------------------------------------------------}}
 
 \newcommand\Declaration[1]{
-\btypeout{Declaration of Authorship}
-\addtotoc{Declaration of Authorship}
+\btypeout{Erklärung}
+\addtotoc{Erklärung}
 \thispagestyle{plain}
 \null\vfil
 %\vskip 60\p@
-\begin{center}{\huge\bf Declaration of Authorship\par}\end{center}
+\begin{center}{\huge\bf Erkl\"arung\par}\end{center}
 %\vskip 60\p@
 {\normalsize #1}
 \vfil\vfil\null
@@ -187,7 +187,7 @@
 %-------------------------------------------------  
 \supervisor{Adrian \textsc{Lange}} % You supervisor's name - this is used in the title page
 %-------------------------------------------------   
-\examiner{} % Your examiner's name - this is not currently used anywhere in the template, cite it with \examname if you want it
+\examiner{Prof. Dr. Dr. h.c. G\"unter \textsc{M\"uller}} % Betreuer
 %-------------------------------------------------   
 \degree{Bachelor of Science} % Your degree name - this is currently used in the title page and abstract
 %-------------------------------------------------   
@@ -199,24 +199,24 @@
 %-------------------------------------------------   
 \keywords{} % Keywords for your thesis - this is not currently used anywhere in the template, cite it with \keywordnames if you want it
 %-------------------------------------------------   
-\university{\texorpdfstring{\href{http://www.uni-freiburg.de/} % Your university's URL
-                {Albert Ludwigs University - Freiburg}} % Your university's name - this is currently used in the title page
+\university{\texorpdfstring{ % Your university's URL
+                {Albert Ludwigs Universit\"at - Freiburg}} % Your university's name - this is currently used in the title page
                 {University Name}}
 %-------------------------------------------------   
 \UNIVERSITY{\texorpdfstring{\href{University Web Site URL Here (include http://)} % Your university's URL
                 {ALBERT-LUDWIGS-UNIVERSITÄT FREIBURG}} % Your university's name in capitals - this is currently used in the abstract page
                 {ALBERT-LUDWIGS-UNIVERSITÄT FREIBURG}}
 %-------------------------------------------------                
-\department{\texorpdfstring{\href{Department or School Web Site URL Here (include http://)} % Your department's URL
-                {Department or School Name}} % Your department's name - used in the title page and abstract
+\department{\texorpdfstring{ % Your department's URL
+                {Institut f\"ur Informatik und Gesellschaft}} % Your department's name - used in the title page and abstract
                 {Department or School Name}}
 %-------------------------------------------------                
 \DEPARTMENT{\texorpdfstring{\href{Department or School Web Site URL Here (include http://)} % Your department's URL
                 {DEPARTMENT OR SCHOOL NAME (IN BLOCK CAPITALS)}} % Your department's name in capitals - this is not currently used anywhere in the template, cite it with \DEPTNAME if you want it
                 {DEPARTMENT OR SCHOOL NAME (IN BLOCK CAPITALS)}}
 %-------------------------------------------------                
-\group{\texorpdfstring{\href{Research Group Web Site URL Here (include http://)} % Your research group's URL
-                {Research Group Name}} % Your research group's name - this is currently used in the title page 
+\group{\texorpdfstring{ % Your research group's URL
+                {Abteilung Telematik}} % Your research group's name - this is currently used in the title page 
                 {Research Group Name}}
 %-------------------------------------------------                
 \GROUP{\texorpdfstring{\href{Research Group Web Site URL Here (include http://)} % Your research group's URL
@@ -301,7 +301,7 @@
     \bigskip
     {\huge{\textit{Abstract}} \par}
     \bigskip
-    {\normalsize \facname \par} % Faculty name
+    {\normalsize \groupname \par} % Faculty name
     {\normalsize \deptname \par} % Department name
     \bigskip
     {\normalsize \degreename\par} % Degree name
@@ -324,8 +324,8 @@
 \refstepcounter{dummy}
 \addcontentsline{toc}{chapter}{#1}}
 \renewcommand\tableofcontents{
-\btypeout{Table of Contents}
-\addtotoc{Contents}
+\btypeout{Tabellenverzeichnis}
+\addtotoc{Inhaltsverzeichnis}
 \begin{spacing}{1}{
     \setlength{\parskip}{1pt}
     \if@twocolumn
@@ -342,8 +342,8 @@
 }\end{spacing}
 }
 \renewcommand\listoffigures{
-\btypeout{List of Figures}
-\addtotoc{List of Figures}
+\btypeout{Abbildungsverzeichnis}
+\addtotoc{Abbildungsverzeichnis}
 \begin{spacing}{1}{
     \setlength{\parskip}{1pt}
     \if@twocolumn
@@ -360,8 +360,8 @@
 }\end{spacing}
 }
 \renewcommand\listoftables{
-\btypeout{List of Tables}
-\addtotoc{List of Tables}
+\btypeout{Tabellenverzeichnis}
+\addtotoc{Tabellenverzeichnis}
 \begin{spacing}{1}{
     \setlength{\parskip}{1pt}
     \if@twocolumn
@@ -399,7 +399,7 @@
 \begin{longtable}[c]{#1}#2\end{longtable}\par
     \cleardoublepage
 }
-\newcommand\listnomenclature{Symbols}
+\newcommand\listnomenclature{Symbole}
 \usepackage{longtable}
 \newcommand\listofnomenclature[2]{
 \btypeout{\listnomenclature}

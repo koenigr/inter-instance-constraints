@@ -69,7 +69,15 @@
 \begin{center}
 
 \textsc{\LARGE \univname}\\[1.5cm] % University name
+\deptname\\\groupname\\[2cm] % Research group name and department name
+
+
 \textsc{\Large Bachelor Thesis}\\[0.5cm] % Thesis type
+
+\large \textit{zur Erlangung des akademischen Grades \degreename (B. Sc.) im Studiengang Embedded Systems Engineering} \\[0.3cm] % University requirement text
+
+
+
 
 \HRule \\[0.4cm] % Horizontal line
 {\huge \bfseries \ttitle}\\[0.4cm] % Thesis title
@@ -83,15 +91,14 @@
 \end{minipage}
 \begin{minipage}{0.4\textwidth}
 \begin{flushright} \large
-\emph{Supervisor:} \\
-\href{https://www.telematik.uni-freiburg.de/aboutus/staff/staff?person=Lange_A}{\supname} % Supervisor name - remove the \href bracket to remove the link  
+\emph{Gutachter:} \\
+{\examname} \\
+\emph{Betreuer:} \\
+{\supname} \\
 \end{flushright}
 \end{minipage}\\[3cm]
  
-\large \textit{A thesis submitted in fulfilment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
-\textit{in the}\\[0.4cm]
-\groupname\\\deptname\\[2cm] % Research group name and department name
- 
+\emph{Abgabedatum:}\\
 {\large \today}\\[4cm] % Date
 %\includegraphics{Logo} % University/department logo - uncomment to place it
  
@@ -109,22 +116,13 @@
 
 \addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
-I, \authornames, declare that this thesis titled, '\ttitle' and the work presented in it are my own. I confirm that:
+Hiermit erkläre ich, \authornames, dass ich diese Abschlussarbeit selbständig verfasst habe, keine anderen als die angegebenen Quellen/Hilfsmittel verwendet habe und alle Stellen, die wörtlich oder sinngemäß aus veröffentlichten Schriften entnommen wurden, als solche kenntlich gemacht habe. Darüber hinaus erkläre ich, dass diese Abschlussarbeit nicht, auch nicht auszugsweise, bereits für eine andere Prüfung angefertigt wurde.
 
-\begin{itemize} 
-\item[\tiny{$\blacksquare$}] This work was done wholly or mainly while in candidature for a research degree at this University.
-\item[\tiny{$\blacksquare$}] Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
-\item[\tiny{$\blacksquare$}] Where I have consulted the published work of others, this is always clearly attributed.
-\item[\tiny{$\blacksquare$}] Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
-\item[\tiny{$\blacksquare$}] I have acknowledged all main sources of help.
-\item[\tiny{$\blacksquare$}] Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
-\end{itemize}
- 
-Signed:\\
-\rule[1em]{25em}{0.5pt} % This prints a line for the signature
- 
-Date:\\
+Ort, Datum:\\
 \rule[1em]{25em}{0.5pt} % This prints a line to write the date
+
+Unterschrift:\\
+\rule[1em]{25em}{0.5pt} % This prints a line for the signature
 }
 
 \clearpage % Start a new page
@@ -167,13 +165,13 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 
 \pagestyle{fancy} % The page style headers have been "empty" all this time, now use the "fancy" headers as defined before to bring them back
 
-\lhead{\emph{Contents}} % Set the left side page header to "Contents"
+\lhead{\emph{Inhaltsverzeichnis}} % Set the left side page header to "Contents"
 \tableofcontents % Write out the Table of Contents
 
-\lhead{\emph{List of Figures}} % Set the left side page header to "List of Figures"
+\lhead{\emph{Abbildungsverzeichnis}} % Set the left side page header to "List of Figures"
 \listoffigures % Write out the List of Figures
 
-\lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
+\lhead{\emph{Tabellenverzeichnis}} % Set the left side page header to "List of Tables"
 \listoftables % Write out the List of Tables
 
 
@@ -196,7 +194,10 @@ $t_{ij}$& Aktivität j aus Prozessschema i \\
 $t_{ij}^k$& Aktivität j aus der k-ten Instanz des Prozessschema i\\
 $R$& Menge der Rollen \\
 $U$& Menge der Nutzer\\
-$\Tau$ & Menge aller Zeitpunkte
+$\Tau$ & Menge aller Zeitpunkte\\
+$TP$& Zeitpunkt Symbole\\
+$TS$& Zeitspannen Symbole\\
+$E$& Event Logs
 }
 
 %----------------------------------------------------------------------------------------
@@ -211,10 +212,11 @@ $\Tau$ & Menge aller Zeitpunkte
 % Uncomment the lines as you write the chapters
 
 \input{Chapters/Einleitung}
+\input{Chapters/verwandteArbeit} 
 \input{Chapters/Theorie}
+\input{Chapters/Grammatik}
 \input{Chapters/Praxis} 
 \input{Chapters/Auswertung}
-\input{Chapters/verwandteArbeit} 
 \input{Chapters/Ausblick} 
 
 %----------------------------------------------------------------------------------------

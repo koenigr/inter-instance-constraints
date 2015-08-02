@@ -54,6 +54,7 @@
 }
 
 @incollection{wang_definition,
+	year={2012},
 	series = {Lecture {Notes} in {Computer} {Science}},
 	title = {Definition and {Enactment} of {Instance}-{Spanning} {Process} {Constraints}},
 	volume = {7651},
@@ -107,4 +108,10 @@ keywords={Security in business processes; Business process modeling and analysis
 author={Wolter, Christian and Schaad, Andreas},
 pages={64-79},
 language={English}
+}
+
+@misc{SEWOL,
+  title = {SEWOL Github},
+  howpublished = {\url{https://github.com/iig-uni-freiburg/SEWOL}},
+  note = {Accessed: 2015-07-30}
 }

@@ -1,10 +1,10 @@
 % Appendix C
 
-\chapter{Anleitung zur Verwendung} % Main appendix title
+\chapter{User Manual} % Main appendix title
 
 \label{UserManual} % For referencing this appendix elsewhere, use \ref{AppendixA}
 
-\lhead{Appendix C. \emph{Anleitung zur Verwendung}} % This is for the header on each page - perhaps a shortened title
+\lhead{Appendix C. \emph{Users Manual}} % This is for the header on each page - perhaps a shortened title
 
 \textbf{Benötigte Pakete}
 \begin{enumerate}
