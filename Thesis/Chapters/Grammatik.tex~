@@ -1,6 +1,6 @@
 % Chapter Template
 
-\chapter{Grammatik} % Main chapter title
+\chapter{Entwicklung einer Definitionssprache für Regeln} % Main chapter title
 
 \label{GrammatikKapitel} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
@@ -12,11 +12,11 @@ In diesem Kapitel wird die Grammatik vorgestellt, die es ermöglichen soll, Rege
 % Anforderungen an die Grammatik
 %
 \section{Anforderungen an die Grammatik}
-Um eine ausdrucksstarke Grammatik zu definieren, die möglichst viele Fälle abdeckt, muss zuerst untersucht werden, welche genauen Anforderungen an sie gestellt wird.
+Um eine ausdrucksstarke Grammatik zu definieren, die möglichst viele Fälle abdeckt, muss zuerst untersucht werden, welche genauen Anforderungen an sie gestellt werden.
 
-Grundsätzlich ist das Ziel, Regeln zur Ausführung bestimmter Aktivitäten auf Basis bereits abgeschlossener Aktivitäten aufzustellen. Es muss also einen Teil geben, in dem man die Bedingungen festlegen kann um dann anzugeben, welche gewünschte Aktion daraus resultiert. Die Bedingungen bilden in den meisten Fällen eine Disjunktion. Werden alle Bedingungen erfüllt, tritt die Regel in Kraft. Zur Vollständigkeit wird hier auch die Option mit aufgenommen, absolute Regeln aufzustellen, die in jedem Fall gelten sollen.
+Grundsätzlich ist das Ziel, Regeln zur Ausführung bestimmter Aktivitäten auf Basis bereits abgeschlossener Aktivitäten aufzustellen. Es muss also einen Teil geben, in dem man die Bedingungen festlegen kann um dann anzugeben, welche gewünschte Aktion daraus resultiert. Die Bedingungen bilden in den meisten Fällen eine Konjunktion. Werden alle Bedingungen erfüllt, tritt die Regel in Kraft. Zur Vollständigkeit wird hier auch die Option mit aufgenommen, absolute Regeln ohne Bedingungen aufzustellen, die in jedem Fall gelten sollen.
 
-Für alle Regeltypen, die in \ref{sec:ArtenConstraints} gefunden wurden, ist Disjunktion von positiven Bedingungen erlaubt. Um dem Nutzer größtmögliche Freiheit zu lassen, sollte Konjunktion und Negation von Bedingungen ebenfalls angeboten werden.
+Für alle Regeltypen, die in \ref{sec:ArtenConstraints} gefunden wurden, ist Konjunktion von positiven Bedingungen ausreichend. Um dem Nutzer größtmögliche Freiheit zu lassen, sollte Konjunktion und Negation von Bedingungen ebenfalls angeboten werden.
 
 Das Ziel der Arbeit ist es, Regeln in Instanz-übergreifendem Kontext aufstellen zu können. Trotzdem muss es auch möglich sein, Regeln wie in bisherigen Compliancecheckern auch innerhalb einer Instanz zu prüfen. Es ist deswegen eine eindeutige Konvention notwendig, die deutlich macht, in welchem Kontext die Regel arbeitet.
 
@@ -24,9 +24,9 @@ Im Rollenbasierten Authorisierungsmodell existiert das einfache Rollenmodell, in
 
 Da es Bedingungen in Bezug auf Zeitpunkte, Zeitunterschiede und Werte von Attributen gibt, müssen zumindest grundlegende arithmetische Operationen erlaubt sein.
 
-Eventlogs speichern zu jeder Aktivität jedes einzelne Event. Das könnte entweder die Eingabe der Regeln unnötig kompliziert machen (indem der Anwender zu jeder einzelnen Aktivität immer das Event angeben muss) oder es würde zu multiplen Ergebnissen führen. Es muss deshalb eine Einigung geben, auf welches Event sich eine Bedingung bezieht und gleichzeitig die Möglichkeit offenlassen, auch weitere Events zu untersuchen. Zum Beispiel besteht die Frage, auf welches Event einer Aktivität sich der Zeitpunkt der Aktivität bezieht.
+Eventlogs speichern zu jeder Aktivität jedes einzelne Event. Das könnte entweder die Eingabe der Regeln unnötig kompliziert machen (indem der Anwender zu jeder einzelnen Aktivität immer das Event angeben muss) oder es würde zu multiplen Ergebnissen führen. Es muss eine Einigung geben, ob Events explizit angegeben werden müssen, oder sich Prädikate wie \texttt{timestamp(TASK)} auf ein konkretes Event bezieht.
 
-Unter Berücksichtigung aller gestellten Forderungen sollte trotzdem eine möglichst intuitive, leicht zu lernende und leicht zu verstehende Notation gewährleistet sein. Im folgenden wird die entwickelte Grammatik vorgestellt und im Anschluss geklärt, inwiefer die hier aufgeführten Fragen und Anforderungen gelöst wurden.
+Unter Berücksichtigung aller gestellten Forderungen sollte trotzdem eine leicht zu lernende und leicht zu verstehende Notation gewährleistet sein. Im folgenden wird die entwickelte Grammatik vorgestellt und im Anschluss geklärt, inwiefern die hier aufgeführten Fragen und Anforderungen gelöst wurden.
 %
 % Definition der Grammatik
 %
@@ -36,7 +36,8 @@ Für ein besseres Verständnis der Definition wird hier zuerst ein kleines, intu
 \begin{verbatim}
 SET 'Mark Maier' is related to 'Max Mueller'
 
-DESC "'Kredit beantragen' und 'Kredit prüfen' darf nicht von Verwandten ausgeführt werden"
+DESC "'Kredit beantragen' und 'Kredit prüfen' dürfen 
+	nicht von Verwandten ausgeführt werden"
 IF USER_A executed 'Kredit beantragen' AND USER_A is related to USER_B
   THEN USER_B cannot execute 'Kredit prüfen'
 \end{verbatim}
@@ -46,7 +47,7 @@ IF USER_A executed 'Kredit beantragen' AND USER_A is related to USER_B
 \end{figure}
 
 
-Das Ziel der Grammatik ist es, gewünschte oder unerwünscht Aktionen in Abhängigkeit von zuvor stattgefundenen Aktivitäten zu definieren. Zu diesem Zweck werden die Bedingungen als eine Disjunktion von Prädikaten über den Verlauf gebildet. Sollten diese Aussagen alle zu einem positiven Ergebnis führen, tritt die Einschränkung in Kraft. Diese Einschränkung macht eine Aussage darüber, ob eine bestimmte Aktivität von einem Nutzer / Rolle ausgeführt werden muss bzw dass sie von einem Nutzer/Rolle nicht ausgeführt werden darf. Es gibt auch Regeln, die aufzeigen, wann ein Verlauf nicht der Spezifikation entsprach (\texttt{illegal\_execution}).\\
+Das Ziel der Grammatik ist es, gewünschte oder unerwünscht Aktionen in Abhängigkeit von zuvor stattgefundenen Aktivitäten zu definieren. Zu diesem Zweck werden die Bedingungen als eine Konjunktion von Prädikaten über den Verlauf gebildet. Sollten diese Aussagen alle zu einem positiven Ergebnis führen, tritt die Einschränkung in Kraft. Diese Einschränkung macht eine Aussage darüber, ob eine bestimmte Aktivität von einem Nutzer / Rolle ausgeführt werden muss bzw dass sie von einem Nutzer/Rolle nicht ausgeführt werden darf. Es gibt auch Regeln, die aufzeigen, wann ein Verlauf nicht der Spezifikation entsprach (\texttt{illegal\_execution}).\\
 In den nächsten Abschnitten werden zuerst die Variablen, Konstanten und Prädikate vorgestellt, bevor dann im Anschluss die Syntax und Semantik der Grammatik genauer erläutert wird.
 
 \subsection{Argumente - Variablen und Konstanten}
@@ -68,40 +69,47 @@ WT& Variablen und Konstanten über Prozesse. Dieser Typ bezeichnet das Prozesssc
 \hline
 WIT& Variablen und Konstanten über Prozessinstanzen. Als Konstante sind Prozessinstanzen ein String.\\
 \hline
-ET&  Variablen und Konstanten über Eventtypen. Als Konstante sind Events aus der Menge $\{$'started', 'completed',..$\}$ (siehe \ref{sec:activities}).\\
+ET&  Variablen und Konstanten über Eventtypen. Als Konstante sind Events Elemente aus der Menge $\{$'started', 'completed',..$\}$ (siehe \ref{sec:activities}).\\
 \hline
-TP& Variablen und Konstanten über Zeitpunkte. Als Konstante // TODO ISO und Verweise auf genaue Definition.. oder doch lieber hier genau deifnieren?.\\
+TP& Variablen und Konstanten über Zeitpunkte. Als Konstante Zeitpunkt nach ISO 8601.\\
 \hline
-TS& Variablen und Konstanten über Zeitspannen. Als Konstante // TODO.\\
+TS& Variablen und Konstanten über Zeitspannen. Als Konstante Zeitspanne nach ISO 8601.\\
 \hline
-NT&  Variablen und Konstanten über numerische Werte. Als Konstante sind numerische Werte eine Zahl größer Null.\\
+NT&  Variablen und Konstanten über numerische Werte. Als Konstante sind numerische Werte eine Zahl größer Null. Negative Werte sind nicht erlaubt.\\
 \hline
 \end{tabular}
 \caption{Argument Typen, die bei Prädikaten vorkommen können}
 \label{tab:args}
 \end{table}
 
-\subsection{Prädikate}
-Prädikate sind Aussagen über bestimmte Zustände. Es gibt verschiedene Typen. Externe Informationen, Spezifikation, Status, Enforcement und Konditionell. \\
+Zeitpunkte nach ISO 8601 werden im Format JJJJ-MM-DD'T'hh:mm:ss.f , wobei f ein dezimaler Bruchteil für Sekunden beliebiger Genauigkeit ist. Die Datums und Uhrzeit-Angabe wird von einem 'T' getrennt. Die Werte werden ohne Leerzeichen notiert. Es ist erlaubt, Werte mit geringerer Genauigkeit anzugeben, jedoch darf die Angabe immer nur von rechts (mit dem kleinsten Wert beginnend) weggelassen werden. Gültige Beispiele sind \texttt{2015-08-21T11:23:45.23526} , \texttt{2015-08-21T11}, \texttt{2015-08}. Eine ungültige Angabe hingegen wäre \texttt{2015-21T23}. Hier wurde der Monat und die Uhrzeit weggelassen, obwohl dahinter noch das Datum und die Minuten standen.
 
-Externe Informationen (Tabelle \ref{tab:extern}) sind Aussagen, die nicht direkt mit der Workflow Spezifikation zu tun haben aber dennoch relevant für den Ablauf sein könnten. Diese Prädikate müssen explizit in den Regeln gesetzt werden, da es sonst zu keinem Ergebnis führt.
+Zeitspannen im ISO 8601 Format sind 'P'JJJJ'Y'MM'M'DD'D''T'hh'h'mm'm'ss.f's'. Die Zeitspanne beginnt mit einem vorangestellten 'P', dahinter folgen Werte für Jahr, Monat, Tag, Stunden, Minuten, Sekunden. Datum und Zeitangaben werden hier ebenfalls voneinander mit dem Trennsymbol 'T' abgegrenzt. Im ISO 8601 sind auch Wochenangaben erlaubt. Da diese sich aber auch durch Monate und Tage darstellen lassen, wird hier darauf verzichtet. Bei Zeitspannen dürfen auch Werte in der "Mitte" weggelassen werden. Um trotzdem eindeutig identifizieren zu können, welche Einheit eine Angabe besitzt, muss hinter jedem Wert das zugehörige Symbol stehen: \textbf{Y} für Jahr, \textbf{M} Monat, \textbf{D} Tage, \textbf{h} Stungen, \textbf{m} Minuten, \textbf{s} Sekunden. Beispiele für Zeitspannen sind \texttt{P2Y6M1DT16h35m2s} (2 Jahre 6 Monate 1 Tag 16 Stunden 35 Minuten 2 Sekunden), \texttt{P1D} (1 Tag) und \texttt{P2Y1DT16h35m2s} (2 Jahre 1 Tag 16 Stunden 35 Minuten 2 Sekunden).
+
+Zeitzonenangaben sind nicht erlaubt.
+
+\subsection{Prädikate}
+In diesem Abschnitt werden alle Verfügbaren Prädikate vorgestellt. Es gibt  7 verschiedene Typen: \textit{Externe Informationen, Spezifikation des Prozesses und der Authorisierung, Status, Prädikate für den Kopf einer Regel, Aggregationsprädikate, Vergleiche und arithmetische Operationen}. \\
+
+Externe Informationen (Tabelle \ref{tab:extern}) sind Aussagen, die nicht direkt mit der Workflow Spezifikation zu tun haben aber dennoch relevant für den Ablauf sein könnten. Diese Prädikate müssen explizit in den Regeln gesetzt werden, da sie nicht aus den Logs herausgelesen werden und bei einer Anfrage immer \textit{false} zurückgeben würden.
 \begin{table}[h]
 \begin{tabular} {|p{6cm}|p{10cm}|}
 \hline
 \textbf{Prädikat} & \textbf{Beschreibung}\\
 \hline
-UT is related to UT 		& Beide User sind verwandt \\
+UT 'is related to' UT 		& Beide User sind verwandt \\
 \hline
-UT is partner fo UT		& Beide Akteure sind Partner \\
+UT 'is partner to' UT		& Beide Akteure sind Partner \\
 \hline
-UT is in same group as UT	& Beide Akteure sind in der selben Gruppe, Abteilung\\
+UT 'is in same group as' UT	& Beide Akteure sind in der selben Gruppe, Abteilung\\
 \hline
 \end{tabular}
-\caption{Prädikate für externe Informationen. Das sind nur drei Vorlagen. Dem Programmierer ist selbst überlassen, wie er diese Prädikate interpretieren will.}
+\\\\\small Die Beschreibungen sind nur Vorschläge für den Einsatz. Dem Programmierer ist selbst überlassen, wie er diese Prädikate interpretieren und einsetzen möchte.
+\caption{Prädikate für externe Informationen.}
 \label{tab:extern}
 \end{table}
 
-Spezifikationsprädikate (Tabelle \ref{tab:specification}) bestimmen die Beziehungen und Zugehörigkeit zwischen Nutzern, Rollen und Tasks. Sie Sollten genauso gesetzt werden, wie die Spezifikation war, als der Workflow ausgeführt wurde.
+Spezifikationsprädikate (Tabelle \ref{tab:specification}) bestimmen die Beziehungen und Zugehörigkeit zwischen Nutzern, Rollen und Tasks. Um korrekte Ergebnisse zu erhalten, sollten sie genauso gesetzt werden wie in der Spezifikation der Authorisierung zur Ausführungszeit des Prozesses.
 \begin{table}[h]
 \begin{tabular} {|p{6cm}|p{10cm}|}
 \hline
@@ -117,110 +125,127 @@ RT 'is glb of' TT 		& greatest lower bound. TT muss mindestens mit Rolle RT ausg
 \hline
 RT 'is lub' TT 			& lowest upper bound. TT darf höchstens mit Rolle RT ausgeführt werden\tnote{1}\\
 \hline
-RT 'dominates' RT 		& Rolle 1 dominiert Rolle 2\tnote{1}\\
+RT 'dominates' RT 		& Rolle 1 (links) dominiert Rolle 2 (rechts)\\
 \hline
 'critical{\_}task{\_}pair(' TT ',' TT ')'& Die beiden Tasks sind ein kritisches Paar. Die User werden markiert, die dieses Paar ausführen\\
 \hline
 \end{tabular}
-\begin{tablenotes}\footnotesize 
-\item[1] In Bezug auf die jeweilige Rollenhierarchie 
-\end{tablenotes}
-\caption{Prädikate für die Spezifikation von ...}
+\\\\\small Prädikate für die Spezifikation der Authorisierung, Rollenbeziehungen und Bestimmung kritischer Aufgabenpaare.
+\caption{Spezifikation}
 \label{tab:specification}
 \end{table}
 
-Statusprädikate (Tabelle \ref{tab:status}) sind Aussagen über Aktivitäten. Diese werden später mit den Informationen aus den Logs verglichen. 
+Statusprädikate (Tabelle \ref{tab:status}) sind Aussagen über Aktivitäten. Diese können in den Bedingungen einer Regel eingesetzt werden und werden später mit den Informationen aus den Logs verglichen. 
 \begin{table}[h]
 \begin{tabular} {|p{6cm}|p{10cm}|}
 \hline
 \textbf{Prädikat} & \textbf{Beschreibung}\\
 \hline
-('user')? UT 'executed' TT      & Ut hat TT so ausgeführt, dass TT completed ??\\
+('user')? UT 'executed' TT      & Ut hat TT ausgeführt. Der Event-Typ ist unbestimmt und muss extra angegeben werden.\\
 \hline
-'role' RT 'executed' TT		& RT hat TT ausgeführt\\
+'role' RT 'executed' TT		& RT hat TT ausgeführt. Der Event-Typ ist unbestimmt und muss extra angegeben werden.\\
 \hline
-UT 'is assigned to' TT		& UT wurde TT zugewiesen\\
+UT 'is assigned to' TT		& UT wurde TT zugewiesen. Entspricht dem Event-Typ 'assign'.\\
 \hline
-TT 'aborted'			& TT ist abgebrochen\\
+TT 'started'			& TT wurde gestartet. Entspricht dem Event-Typ 'start'.\\
 \hline
-TT 'succeeded'			& TT hat geklappt \\
+TT 'aborted'			& TT wurde abgebrochen. Entspricht dem Event-Typ 'ate\_abort'.\\
 \hline
-UT 'is collaborator of' UT	& UT sind alle Akteure, die an criticalTaskPair gearbeitet haben\\
+TT 'completed'			& TT wurde erfolgreich abgeschlossen. Entspricht dem Event-Typ 'complete'. \\
 \hline
+'EventType(' TT ')'.$<$event$>$ 	& Prädikat, um einer Aktivität einen beliebigen Event-Typ zuweisen zu können. $<$event$>$ ist dabei eine Konstante aus den 12 zuvor bestimmten Events.\\
+\hline
+UT 'is collaborator of' UT	& UT sind alle Akteure, die an criticalTaskPair gearbeitet haben. Collaborator muss nicht extra wie criticalTaskPair gesetzt werden, sondern wird in der Analysephase vom ModelChecker berechnet.\\
+\hline
+'timestamp of' TT 'is' VAR	& Der Zeitpunkt von TT wird in eine Variable an der Stelle von VAR geschrieben.\\
+\hline
+'timeinterval of' TT 'and' TT 'is' VAR 	& Das Zeitinterval zwischen TT 1 (links) und TT 2 (rechts) wird in eine Variable an der Stelle VAR geschrieben.\\
+\hline
+'attribute' VAR1 'of' TT 'is' VAR2 & TODO\\
+\hline	
 \end{tabular}
-\caption{Prädikate, um Aussgen über den Status in die Regeln mit einbeziehen zu können}
+\\\\\small Da sich die beiden \textit{executed} Prädikate nicht auf ein bestimmtes Event beziehen, ist es notwendig, das Event extra anzugeben, um keine multiplen Ergebnisse zu erhalten. Es werden vier Prädikate für die Event-Typen \textit{assign}, \textit{start}, \textit{abort} und \textit{complete} angeboten. Für alle weiteren kann man das allgemeine Event-Prädikat 'Event(' TT ')' verwenden. Für das Event \textit{skip} wäre es EventType(TT).'skip'. Das Event muss in zwei einfachen Anführungszeichen stehen.
+\caption{Prädikate, um Aussagen über den Status in die Regeln mit einbeziehen zu können}
 \label{tab:status}
 \end{table}
 
-Konditionelle Prädikate (Tabelle \ref{tab:conditional})
+Aggregations Prädikate (Tabelle \ref{tab:conditional}) (\textit{NUMBER, SUM, AVG, MIN, MAX}) geben einen Wert über die Aggregation von einer Variablen zurück, die in den Klauseln des Körpers dieses Prädikates stehen. \texttt{MIN OF X WHERE 'T1' completed AND timestamp of 'T1' is X IS N} berechnet das Minimum von allen Zeitpunkten, an denen die Aktivität 'T1' abgeschlossen wurde und schreibt es in die Variable N. X ist die Variable, mit der gerechnet wird und mindestens ein Mal in Körper dieses Prädikates vorkommen muss. Die beiden Literale \textbf{'T1' completed} und \textbf{timestamp of 'T1' is X} bilden den Körper. '\textbf{MIN OF} Var \textbf{WHERE} body \textbf{IS} Var ist das Aggregations-Prädikat selbst.
 \begin{table}[h]
 \begin{tabular} {|p{6cm}|p{10cm}|}
 \hline
 \textbf{Prädikat} & \textbf{Beschreibung}\\
 \hline
-number where body is RES		& Zählt die Anzahl der verschiedenen Lösungen für body \\
+'NUMBER WHERE' $<$body$>$ 'IS' RES		& Zählt die Anzahl der verschiedenen Lösungen für $<$body$>$ und speichert sie in einer Variablen an der Stelle von RES \\
 \hline
-number of VAR where body is RES	& Zählt die Anzahl der verschiedenen Lösungen für VAR, die body erfüllen. VAR muss mindestens einmal in body vorkommen.\\
+'NUMBER OF' VAR 'WHERE' $<$body$>$ 'IS' RES	& Zählt die Anzahl der verschiedenen Lösungen für VAR, die in $<$body$>$ vorkommen, wenn $<$body$>$ erfüllt wird. VAR kann eine beliebige Variable sein, muss aber mindestens einmal in $<$body$>$ vorkommen.\\
 \hline
-sum of NT where body is RES		& Gibt die Summe von NT zurück. NT muss im body enthalten sein und zählt alle Lösungen mit. NT muss\\
+'SUM OF' NT$|$TP$|$TS 'WHERE' $<$body$>$ 'IS' RES		& Gibt die Summe einer Variablen aus $<$body$>$ zurück. Diese Variable sollte für einen numerischen Wert stehen (zB in den Attributen einer Aktivität) oder für Zeitpunkte oder Zeitintervalle.\\
 \hline
-avg of NT ?TauT? where body is RES		& Gibt den Durchschnitt von NT zurück.\\
+'AVG OF' NT$|$TP$|$TS 'WHERE' $<$body$>$ 'IS' RES		& Gibt den Durchschnitt einer Variablen aus $<$body$>$ zurück.\\
 \hline
-min of NT ?TauT? where body is RES		& Gibt das Minimum von NT zurück.\\
+'MIN OF' NT$|$TP$|$TS 'WHERE' $<$body$>$ 'IS' RES		& Gibt das Minimum einer Variablen aus $<$body$>$ zurück.\\
 \hline
-max of NT ?TauT? where body is RES		& Gibt das Maximum von NT zurück.\\
+'MAX OF' NT$|$TP$|$TS 'WHERE' $<$body$>$ 'IS' RES		& Gibt das Maximum einer Vairablen aus $<$body$>$ zurück.\\
 \hline
 \end{tabular}
-Das Resultat wird in der Variable gespeichtert, die anstelle von RES definiert wurde. Body ist eine Konjunktion von Status- , Externen und Spezifikationsprädikaten.
-\caption{Prädikate für Aussagen über die Akkumulation von Werten}
+\\\\\small Das Resultat wird in der Variable gespeichtert, die anstelle von RES definiert wurde. $<$body$>$ ist eine Konjunktion von Status- , Externen und Spezifikationsprädikaten. Für $<$body$>$ gelten die selben Regeln wie für den Körper einer Regel bezüglich verwendbarer Prädikate, Negation und Disjunktion. 
+\caption{Aggregationsprädikate}
 \label{tab:conditional}
 \end{table}
 
 
-Vergleiche (Tabelle \ref{tab:comparison})
+Vergleiche (Tabelle \ref{tab:comparison}) dienen dazu, festzustellen, in welchem Verhältnis zwei Werte zueinander stehen. Es können immer nur zwei Werte des gleichen Typs verglichen werden. Bei Gleichheitsabfragen sind alle Typen erlaubt, bei Abfragen über Größenverhätltnisse sind außer den numerischen Werten und Zeiten auch Rollen bezüglich der Hierarchie erlaubt.
 \begin{table}[h]
 \begin{tabular} {|p{6cm}|p{10cm}|}
 \hline
 \textbf{Prädikat} & \textbf{Beschreibung}\\
 \hline
- $= | !=$		& ww \\
- $< | <= | > | >=$   	& dd \\
+ $= | !=$		& Gleichheit und Ungleichheit kann man auf alle Argumenttypen anwenden, solange auf der rechten und linken Seite der selbe Typ steht. Es können jeweils Strings, numerische Werte, Zeitpunkte und Zeitstempel untereinander verglichen werden. \\
+\hline
+ $< | <= | > | >=$   	& Ungleichheit kann nur auf Rollen (um Beziehungen zwischen Rollen bezüglich der Hierarchie festzustellen), numerische Werte, Zeitpunkte und Zeitstempel angewendet werden. \\
 \hline
 \end{tabular}
-...
+\\\\\small 'Manager' $>$ 'Azubi' ergibt ein positives Ergebnis, wenn der 'Manager' in der Hierarchie über dem 'Azubi' steht.
 \caption{Vergleiche}
 \label{tab:comparison}
 \end{table}
 
-Operationen (Tabelle \ref{tab:operations})
+Arithmetische Operationen (Tabelle \ref{tab:operations}) sind grundsätzlich nur für numerische Werte erlaubt. Eine Ausnahme bildet die Summe aus einem Zeitpunkt und einer Zeitspanne (Das Ergebnis ist ein Zeitpunkt) und die Differenz aus zwei Zeitpunkten (das Ergebnis ist eine Zeitspanne).
 \begin{table}[h]
 \begin{tabular} {|p{6cm}|p{10cm}|}
 \hline
 \textbf{Prädikat} & \textbf{Beschreibung}\\
 \hline
- $+ |-$		& bb \\
- $ * | / $   	& bb \\
+ $+$ 		& Numerische Werte und TP + TS (= TP) \\
+\hline
+ $-$		& Numerische Werte und TP - TP (= TS) \\
+\hline
+ $ * | / $   	& Als Argumente sind nur numerische Werte erlaubt. \\
 \hline
 \end{tabular}
-...
-\caption{Operationsn}
+\\\\\small 2015-08-03 + P5D liefert das Ergebnis 2015-08-08.
+\caption{Arithmetische Operationen}
 \label{tab:operations}
 \end{table}
-
-Kopfprädikate. Diese müssen im Kopf einer Regel stehen, und dürfen nicht im Körper vorkommen. (Tabelle \ref{tab:head})
+\\
+Kopfprädikate bestimmen das gewünschte Resultat einer Regel. Sie machen Aussagen darüber, ob eine Aktivität von einem Nutzer/Rolle ausgeführt werden darf oder muss. Diese müssen im Kopf einer Regel stehen, und dürfen nicht im Körper vorkommen. \texttt{illegal execution} kann dazu verwendet werden, eine Ausführung als ??? (TODO) zu kennzeichnen, sofern die Spezifikation im Körper der Regel erfällt wurde. (Tabelle \ref{tab:head})
 \begin{table}[h]
 \begin{tabular} {|p{6cm}|p{10cm}|}
 \hline
 \textbf{Prädikat} & \textbf{Beschreibung}\\
 \hline
-UT cannot execute TT		& ww \\
-UT must execute TT  		& dd \\
-RT cannot execute TT		& \\
-RT must execute TT		& \\
-illegal execution		& \\
+UT cannot execute TT		& Nutzer UT darf TT nicht ausführen. \\
+\hline
+UT must execute TT  		& Nutzer UT muss TT ausführen. \\
+\hline
+RT cannot execute TT		& Rolle RT darf TT nicht ausführen.\\
+\hline
+RT must execute TT		& Rolle RT muss TT ausführen.\\
+\hline
+illegal execution		& Die Prozessinstanz hat den Körper der Regel erfüllt (was aber nicht erwünscht war) und hat somit die Spezifikation gebrochen.\\
 \hline
 \end{tabular}
-...
+\\\\\small Im Körper von \texttt{illegal execution} kann alles beschrieben werden, was zu einer ?? Ausführung führt. Wenn \texttt{IF USER executed 'T1' AND USER executed 'T2' THEN illegal execution} \textit{true} zurückgibt, bedeutet es, dass ein Nutzer sowohl T1 als auch T2 ausgeführt hat, dies aber nicht erlaubt war.
 \caption{Prädikate für den Kopf einer Regel}
 \label{tab:head}
 \end{table}
@@ -259,7 +284,7 @@ WHERE t.name = t2.name AND  ...\\
 %
 % Erklärungen zur Grammatik
 %
-\section{Verwendung der Grammatik, Erklärungen}
+\section{Diskussion zur Grammatik}
 Wenn sich etwas auf jede Instanz einzeln beziehen muss, muss Task1.workflow.instance = Task2.workflow.instance\\
 Eignet sich für hierarchisches und auch für normales Rollenmodell. Hängt nur davon ab, ob die Hierarchie als Fakt gesetzt wurde.\\
 User und ihre Rollenzuweisungen müssen nicht explizit angegeben werden. Nur wenn man das für die Vergleiche braucht.\\
@@ -318,7 +343,9 @@ IF ACTOR executed ACTIVITY AND EventType(ACTIVITY).'aborted' THEN aborted(ACTOR,
 \subsection{Negation}
 Negation wird ebenfalls für die Bildung der meisten Regeln nicht benötigt, wird hier aber der Vollständigkeit halber erlaubt. Dabei gilt hier das Prinzip der \textbf{negation as failure}. Da nicht garantiert werden kann, dass ein Arbeitsablauf vollständig und korrekt geloggt wurde, muss man sich hier darauf einigen, dass das "nicht-vorhandensein" einer Klausel trotzdem mit der Negation dieser Klausel gleichzusetzen ist. Sollte das ein Fehler sein, entsteht ein False-positive Eintrag, dh. es wird ein Fehler zuviel angezeigt.
 
+\textbf{Wie werden die Schutzziele erfüllt?}
 
+\textbf{Kann man alle Constraints definieren?}
 
 %
 % Nochmal konkretes Beispiel

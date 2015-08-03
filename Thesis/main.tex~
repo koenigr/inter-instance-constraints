@@ -149,7 +149,7 @@ Kevin Mitnick
 %	ABSTRACT PAGE
 %----------------------------------------------------------------------------------------
 
-\addtotoc{Abstract} % Add the "Abstract" page entry to the Contents
+\addtotoc{Kurzfassung} % Add the "Abstract" page entry to the Contents
 
 \abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
@@ -168,10 +168,10 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 \lhead{\emph{Inhaltsverzeichnis}} % Set the left side page header to "Contents"
 \tableofcontents % Write out the Table of Contents
 
-\lhead{\emph{List of Figures}} % Set the left side page header to "List of Figures"
+\lhead{\emph{Abbildungsverzeichnis}} % Set the left side page header to "List of Figures"
 \listoffigures % Write out the List of Figures
 
-\lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
+\lhead{\emph{Tabellenverzeichnis}} % Set the left side page header to "List of Tables"
 \listoftables % Write out the List of Tables
 
 

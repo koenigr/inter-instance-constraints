@@ -2,23 +2,21 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Beispiel Log Eintr\IeC {\"a}ge. \relax }}{9}{table.caption.38}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Beispiel Log Eintr\IeC {\"a}ge. \relax }}{9}{table.caption.34}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Argument Typen, die bei Pr\IeC {\"a}dikaten vorkommen k\IeC {\"o}nnen\relax }}{16}{table.caption.62}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r externe Informationen. Das sind nur drei Vorlagen. Dem Programmierer ist selbst \IeC {\"u}berlassen, wie er diese Pr\IeC {\"a}dikate interpretieren will.\relax }}{17}{table.caption.64}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r die Spezifikation von ...\relax }}{17}{table.caption.65}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Pr\IeC {\"a}dikate, um Aussgen \IeC {\"u}ber den Status in die Regeln mit einbeziehen zu k\IeC {\"o}nnen\relax }}{17}{table.caption.66}
-\contentsline {table}{\numberline {4.5}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r Aussagen \IeC {\"u}ber die Akkumulation von Werten\relax }}{18}{table.caption.67}
-\contentsline {table}{\numberline {4.6}{\ignorespaces Vergleiche\relax }}{18}{table.caption.68}
-\contentsline {table}{\numberline {4.7}{\ignorespaces Operationsn\relax }}{18}{table.caption.69}
-\contentsline {table}{\numberline {4.8}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r den Kopf einer Regel\relax }}{18}{table.caption.70}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Argument Typen, die bei Pr\IeC {\"a}dikaten vorkommen k\IeC {\"o}nnen\relax }}{16}{table.caption.58}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r externe Informationen.\relax }}{17}{table.caption.60}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Spezifikation\relax }}{17}{table.caption.61}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Pr\IeC {\"a}dikate, um Aussagen \IeC {\"u}ber den Status in die Regeln mit einbeziehen zu k\IeC {\"o}nnen\relax }}{18}{table.caption.62}
+\contentsline {table}{\numberline {4.5}{\ignorespaces Aggregationspr\IeC {\"a}dikate\relax }}{19}{table.caption.63}
+\contentsline {table}{\numberline {4.6}{\ignorespaces Vergleiche\relax }}{19}{table.caption.64}
+\contentsline {table}{\numberline {4.7}{\ignorespaces Arithmetische Operationen\relax }}{19}{table.caption.65}
+\contentsline {table}{\numberline {4.8}{\ignorespaces Pr\IeC {\"a}dikate f\IeC {\"u}r den Kopf einer Regel\relax }}{20}{table.caption.66}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Statuspr\IeC {\"a}dikate\relax }}{25}{table.caption.91}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Aus einem Log herausgelesene Klauseln in Prolog. Die TaskID wird f\IeC {\"u}r jeden Eintrag automatisch generiert. Die restlichen Informationen stammen aus dem Log. Diejenigen Attributswerte, die eine valide Zahl darstellen, werden auch als Zahl gespeichert, um arithmetische Operationen zu erlauben. Die restlichen Werte werden als String im Prolog Format (zwei einfach Striche) gespeichert. \relax }}{25}{table.caption.92}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Statuspr\IeC {\"a}dikate\relax }}{26}{table.caption.87}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Wissensbasis\relax }}{27}{table.caption.88}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {B.1}{\ignorespaces Kommandozeilenparameter\relax }}{32}{table.caption.106}
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

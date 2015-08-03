@@ -299,7 +299,7 @@
     \setlength{\parskip}{0pt}
     {\normalsize \UNIVNAME \par} % University name in capitals
     \bigskip
-    {\huge{\textit{Abstract}} \par}
+    {\huge{\textit{Kurzfassung}} \par}
     \bigskip
     {\normalsize \groupname \par} % Faculty name
     {\normalsize \deptname \par} % Department name

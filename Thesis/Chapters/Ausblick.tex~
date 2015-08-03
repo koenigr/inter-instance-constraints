@@ -4,13 +4,11 @@
 
 \label{Kapitel6} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-\lhead{Kapitel 5. \emph{Ausblick}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+\lhead{Kapitel 5. \emph{Zusammenfassung}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-Wie kann man die restlichen Constraints implementieren\\
-Compliance Checking:\\
-Cannot do und Must execute vergleichen.\\
-Optimierung??\\
+In dieser Arbeit wurde das und das gemacht...
 
+Wie wurden die Schutzziele erfüllt?
 
 
 

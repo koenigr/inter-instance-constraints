@@ -1,3 +1,81 @@
+@INPROCEEDINGS{SOD,
+author={Gligor, V.D. and Gavrila, S.I. and Ferraiolo, David},
+booktitle={Security and Privacy, 1998. Proceedings. 1998 IEEE Symposium on},
+title={On the formal definition of separation-of-duty policies and their composition},
+year={1998},
+month={May},
+pages={172-183},
+keywords={authorisation;database management systems;formal specification;SoD property composability;ambiguities;database management systems;formal definition;implementation strategies;practical implementation;role-based access control;security administration;separation-of-duty policies;Access control;Data security;Database systems},
+doi={10.1109/SECPRI.1998.674833},
+ISSN={1081-6011},}
+
+
+@article{SOD2,
+ author = {Botha, Reinhardt A. and Eloff, Jan H. P.},
+ title = {Separation of Duties for Access Control Enforcement in Workflow Environments},
+ journal = {IBM Syst. J.},
+ issue_date = {March 2001},
+ volume = {40},
+ number = {3},
+ month = mar,
+ year = {2001},
+ issn = {0018-8670},
+ pages = {666--682},
+ numpages = {17},
+ url = {http://dx.doi.org/10.1147/sj.403.0666},
+ doi = {10.1147/sj.403.0666},
+ acmid = {1017212},
+ publisher = {IBM Corp.},
+ address = {Riverton, NJ, USA},
+} 
+
+
+@INPROCEEDINGS{Bertino,
+    author = {E. Bertino and E. Ferrari and V. Atluri},
+    title = {An Authorization Model for Supporting the Specification and Enforcement of Authorization Constraints in Workflow Management Systems},
+    booktitle = {in Workflow Management Systems. ACM Transactions on Information System Security},
+    year = {1999},
+    pages = {65--104}
+}
+
+
+@inproceedings{warner_inter_instance,
+	address = {New York, NY, USA},
+	series = {{SACMAT} '06},
+	title = {Inter-instance {Authorization} {Constraints} for {Secure} {Workflow} {Management}},
+	isbn = {1-59593-353-0},
+	booktitle = {Proceedings of the {Eleventh} {ACM} {Symposium} on {Access} {Control} {Models} and {Technologies}},
+	publisher = {ACM},
+	author = {Warner, Janice and Atluri, Vijayalakshmi},
+	year = {2006},
+	keywords = {authorization constraints, security, workflow},
+	pages = {190--199}
+}
+
+@incollection{instance_spanning,
+	year={2012},
+	series = {Lecture {Notes} in {Computer} {Science}},
+	title = {Definition and {Enactment} of {Instance}-{Spanning} {Process} {Constraints}},
+	volume = {7651},
+	isbn = {978-3-642-35062-7},
+	language = {English},
+	booktitle = {Web {Information} {Systems} {Engineering} - {WISE} 2012},
+	publisher = {Springer Berlin Heidelberg},
+	author = {Leitner, Maria and Mangler, Juergen and Rinderle-Ma, Stefanie},
+	editor = {Wang, X.Sean and Cruz, Isabel and Delis, Alex and Huang, Guangyan},
+	pages = {652--658}
+}
+
+@INPROCEEDINGS{rulelanguage,
+    author = {Gerd Wagner},
+    title = {How to Design a General Rule Markup Language},
+    booktitle = {In Invited talk at the Workshop XML Technologien für das Semantic Web (XSW 2002},
+    year = {2002},
+    pages = {24--25}
+}
+
+
+
 
 @book{antlr,
 	title = {The {Definitve} {ANTLR} {Reference} - {Building} {Domain}-{Specific} {Languages}},
@@ -15,18 +93,8 @@
     pages = {166--181}
 }
 
-@inproceedings{warner_inter_instance,
-	address = {New York, NY, USA},
-	series = {{SACMAT} '06},
-	title = {Inter-instance {Authorization} {Constraints} for {Secure} {Workflow} {Management}},
-	isbn = {1-59593-353-0},
-	booktitle = {Proceedings of the {Eleventh} {ACM} {Symposium} on {Access} {Control} {Models} and {Technologies}},
-	publisher = {ACM},
-	author = {Warner, Janice and Atluri, Vijayalakshmi},
-	year = {2006},
-	keywords = {authorization constraints, security, workflow},
-	pages = {190--199}
-}
+
+
 
 @inproceedings{tan_consistency_2004,
 	title = {The consistency of task-based authorization constraints in workflow},
@@ -53,19 +121,7 @@
 	pages = {319--338}
 }
 
-@incollection{wang_definition,
-	year={2012},
-	series = {Lecture {Notes} in {Computer} {Science}},
-	title = {Definition and {Enactment} of {Instance}-{Spanning} {Process} {Constraints}},
-	volume = {7651},
-	isbn = {978-3-642-35062-7},
-	language = {English},
-	booktitle = {Web {Information} {Systems} {Engineering} - {WISE} 2012},
-	publisher = {Springer Berlin Heidelberg},
-	author = {Leitner, Maria and Mangler, Juergen and Rinderle-Ma, Stefanie},
-	editor = {Wang, X.Sean and Cruz, Isabel and Delis, Alex and Huang, Guangyan},
-	pages = {652--658}
-}
+
 
 @techreport{van_dongen_meta_????,
 	title = {A {Meta} {Model} for {Process} {Mining} {Data}},
@@ -110,8 +166,54 @@ pages={64-79},
 language={English}
 }
 
+%
+% Documentations of Tools
+%
+
 @misc{SEWOL,
   title = {SEWOL Documentation},
   howpublished = {\url{http://doku.telematik.uni-freiburg.de/sewol}},
+  year = {2015},
   note = {Accessed: 2015-07-30}
+}
+
+
+@misc{SCIFF,
+  title = {SCIFF Documentation},
+  howpublished = {\url{http://www.lia.deis.unibo.it/research/climb/tools-SCIFF.html}},
+  year = {2015},
+  note = {Accessed: 2015-08-02}
+}
+
+@incollection{SCIFFPaper,
+year={2009},
+booktitle={Business Process Management Workshops},
+volume={17},
+series={Lecture Notes in Business Information Processing},
+editor={Ardagna, Danilo and Mecella, Massimo and Yang, Jian},
+title={Checking Compliance of Execution Traces to Business Rules},
+publisher={Springer Berlin Heidelberg},
+author={Chesani, Federico and Mello, Paola and Montali, Marco and Riguzzi, Fabrizio and Sebastianis, Maurizio and Storari, Sergio},
+pages={134-145},
+language={English}
+}
+
+@INPROCEEDINGS{SCIFF2,
+    author = {H. T. De Beer and B. F. Van Dongen},
+    title = {Process Mining and Verification of Properties: An Approach based on Temporal Logic},
+    booktitle = {On the Move to Meaningful Internet Systems 2005: CoopIS, DOA, and ODBASE: OTM Confederated International Conferences, CoopIS, DOA, and ODBASE 2005, volume 3760 of Lecture Notes in Computer Science},
+    year = {2005},
+    pages = {130--147},
+    publisher = {Springer-Verlag}
+}
+
+@article{SCIFF3,
+  title={Verifiable agent interaction in abductive logic programming: the SCIFF framework},
+  author={Alberti, Marco and Chesani, Federico and Gavanelli, Marco and Lamma, Evelina and Mello, Paola and Torroni, Paolo},
+  journal={ACM Transactions on Computational Logic (TOCL)},
+  volume={9},
+  number={4},
+  pages={29},
+  year={2008},
+  publisher={ACM}
 }

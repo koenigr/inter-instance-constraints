@@ -1,7 +1,7 @@
 \select@language {german}
 \contentsline {chapter}{Erklärung}{i}{dummy.1}
 \vspace {1em}
-\contentsline {chapter}{Abstract}{iii}{dummy.2}
+\contentsline {chapter}{Kurzfassung}{iii}{dummy.2}
 \vspace {1em}
 \contentsline {chapter}{Inhaltsverzeichnis}{iv}{dummy.3}
 \contentsline {chapter}{Abbildungsverzeichnis}{vi}{dummy.5}
@@ -12,57 +12,52 @@
 \contentsline {section}{\numberline {1.2}Ziel der Arbeit}{2}{section.17}
 \contentsline {section}{\numberline {1.3}Aufbau der Arbeit}{2}{section.18}
 \contentsline {chapter}{\numberline {2}Verwandte Arbeit}{3}{chapter.19}
-\contentsline {section}{\numberline {2.1}Related work}{3}{section.20}
-\contentsline {subsection}{\numberline {2.1.1}Geschichte}{3}{subsection.21}
-\contentsline {subsection}{\numberline {2.1.2}Heute}{3}{subsection.22}
-\contentsline {subsection}{\numberline {2.1.3}warner inter-Instance}{3}{subsection.23}
-\contentsline {subsection}{\numberline {2.1.4}leitner instance-spanning}{4}{subsection.24}
-\contentsline {subsection}{\numberline {2.1.5}tan consistency}{4}{subsection.25}
-\contentsline {subsection}{\numberline {2.1.6}ProM - SCIFFchecker}{4}{subsection.26}
-\contentsline {chapter}{\numberline {3}Grundlagen}{5}{chapter.27}
-\contentsline {section}{\numberline {3.1}Grundlagen und Definitionen}{5}{section.28}
-\contentsline {subsection}{\numberline {3.1.1}Prozess Schemata und Instanzen}{5}{subsection.29}
-\contentsline {subsection}{\numberline {3.1.2}Aktivit\IeC {\"a}ten}{6}{subsection.31}
-\contentsline {subsection}{\numberline {3.1.3}Rollenmodell und Authorisierung}{7}{subsection.33}
-\contentsline {subsection}{\numberline {3.1.4}Zeitmodell}{8}{subsection.35}
-\contentsline {subsection}{\numberline {3.1.5}Event Logs}{8}{subsection.36}
-\contentsline {subsection}{\numberline {3.1.6}Schutzziele}{9}{subsection.39}
-\contentsline {section}{\numberline {3.2}Herleitung der Einschr\IeC {\"a}nkungen}{10}{section.41}
-\contentsline {subsection}{\numberline {3.2.1}Ein praktisches Beispiel mit vielen Einschr\IeC {\"a}nkungen}{10}{subsection.42}
-\contentsline {subsection}{\numberline {3.2.2}Arten von Constraints - Herleitung}{11}{subsection.54}
-\contentsline {subsection}{\numberline {3.2.3}G\IeC {\"u}ltigkeitsbereich von Constraints}{12}{subsection.56}
-\contentsline {chapter}{\numberline {4}Grammatik}{14}{chapter.57}
-\contentsline {section}{\numberline {4.1}Anforderungen an die Grammatik}{14}{section.58}
-\contentsline {section}{\numberline {4.2}Definition der Grammatik}{15}{section.59}
-\contentsline {subsection}{\numberline {4.2.1}Argumente - Variablen und Konstanten}{16}{subsection.61}
-\contentsline {subsection}{\numberline {4.2.2}Pr\IeC {\"a}dikate}{16}{subsection.63}
-\contentsline {subsection}{\numberline {4.2.3}Regeln}{17}{subsection.71}
-\contentsline {subsection}{\numberline {4.2.4}Grammatik - Syntax und Semantik}{19}{subsection.72}
-\contentsline {section}{\numberline {4.3}Verwendung der Grammatik, Erkl\IeC {\"a}rungen}{19}{section.73}
-\contentsline {subsection}{\numberline {4.3.1}Disjunktion}{19}{subsection.74}
-\contentsline {subsection}{\numberline {4.3.2}Umgang mit verschiedenen Rollenmodellen}{20}{subsection.77}
-\contentsline {subsubsection}{\numberline {4.3.2.1}Definition eigener Pr\IeC {\"a}dikate}{20}{subsubsection.78}
-\contentsline {subsection}{\numberline {4.3.3}Negation}{20}{subsection.80}
-\contentsline {section}{\numberline {4.4}konkretes Beispiel}{21}{section.81}
-\contentsline {chapter}{\numberline {5}Implementierung}{22}{chapter.83}
-\contentsline {section}{\numberline {5.1}Verwendete Hilfsmittel}{23}{section.85}
-\contentsline {subsection}{\numberline {5.1.1}SEWOL}{23}{subsection.86}
-\contentsline {subsection}{\numberline {5.1.2}ANTLR}{23}{subsection.87}
-\contentsline {subsection}{\numberline {5.1.3}Programmiersprachen}{24}{subsection.88}
-\contentsline {section}{\numberline {5.2}Architektur und Umsetzung der Analyse}{24}{section.89}
-\contentsline {subsection}{\numberline {5.2.1}Erstellen der Wissensbasis - Einlesen der Logs}{24}{subsection.90}
-\contentsline {subsection}{\numberline {5.2.2}\IeC {\"U}bersetzung der Regeln}{24}{subsection.93}
-\contentsline {subsection}{\numberline {5.2.3}Algorithmus Compliance Checker}{27}{subsection.96}
-\contentsline {subsection}{\numberline {5.2.4}Darstellung der Ergebnisse}{27}{subsection.98}
-\contentsline {subsection}{\numberline {5.2.5}Struktur der Pakete}{27}{subsection.99}
-\contentsline {chapter}{\numberline {6}Ergebnisse und Diskussion}{28}{chapter.100}
-\contentsline {section}{\numberline {6.1}Evaluation}{28}{section.101}
-\contentsline {subsection}{\numberline {6.1.1}Mein Beispiel mit ein paar Logs untersuchen}{28}{subsection.102}
-\contentsline {chapter}{\numberline {7}Ausblick}{29}{chapter.103}
+\contentsline {section}{\numberline {2.1}Untersuchung Instanz-\IeC {\"u}bergreifender Regeln}{3}{section.20}
+\contentsline {section}{\numberline {2.2}Definition und Anwendung von Regeln in Gesch\IeC {\"a}ftsprozessen}{4}{section.21}
+\contentsline {section}{\numberline {2.3}ProM - CLIMB - SCIFF}{4}{section.22}
+\contentsline {chapter}{\numberline {3}Grundlagen}{5}{chapter.23}
+\contentsline {section}{\numberline {3.1}Grundlagen und Definitionen}{5}{section.24}
+\contentsline {subsection}{\numberline {3.1.1}Prozess Schemata und Instanzen}{5}{subsection.25}
+\contentsline {subsection}{\numberline {3.1.2}Aktivit\IeC {\"a}ten}{6}{subsection.27}
+\contentsline {subsection}{\numberline {3.1.3}Rollenmodell und Authorisierung}{7}{subsection.29}
+\contentsline {subsection}{\numberline {3.1.4}Zeitmodell}{8}{subsection.31}
+\contentsline {subsection}{\numberline {3.1.5}Event Logs}{8}{subsection.32}
+\contentsline {subsection}{\numberline {3.1.6}Schutzziele}{9}{subsection.35}
+\contentsline {section}{\numberline {3.2}Herleitung der Einschr\IeC {\"a}nkungen}{10}{section.37}
+\contentsline {subsection}{\numberline {3.2.1}Ein praktisches Beispiel mit vielen Einschr\IeC {\"a}nkungen}{10}{subsection.38}
+\contentsline {subsection}{\numberline {3.2.2}Arten von Constraints - Herleitung}{11}{subsection.50}
+\contentsline {subsection}{\numberline {3.2.3}G\IeC {\"u}ltigkeitsbereich von Constraints}{12}{subsection.52}
+\contentsline {chapter}{\numberline {4}Entwicklung einer Definitionssprache f\IeC {\"u}r Regeln}{14}{chapter.53}
+\contentsline {section}{\numberline {4.1}Anforderungen an die Grammatik}{14}{section.54}
+\contentsline {section}{\numberline {4.2}Definition der Grammatik}{15}{section.55}
+\contentsline {subsection}{\numberline {4.2.1}Argumente - Variablen und Konstanten}{16}{subsection.57}
+\contentsline {subsection}{\numberline {4.2.2}Pr\IeC {\"a}dikate}{17}{subsection.59}
+\contentsline {subsection}{\numberline {4.2.3}Regeln}{20}{subsection.67}
+\contentsline {subsection}{\numberline {4.2.4}Grammatik - Syntax und Semantik}{20}{subsection.68}
+\contentsline {section}{\numberline {4.3}Diskussion zur Grammatik}{21}{section.69}
+\contentsline {subsection}{\numberline {4.3.1}Disjunktion}{21}{subsection.70}
+\contentsline {subsection}{\numberline {4.3.2}Umgang mit verschiedenen Rollenmodellen}{22}{subsection.73}
+\contentsline {subsubsection}{\numberline {4.3.2.1}Definition eigener Pr\IeC {\"a}dikate}{22}{subsubsection.74}
+\contentsline {subsection}{\numberline {4.3.3}Negation}{22}{subsection.76}
+\contentsline {section}{\numberline {4.4}konkretes Beispiel}{23}{section.77}
+\contentsline {chapter}{\numberline {5}Implementierung}{24}{chapter.79}
+\contentsline {section}{\numberline {5.1}Verwendete Hilfsmittel}{25}{section.81}
+\contentsline {subsection}{\numberline {5.1.1}SEWOL}{25}{subsection.82}
+\contentsline {subsection}{\numberline {5.1.2}ANTLR}{25}{subsection.83}
+\contentsline {subsection}{\numberline {5.1.3}Programmiersprachen}{25}{subsection.84}
+\contentsline {section}{\numberline {5.2}Architektur und Umsetzung der Analyse}{26}{section.85}
+\contentsline {subsection}{\numberline {5.2.1}Erstellen der Wissensbasis - Einlesen der Logs}{26}{subsection.86}
+\contentsline {subsection}{\numberline {5.2.2}\IeC {\"U}bersetzung der Regeln}{27}{subsection.89}
+\contentsline {subsection}{\numberline {5.2.3}Algorithmus Compliance Checker}{28}{subsection.92}
+\contentsline {subsection}{\numberline {5.2.4}Darstellung der Ergebnisse}{29}{subsection.94}
+\contentsline {subsection}{\numberline {5.2.5}Struktur der Pakete}{29}{subsection.95}
+\contentsline {chapter}{\numberline {6}Ergebnisse und Diskussion}{30}{chapter.96}
+\contentsline {section}{\numberline {6.1}Evaluation}{30}{section.97}
+\contentsline {section}{\numberline {6.2}Diskussion}{30}{section.98}
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{31}{chapter.99}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Weitere Beispiele f\IeC {\"u}r die Benutzung der Grammatik}{30}{appendix.104}
-\contentsline {chapter}{\numberline {B}Argumente und Konfiguration}{32}{appendix.105}
-\contentsline {chapter}{\numberline {C}Anleitung zur Verwendung}{33}{appendix.107}
-\contentsline {chapter}{\numberline {D}Grammatik im BNF Format}{34}{appendix.115}
+\contentsline {chapter}{\numberline {A}Weitere Beispiele f\IeC {\"u}r die Benutzung der Grammatik}{32}{appendix.100}
+\contentsline {chapter}{\numberline {B}Anleitung zur Verwendung}{34}{appendix.101}
+\contentsline {chapter}{\numberline {C}Grammatik im BNF Format}{36}{appendix.109}
 \vspace {2em}
-\contentsline {chapter}{Literaturverzeichnis}{35}{dummy.116}
+\contentsline {chapter}{Literaturverzeichnis}{37}{dummy.110}

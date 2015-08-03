@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.6.30)  2 AUG 2015 13:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.6.30)  3 AUG 2015 15:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -845,7 +845,7 @@ Kapitel 1.
 ------------------------------------------------------------------------------
  1 Einleitung
 ------------------------------------------------------------------------------
-<Figures/Workflow.jpeg, id=441, 974.64125pt x 164.615pt>
+<Figures/Workflow.jpeg, id=413, 974.64125pt x 164.615pt>
 File: Figures/Workflow.jpeg Graphic file (type jpg)
 
 <use Figures/Workflow.jpeg>
@@ -867,7 +867,13 @@ Kapitel 2.
 ------------------------------------------------------------------------------
 [3
 
-]) (./Chapters/Theorie.tex [4]
+]
+Overfull \hbox (8.05145pt too wide) in paragraph at lines 22--22
+[]\OT1/cmr/bx/n/14.4 Definition und An-wen-dung von Re-geln in Gesch[]aftsproze
+ssen 
+ []
+
+) (./Chapters/Theorie.tex [4]
 Kapitel 3.
 ------------------------------------------------------------------------------
  3 Grundlagen
@@ -877,7 +883,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--23
 
  []
 
-<Figures/sampleW.jpeg, id=468, 694.595pt x 243.91125pt>
+<Figures/sampleW.jpeg, id=458, 694.595pt x 243.91125pt>
 File: Figures/sampleW.jpeg Graphic file (type jpg)
 
 <use Figures/sampleW.jpeg>
@@ -886,76 +892,76 @@ Package pdftex.def Info: Figures/sampleW.jpeg used on input line 26.
  [5
 
  <./Figures/sampleW.jpeg>]
-<Figures/Taskevents.jpeg, id=474, 925.4575pt x 612.2875pt>
+<Figures/Taskevents.jpeg, id=463, 925.4575pt x 612.2875pt>
 File: Figures/Taskevents.jpeg Graphic file (type jpg)
 
 <use Figures/Taskevents.jpeg>
 Package pdftex.def Info: Figures/Taskevents.jpeg used on input line 49.
 (pdftex.def)             Requested size: 408.24449pt x 270.0987pt.
 
-<Figures/Rollenmodell.jpeg, id=475, 545.03625pt x 207.77625pt>
+<Figures/Rollenmodell.jpeg, id=464, 545.03625pt x 207.77625pt>
 File: Figures/Rollenmodell.jpeg Graphic file (type jpg)
 
 <use Figures/Rollenmodell.jpeg>
 Package pdftex.def Info: Figures/Rollenmodell.jpeg used on input line 64.
 (pdftex.def)             Requested size: 408.24449pt x 155.62888pt.
  [6 <./Figures/Taskevents.jpeg>] [7 <./Figures/Rollenmodell.jpeg>]
-<Figures/WorkflowOntology.jpeg, id=488, 807.015pt x 508.90125pt>
+<Figures/WorkflowOntology.jpeg, id=478, 807.015pt x 508.90125pt>
 File: Figures/WorkflowOntology.jpeg Graphic file (type jpg)
 
 <use Figures/WorkflowOntology.jpeg>
-Package pdftex.def Info: Figures/WorkflowOntology.jpeg used on input line 104.
+Package pdftex.def Info: Figures/WorkflowOntology.jpeg used on input line 105.
 (pdftex.def)             Requested size: 408.24449pt x 257.4396pt.
  [8 <./Figures/WorkflowOntology.jpeg>]
-Overfull \hbox (6.80453pt too wide) in paragraph at lines 116--127
+Overfull \hbox (6.80453pt too wide) in paragraph at lines 117--128
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--156
+Underfull \hbox (badness 10000) in paragraph at lines 145--157
 
  []
 
 [9]
 File: Figures/Workflow.jpeg Graphic file (type jpg)
  <use Figures/Workflow.jpeg>
-Package pdftex.def Info: Figures/Workflow.jpeg used on input line 180.
+Package pdftex.def Info: Figures/Workflow.jpeg used on input line 181.
 (pdftex.def)             Requested size: 408.24449pt x 68.95195pt.
  [10]
-Underfull \hbox (badness 10000) in paragraph at lines 207--208
+Underfull \hbox (badness 10000) in paragraph at lines 208--209
 
  []
 
-<Figures/Constraints.jpeg, id=516, 918.43124pt x 464.73625pt>
+<Figures/Constraints.jpeg, id=505, 918.43124pt x 464.73625pt>
 File: Figures/Constraints.jpeg Graphic file (type jpg)
 
 <use Figures/Constraints.jpeg>
-Package pdftex.def Info: Figures/Constraints.jpeg used on input line 211.
+Package pdftex.def Info: Figures/Constraints.jpeg used on input line 212.
 (pdftex.def)             Requested size: 408.24449pt x 206.5765pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--221
+Underfull \hbox (badness 10000) in paragraph at lines 217--222
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 222--227
+Underfull \hbox (badness 10000) in paragraph at lines 223--228
 
  []
 
 [11 <./Figures/Constraints.jpeg>]
-Underfull \hbox (badness 10000) in paragraph at lines 228--230
+Underfull \hbox (badness 10000) in paragraph at lines 229--231
 
  []
 
-) (./Chapters/Grammatik.tex [12] [13]
+[12]) (./Chapters/Grammatik.tex [13]
 Kapitel 4.
 ------------------------------------------------------------------------------
- 4 Grammatik
+ 4 Entwicklung einer Definitionssprache f\IeC {\"u}r Regeln
 ------------------------------------------------------------------------------
 [14
 
@@ -964,110 +970,171 @@ Underfull \hbox (badness 10000) in paragraph at lines 34--35
 
  []
 
-
-Overfull \hbox (63.77382pt too wide) in paragraph at lines 42--42
-[]\OT1/cmtt/m/n/10.95 DESC "'Kredit beantragen' und 'Kredit pr^^?ufen' darf nic
-ht von Verwandten ausgef^^?uhrt werden"[] 
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+[15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
 
  []
 
 
-Overfull \hbox (25.636pt too wide) in paragraph at lines 89--100
+Overfull \hbox (25.636pt too wide) in paragraph at lines 96--108
 [][] 
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Underfull \hbox (badness 10000) in paragraph at lines 96--108
+
+ []
 
 
-Overfull \hbox (25.636pt too wide) in paragraph at lines 106--125
+Overfull \hbox (25.636pt too wide) in paragraph at lines 114--134
 [][] 
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Underfull \hbox (badness 10000) in paragraph at lines 114--134
+
+ []
 
 
-Overfull \hbox (25.636pt too wide) in paragraph at lines 134--151
+Underfull \hbox (badness 7012) in paragraph at lines 152--153
+[]\OT1/cmr/m/n/10.95 TT wur-de ab-ge-bro-chen. Ent-spricht dem Event-Typ
+ []
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 140--168
 [][] 
  []
 
-[16]
-Overfull \hbox (25.636pt too wide) in paragraph at lines 157--175
-[][]
- []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (25.636pt too wide) in paragraph at lines 182--191
-[][]
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (25.636pt too wide) in paragraph at lines 197--206
-[][]
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (25.636pt too wide) in paragraph at lines 212--224
-[][]
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 231--234
+Underfull \hbox (badness 10000) in paragraph at lines 140--168
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 244--245
+Underfull \hbox (badness 2744) in paragraph at lines 180--180
+[]\OT1/cmr/m/n/10.95 'NUMBER OF' VAR 'WHE-RE'
+ []
+
+
+Underfull \hbox (badness 1540) in paragraph at lines 182--182
+[]\OT1/cmr/m/n/10.95 'SUM OF' NT$\OMS/cmsy/m/n/10.95 j$\OT1/cmr/m/n/10.95 TP$\O
+MS/cmsy/m/n/10.95 j$\OT1/cmr/m/n/10.95 TS 'WHE-RE'
+ []
+
+
+Underfull \hbox (badness 1838) in paragraph at lines 184--184
+[]\OT1/cmr/m/n/10.95 'AVG OF' NT$\OMS/cmsy/m/n/10.95 j$\OT1/cmr/m/n/10.95 TP$\O
+MS/cmsy/m/n/10.95 j$\OT1/cmr/m/n/10.95 TS 'WHE-RE'
+ []
+
+
+Underfull \hbox (badness 2376) in paragraph at lines 186--186
+[]\OT1/cmr/m/n/10.95 'MIN OF' NT$\OMS/cmsy/m/n/10.95 j$\OT1/cmr/m/n/10.95 TP$\O
+MS/cmsy/m/n/10.95 j$\OT1/cmr/m/n/10.95 TS 'WHE-RE'
+ []
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 174--192
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--192
 
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 249--257
+
+Overfull \hbox (3.22223pt too wide) in paragraph at lines 172--195
+\OT1/cmr/m/n/10.95 Pr[]adikates ste-hen. \OT1/cmtt/m/n/10.95 MIN OF X WHERE 'T1
+' completed AND timestamp of 'T1' is X IS N \OT1/cmr/m/n/10.95 be-
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 199--209
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--209
 
  []
 
-[19]
-Overfull \hbox (63.77382pt too wide) in paragraph at lines 312--312
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (25.636pt too wide) in paragraph at lines 215--227
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 215--227
+
+ []
+
+[18] [19]
+Overfull \hbox (25.636pt too wide) in paragraph at lines 233--249
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 233--249
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 233--249
+\OT1/cmr/m/n/10 f[]uhrt. Wenn \OT1/cmtt/m/n/10 IF USER executed 'T1' AND USER e
+xecuted 'T2' THEN illegal execution \OT1/cmr/m/it/10 true
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 256--259
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 274--282
+
+ []
+
+[20]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[21]
+Overfull \hbox (63.77382pt too wide) in paragraph at lines 337--337
 []\OT1/cmtt/m/n/10.95 IF ACTOR executed ACTIVITY AND EventType(ACTIVITY).'abort
 ed' THEN aborted(ACTOR, ACTIVITY)[] 
  []
 
-[20]
-Underfull \hbox (badness 10000) in paragraph at lines 327--328
+
+Underfull \hbox (badness 10000) in paragraph at lines 354--355
 
  []
 
-) (./Chapters/Praxis.tex [21]
+[22]) (./Chapters/Praxis.tex [23]
 Kapitel 5.
 ------------------------------------------------------------------------------
  5 Implementierung
 ------------------------------------------------------------------------------
-<Figures/myProg.png, id=581, 642.4pt x 481.8pt>
-File: Figures/myProg.png Graphic file (type png)
- <use Figures/myProg.png>
-Package pdftex.def Info: Figures/myProg.png used on input line 20.
-(pdftex.def)             Requested size: 408.24449pt x 306.18954pt.
+<Figures/Programm.jpeg, id=580, 796.9775pt x 462.72874pt>
+File: Figures/Programm.jpeg Graphic file (type jpg)
 
-[22
+<use Figures/Programm.jpeg>
+Package pdftex.def Info: Figures/Programm.jpeg used on input line 20.
+(pdftex.def)             Requested size: 408.24449pt x 237.02646pt.
+ [24
 
- <./Figures/myProg.png>] [23]
+ <./Figures/Programm.jpeg>] [25]
 Underfull \hbox (badness 3049) in paragraph at lines 68--68
 []\OT1/cmr/m/n/10 task[]attribute(taskID, at-trNa-me, at-
  []
@@ -1078,36 +1145,38 @@ Overfull \hbox (25.636pt too wide) in paragraph at lines 50--73
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
+Underfull \hbox (badness 10000) in paragraph at lines 79--89
 
  []
 
-[24] [25] <Figures/Container.jpeg, id=620, 985.6825pt x 709.65125pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
+
+ []
+
+[26] <Figures/Container.jpeg, id=611, 985.6825pt x 709.65125pt>
 File: Figures/Container.jpeg Graphic file (type jpg)
 
 <use Figures/Container.jpeg>
-Package pdftex.def Info: Figures/Container.jpeg used on input line 109.
+Package pdftex.def Info: Figures/Container.jpeg used on input line 110.
 (pdftex.def)             Requested size: 408.24449pt x 293.92587pt.
- [26 <./Figures/Container.jpeg>])
-(./Chapters/Auswertung.tex [27]
+ [27] [28 <./Figures/Container.jpeg>])
+(./Chapters/Auswertung.tex [29]
 Kapitel 6.
 ------------------------------------------------------------------------------
  6 Ergebnisse und Diskussion
 ------------------------------------------------------------------------------
-) (./Chapters/Ausblick.tex [28
+) (./Chapters/Ausblick.tex [30
 
 ]
 Kapitel 7.
 ------------------------------------------------------------------------------
- 7 Ausblick
+ 7 Zusammenfassung
 ------------------------------------------------------------------------------
-) (./Appendices/FurtherConstraints.tex [29
+) (./Appendices/FurtherConstraints.tex [31
 
 ]
 Anhang A.
@@ -1141,69 +1210,77 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
-) (./Appendices/Kommandozeilenargumente.tex
+) (./Appendices/Programmstarten.tex
 Underfull \hbox (badness 10000) in paragraph at lines 34--2
 
  []
 
-[30
+[32
 
-] [31]
+] [33]
 Anhang B.
 ------------------------------------------------------------------------------
- B Argumente und Konfiguration
+ B Anleitung zur Verwendung
 ------------------------------------------------------------------------------
-) (./Appendices/Programmstarten.tex [32
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 26--29
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--41
+
+ []
+
+[34
+
+]) (./Appendices/Grammatik.tex [35]
 Anhang C.
 ------------------------------------------------------------------------------
- C Anleitung zur Verwendung
-------------------------------------------------------------------------------
-) (./Appendices/Grammatik.tex [33
-
-]
-Anhang D.
-------------------------------------------------------------------------------
- D Grammatik im BNF Format
+ C Grammatik im BNF Format
 ------------------------------------------------------------------------------
 
-Overfull \hbox (7.22224pt too wide) in paragraph at lines 10--37
+Overfull \hbox (7.22224pt too wide) in paragraph at lines 10--40
 [] 
  []
 
-) [34
+) [36
 
 ]
 ------------------------------------------------------------------------------
  Literaturverzeichnis
 ------------------------------------------------------------------------------
-(./main.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 255.
- [35
+(./main.bbl [37
 
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 255.
+])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 254.
+ [38]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 254.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 255.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 255.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 254.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 254.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C57F566590AD253557191B9B834AD6DF;11730.
+(rerunfilecheck)             Checksum: 93F7DA19FA667470E87D0DEC65F1470B;11205.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 255.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 254.
  ) 
 Here is how much of TeX's memory you used:
- 13813 strings out of 494976
- 193092 string characters out of 6179137
- 279628 words of memory out of 5000000
- 16622 multiletter control sequences out of 15000+600000
- 17789 words of font info for 66 fonts, out of 8000000 for 9000
+ 13842 strings out of 494976
+ 193402 string characters out of 6179137
+ 278451 words of memory out of 5000000
+ 16649 multiletter control sequences out of 15000+600000
+ 19357 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 49i,12n,45p,1366b,498s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 49i,12n,45p,1422b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
@@ -1219,10 +1296,10 @@ amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (44 pages, 529595 bytes).
+Output written on main.pdf (47 pages, 561081 bytes).
 PDF statistics:
- 763 PDF objects out of 1000 (max. 8388607)
- 685 compressed objects within 7 object streams
- 168 named destinations out of 1000 (max. 500000)
- 545 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 767 PDF objects out of 1000 (max. 8388607)
+ 687 compressed objects within 7 object streams
+ 173 named destinations out of 1000 (max. 500000)
+ 505 words of extra memory for PDF output out of 10000 (max. 10000000)
 

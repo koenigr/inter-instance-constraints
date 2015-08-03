@@ -3,23 +3,22 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Arbeitsablauf in einer Bank, nachdem ein Kreditantrag eingegangen ist.\relax }}{2}{figure.caption.16}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces einfaches Beispiel eines Prozessschemas\relax }}{5}{figure.caption.30}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Aktivit\IeC {\"a}ten und Events\relax }}{6}{figure.caption.32}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Beispiel Rollenmodell\relax }}{7}{figure.caption.34}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Ontologie eines Prozesses // TODO nochmal Beziehungen \IeC {\"u}berdenken\relax }}{8}{figure.caption.37}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Bearbeitung eines Kreditantrags in der Bank\relax }}{10}{figure.caption.43}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Typen von Einschr\IeC {\"a}nkungen und regeln\relax }}{11}{figure.caption.55}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces einfaches Beispiel eines Prozessschemas\relax }}{5}{figure.caption.26}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Aktivit\IeC {\"a}ten und Events\relax }}{6}{figure.caption.28}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Beispiel Rollenmodell\relax }}{7}{figure.caption.30}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Ontologie eines Prozesses // TODO nochmal Beziehungen \IeC {\"u}berdenken\relax }}{8}{figure.caption.33}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Bearbeitung eines Kreditantrags in der Bank\relax }}{10}{figure.caption.39}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Typen von Einschr\IeC {\"a}nkungen und regeln\relax }}{11}{figure.caption.51}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Beispiel Spezifikation einer einfachen Regel\relax }}{15}{figure.caption.60}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Disjunktion im K\IeC {\"o}rper einer Regel. Man beachte, dass jede Disjunktion von umschlie\IeC {\ss }enden Klammern umgeben sein muss.\relax }}{19}{figure.caption.75}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Disjunktion im Kopfbereich ist nicht erlaubt. Es m\IeC {\"u}ssen zwei getrennte Regeln erstellt werden.\relax }}{20}{figure.caption.76}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Definition eigener Pr\IeC {\"a}dikate. .. wurde gesetzt, .. hat eine eigene Regel\relax }}{20}{figure.caption.79}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Regeln f\IeC {\"u}r unsere gefundenen Beispiele\relax }}{21}{figure.caption.82}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Beispiel Spezifikation einer einfachen Regel\relax }}{15}{figure.caption.56}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Disjunktion im K\IeC {\"o}rper einer Regel. Man beachte, dass jede Disjunktion von umschlie\IeC {\ss }enden Klammern umgeben sein muss.\relax }}{21}{figure.caption.71}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Disjunktion im Kopfbereich ist nicht erlaubt. Es m\IeC {\"u}ssen zwei getrennte Regeln erstellt werden.\relax }}{22}{figure.caption.72}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Definition eigener Pr\IeC {\"a}dikate. .. wurde gesetzt, .. hat eine eigene Regel\relax }}{22}{figure.caption.75}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Regeln f\IeC {\"u}r unsere gefundenen Beispiele\relax }}{23}{figure.caption.78}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Aufbau des IICMCheckers\relax }}{22}{figure.caption.84}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Interne Datenstruktur\relax }}{26}{figure.caption.95}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Pseudocode des Modelchecker\relax }}{27}{figure.caption.97}
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Aufbau des IICMCheckers\relax }}{24}{figure.caption.80}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Interne Datenstruktur\relax }}{28}{figure.caption.91}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Pseudocode des Modelchecker\relax }}{29}{figure.caption.93}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

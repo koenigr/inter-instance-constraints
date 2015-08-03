@@ -5,22 +5,19 @@
 \label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
 \lhead{Chapter 5. \emph{Ergebnisse}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
-
 \section{Evaluation}
-\subsection{Mein Beispiel mit ein paar Logs untersuchen}
-Zur Auswertung wurden für den in ... beschrieben Workflow wurden für jede Regel jeweils 3 Logs manuell erstellt, die zusammen genau eine Regelverletzung beinhalten. Des weiteren gibt einen Log für 3 Cases, in denen keine Regel verletzt wurde. Um den Reibungslosen Ablauf auch bei mehreren Regelbrüchen zu prüfen, werden zum Schluss alle Logs gemeinsam eingelesen. Es wird erwartet, dass die selben Fehler gefunden werden, die bereits in den einzelnen Logs auftraten (+ natürlich ein paar weitere, wenn es um Akkumulation geht).
+Sämtliche hier vorgestellte Regeln wurden mit speziell erstellen Logs in SEWOL erfolgreich getestet. Blabla Erklärung
+
+Im Folgenden wird ein einfaches Beispiel vorgestellt und der genaue Ablauf der Auswertung besprochen.
+
+\section{Diskussion}
 
 
-
-Erklärung, woher diese Logs kommen und wie sie erzeugt wurden.\\
-Zeigen, wie der Output aussieht.\\
-Beweismethoden??\\
-Wann gibt es false Negatives, false Positives?\\
-Gibt es Fehler? Wieviele? 
-Laufzeit?
-Bild vom Output
-
-Wie werden die Sicherheitsziele behandelt?
+Wie kann man die restlichen Constraints implementieren\\
+Compliance Checking:\\
+Cannot do und Must execute vergleichen.\\
+Optimierung??\\
+Weitere Enforcement Prädikate definieren
 
 
 

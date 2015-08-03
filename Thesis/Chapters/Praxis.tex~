@@ -17,9 +17,9 @@ In diesem Kapitel wird darauf eingegangen, aus welchen Komponenten der im Rahmen
 
 \begin{figure}[ht]
 	\centering
-  \includegraphics[width=0.9\textwidth]{Figures/myProg}
+  \includegraphics[width=0.9\textwidth]{Figures/Programm}
 	\caption{Aufbau des IICMCheckers}
-	\label{fig: myprog}
+	\label{fig:myprog}
 \end{figure}
 Das Programm besteht aus drei Teilen die über Prologdateien miteinander kommunizieren, wobei die Lesenden Teile in Java implementiert sind und der ausführende Teil (der eigentliche Modelchecker) in Prolog ausgeführt wird.
 Der Logtransformer liest Logs im SEWOL \cite{SEWOL} Format ein und übersetzt sie in Status Prädikate (siehe Abschnitt \ref{sec:logtransformer}). 
@@ -69,7 +69,7 @@ Die \textbf{taskID} wird dabei automatisch generiert, um zusammengehörige Eintr
 
 \hline
 \end{tabular}
-Diese Statusprädikate werden aus den Logs extrahiert.
+Diese Statusprädikate werden aus den Logs extrahiert und sind ausschließlich dem Modelchecker sichtbar. Sie sind nicht zu verwechseln mit den Prädikaten, die in der Grammatik verwendet werden. 
 \caption{Statusprädikate}
 \label{tab:statuspr}
 \end{table}
@@ -83,9 +83,10 @@ timestamp(0, 123)&timestamp(1, 123)\\
 eventtype(0, start)&eventtype(1, start)\\
 executed{\_}user(0, 'Mark')&executed{\_}user(1, 'Theo')\\
 executed{\_}role(0, 'Admin')&executed{\_}role(1, 'Azubi')\\
-task\_attribute(0, 'amount', 3000)& task\_attribute(0, 'amount', '3000Euro')\\
-\end{tabular}
-\caption{Aus einem Log herausgelesene Klauseln in Prolog. Die TaskID wird für jeden Eintrag automatisch generiert. Die restlichen Informationen stammen aus dem Log. Diejenigen Attributswerte, die eine valide Zahl darstellen, werden auch als Zahl gespeichert, um arithmetische Operationen zu erlauben. Die restlichen Werte werden als String im Prolog Format (zwei einfach Striche) gespeichert. }
+task\_attribute(0, 'amount', 3000)& task\_attribute(1, 'amount', '3000Euro')\\
+\end{tabular}\\\\
+\small Aus einem Log herausgelesene Klauseln in Prolog. Die TaskID wird für jeden Eintrag automatisch generiert. Die restlichen Informationen stammen aus dem Log. Diejenigen Attributswerte, die eine valide Zahl darstellen, werden auch als Zahl gespeichert, um arithmetische Operationen zu erlauben. Die restlichen Werte werden als String im Prolog Format (zwei einfach Striche) gespeichert. 
+\caption{Wissensbasis}
 \label{tab:knowledge}
 \end{table}
 
@@ -119,7 +120,7 @@ Um dem Nutzer eine möglichst intuitive Definition der Regeln zu ermöglichen, w
 
 Die wichtigste Aufgabe des Listeners ist es, den Regeln entsprechende Klauseln hinzuzufügen, die sicherstellen, dass die Regeln im richtigen Kontext angewandt werden - Intra-Instance, Inter-Instance oder Inter-Process. Intra-Instance Regeln gelten für Activities in der selben Prozessinstanz. Inter-Instance Regeln betrachten auch Aktivitäten, die aus unterschiedlichen Prozessinstanzen gehören, jedoch aus dem selben Prozessschema. Inter-Process Regeln gelten für alle Aktivitäten, unabhängig davon, zu welchem Prozess sie gehören...
 
-Da Logs die Events einer Aktivität speichern, die Untersuchung in den meisten Fällen aber nicht die einzelnen Events einzeln betrachtet, werden bei den executed-Klauseln das Event start betrachtet.
+Zeitpunkte und Zeitspannen werden in ms nach 1970 übersetzt. Soll arithmetische Operationen erleichtern.
 
 %
 % ALGORITHMUS

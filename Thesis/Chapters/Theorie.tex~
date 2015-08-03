@@ -42,7 +42,7 @@ Eine Aktivität ist ein atomares Event, dh. eine in sich abgeschlossene Aufgabe 
 
 Des weiteren besitzen die Aktivitäten einen eindeutigen Zeitstempel $\tau$, zu dessen Zeitpunkt sie ausgeführt wurden. Diese Zeitstempel bestimmen eine Ordnung $<T, \leq>$. Es gilt nämlich $t_1 < t_2 $, wenn $t_1$ vor $t_2$ ausgeführt wurde, dh. timestamp($t_1$) $<$ timestamp($t_2$).
 
-Aktivitäten besitzen 7 verschiedene Zustände: \textit{new, scheduled, assigned, active, suspended, completed, aborted}. Die Aktivitäten werden durch \textbf{Events} von einem Zustand in den nächsten geführt. Die Übergänge können sehr fein gegliedert sein oder sich nur auf elementare \textit{Events} beschränken. In dieser Arbeit wird von 12 \textit{Event}-Typen ausgegangen: \textit{schedule, assign, reassign, start, resume, suspend, autoskip, manualskip, withdraw, ate\_abort, pi\_abort}.
+Aktivitäten besitzen 7 verschiedene Zustände: \textit{new, scheduled, assigned, active, suspended, completed, aborted}. Die Aktivitäten werden durch \textbf{Events} von einem Zustand in den nächsten geführt. Die Übergänge können sehr fein gegliedert sein oder sich nur auf elementare \textit{Events} beschränken. In dieser Arbeit wird von 12 \textit{Event}-Typen ausgegangen: \textit{schedule, assign, reassign, start, complete, resume, suspend, autoskip, manualskip, withdraw, ate\_abort, pi\_abort}.
 
 \begin{figure}[ht]
 	\centering
@@ -86,7 +86,8 @@ $\Tau$ ist eine Menge von \textit{Zeitpunkten} $\tau$ und $\leq$ eine total Ordn
 Ein \textit{Zeitinterval}$[\tau_a, \tau_b]$ ist eine Menge von Zeitpunkten $\tau \in \Tau$ mit $\tau_a \leq \tau \leq \tau_b$.
 Ein Zeitinterval $\tau' = [\tau_a, \tau_b]$ wird als leer bezeichnet, falss $\tau_b \leq \tau_a$.
 
-\textbf{TS} wird als die Menge aller Zeitpunkt Symbole wie 30.07.1999, 14:55 definiert und \textbf{TP} bezeichnet die Menge aller Zeitspannen wie 3 Tage 5 Stunden, 5 Monate. \textbf{TV} ... Variablen für Zeitpunkte TODO
+\textbf{TS} wird als die Menge aller Zeitpunkt-Variablen und Konstanten wie 30.07.1999, 14:55 definiert und \textbf{TP} bezeichnet die Menge aller Zeitspannen wie 3 Tage 5 Stunden, 5 Monate.\\
+Es gilt: $$TP - TP = TS$$ und $$TP + TS = TP$$ Die Differenz zwischen zwei Zeitpunkten ist eine Zeitspanne ( 30.07.1999 - 25.7.1999 = 5D ) und die Summe von einem Zeitpunkt und einer Zeitspanne ist wieder ein Zeitpunkt ( 25.07.1999 + 5D = 25.07.1999 ).
 
 
 \cite{warner_inter_instance}

@@ -1,10 +1,10 @@
 % Appendix D
 
-\chapter{Grammatik in BNF Form} % Main appendix title
+\chapter{Grammatik im BNF Format} % Main appendix title
 
 \label{Grammatik} % For referencing this appendix elsewhere, use \ref{AppendixA}
 
-\lhead{Appendix R. \emph{Grammatik in BNF Form}} % This is for the header on each page - perhaps a shortened title
+\lhead{Appendix R. \emph{Grammatik im BNF Format}} % This is for the header on each page - perhaps a shortened title
 
 
 \begin{tabular}{lll}

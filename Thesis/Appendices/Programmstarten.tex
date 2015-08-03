@@ -16,13 +16,43 @@
 \end{enumerate}
 \end{enumerate}
 
-\textbf{Es wurde auf folgendem System getestet}
+\textbf{Es wurde auf folgendem System entwickelt und getestet}
 \begin{enumerate}
-\item java7 .. 8??
-\item SWI-Prolog 6
-\item Linux Ubuntu 12....
+\item Linux Ubuntu 14.04 LTS 64-Bit
+\item Java version 1.7.0\_79
+\item SWI-Prolog version 6.6.4 for amd64
 \end{enumerate}
 
-\textbf{Wie startet man das programm?}
+\textbf{Ausführen des Programms per Kommandozeile}\\
+Entweder muss sich der Ordner libraries oder alle benötigten Pakete im Classpath befinden.\\
+Alle Ordner (rule, log, output,..) müssen im bin-Ordner sein.\\
 
+\texttt{java -cp .:../../libraries/* main.Main}
+
+
+
+Das Paket \texttt{}
+
+\textbf{Einrichten des Programms in Eclipse}\\
+
+
+\textbf{Einbinden in eigenes Projekt}\\
+Das Paket \texttt{iicmchecker} muss sich samt allen Abhängigkeiten im Build-Path des Projekts befinden. Gestartet wird es über das Kommando \texttt{run()}.\\
+\begin{verbatim}
+IICMChecker checker = new IICMChecker();
+checker.run();
+\end{verbatim}
+
+
+\textbf{Individuelle Einstellungen}\\
+Der IICMChecker besitzt diverse Methoden, um individuelle Einstellungen vorzunehmen.
+Folgende Optionen sind möglich (im Kommentar steht die Klasse des Arguments):
+\begin{verbatim}
+checker.setLoggerLevel(loggerLevel);    	// java.util.logging.Level
+checker.setRuleLocation(rulelocation);  	// java.lang.String
+checker.setRuleFiles(rulefiles);  		// java.lang.String[]
+checker.setLogLocation(loglocation);		// java.lang.String
+checker.setLogFiles(logfiles);			// java.lang.String[]
+checker.setOutputLocation(outputlocation);	// java.lang.String
+\end{verbatim}
 
