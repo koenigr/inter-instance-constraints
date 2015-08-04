@@ -29,6 +29,9 @@
 
 \usepackage[german]{babel}
 
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
 \graphicspath{{Figures/}} % Specifies the directory where pictures are stored
 
 \usepackage[square, numbers, comma, sort&compress]{natbib} % Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
@@ -197,7 +200,10 @@ $U$& Menge der Nutzer\\
 $\Tau$ & Menge aller Zeitpunkte\\
 $TP$& Zeitpunkt Symbole\\
 $TS$& Zeitspannen Symbole\\
-$E$& Event Logs
+$E$& Event Logs\\
+$L$& Menge aller Prädikate außer den Kopfprädikaten\\
+$K$& Menge aller Disjunktionen von Prädikaten aus L\\
+$N$& Menge aller Negationen von Konjunktionen von Prädikaten aus L\\
 }
 
 %----------------------------------------------------------------------------------------
@@ -231,9 +237,10 @@ $E$& Event Logs
 % Uncomment the lines as you write the Appendices
 
 \input{Appendices/FurtherConstraints}
-\input{Appendices/Kommandozeilenargumente}
 \input{Appendices/Programmstarten}
+\input{Appendices/Paketstruktur}
 \input{Appendices/Grammatik}
+\input{Appendices/Pseudocode}
 %\input{Appendices/AppendixC}
 
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics

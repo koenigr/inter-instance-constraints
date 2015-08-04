@@ -46,7 +46,7 @@ checker.run();
 
 \textbf{Individuelle Einstellungen}\\
 Der IICMChecker besitzt diverse Methoden, um individuelle Einstellungen vorzunehmen.
-Folgende Optionen sind möglich (im Kommentar steht die Argumentklasse):
+Folgende Optionen sind möglich (im Kommentar steht die Klasse des Arguments):
 \begin{verbatim}
 checker.setLoggerLevel(loggerLevel);    	// java.util.logging.Level
 checker.setRuleLocation(rulelocation);  	// java.lang.String

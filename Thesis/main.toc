@@ -22,42 +22,46 @@
 \contentsline {subsection}{\numberline {3.1.3}Rollenmodell und Authorisierung}{7}{subsection.29}
 \contentsline {subsection}{\numberline {3.1.4}Zeitmodell}{8}{subsection.31}
 \contentsline {subsection}{\numberline {3.1.5}Event Logs}{8}{subsection.32}
-\contentsline {subsection}{\numberline {3.1.6}Schutzziele}{9}{subsection.35}
-\contentsline {section}{\numberline {3.2}Herleitung der Einschr\IeC {\"a}nkungen}{10}{section.37}
-\contentsline {subsection}{\numberline {3.2.1}Ein praktisches Beispiel mit vielen Einschr\IeC {\"a}nkungen}{10}{subsection.38}
-\contentsline {subsection}{\numberline {3.2.2}Arten von Constraints - Herleitung}{11}{subsection.50}
-\contentsline {subsection}{\numberline {3.2.3}G\IeC {\"u}ltigkeitsbereich von Constraints}{12}{subsection.52}
-\contentsline {chapter}{\numberline {4}Entwicklung einer Definitionssprache f\IeC {\"u}r Regeln}{14}{chapter.53}
-\contentsline {section}{\numberline {4.1}Anforderungen an die Grammatik}{14}{section.54}
-\contentsline {section}{\numberline {4.2}Definition der Grammatik}{15}{section.55}
-\contentsline {subsection}{\numberline {4.2.1}Argumente - Variablen und Konstanten}{16}{subsection.57}
-\contentsline {subsection}{\numberline {4.2.2}Pr\IeC {\"a}dikate}{17}{subsection.59}
-\contentsline {subsection}{\numberline {4.2.3}Regeln}{20}{subsection.67}
-\contentsline {subsection}{\numberline {4.2.4}Grammatik - Syntax und Semantik}{20}{subsection.68}
-\contentsline {section}{\numberline {4.3}Diskussion zur Grammatik}{21}{section.69}
-\contentsline {subsection}{\numberline {4.3.1}Disjunktion}{21}{subsection.70}
-\contentsline {subsection}{\numberline {4.3.2}Umgang mit verschiedenen Rollenmodellen}{22}{subsection.73}
-\contentsline {subsubsection}{\numberline {4.3.2.1}Definition eigener Pr\IeC {\"a}dikate}{22}{subsubsection.74}
-\contentsline {subsection}{\numberline {4.3.3}Negation}{22}{subsection.76}
-\contentsline {section}{\numberline {4.4}konkretes Beispiel}{23}{section.77}
-\contentsline {chapter}{\numberline {5}Implementierung}{24}{chapter.79}
-\contentsline {section}{\numberline {5.1}Verwendete Hilfsmittel}{25}{section.81}
-\contentsline {subsection}{\numberline {5.1.1}SEWOL}{25}{subsection.82}
-\contentsline {subsection}{\numberline {5.1.2}ANTLR}{25}{subsection.83}
-\contentsline {subsection}{\numberline {5.1.3}Programmiersprachen}{25}{subsection.84}
-\contentsline {section}{\numberline {5.2}Architektur und Umsetzung der Analyse}{26}{section.85}
-\contentsline {subsection}{\numberline {5.2.1}Erstellen der Wissensbasis - Einlesen der Logs}{26}{subsection.86}
-\contentsline {subsection}{\numberline {5.2.2}\IeC {\"U}bersetzung der Regeln}{27}{subsection.89}
-\contentsline {subsection}{\numberline {5.2.3}Algorithmus Compliance Checker}{28}{subsection.92}
-\contentsline {subsection}{\numberline {5.2.4}Darstellung der Ergebnisse}{29}{subsection.94}
-\contentsline {subsection}{\numberline {5.2.5}Struktur der Pakete}{29}{subsection.95}
-\contentsline {chapter}{\numberline {6}Ergebnisse und Diskussion}{30}{chapter.96}
-\contentsline {section}{\numberline {6.1}Evaluation}{30}{section.97}
-\contentsline {section}{\numberline {6.2}Diskussion}{30}{section.98}
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{31}{chapter.99}
+\contentsline {section}{\numberline {3.2}Herleitung der Einschr\IeC {\"a}nkungen}{9}{section.35}
+\contentsline {subsection}{\numberline {3.2.1}Ein praktisches Beispiel mit vielen Einschr\IeC {\"a}nkungen}{9}{subsection.36}
+\contentsline {subsection}{\numberline {3.2.2}Arten von Constraints - Herleitung}{10}{subsection.47}
+\contentsline {subsection}{\numberline {3.2.3}G\IeC {\"u}ltigkeitsbereich von Constraints}{12}{subsection.49}
+\contentsline {chapter}{\numberline {4}Entwicklung einer Definitionssprache f\IeC {\"u}r Regeln}{13}{chapter.50}
+\contentsline {section}{\numberline {4.1}Anforderungen an die Grammatik}{13}{section.51}
+\contentsline {section}{\numberline {4.2}Definition der Grammatik}{14}{section.52}
+\contentsline {subsection}{\numberline {4.2.1}Argumente - Variablen und Konstanten}{15}{subsection.54}
+\contentsline {subsection}{\numberline {4.2.2}Pr\IeC {\"a}dikate}{16}{subsection.56}
+\contentsline {subsection}{\numberline {4.2.3}Regeln}{17}{subsection.57}
+\contentsline {section}{\numberline {4.3}Grammatik - Syntax und Semantik}{18}{section.60}
+\contentsline {subsection}{\numberline {4.3.1}Definition eigener Pr\IeC {\"a}dikate}{18}{subsection.63}
+\contentsline {subsection}{\numberline {4.3.2}Setzen von Fakten}{19}{subsection.65}
+\contentsline {subsection}{\numberline {4.3.3}Notation bei Regeln}{19}{subsection.67}
+\contentsline {subsection}{\numberline {4.3.4}Spezifikation des Kontexts}{20}{subsection.69}
+\contentsline {subsection}{\numberline {4.3.5}Events}{21}{subsection.71}
+\contentsline {subsection}{\numberline {4.3.6}Disjunktion}{21}{subsection.72}
+\contentsline {subsection}{\numberline {4.3.7}Kollaborateure und kritische Aufgabenpaare}{22}{subsection.75}
+\contentsline {subsection}{\numberline {4.3.8}reservierte Schl\IeC {\"u}sselw\IeC {\"o}rter}{22}{subsection.76}
+\contentsline {section}{\numberline {4.4}Konkretes Beispiel}{22}{section.77}
+\contentsline {chapter}{\numberline {5}Implementierung}{25}{chapter.79}
+\contentsline {section}{\numberline {5.1}Verwendete Hilfsmittel}{26}{section.81}
+\contentsline {subsection}{\numberline {5.1.1}SEWOL}{26}{subsection.82}
+\contentsline {subsection}{\numberline {5.1.2}ANTLR}{26}{subsection.83}
+\contentsline {subsection}{\numberline {5.1.3}Programmiersprachen}{26}{subsection.84}
+\contentsline {section}{\numberline {5.2}Architektur und Umsetzung der Analyse}{27}{section.85}
+\contentsline {subsection}{\numberline {5.2.1}Erstellen der Wissensbasis - Einlesen der Logs}{27}{subsection.86}
+\contentsline {subsection}{\numberline {5.2.2}\IeC {\"U}bersetzung der Regeln}{28}{subsection.89}
+\contentsline {subsection}{\numberline {5.2.3}Algorithmus Compliance Checker}{30}{subsection.92}
+\contentsline {subsection}{\numberline {5.2.4}Darstellung der Ergebnisse}{30}{subsection.93}
+\contentsline {chapter}{\numberline {6}Auswertung}{31}{chapter.95}
+\contentsline {section}{\numberline {6.1}Evaluation}{31}{section.96}
+\contentsline {section}{\numberline {6.2}Diskussion}{33}{section.102}
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{34}{chapter.103}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Weitere Beispiele f\IeC {\"u}r die Benutzung der Grammatik}{32}{appendix.100}
-\contentsline {chapter}{\numberline {B}Anleitung zur Verwendung}{34}{appendix.101}
-\contentsline {chapter}{\numberline {C}Grammatik im BNF Format}{36}{appendix.109}
+\contentsline {chapter}{\numberline {A}Pr\IeC {\"a}dikate}{35}{appendix.104}
+\contentsline {chapter}{\numberline {B}Weitere Beispiele f\IeC {\"u}r die Benutzung der Grammatik}{39}{appendix.112}
+\contentsline {chapter}{\numberline {C}Anleitung zur Verwendung}{41}{appendix.113}
+\contentsline {chapter}{\numberline {D}Paketstruktur}{43}{appendix.121}
+\contentsline {chapter}{\numberline {E}Grammatik im BNF Format}{44}{appendix.122}
+\contentsline {chapter}{\numberline {F}Algorithmus Compliance Checker}{45}{appendix.123}
 \vspace {2em}
-\contentsline {chapter}{Literaturverzeichnis}{37}{dummy.110}
+\contentsline {chapter}{Literaturverzeichnis}{47}{dummy.167}

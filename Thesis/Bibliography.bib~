@@ -9,7 +9,30 @@ keywords={authorisation;database management systems;formal specification;SoD pro
 doi={10.1109/SECPRI.1998.674833},
 ISSN={1081-6011},}
 
+@MISC{Entailment1,
+    author = {Jason Crampton and Royal Holloway},
+    title = {On the Satisfiability of Constraints in Workflow Systems},
+    year = {2004}
+}
 
+@article{SOD2,
+ author = {Botha, Reinhardt A. and Eloff, Jan H. P.},
+ title = {Separation of Duties for Access Control Enforcement in Workflow Environments},
+ journal = {IBM Syst. J.},
+ issue_date = {March 2001},
+ volume = {40},
+ number = {3},
+ month = mar,
+ year = {2001},
+ issn = {0018-8670},
+ pages = {666--682},
+ numpages = {17},
+ url = {http://dx.doi.org/10.1147/sj.403.0666},
+ doi = {10.1147/sj.403.0666},
+ acmid = {1017212},
+ publisher = {IBM Corp.},
+ address = {Riverton, NJ, USA},
+} 
 
 
 @INPROCEEDINGS{Bertino,

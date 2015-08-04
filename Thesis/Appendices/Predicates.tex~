@@ -1,0 +1,158 @@
+% Appendix F
+
+\chapter{Prädikate} % Main appendix title
+
+\label{AppendixA} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix A. \emph{Prädikate}} % This is for the header on each page - perhaps a shortened title
+
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+UT 'is related to' UT 		& Beide User sind verwandt \\
+\hline
+UT 'is partner to' UT		& Beide Akteure sind Partner \\
+\hline
+UT 'is in same group as' UT	& Beide Akteure sind in der selben Gruppe, Abteilung\\
+\hline
+\end{tabular}
+\\\\\small Die Beschreibungen sind nur Vorschläge für den Einsatz. Dem Programmierer ist selbst überlassen, wie er diese Prädikate interpretieren und einsetzen möchte.
+\caption{Prädikate für externe Informationen.}
+\label{tab:extern}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+'role' RT 'can execute' TT	& RT ist in  R(TT)\\
+\hline
+'user' UT 'can execute' TT 	& UT ist in U(TT)\\
+\hline
+'user' UT 'belongs to role' RT  & (UT,RT) ist in UR\\
+\hline
+RT 'is glb of' TT 		& greatest lower bound. TT muss mindestens mit Rolle RT ausgeführt werden\tnote{1}\\
+\hline
+RT 'is lub' TT 			& lowest upper bound. TT darf höchstens mit Rolle RT ausgeführt werden\tnote{1}\\
+\hline
+RT 'dominates' RT 		& Rolle 1 (links) dominiert Rolle 2 (rechts)\\
+\hline
+'critical{\_}task{\_}pair(' TT ',' TT ')'& Die beiden Aufgaben sind ein kritisches Paar. Die Nutzer, die diese beiden Aufgaben ausführen, werden als \textit{collaborators} in die interne Datenbank eingetragen.\\
+\hline
+\end{tabular}
+\\\\\small Prädikate für die Spezifikation der Authorisierung, Rollenbeziehungen und Bestimmung kritischer Aufgabenpaare.
+\caption{Spezifikation}
+\label{tab:specification}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+'user' UT 'executed' TT      & Ut hat TT ausgeführt. Der Event-Typ ist unbestimmt und muss extra angegeben werden.\\
+\hline
+'role' RT 'executed' TT		& RT hat TT ausgeführt. Der Event-Typ ist unbestimmt und muss extra angegeben werden.\\
+\hline
+UT 'is assigned to' TT		& UT wurde TT zugewiesen. Entspricht dem Event-Typ 'assign'.\\
+\hline
+TT 'started'			& TT wurde gestartet. Entspricht dem Event-Typ 'start'.\\
+\hline
+TT 'aborted'			& TT wurde abgebrochen. Entspricht dem Event-Typ 'ate\_abort'.\\
+\hline
+TT 'completed'			& TT wurde erfolgreich abgeschlossen. Entspricht dem Event-Typ 'complete'. \\
+\hline
+'eventtype of ' TT ' is ' ET 	& Prädikat, um einer Aktivität einen beliebigen Event-Typ zuweisen zu können.\\
+\hline
+UT 'is collaborator of' UT	& UT sind alle Akteure, die an criticalTaskPair gearbeitet haben. Collaborator muss nicht extra wie criticalTaskPair gesetzt werden, sondern wird in der Analysephase vom ModelChecker berechnet.\\
+\hline
+'timestamp of' TT 'is' VAR	& Der Zeitpunkt von TT wird in eine Variable an der Stelle von VAR geschrieben.\\
+\hline
+'timeinterval of' TT 'and' TT 'is' VAR 	& Das Zeitinterval zwischen TT 1 (links) und TT 2 (rechts) wird in eine Variable an der Stelle VAR geschrieben.\\
+\hline
+'attribute' VAR1 'of' TT 'is' VAR2 & TODO\\
+\hline	
+\end{tabular}
+\\\\\small Da sich die beiden \textit{executed} Prädikate nicht auf ein bestimmtes Event beziehen, ist es notwendig, das Event extra anzugeben, um keine multiplen Ergebnisse zu erhalten. Es werden vier Prädikate für die Event-Typen \textit{assign}, \textit{start}, \textit{abort} und \textit{complete} angeboten. Für alle weiteren kann man das allgemeine Event-Prädikat 'Event(' TT ')' verwenden. Für das Event \textit{skip} wäre es EventType(TT).'skip'. Das Event muss in zwei einfachen Anführungszeichen stehen.
+\caption{Prädikate, um Aussagen über den Status in die Regeln mit einbeziehen zu können}
+\label{tab:status}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+'NUMBER WHERE (' $<$body$>$ ' ) IS' RES		& Zählt die Anzahl der verschiedenen Lösungen für $<$body$>$ und speichert sie in einer Variablen an der Stelle von RES \\
+\hline
+'NUMBER OF' VAR 'WHERE (' $<$body$>$ ' ) IS' RES	& Zählt die Anzahl der verschiedenen Lösungen für VAR, die in $<$body$>$ vorkommen, wenn $<$body$>$ erfüllt wird. VAR kann eine beliebige Variable sein, muss aber mindestens einmal in $<$body$>$ vorkommen.\\
+\hline
+'SUM OF' NT$|$TP$|$TS 'WHERE (' $<$body$>$ ' ) IS' RES		& Gibt die Summe einer Variablen aus $<$body$>$ zurück. Diese Variable sollte für einen numerischen Wert stehen (zB in den Attributen einer Aktivität) oder für Zeitpunkte oder Zeitintervalle.\\
+\hline
+'AVG OF' NT$|$TP$|$TS 'WHERE (' $<$body$>$ ' ) IS' RES		& Gibt den Durchschnitt einer Variablen aus $<$body$>$ zurück.\\
+\hline
+'MIN OF' NT$|$TP$|$TS 'WHERE (' $<$body$>$ ' ) IS' RES		& Gibt das Minimum einer Variablen aus $<$body$>$ zurück.\\
+\hline
+'MAX OF' NT$|$TP$|$TS 'WHERE (' $<$body$>$ ' ) IS' RES		& Gibt das Maximum einer Vairablen aus $<$body$>$ zurück.\\
+\hline
+\end{tabular}
+\\\\\small Das Resultat wird in der Variable gespeichtert, die anstelle von RES definiert wurde. $<$body$>$ ist eine Konjunktion von Status- , Externen und Spezifikationsprädikaten. Für $<$body$>$ gelten die selben Regeln wie für den Körper einer Regel bezüglich verwendbarer Prädikate, Negation und Disjunktion. 
+\caption{Aggregationsprädikate}
+\label{tab:conditional}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+ $= | !=$		& Gleichheit und Ungleichheit kann man auf alle Argumenttypen anwenden, solange auf der rechten und linken Seite der selbe Typ steht. Es können jeweils Strings, numerische Werte, Zeitpunkte und Zeitstempel untereinander verglichen werden. \\
+\hline
+ $< | <= | > | >=$   	& Ungleichheit kann nur auf Rollen (um Beziehungen zwischen Rollen bezüglich der Hierarchie festzustellen), numerische Werte, Zeitpunkte und Zeitstempel angewendet werden. \\
+\hline
+\end{tabular}
+\\\\\small 'Manager' $>$ 'Azubi' ergibt ein positives Ergebnis, wenn der 'Manager' in der Hierarchie über dem 'Azubi' steht.
+\caption{Vergleiche}
+\label{tab:comparison}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+ $+$ 		& Numerische Werte und TP + TS (= TP) \\
+\hline
+ $-$		& Numerische Werte und TP - TP (= TS) \\
+\hline
+ $ * | / $   	& Als Argumente sind nur numerische Werte erlaubt. \\
+\hline
+\end{tabular}
+\\\\\small 2015-08-03 + P5D liefert das Ergebnis 2015-08-08.
+\caption{Arithmetische Operationen}
+\label{tab:operations}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular} {|p{6cm}|p{10cm}|}
+\hline
+\textbf{Prädikat} & \textbf{Beschreibung}\\
+\hline
+UT cannot execute TT		& Nutzer UT darf TT nicht ausführen. \\
+\hline
+UT must execute TT  		& Nutzer UT muss TT ausführen. \\
+\hline
+RT cannot execute TT		& Rolle RT darf TT nicht ausführen.\\
+\hline
+RT must execute TT		& Rolle RT muss TT ausführen.\\
+\hline
+illegal execution		& Die Prozessinstanz hat den Körper der Regel erfüllt (was aber nicht erwünscht war) und hat somit die Spezifikation gebrochen.\\
+\hline
+\end{tabular}
+\\\\\small Im Körper von \texttt{illegal execution} kann alles beschrieben werden, was zu einer ?? Ausführung führt. Wenn \texttt{IF USER executed 'T1' AND USER executed 'T2' THEN illegal execution} \textit{true} zurückgibt, bedeutet es, dass ein Nutzer sowohl T1 als auch T2 ausgeführt hat, dies aber nicht erlaubt war.
+\caption{Prädikate für den Kopf einer Regel}
+\label{tab:head}
+\end{table}

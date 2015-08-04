@@ -1,0 +1,31 @@
+% Appendix A
+
+\chapter{Paketstruktur} % Main appendix title
+
+\label{AppendixC} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix C. \emph{Paketstruktur}} % This is for the header on each page - perhaps a shortened title
+
+Der Java Teil des entwickelten Programm befindet sich im Paket \texttt{iicmchecker}.
+Es besteht aus den Paketen \texttt{iicmchecker.compliancechecker}, \texttt{iicmchecker.constraintReader}, \\
+\texttt{iicmchecker.logtransformer}, \texttt{iicmchecker.storage}, \texttt{iicmchecker.utils}.
+
+In \texttt{iicmchecker.compliancechecker} findet man die Klasse \\\texttt{iicmchecker.compliancechecker.Compliancechecker} welche für das Starten des Prolog Teils zuständig ist.
+
+\texttt{iicmchecker.constraintReader} beinhaltet alle Klassen und benötigte Dateien für den \textit{Lexer, Parser} und den \textit{Listener}.
+
+In \texttt{iicmchecker.logtransformer} liegt die Klasse \texttt{iicmchecker.logtransformer.LogTransformer} die Logs im \textit{SEWOL} Format in Prolog-Fakten übersetzt.
+
+\texttt{iicmchecker.storage} enthält die Container - eine interne Datenstruktur zum temporären speichern aller Informationen und anschließendem Konvertieren ins Prolog-Format.
+
+Im Paket \texttt{iicmchecker.utils} liegen alle Helfer-Klassen zur String-Konvertierung und Überprüfung, \textit{Logging} und \textit{Exceptions}.
+
+Das Programm wird über die Klasse \texttt{iicmchecker.IICMChecker} gestartet.
+
+
+\texttt{main.Main} ist eine Beispielklasse für den Aufruf für den \texttt{IICMChecker}.
+
+
+Im Ordner \texttt{prologfiles} befinden sich alle generierten Prologdateien sowie \texttt{main.pl} und \texttt{start.pl}.
+
+Die Defaultordner für die Regeln und \texttt{results.txt} sind \texttt{rulefiles} und \texttt{outputfiles}.

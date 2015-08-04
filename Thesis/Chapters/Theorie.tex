@@ -131,34 +131,6 @@ Das ist nur ein Auszug und kein vollständiger Log. Es können auch weitere Date
   \label{tab:examplelog}
 \end{table}
 
-
-
-%-----------------------------------
-%	Security policy
-%-----------------------------------
-\subsection{Schutzziele}
-
-Um bestimmen zu können, welche Regeln und Einschränkungen für den Ablauf eines Prozesses notwendig sein könnten, muss zuletzt noch auf die Schutzziele von Unternehmen (besseres Wort) eingegangen werden.
-
-Müller et al. \cite{mueller_accorsi} sammeln unter anderem\footnote{Ein weiteres Schutzziel ist "Data Integrity" und "Nutzungskontrolle", welches für diese Arbeit nicht relevant ist.} folgende Punkte:\\
-
-\textbf{(1) Autorisierung}\\
-Welche Subjekte bzw Rollen dürfen auf welche Ressourcen zugreifen? Da es in größeren Unternehmen komplex werden kann, wurde das Rollenmodell zur Vereinfachung entwickelt. \\
-\textbf{(2) Nutzungskontrolle}\\
-Regelt die Art der Nutzung. RWX, begrenzte Anzahl an Zugriffen, bzw Verpflichutung einer Löschoperation (weiteren, resultierenden Handlungen) nach Zugriff(Kontrollfluss)\\
-\textbf{(3) Interessenskonflikt}\\
-Unterbindung von unzulässiger Ausnutzung von insider-Wissen. Chinese Wall Modell.\\
-\textbf{(4) Funktionstrennung}\\
-Bestimmte Aufgaben dürfen nicht vom selben Subjekt, Rolle, Abteilung, ausgeführt werden. Unterbindung von kriminellen Handlungen und Betrug.\\
-\textbf{(5) Aufgabenbindung}\\
-Gegenteil von Funktionstrennung\\
-\textbf{(6) Mehr-Augen-Kontrolle}\\
-kritische Aktivität im Prozess darf nicht von einer einzelnen Person ausgeführt werden. Das wäre bei mir Cardinality Constraints, wenn eine Aktivität aus mehreren Tasks besteht.\\
-
-// TODO: was kann man noch hinzufügen?
-
-
-
 \section{Herleitung der Einschränkungen}
 
 
@@ -186,16 +158,15 @@ Der Prozess in Abbildung \ref{fig:Workflow} stellt die Bearbeitungsschritte eine
 Um einen sicheren und reibungslosen Ablauf zu gewährleisten, werden folgende Anforderungen gestellt:
 
 \begin{enumerate}
-\item (Der Kontakt mit Kunden) T1 und T6 muss vom Kundenberater erledigt werden
-\item Um den Kunden nicht zu lange warten zu lassen, sollte der Kunde spätestens 3 Tage nach erstem Kontakt über das Ergebnis informiert werden (timestamp(T6) $<$ timestamp(T1) + 3D)
+\item Der Kontakt mit Kunden (T1 und T6) muss durch den Kundenberater erfolgen.
+\item Um den Kunden nicht zu lange warten zu lassen, sollte der Kunde spätestens 3 Tage nach erstem Kontakt über das Ergebnis informiert werden (timestamp(T6) $<$ timestamp(T1) + 3D).
 \item Um zu verhindern, dass Fehler durch Überlastung passieren, darf jeder Mitarbeiter am Tag höchstens 100 Tasks bearbeiten.
 \item Den Antrag annehmen (T1) und den Antrag prüfen(T2, T3) sollten von verschiedenen Personen erledigt werden (4 Augen Prinzip).
 \item Ferner sollten auch die zwei Prüfungen von verschiedenen Mitarbeitern vollzogen werden. T3 muss durch den Bank Manager erfolgen.
 \item Wenn ein Mitarbeiter 5x einem Task zugewiesen wird und ihn dann abbricht, darf er nicht mehr an dem Task arbeiten.
 \item Es dürfen keine Anträge von Verwandten geprüft werden.
-\item Es dürfen auch höchstens 3 mal Mitarbeiter an den Anträgen des jeweils anderen Verwandten arbeiten.
+\item Es dürfen auch höchstens 3 mal Mitarbeiter an den Anträgen des jeweils anderen Mitarbeiters arbeiten.
 \item Ein Mitarbeiter darf bei dem selben Kunden höchstens Kredite bis 100000 Euro prüfen.
-\item Es dürfen hochstens 3 mal die selben Personen an T2 und T3 arbeiten
 \end{enumerate}
 
 
@@ -210,41 +181,44 @@ Generell kann man verschiedene Arten von Regeln erkennen.\\
 \begin{figure}[ht]
 	\centering
   \includegraphics[width=0.9\textwidth]{Figures/Constraints}
-	\caption{Typen von Einschränkungen und regeln}
+	\caption{Typen von Einschränkungen und Regeln}
 	\label{fig:constraints}
 \end{figure}
 
-\textbf{Sich gegenseitig ausschließende Tasks (Conflicting Tasks)}
-TODO: kommt das zur Constraint Sammlung?
-In manchen Fällen kann man Tasks nicht verschiedenen Rollen zuweisen  ohne die exisitierenden Rollen derart zu segmentieren, dass die schwer zu verwalten sind in Bezug auf das organsiatorische Modell. Außerdem können Rollenhierarchien dazu verwendet werden, in zwei verschiedenen Rollen zu agieren, die eigentlich getrennt waren. ZB könnte ein Manager als ein Clerk und gleichzeitig als sein eigenener Supervisor handeln.\\
-Deswegen definieren wir \textbf{TC} $\subset$ T als eine Menge von \textbf{kollidierenden Tasks}. TC beinhaltet Tasks, deren Allokation von der Allokation von vorhergehend ausgeführten Tasks aus TC abhängt. Diese Abhängigkeit wird als Abhängigkeit zwischen Tasks aus TC beschrieben. $t_c\in TC$ gilt als entailed Task von $t_m\in TC$, wenn die Allokation von $t_n$ von der Allokation von $t_m$ eingeschränkt wird, mit $t_m<t_n$.
-\cite{wolter_modeling_of_TBAC_in_BPMN}\\
-
 \textbf{Zeitliche Beschränkungen}\\
---absolute Einschränkungen\\
-Das sind Einschränkungen, die sich auf einen absoluten Zeitpunkt beziehen, wie zum Beispiel dass besondere Kredite nicht mehr vergeben werden dürfen, nachdem das Angebot erloschen ist. Sollte nach dem festgelegten Datum trotzdem dieser Kredit vergeben werden, stellt das einen Regelbruch dar.
---relative Einschränkungen\\
+\textbf{- absolute Einschränkungen}\\
+Das sind Einschränkungen, die sich auf einen absoluten Zeitpunkt beziehen, wie zum Beispiel dass besondere Kredite nicht mehr vergeben werden dürfen, nachdem das Angebot erloschen ist. Sollte nach dem festgelegten Datum trotzdem dieser Kredit vergeben werden, stellt das einen Regelbruch dar.\\
+\textbf{- relative Einschränkungen}\\
 Relative Einschränkungen beziehen sich auf vorher erfüllte Aufgaben und schränken die weiteren für einen bestimmten Zeitraum ein.\\
 
 \textbf{Einschränkungen auf Parametern}\\
-Einschränkungen, die mit der Akkumulation von Aktivitäten arbeiten, geben oft eine Grenze für einen Parameter in einem bestimmten Zeitraum vor. Diese Art der Einschränkungen ist oft mit zeitlichen Einschränkungen verbunden.\\
+Einschränkungen, die mit der Aggregation von Aktivitäten arbeiten, geben oft eine Grenze für einen Parameter in einem bestimmten Zeitraum vor. Diese Art der Einschränkungen ist oft mit zeitlichen Einschränkungen verbunden.\\
 
-\textbf{Entailment Constraint}
-c=(TC, $n_u$,$m_{th}$) mit $n_u$ als minimale Anzahl an verschiedenen Usern, die einem Task zugewiesen werden müssen. Wenn $t_{ki}$ eine Instanz des Tasks $t_k$ ist, dann ist $m_th$ der Grenzwert von der Summe der Task Instanzen, denen ein User zugewiesen sein darf.
-\cite{wolter_modeling_of_TBAC_in_BPMN}
-\textbf{Separation of Duty}\\
-...\\
-\textbf{Binding of Duty Constraints}\\
-...\\
+\textbf{Entailment Constraint}\\
+\textit{Entailment-Constraints} machen Aussagen darüber, in welcher Beziehung die Ausführenden zweier Aktivitäten zueinander stehen.
+\textit{Rollenbasierte Entailment-Constraints} haben die Form $(R, \{t_1,t_2\}, pred)$ mit \textbf{R} als Teilmenge aller Rollen. Die Rollen aus R sind zugelassen, $t_1$ und $t_2$ auszuführen. \textit{pred} ist ein Prädikat aus der Menge $\{=, \neq,<, \leq,>, \geq \}$ und gibt an, in welchem Verhältnis gemäß der Rollenhierarchie die ausführenden Rollen zueinander stehen müssen.\\
+\textit{Nutzerbasierte Constraints} $(U, \{t_1,t_2\}, pred)$ legen fest, welches Verhältnis die Nutzer in Bezug auf ihre Rollen bei der Ausführung von $t_1$ und $t_2$ haben müssen.
+\cite{wolter_modeling_of_TBAC_in_BPMN} \cite{Entailment1} \cite{tan_consistency}
+
 \textbf{Cardinality Constraints}\\
-..\\
+Kardinalitätseinschränkungen haben die generelle Form $(T, k, n_u, n_r)$ und besagen, dass eine Menge von Aktivitäten \textbf{T} von $n_u$ verschiedenen Personen und $n_r$ verschiedenen Rollen ausgeführt werden muss. Man unterscheidet zwischen \textit{lokalen} und \textit{globalen} Einschränkungen. \textit{Lokale} Einschränkungen beziehen sich auf verschiedene Instanzen der selben Aktivität in einer Prozessinstanz. Sie haben die Form $(t, k, n_u, n_r)$ und können zusätzlich eine Aussage darüber treffen, wieviele Instanzen einer Aktivität es geben muss. \textit{Globale} Kardinalitätseinschränkungen sind Einschränkungen auf die Instanzen von einer gegebenen Menge von Aktivitäten T in der selben Prozessinstanz.
+\cite{wolter_modeling_of_TBAC_in_BPMN} \cite{Entailment1} \cite{tan_consistency}
+
+
+\textbf{Separation of Duty - ??4 Augen Prinzip??}\\
+Das Separation of Duty-Prinzip ist ein Speziallfall der Kardinalitätseinschränkungen und kann für zwei Aktivitäten $t_1$ und $t_2$ als $(\{t_1,t_2\},2)$ ausgedrückt werden. Das Separation of Duty Prinzip ...
+\cite{SOD}\cite{SOD2}
+
+\textbf{Binding of Duty Constraints}\\
+\textit{Binding of Duty Constraints} - Aufgabenbindung ist das Gegenteil von \textit{Separation of Duty Constraints}, und ist ebenfalls ein Spezialfall von \textit{Cardinality Constraints}. Es hat die Form $(\{t_1,t_2\},1)$. Zwei unterschiedliche Aktivitäten müssen von der selben Person erledigt werden... wozu??
+
+
 \textbf{Workflow Soundness}\\
 Das sind Regeln, die allgemein den korrekten Ablauf eines Prozesses sicherstellen sollen. Diese Regeln beziehen sich im Allgemeinen nicht darauf, welcher Nutzer eine Aktivität ausgeführt hat (keine Authorisierungs-Einschränkungen) sondern betrachten die Tatsache, ob eine Aktivität zu einem korrekten Zeitpunkt oder in einem korrekten Zusammenhang ausgeführt wurde.
 
-TODO Zum ein oder anderen Vielleicht Quellenangabe
-
 \subsection{Gültigkeitsbereich von Constraints}
-//TODO Welche der Einschränkungen gehört wohin
+\label{sec:rulecontext}
+//TODO Welche der Einschränkungen gehört wohin\\
 \textbf{Intra-Instanz}\\
 Die meisten Ansätze beziehen sich auf Regeln, die in Bezug zu einer Prozessinstanz stehen. Hier gilt, dass die Prozessinstanz für alle Aktivitäten die selbe ist. Sollten zwei Aktivitäten zu verschiedenen Instanzen gehören, werden sie nicht gegeneinander betrachtet. Seien A und B zwei Aktivitäten, dann gilt A.caseID = B.caseID. 
 \\

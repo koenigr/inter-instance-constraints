@@ -1,0 +1,68 @@
+% Appendix E
+
+\chapter{Algorithmus Compliance Checker} % Main appendix title
+
+\label{AppendixE} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix E. \emph{Algorithmus Compliance Checker}} % This is for the header on each page - perhaps a shortened title
+
+\begin{algorithm}
+\caption{Algorithmus Model Checker}
+\end{algorithm}
+\begin{algorithmic}[1]
+\FOR{each task pairs $t_i,t_j \in critical\_task\_pair$}
+\STATE{get $u_i$: $u_i$ executed $t_i$} 
+\STATE{get $u_j$: $u_i$ executed $t_j$} 
+\STATE{add collaborator($u_i, u_j$)}
+\ENDFOR
+
+\FOR{each task pairs $t_i,t_j \in critical\_task\_pair$} 
+\STATE{add critical\_task\_pair($u_j, u_i$)}
+\ENDFOR
+
+\FOR{each user pairs $u_i,u_j$ and $u_j, u_k\in related$} 
+\STATE{add related($u_i, u_k$)}
+\ENDFOR
+
+\FOR{each user pair $u_i,u_j \in related$} 
+\STATE{add related($u_j, u_i$)}
+\ENDFOR
+
+\FOR{each role pairs $r_i,r_j$ and $r_j, r_k\in dominates$} 
+\STATE{add dominates($r_i, r_k$)}
+\ENDFOR
+
+\FOR{each rule $user\_cannot\_execute(u_i, t_i)$} 
+\IF{$\exists\ user\_executed(u_i, t_i)$ }
+\RETURN{Illegal execution}
+\ENDIF
+\ENDFOR
+
+\FOR{each rule $role\_cannot\_execute(r_i, t_i)$} 
+\IF{$\exists\ role\_executed(r_i, t_i)$ }
+\RETURN{Illegal execution}
+\ENDIF
+\ENDFOR
+
+\newpage
+
+\FOR{each rule $user\_must\_execute(u_i, t_i)$} 
+\IF{$\nexists\ user\_executed(u_i, t_i)$ }
+\RETURN{Illegal execution}
+\ENDIF
+\ENDFOR
+
+\FOR{each rule $role\_must\_execute(r_i, t_i)$} 
+\IF{$\nexists\ role\_executed(r_i, t_i)$ }
+\RETURN{Illegal execution}
+\ENDIF
+\ENDFOR
+
+\FOR{each rule $illegal execution$} 
+\IF{body of rule is satisfied}
+\RETURN{Illegal execution}
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+
+\hrule

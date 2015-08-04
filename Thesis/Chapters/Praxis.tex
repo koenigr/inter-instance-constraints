@@ -74,6 +74,8 @@ Diese Statusprädikate werden aus den Logs extrahiert und sind ausschließlich d
 \label{tab:statuspr}
 \end{table}
 
+
+\newpage
 Die ersten 2 Zeilen aus Tabelle \ref{tab:examplelog} werden somit in die Wissensbasis aus Tabelle \ref{tab:knowledge} konvertiert.
 \begin{table}[h!]
 \begin{tabular}{ccc}
@@ -129,41 +131,34 @@ Zeitpunkte und Zeitspannen werden in ms nach 1970 übersetzt. Soll arithmetische
 \label{sec:compliancechecker}
 In diesem Abschnitt wird betrachtet, wie der Compliance Checker die Logs auf die Einhaltung der definierten Regeln prüft. Der Checker selber besteht aus \textit{start.pl} und \textit{main.pl}. Die Datei \textit{start.pl} enthält die Routine zum Starten der Untersuchung. In \textit{main.pl} sind alle nötigen Funktionen, um implizite Beziehungen herzustellen und die einzelnen Routinen für die verschiedenen Regeltypen.
 
-\begin{verbatim}
-3. Add Collaborators
-4. Adddominates
-   Addrelated
-5. For each cannot_execute_user(Actor, Activity): 
-6.	If exists executed_user(Actor, Activity) 
-7. 	then write trace
-8. For each cannot_execute_role(Role, Activity):
-9. 	If exists executed_role(Role, Activity)
-10.	then write trace
-11. For each must_execute_user(Actor, Activity): 
-12.	If not exists executed_user(Actor, Activity) 
-13. 	then write trace
-14. For each must_execute_role(Role, Activity):
-15. 	If not exists executed_role(Role, Activity)
-16.	then write trace
-17. For each illegal_execution write trace
-\end{verbatim}
-\begin{figure}[!h]
-\caption{Pseudocode des Modelchecker}
-\label{fig:pseudocode}
-\end{figure}
-
-Bevor die eigentliche Untersuchung beginnt, werden zuerst noch einige implizierte Klauseln die Prolog-Datenbank hinzugefügt. Es werden alle \textit{collaborators} berechnet, die an {critical\_task\_pairs} gearbeitet haben, weitere Beziehung aus dem Rollenmodell und Verwandschaften ermittelt....
+Bevor die eigentliche Untersuchung beginnt, werden zuerst noch einige implizierte Klauseln zu der Prolog-Datenbank hinzugefügt. Es werden alle \textit{collaborators} berechnet, die an {critical\_task\_pairs} gearbeitet haben, weitere Beziehung aus dem Rollenmodell und Verwandschaften ermittelt....
 Für jede cannot execute Regel wird gefragt, ob der User das ausgeführt hat,...
+
+Im Anhang \ref{AppendixE} befindet sich der Pseudocode wird die Analyseprozedur.
 
 %
 % ERGEBNISSE
 %
 \subsection{Darstellung der Ergebnisse}
 \label{sec:results}
-Sollte eine ungewollte Aktivität im Log gefunden sein, 
+Sollte eine Aktivität im Log gefunden werden, die eine Regel bricht, wird der User/Rolle mit Task Namen und Beschreibung der Regel in \textit{results.txt} geschrieben.
 
-%
-% Struktur der Pakete
-%
-\subsection{Struktur der Pakete}
-Hilfsklassen wie ... befinden sich im Paket utils
+\begin{verbatim}
+Modelchecker startet...
+Searching for illegal executions by user...
+
+"blabla"
+Illegal execution found: 
+User Mark executed Task 10
+
+Searching for illegal executions by role...
+Searching for missed executions by user...
+Searching for missed executions by role...
+Searching for illegal executions...
+Modelchecker finished...
+\end{verbatim}
+\begin{figure}[!h]
+\small Als Mark Task 10 ausgeführt hat, hat er die Regel "blabla" verletzt
+\caption{Beispiel Output}
+\label{fig:sampleoutput}
+\end{figure}
