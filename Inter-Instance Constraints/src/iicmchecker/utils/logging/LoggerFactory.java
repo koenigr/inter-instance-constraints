@@ -1,4 +1,4 @@
-package iicmchecker.logging;
+package iicmchecker.utils.logging;
 
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;

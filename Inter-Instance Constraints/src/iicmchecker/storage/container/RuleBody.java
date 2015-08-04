@@ -3,8 +3,8 @@ package iicmchecker.storage.container;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.container.Fact;
+import iicmchecker.utils.logging.LoggerFactory;
 
 public class RuleBody {
 

@@ -2,8 +2,6 @@ package iicmchecker.constraintReader;
 
 
 
-import iicmchecker.exceptions.UnexpectedContextException;
-import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.StorageHelper;
 import iicmchecker.storage.container.Fact;
 import iicmchecker.storage.container.RuleBody;
@@ -22,7 +20,7 @@ import iicmchecker.storage.container.conditional.NumVars;
 import iicmchecker.storage.container.conditional.Sum;
 import iicmchecker.storage.container.externspec.CriticalTaskPair;
 import iicmchecker.storage.container.externspec.Dominates;
-import iicmchecker.storage.container.externspec.ExternAndSpecificationContainer;
+import iicmchecker.storage.container.container.ExternAndSpecificationContainer;
 import iicmchecker.storage.container.externspec.GLB;
 import iicmchecker.storage.container.externspec.LUB;
 import iicmchecker.storage.container.externspec.Partner;
@@ -36,11 +34,11 @@ import iicmchecker.storage.container.rules.CannotDoRole;
 import iicmchecker.storage.container.rules.CannotDoUser;
 import iicmchecker.storage.container.rules.MustDoRole;
 import iicmchecker.storage.container.rules.MustDoUser;
-import iicmchecker.storage.container.rules.Panic;
-import iicmchecker.storage.container.rules.PanicRule;
+import iicmchecker.storage.container.rules.IllegalExecution;
+import iicmchecker.storage.container.rules.IllegalExecutionRule;
 import iicmchecker.storage.container.rules.RoleCannotDoRule;
 import iicmchecker.storage.container.rules.RoleMustDoRule;
-import iicmchecker.storage.container.rules.RuleContainer;
+import iicmchecker.storage.container.container.RuleContainer;
 import iicmchecker.storage.container.rules.UserCannotDoRule;
 import iicmchecker.storage.container.rules.UserMustDoRule;
 import iicmchecker.storage.container.status.ExecutedGroupStatus;
@@ -51,6 +49,8 @@ import iicmchecker.storage.container.status.TaskWorkflow;
 import iicmchecker.storage.container.status.WorkflowName;
 import iicmchecker.utils.EventHelper;
 import iicmchecker.utils.EventHelper.EventTypes;
+import iicmchecker.utils.exceptions.UnexpectedContextException;
+import iicmchecker.utils.logging.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -474,9 +474,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 			rule_body.setFirst(new TaskName(taskID, taskName, false));
 			rule_body.setFirst(new TaskEvent(taskID, et, false));
 			rule.setBody(rule_body);
-			if (description == null) {
+			System.out.println("a " + description);
+			if (description == null || description == "") {
+
+				System.out.println("c " + description);
 				description = ListenerHelper.generateRuleID();
 			}
+			System.out.println("b " + description);
 			rule.setDescription(description);
 			rc.addUserCannotDoRule(rule);
 		} else {
@@ -528,7 +532,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				rule_body.setFirst(new TaskName(taskID, taskName, false));
 				rule_body.setFirst(new TaskEvent(taskID, et, false));
 				rule.setBody(rule_body);
-			if (description == null) {
+			if (description == null || description == "") {
 				description = ListenerHelper.generateRuleID();
 			}
 			rule.setDescription(description);
@@ -583,7 +587,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				rule_body.setFirst(new TaskName(taskID, taskName, false));
 				rule_body.setFirst(new TaskEvent(taskID, et, false));
 				rule.setBody(rule_body);
-			if (description == null) {
+			if (description == null || description == "") {
 				description = ListenerHelper.generateRuleID();
 			}
 			rule.setDescription(description);
@@ -637,7 +641,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 				rule_body.setFirst(new TaskName(taskID, taskName, false));
 				rule_body.setFirst(new TaskEvent(taskID, et, false));
 				rule.setBody(rule_body);
-			if (description == null) {
+			if (description == null || description == "") {
 				description = ListenerHelper.generateRuleID();
 			}
 			rule.setDescription(description);
@@ -652,15 +656,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitPanic(Inter_InstanceParser.PanicContext ctx) {
 		
-		logger.info("Exiting Cannot Role Context");
+		logger.info("Exiting Illegal Execution Context");
 		
 		lh.checkChildCount(1, ctx.getChildCount());
 		
 		if (inputContext == InputContext.ASSIGNMENT_HEAD) {
-			PanicRule rule = new PanicRule();
-			if (description == null) {
-				description = ListenerHelper.generateRuleID();
-			}
+			IllegalExecutionRule rule = new IllegalExecutionRule();
 			
 			String workflowID;
 			switch(ruleContext) {
@@ -682,11 +683,17 @@ public class IIListener extends Inter_InstanceBaseListener {
 			default: break; // TODO
 			}
 			
-			rc.addPanicRule(rule);
-			
+System.out.println(description);
+			if (description == null || description == "") {
+				description = ListenerHelper.generateRuleID();
+			}
+			System.out.println(description);
 			rule.setDescription(description);
-			rule.setHead(new Panic());
+			rule.setHead(new IllegalExecution());
 			rule.setBody(rule_body);
+			
+			rc.addIllegalExecutionRule(rule);
+			
 			
 		} else {
 			// TODO

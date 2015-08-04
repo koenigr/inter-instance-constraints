@@ -53,6 +53,7 @@ entryA2.setRole("Kundenberater");
 entryA2.setTimestamp(new Date(1445405280000l));
 entryA2.addMetaAttribute(new DataAttribute("Kreditwunsch", 5000));
 
+
 LogEntry entryB1 = new LogEntry("Antrag prüfen 1");
 entryB1.setEventType(EventType.start);
 entryB1.setOriginator("Mark");

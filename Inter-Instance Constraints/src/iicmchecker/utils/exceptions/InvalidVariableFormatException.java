@@ -1,4 +1,4 @@
-package iicmchecker.exceptions;
+package iicmchecker.utils.exceptions;
 
 public class InvalidVariableFormatException extends RuntimeException {
 	/**

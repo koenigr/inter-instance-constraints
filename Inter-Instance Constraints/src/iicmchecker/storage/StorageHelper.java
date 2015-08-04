@@ -2,10 +2,10 @@ package iicmchecker.storage;
 
 import java.util.logging.Logger;
 
-import iicmchecker.logging.LoggerFactory;
-import iicmchecker.storage.container.externspec.ExternAndSpecificationContainer;
-import iicmchecker.storage.container.rules.RuleContainer;
-import iicmchecker.storage.container.status.StatusContainer;
+import iicmchecker.storage.container.container.ExternAndSpecificationContainer;
+import iicmchecker.storage.container.container.RuleContainer;
+import iicmchecker.storage.container.container.StatusContainer;
+import iicmchecker.utils.logging.LoggerFactory;
 
 public class StorageHelper {
 	

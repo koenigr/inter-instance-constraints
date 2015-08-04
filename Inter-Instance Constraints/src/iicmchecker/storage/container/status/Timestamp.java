@@ -2,8 +2,6 @@ package iicmchecker.storage.container.status;
 
 import java.util.Date;
 
-import iicmchecker.exceptions.IllegalArgumentsPositionException;
-import iicmchecker.exceptions.InvalidVariableFormatException;
 import iicmchecker.storage.container.Fact;
 import iicmchecker.utils.StringChecker;
 

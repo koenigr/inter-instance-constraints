@@ -1,4 +1,4 @@
-package iicmchecker.storage.container.rules;
+package iicmchecker.storage.container.container;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -10,14 +10,19 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.container.Rule;
+import iicmchecker.storage.container.rules.IllegalExecutionRule;
+import iicmchecker.storage.container.rules.RoleCannotDoRule;
+import iicmchecker.storage.container.rules.RoleMustDoRule;
+import iicmchecker.storage.container.rules.UserCannotDoRule;
+import iicmchecker.storage.container.rules.UserMustDoRule;
+import iicmchecker.utils.logging.LoggerFactory;
 
 public class RuleContainer {
 	
 	private static String outputFile;
 
-	private ArrayList<PanicRule> panic = new ArrayList<PanicRule>();
+	private ArrayList<IllegalExecutionRule> illegalexec = new ArrayList<IllegalExecutionRule>();
 	private ArrayList<UserCannotDoRule> userCannotDo = new ArrayList<UserCannotDoRule>();
 	private ArrayList<UserMustDoRule> userMustDo = new ArrayList<UserMustDoRule>();
 	private ArrayList<RoleCannotDoRule> roleCannotDo = new ArrayList<RoleCannotDoRule>();
@@ -29,8 +34,8 @@ public class RuleContainer {
 		outputFile = file;
 	}
 
-	public void addPanicRule(PanicRule r) {
-		panic.add(r);
+	public void addIllegalExecutionRule(IllegalExecutionRule r) {
+		illegalexec.add(r);
 	}
 	
 	public void addUserCannotDoRule(UserCannotDoRule r) {
@@ -57,7 +62,7 @@ public class RuleContainer {
 
 			writer.write("% Rules\n"); 
 
-			for(Rule r : panic) {
+			for(Rule r : illegalexec) {
 				writer.write(r.getAsString());
 			}
 			

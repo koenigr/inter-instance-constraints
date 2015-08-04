@@ -5,8 +5,8 @@
   import iicmchecker.constraintReader.ParserHelper;
   import java.util.logging.Logger;
   import java.util.logging.Level;
-  import iicmchecker.logging.LoggerFactory;
-  import iicmchecker.exceptions.UnexpectedContextException;
+  import iicmchecker.utils.logging.LoggerFactory;
+  import iicmchecker.utils.exceptions.UnexpectedContextException;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;

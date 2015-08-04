@@ -7,11 +7,10 @@ import java.util.logging.Logger;
 import de.uni.freiburg.iig.telematik.sewol.log.DataAttribute;
 import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
 import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
-import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.StorageHelper;
 import iicmchecker.storage.container.status.ExecutedGroupStatus;
 import iicmchecker.storage.container.status.ExecutedUserStatus;
-import iicmchecker.storage.container.status.StatusContainer;
+import iicmchecker.storage.container.container.StatusContainer;
 import iicmchecker.storage.container.status.TaskAttribute;
 import iicmchecker.storage.container.status.TaskEvent;
 import iicmchecker.storage.container.status.TaskName;
@@ -19,6 +18,7 @@ import iicmchecker.storage.container.status.TaskWorkflow;
 import iicmchecker.storage.container.status.Timestamp;
 import iicmchecker.storage.container.status.WorkflowName;
 import iicmchecker.utils.StringChecker;
+import iicmchecker.utils.logging.LoggerFactory;
 
 public class LogTransformer {
 	
@@ -51,7 +51,7 @@ public class LogTransformer {
 
 					
 					String name = StringChecker.convertToValidConstant(entry.getActivity());
-					String group = StringChecker.convertToValidConstant(entry.getGroup());
+					String group = StringChecker.convertToValidConstant(entry.getRole());
 					String user = StringChecker.convertToValidConstant(entry.getOriginator());
 					String eventType = StringChecker.convertToValidConstant(entry.getEventType().toString());
 					Date timestamp = entry.getTimestamp();

@@ -1,11 +1,13 @@
 package iicmchecker.constraintReader;
 
+
+import iicmchecker.utils.logging.LoggerFactory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import iicmchecker.logging.LoggerFactory;
 
 
 /**

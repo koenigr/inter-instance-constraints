@@ -1,7 +1,7 @@
 package iicmchecker.storage.container;
 
-import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.container.Fact;
+import iicmchecker.utils.logging.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;

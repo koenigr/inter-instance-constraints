@@ -34,21 +34,16 @@ for (String el: arg) {
 SINGLE_LINE_COMMENTS: '//' .*? '\n'    -> skip ;
 
 // KEYWORDS
-SET		: 'SET' | 'set'; // TODO hier auch Groß und Kleinschreibung vermischt
-IF		: 'IF' | 'if' | 'If' | 'iF';
+SET		: 'SET'; 
+IF		: 'IF';
 THEN	: 'THEN';
-NEG		: 'NOT'  | 'not';
-KONJ 	: 'AND' | 'and'; // TODO
-DISJ	: 'OR' | 'or'; // TODO
-DEF		: ('DEF'|'DEFINE'|'define'|'def');   
-DESC	: 'DESC' | 'desc' | 'description' ;
-ARGS	: ('UT'|'RT'|'TT'|'WT'|'TauT'|'NT'| 'STRING_VAR');
+NEG		: 'NOT';
+KONJ 	: 'AND'; 
+DISJ	: 'OR'; 
+DEF		: 'DEF';   
+DESC	: 'DESC';
+ARGS	: ('UT'|'RT'|'TT'|'WT'|'TP'|'NT'| 'TS'| 'STRING_VAR');
 WHERE	: 'WHERE';
-ROLE	: '.Role';
-
-TASKINSTANCE : '.InstanceID'; // TODO wegmachen?
-WORKFLOWINSTANCE: .'WorkflowID'; // TODO wegmachen?
-WORKFLOW:	'.Workflow'; // TODO wegmachen?
 
 
 TIMESTAMP : '.Timestamp';
@@ -67,6 +62,7 @@ SUB			: '-' ;
 
 // This keyword is reserved for generated vars. 
 // Its not possible to use it in the grammar.
+// TODO noch das andere für desc oder so dazutun.
 GEN			: 'GENERATED'; 
 
 YEARS 	: NUMBER 'Y';
@@ -77,13 +73,13 @@ MINUTES	: NUMBER 'm';
 SECONDS	: NUMBER ('.' NUMBER)? 's';
 
 
-TIMEINTERVAL: 'P' [ ]? YEARS [ ]? (MONTHS)? [ ]? (DAYS)? [ ]? (HOURS)? 
+TIMEINTERVAL: 'P' [ ]? YEARS [ ]? (MONTHS)? [ ]? (DAYS)? [ ]? 'T'(HOURS)? 
 			[ ]? (MINUTES)? [ ]? (SECONDS)? 
-			| 'P' [ ]? MONTHS [ ]? (DAYS)? [ ]? (HOURS)? 
+			| 'P' [ ]? MONTHS [ ]? (DAYS)? [ ]? 'T' (HOURS)? 
 			[ ]? (MINUTES)? [ ]? (SECONDS)? 
-			| 'P' [ ]? DAYS [ ]? (HOURS)? 
+			| 'P' [ ]? DAYS [ ]? 'T' (HOURS)? 
 			[ ]? (MINUTES)? [ ]? (SECONDS)? 
-			| 'P' HOURS [ ]? (MINUTES)? [ ]? (SECONDS)? 
+			| 'P' 'T' HOURS [ ]? (MINUTES)? [ ]? (SECONDS)? 
 			| 'P' MINUTES [ ]? (SECONDS)? 
 			| 'P' SECONDS
 		 	; // TODO im Moment ist es so, dass es keine Variable mit P geben darf
@@ -102,7 +98,7 @@ CONSTANT 	: '\''.*?'\'' {
 		setType(eventtypes.get(getText()));
 	}}
 			;
-VARIABLE : [A-Z][A-Za-z0-9]* ; 
+VARIABLE : [A-Z][A-Za-z0-9_]* ; 
 CLAUSE	: [a-z_]+;
 NUMBER : [0-9]+ ; // Null muss auch erlaubt sein
 STRING  : [A-Za-z0-9]+; // Ist es schlimm, dass CLAUSE herausgefiltert wird?

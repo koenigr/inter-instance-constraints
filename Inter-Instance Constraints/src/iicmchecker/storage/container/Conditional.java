@@ -4,13 +4,11 @@ package iicmchecker.storage.container;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import iicmchecker.logging.LoggerFactory;
-import iicmchecker.exceptions.IllegalArgumentsPositionException;
-import iicmchecker.exceptions.InvalidPredicateFormatException;
-import iicmchecker.exceptions.InvalidVariableFormatException;
-import iicmchecker.exceptions.UnexpectedNumberOfArgumentsException;
 import iicmchecker.storage.container.ConditionalBody;
 import iicmchecker.utils.StringChecker;
+import iicmchecker.utils.exceptions.InvalidVariableFormatException;
+import iicmchecker.utils.exceptions.UnexpectedNumberOfArgumentsException;
+import iicmchecker.utils.logging.LoggerFactory;
 
 public abstract class Conditional extends Fact{
 	public Conditional(String predicate, int numberOfArguments, boolean neg) {

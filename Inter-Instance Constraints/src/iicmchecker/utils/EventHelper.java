@@ -11,13 +11,13 @@ public class EventHelper {
 	switch (e) {
 		case ASSIGN		:    return "'assign'"; 
 		case ATE_ABORT	:    return "'abort'"; 
-	    case AUTOSKIP	:    return "'skipp'";
+	    case AUTOSKIP	:    return "'skip'";
 	    case COMPLETE	:    return "'complete'";
-	    case MANUAL_SKIP:    return "'skipp'";
-	    case PI_ABORT	:    return "'abort'";
+	    case MANUAL_SKIP:    return "'skip'";
+	    case PI_ABORT	:    return "'pi abort'";
 	    case REASSIGN	:    return "'reassign'"; 
-	    case RESUME		:    return "'resum'"; 
-	    case SCHEDULE	:    return "'schedul'"; 
+	    case RESUME		:    return "'resume'"; 
+	    case SCHEDULE	:    return "'schedule'"; 
 	    case START		:    return "'start'"; 
 	    case SUSPEND	:    return "'suspend'"; 
 	    case WITHDRAW	:	 return "'withdraw'"; 

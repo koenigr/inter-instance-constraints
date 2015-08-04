@@ -1,4 +1,4 @@
-package iicmchecker.logging;
+package iicmchecker.utils.logging;
 
 import java.util.logging.Formatter;
 import java.util.logging.Handler;

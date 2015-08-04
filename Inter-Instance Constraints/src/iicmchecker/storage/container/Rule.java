@@ -3,9 +3,9 @@ package iicmchecker.storage.container;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import iicmchecker.logging.LoggerFactory;
 import iicmchecker.storage.container.Fact;
 import iicmchecker.storage.container.RuleBody;
+import iicmchecker.utils.logging.LoggerFactory;
 
 public abstract class Rule {
 	private RuleBody body;
@@ -24,7 +24,7 @@ public abstract class Rule {
 	}
 	
 	public String getAsString() {
-		System.out.println(description);
+		System.out.println("rule description:" + description);
 		String result;
 		result = head.getAsString() + " :- "
 				+ body.getAsString()

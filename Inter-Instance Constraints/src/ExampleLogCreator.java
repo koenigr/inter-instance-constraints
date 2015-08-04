@@ -21,7 +21,7 @@ import de.uni.freiburg.iig.telematik.sewol.writer.PerspectiveException;
 public class ExampleLogCreator {
 
 private static String loglocation = "logfiles"; 
-private static String logfile = "logfile";
+private static String logfile = "examplelogfile";
 
 public static void main(String[] args) {
 	try {
@@ -45,40 +45,6 @@ entryA1.setRole("Kundenberater");
 entryA1.setTimestamp(new Date(499161600000l));
 entryA1.addMetaAttribute(new DataAttribute("Kreditwunsch", 50000));
 
-System.out.println(entryA1.getRole());
-System.out.println(entryA1.getGroup());
-
-LogEntry entryA2 = new LogEntry("Antrag empfangen");
-entryA2.setEventType(EventType.complete);
-entryA2.setOriginator("Mark");
-entryA2.setGroup("Kundenberater");
-entryA2.setRole("Kundenberater");
-entryA2.setTimestamp(new Date(1445405280000l));
-entryA2.addMetaAttribute(new DataAttribute("Kreditwunsch", 50000));
-
-LogEntry entryB1 = new LogEntry("Antrag prüfen 2");
-entryB1.setEventType(EventType.start);
-entryB1.setOriginator("Mark");
-entryB1.setGroup("Manager");
-entryB1.setTimestamp(new Date(499136600000l));
-		
-LogEntry entryB2 = new LogEntry("Antrag prüfen 2");
-entryB2.setEventType(EventType.complete);
-entryB2.setOriginator("Mark");
-entryB2.setGroup("Manager");
-entryB2.setTimestamp(new Date(499461600000l));
-		
-LogEntry entryC1 = new LogEntry("Vertrag vorbereiten");
-entryC1.setEventType(EventType.start);
-entryC1.setOriginator("Susi");
-entryC1.setGroup("Manager");
-entryC1.setTimestamp(new Date(499536600000l));
-		
-LogEntry entryC2 = new LogEntry("Vertrag vorbereiten");
-entryC2.setEventType(EventType.complete);
-entryC2.setOriginator("Susi");
-entryC2.setGroup("Manager");
-entryC2.setTimestamp(new Date(499537600000l));
 		
 /*
  * Create Log Traces
@@ -86,34 +52,17 @@ entryC2.setTimestamp(new Date(499537600000l));
 System.out.println("Creating trace A");
 LogTrace<LogEntry> traceA = new LogTrace<LogEntry>();
 traceA.addEntry(entryA1);
-traceA.addEntry(entryA2);
-traceA.addEntry(entryB1);
-traceA.addEntry(entryB2);
-traceA.addEntry(entryC1);
-traceA.addEntry(entryC2);
-
-System.out.println("Creating trace B");
-LogTrace<LogEntry> traceB = new LogTrace<LogEntry>();
-traceB.addEntry(entryA1);
-traceB.addEntry(entryA2);
-traceB.addEntry(entryB1);
-traceB.addEntry(entryB2);
-traceB.addEntry(entryC1);
-traceB.addEntry(entryC2);
-		
 /*
 * Create Logs
 */
 		
 Log<LogEntry> log = new Log<LogEntry>();
 log.addTrace(traceA);
-log.addTrace(traceB);
 		
 // Serialize Logs
 String fileName = loglocation + "/" + logfile;
 LogWriter w = new LogWriter(LogFormatFactory.MXML(), fileName);
 w.writeTrace(traceA);
-w.writeTrace(traceB);
 w.closeFile();
 		
 		

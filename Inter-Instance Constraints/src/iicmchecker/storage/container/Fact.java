@@ -3,10 +3,10 @@ package iicmchecker.storage.container;
 
 import java.util.logging.Logger;
 
-import iicmchecker.logging.LoggerFactory;
-import iicmchecker.exceptions.IllegalArgumentsPositionException;
-import iicmchecker.exceptions.InvalidPredicateFormatException;
 import iicmchecker.utils.StringChecker;
+import iicmchecker.utils.exceptions.IllegalArgumentsPositionException;
+import iicmchecker.utils.exceptions.InvalidPredicateFormatException;
+import iicmchecker.utils.logging.LoggerFactory;
 
 public abstract class Fact{
 	

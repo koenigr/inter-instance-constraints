@@ -2,14 +2,15 @@ package iicmchecker.storage.container.rules;
 
 import iicmchecker.storage.container.Fact;
 
-public class Panic extends Fact {
+public class IllegalExecution extends Fact {
 
 	private static final int NUMBER_OF_ARGUMENTS = 0;
+	private static final String NAME = "illegal_execution";
 
 	/*
 	 * illegal_execution
 	 */
-	public Panic() {
+	public IllegalExecution() {
 		super("illegal_execution", NUMBER_OF_ARGUMENTS, false);
 	}
 

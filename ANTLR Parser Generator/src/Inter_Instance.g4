@@ -8,8 +8,8 @@ import LexerRules;
   import iicmchecker.constraintReader.ParserHelper;
   import java.util.logging.Logger;
   import java.util.logging.Level;
-  import iicmchecker.logging.LoggerFactory;
-  import iicmchecker.exceptions.UnexpectedContextException;
+  import iicmchecker.utils.logging.LoggerFactory;
+  import iicmchecker.utils.exceptions.UnexpectedContextException;
 }
 
 @parser::members{
@@ -34,7 +34,7 @@ define 	: DEF CLAUSE {ph.addClause($CLAUSE.text);} '(' ARGS {ph.addArgTypeToClau
 		
 		; 
 			
-explicitSetting : SET (extern|specification|definedClause) ((KONJ|',') (extern|specification|definedClause))* ; // TODO Konj und . sollten schon das selbe sein
+explicitSetting : SET (extern|specification|definedClause); 
 
 assignment 	: { context = Context.UNKNOWN;}
 			(description)? IF (assignmentBody)? THEN assignmentHead 	
@@ -52,7 +52,7 @@ clauses			: atoms
 disjunction		: '(' atoms (DISJ atoms)* ')'
 				; 
 				
-negation		: NEG atoms;
+negation		: NEG '(' atoms ( KONJ atoms)*')';
 
 atoms			: specification		
 				| status
@@ -84,30 +84,32 @@ specification	: 'role' rt 'can execute' tt  		#roleTask // TODO bessere Bezeichn
 				| 'critical_task_pair('tt','tt')'	#critTaskPair
 				;
 
-enforcement		: 'user'? ut 'cannot execute' tt	#cannotUser
+enforcement		: 'user' ut 'cannot execute' tt	#cannotUser
 				| 'role' rt 'cannot execute' tt	#cannotRole
 				|  ut 'must execute' tt				#mustUser
 				| 'role' rt 'must execute' tt 		#mustRole
-				| 'panic'							#panic
+				| 'illegal execution'				#panic
 				;
 			
-status			:  'user'? ut 'executed' tt			#executedUser
+status			:  'user' ut 'executed' tt			#executedUser
 				|  'role' rt 'executed' tt			#executedRole
 				|  ut 'is assigned to' tt			#assignedUser
 				|  tt 'aborted'						#abortedTask // TODO hier auch mit den EventTypes..
-				|  tt 'succeeded'					#succeededTask
+				|  tt 'completed'					#succeededTask
 				|  tt 'started'						#startedTask
-				| 'EventType(' tt ').' (event | unknownEvent) #flexibleEvent
+				| 'eventtype of' tt ' is ' et		 #flexibleEvent
 				|  ut 'is collaborator of' ut		#collaborator // TODO ??
+				| 'timestamp of' tt 'is' VARIABLE		#timestamp
+				| 'timeinterval of' tt 'and' tt 'is' VARIABLE #timeinterval
+				| 'attribute' CONSTANT|VARIABLE 'of' tt 'is' CONSTANT|VARIABLE			#var
 				;
 	
-conditional		: 'NUMBER' WHERE conditionalBody 'IS' nt					#numSimple
-				| 'NUMBER OF' VARIABLE WHERE conditionalBody 'IS' nt		#numVars
-				| 'NUMBER OF DIFF' VARIABLE  WHERE conditionalBody 'IS' nt	#numDiff // TODO das müsste doch eigentlich schon numVars sein
-				| 'SUM OF' VARIABLE  WHERE conditionalBody 'IS' nt			#sum
-				| 'AVG OF' VARIABLE  WHERE conditionalBody 'IS' nt			#avg
-				| 'MIN OF' VARIABLE WHERE conditionalBody 'IS' nt			#min
-				| 'MAX OF' VARIABLE  WHERE conditionalBody 'IS' nt			#max
+conditional		: 'NUMBER' WHERE '(' conditionalBody ')' 'IS' nt					#numSimple
+				| 'NUMBER OF' VARIABLE WHERE '(' conditionalBody ')' 'IS' nt		#numVars
+				| 'SUM OF' VARIABLE  WHERE '(' conditionalBody ')' 'IS' (nt|tp|ts)			#sum
+				| 'AVG OF' VARIABLE  WHERE '(' conditionalBody ')' 'IS' (nt|tp|ts)			#avg
+				| 'MIN OF' VARIABLE WHERE '(' conditionalBody ')' 'IS' (nt|tp|ts)			#min
+				| 'MAX OF' VARIABLE  WHERE '(' conditionalBody ')' 'IS' (nt|tp|ts)			#max
 				;
 
 conditionalBody 	: clauses ( KONJ clauses)* ;
@@ -121,10 +123,8 @@ equalityExpr	: VARIABLE equality VARIABLE
 				| rt equality rt
 				| tp equality tp
 				| ts equality ts
-				| wt equality wt // TODO wegmachen?
-				| wi equality wi // TODO wegmachen?
 				| ut equality ut
-				| st equality st
+				| et equality et
 				;
 
 inequalityExpr	: VARIABLE inequality VARIABLE
@@ -132,18 +132,17 @@ inequalityExpr	: VARIABLE inequality VARIABLE
 				| rt inequality rt
 				| tp inequality tp
 				| ts inequality ts
-				| st inequality st
 				;
 				
 	
-event			: EVENTTYPE ; 
+et			: EVENTTYPE | unknownEvent | VARIABLE ; 
 
 
 unknownEvent	: CONSTANT;
 
 // Constants and Vars
 ut				: CONSTANT | VARIABLE ;
-rt				: CONSTANT | VARIABLE | ut ROLE | tt ROLE;
+rt				: CONSTANT | VARIABLE ;
 tt 				: intra { 
 					if (context == Context.UNKNOWN) {
 						context = Context.INTRA;
@@ -188,13 +187,8 @@ interp			: (CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)'.'(CONSTANT|VARIABLE)
 nt				: NUMBER 										#num
 				| VARIABLE 										#var
 				| '(' nt arithmetic nt ')'						# arithm
-				| 'Num_Var(' tt ').'CONSTANT					# num_var
 				;
 				
-st	    : 'String_Var(' tt ').'CONSTANT							#str_var
-		| VARIABLE												#var1
-		| CONSTANT												#num1
-		; 
 				
 // timepoint symbols		
 tp 		:DATETIME
@@ -204,24 +198,15 @@ tp 		:DATETIME
 		| TIME		
 		{ph.checkTime($TIME.text);}									# time
 		| '(' tp ADD ts ')'    										# relativeTimepoint
-		| 'timestamp of' tt										    # timestamp
 		| VARIABLE 													# varTP
 		; 
 		
 // timeinterval symbols
 ts		: TIMEINTERVAL		
 		{ph.checkTimeInterval($TIMEINTERVAL.text);}					# absoluteInterval
-		| '(' tp SUB tp ')'											# timedifference
-		| 'timeinterval of' tt 'and' tt 							# timeinterval
+		| '(' tp SUB tp ')'											# timedifference 
 		| VARIABLE													# varTS
 		; 
-	
-
-// workflow symbols
-wt		: tt WORKFLOW ; 
-
-// workflow instances
-wi 		: tt WORKFLOWINSTANCE;
 
 		
 

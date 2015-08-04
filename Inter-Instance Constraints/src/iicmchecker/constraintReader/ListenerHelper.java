@@ -1,6 +1,7 @@
 package iicmchecker.constraintReader;
 
-import iicmchecker.exceptions.UnexpectedNumberOfChildrenException;
+import iicmchecker.utils.exceptions.UnexpectedNumberOfChildrenException;
+
 
 public class ListenerHelper {
 	

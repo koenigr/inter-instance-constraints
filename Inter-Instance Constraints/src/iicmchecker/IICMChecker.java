@@ -12,10 +12,10 @@ import iicmchecker.compliancechecker.Compliancechecker;
 import iicmchecker.constraintReader.IIListener;
 import iicmchecker.constraintReader.Inter_InstanceLexer;
 import iicmchecker.constraintReader.Inter_InstanceParser;
-import iicmchecker.logging.LoggerFactory;
 import iicmchecker.logtransformer.LogParser;
 import iicmchecker.logtransformer.LogTransformer;
 import iicmchecker.storage.StorageHelper;
+import iicmchecker.utils.logging.LoggerFactory;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
