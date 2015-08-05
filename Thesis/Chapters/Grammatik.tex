@@ -12,7 +12,7 @@ In diesem Kapitel wird die Grammatik vorgestellt, die es ermöglichen soll, Rege
 % Anforderungen an die Grammatik
 %
 \section{Anforderungen an die Grammatik}
-Um eine ausdrucksstarke Grammatik zu definieren, die möglichst viele Fälle abdeckt, muss zuerst untersucht werden, welche genauen Anforderungen an sie gestellt werden.
+Um eine Grammatik zu definieren, die möglichst viele Fälle abdeckt, muss zuerst untersucht werden, welche genauen Anforderungen an sie gestellt werden.
 
 Grundsätzlich ist das Ziel, Regeln zur Ausführung bestimmter Aktivitäten auf Basis bereits abgeschlossener Aktivitäten aufzustellen. Es muss also einen Teil geben, in dem man die Bedingungen festlegen kann um dann anzugeben, welche gewünschte Aktion daraus resultiert. Die Bedingungen bilden in den meisten Fällen eine Konjunktion. Werden alle Bedingungen erfüllt, tritt die Regel in Kraft. Zur Vollständigkeit wird hier auch die Option mit aufgenommen, absolute Regeln ohne Bedingungen aufzustellen, die in jedem Fall gelten sollen.
 
@@ -26,7 +26,7 @@ Da es Bedingungen in Bezug auf Zeitpunkte, Zeitunterschiede und Werte von Attrib
 
 Eventlogs speichern zu jeder Aktivität jedes einzelne Event. Das könnte entweder die Eingabe der Regeln unnötig kompliziert machen (indem der Anwender zu jeder einzelnen Aktivität immer das Event angeben muss) oder es würde zu multiplen Ergebnissen führen. Es muss eine Einigung geben, ob Events explizit angegeben werden müssen, oder sich Prädikate wie \texttt{timestamp(TASK)} auf ein konkretes Event bezieht.
 
-Unter Berücksichtigung aller gestellten Forderungen sollte trotzdem eine leicht zu lernende und leicht zu verstehende Notation gewährleistet sein. Im folgenden wird die entwickelte Grammatik vorgestellt und gleichzeitig geklärt, inwiefern die hier aufgeführten Fragen und Anforderungen gelöst wurden.
+Unter Berücksichtigung aller gestellten Forderungen sollte trotzdem eine leicht zu lernende und leicht zu verstehende Notation gewährleistet sein. Im folgenden wird die entwickelte Grammatik vorgestellt und gleichzeitig geklärt, inwiefern die hier aufgeführten Fragen und Anforderungen gelöst werden.
 %
 % Definition der Grammatik
 %
@@ -92,6 +92,8 @@ Zeitzonenangaben sind nicht erlaubt.
 \subsection{Prädikate}
 In diesem Abschnitt werden alle Verfügbaren Prädikate vorgestellt. Es gibt  7 verschiedene Typen: \textit{Externe Informationen, Spezifikation des Prozesses und der Authorisierung, Status, Prädikate für den Kopf einer Regel, Aggregationsprädikate, Vergleiche und arithmetische Operationen}. \\
 
+Eine genaue Auflistung aller Prädikate befindet sich in Anhang {\ref{AppendixA}}.
+
 Externe Informationen (Tabelle \ref{tab:extern}) sind Aussagen, die nicht direkt mit der Workflow Spezifikation zu tun haben aber dennoch relevant für den Ablauf sein könnten. Diese Prädikate müssen explizit in den Regeln gesetzt werden, da sie nicht aus den Logs herausgelesen werden und bei einer Anfrage immer \textit{false} zurückgeben würden.
 
 
@@ -101,16 +103,16 @@ Spezifikationsprädikate (Tabelle \ref{tab:specification}) bestimmen die Beziehu
 Statusprädikate (Tabelle \ref{tab:status}) sind Aussagen über Aktivitäten. Diese können in den Bedingungen einer Regel eingesetzt werden und werden später mit den Informationen aus den Logs verglichen. 
 
 
-Aggregations Prädikate (Tabelle \ref{tab:conditional}) (\textit{NUMBER, SUM, AVG, MIN, MAX}) geben einen Wert über die Aggregation von einer Variablen zurück, die in den Klauseln des Körpers dieses Prädikates stehen. \texttt{MIN OF X WHERE 'T1' completed AND timestamp of 'T1' is X IS N} berechnet das Minimum von allen Zeitpunkten, an denen die Aktivität 'T1' abgeschlossen wurde und schreibt es in die Variable N. X ist die Variable, mit der gerechnet wird und mindestens ein Mal in Körper dieses Prädikates vorkommen muss. Die beiden Literale \textbf{'T1' completed} und \textbf{timestamp of 'T1' is X} bilden den Körper. '\textbf{MIN OF} Var \textbf{WHERE} body \textbf{IS} Var ist das Aggregations-Prädikat selbst.
+Aggregations Prädikate (Tabelle \ref{tab:conditional}) (\textit{NUMBER, SUM, AVG, MIN, MAX}) geben einen Wert über die Aggregation von einer Variablen zurück, die in den Klauseln des Körpers dieses Prädikates stehen. \texttt{MIN OF X WHERE 'T1' completed AND timestamp of 'T1' is X IS N} berechnet das Minimum von allen Zeitpunkten, an denen die Aktivität 'T1' abgeschlossen wurde und schreibt es in die Variable N. X ist die Variable, mit der gerechnet wird und mindestens ein Mal in Körper dieses Prädikates vorkommen muss. Die beiden Literale \texttt{'T1' completed} und \texttt{timestamp of 'T1' is X} bilden den Körper. '\texttt{MIN OF} Var \texttt{WHERE} body \texttt{IS} Var ist das Aggregations-Prädikat selbst.
 
 
 
 Vergleiche (Tabelle \ref{tab:comparison}) dienen dazu, festzustellen, in welchem Verhältnis zwei Werte zueinander stehen. Es können immer nur zwei Werte des gleichen Typs verglichen werden. Bei Gleichheitsabfragen sind alle Typen erlaubt, bei Abfragen über Größenverhätltnisse sind außer den numerischen Werten und Zeiten auch Rollen bezüglich der Hierarchie erlaubt.
 
 
-Arithmetische Operationen (Tabelle \ref{tab:operations}) sind grundsätzlich nur für numerische Werte erlaubt. Eine Ausnahme bildet die Summe aus einem Zeitpunkt und einer Zeitspanne (Das Ergebnis ist ein Zeitpunkt) und die Differenz aus zwei Zeitpunkten (das Ergebnis ist eine Zeitspanne). Jede einzelne arithmetische Operation muss in Klammern stehen.
+Arithmetische Operationen (Tabelle \ref{tab:operations}) sind grundsätzlich nur für numerische Werte möglich. Eine Ausnahme bildet die Summe aus einem Zeitpunkt und einer Zeitspanne (Das Ergebnis ist ein Zeitpunkt) und die Differenz aus zwei Zeitpunkten (das Ergebnis ist eine Zeitspanne). Jede einzelne arithmetische Operation muss in Klammern stehen.
 
-Kopfprädikate bestimmen das gewünschte Resultat einer Regel. Sie machen Aussagen darüber, ob eine Aktivität von einem Nutzer/Rolle ausgeführt werden darf oder muss. Diese müssen im Kopf einer Regel stehen, und dürfen nicht im Körper vorkommen. \texttt{illegal execution} kann dazu verwendet werden, eine Ausführung als ??? (TODO) zu kennzeichnen, sofern die Spezifikation im Körper der Regel erfällt wurde. (Tabelle \ref{tab:head})
+Kopfprädikate bestimmen das gewünschte Resultat einer Regel. Sie machen Aussagen darüber, ob eine Aktivität von einem Nutzer/Rolle ausgeführt werden darf oder muss. Diese müssen im Kopf einer Regel stehen, und dürfen nicht im Körper vorkommen. \texttt{illegal execution} kann dazu verwendet werden, eine Ausführung als regelwidrig zu kennzeichnen, sofern die Spezifikation im Körper der Regel erfüllt wurde. (Tabelle \ref{tab:head})
 
 
 
@@ -145,7 +147,7 @@ THEN role 'Azubi' cannot execute 'Kreditantrag prüfen'
 \label{fig:absolute}
 \end{figure}
 
-Neben den eigentlichen Regeln kann man für selbst definierte Prädikate Regeln aufstellen... TODO
+Neben den eigentlichen Regeln kann man Regeln für selbst definierte Prädikate aufstellen. Dies wird im Abschnitt \ref{sec:define} genauer erläutert.
 
 \section{Grammatik - Syntax und Semantik}
 In diesem Abschnitt werden die wichtigsten Merkmale der Definitionssprache an Beispielen erläutert. Eine genaue Definition in \textbf{BNF}-Form \footnote{Backus-Naur-Format} befindet sich in Anhang \ref{Grammatik}.
@@ -181,7 +183,7 @@ dieser Reihenfolge stattfinden und können nicht gemischt werden.
 \subsection{Definition eigener Prädikate}
 \label{sec:define}
 Es kann nötig werden, eigene Prädikate zu definieren. Zum Beispiel, um weitere Personengruppen anzulegen oder um Abkürzungen für Zusammenhänge zu erstellen. Dafür gibt es die Möglichkeit, ein Prädikat mittels des Schlüsselwortes "DEF"\ zu Beginn der Regeldefinitionen zu setzen. In der Definition wird der Typ der Argumente festgelegt. Verfügbar sind 'UT', 'RT', 'TT', 'WT', 'TS', 'TP', 'NT' und 'STRING\_VAR'. 'STRING\_VAR' bezeichnet dabei einen beliebigen String.
-Um die eigenen Prädikate nutzen zu können, muss man jedoch beachten, dass sie bei der Definition noch keinen "Wert" haben. Entweder muss man sie dann mit 'SET'\ setzen oder man kann ihnen eine Regel erstellen. Damit die Prädikate für den Parser und die weitere Verarbeitung eindeutig sind, sind sie an eine spezielle Form gebunden: $<$predicatename$>$( ARGType (, ARGType)*). $<$predicatename$>$ kann nur aus Kleinbuchstaben a-z und Unterstrichen \_ (nicht am Anfang des Namens) bestehen.
+Um die eigenen Prädikate nutzen zu können, muss man jedoch beachten, dass sie bei der Definition noch keinen 'Wert' haben. Entweder muss man sie dann mit 'SET'\ setzen oder man kann ihnen eine Regel erstellen. Damit die Prädikate für den Parser und die weitere Verarbeitung eindeutig sind, sind sie an eine spezielle Form gebunden: $<$predicatename$>$( ARGType (, ARGType)*). $<$predicatename$>$ kann nur aus Kleinbuchstaben a-z und Unterstrichen \_ (nicht am Anfang des Namens) bestehen.
 
 \begin{verbatim}
 DEF suspicious(UT)
@@ -203,17 +205,18 @@ IF user ACTOR executed ACTIVITY AND EventType(ACTIVITY).'aborted'
 \label{fig:define}
 \end{figure}
 
+Die definierten Prädikate dienen nur zur Gruppierung von Nutzern oder Rollen bzw um Abkürzungen für Beziehungen zwischen Aktivitäten herzustellen. Sie werden bei der späteren Auswertung \textit{nicht} gegen die Logeinträge verglichen und sind somit nicht dazu geeignet, weitere Erwartungstypen zu definieren.
+
 \subsection{Setzen von Fakten}
 \label{sec:set}
-Fakten werden nach dem Definieren eigener Prädikate und vor dem Notieren der Regeln gesetzt. Prädikate aus ... und selbst definierte.
-Fakten können keine Variablen enthalten.
+Fakten aus den Tabellen \ref{tab:extern} (externe Informationen) und \ref{tab:specification} (Spezifikation des Prozesses) und selbst definierte Prädikate werden nach dem Definieren eigener Prädikate und vor dem Notieren der Regeln gesetzt. Fakten können keine Variablen enthalten.
 
 \begin{verbatim}
 SET 'Manager' dominates 'Sekretärin'
 SET 'Tom Hoffman' belongs to role 'Administrator' 
 \end{verbatim}
 \begin{figure}[!h]
-\small blabla
+\small Spezifikation, dass die Rolle 'Manager' die 'Rolle' Sekretär dominiert sowie Zuweisung der Rolle 'Administrator' zu 'Tom Hoffman'.
 \caption{Setzen von Fakten.}
 \label{fig:define}
 \end{figure}
@@ -225,7 +228,7 @@ Die Regeln repräsentieren die Einschränkungen, welche in einem Prozess gelten.
 
 Alle Klauseln (sowohl im Kopf als auch im Körper) können als Argumente entweder Konstanten oder Variablen enthalten. Konstanten sind entweder \textit{Strings} (dann müssen sie in jedem Fall von zwei einfach Anführungsstrichen umschlossen sein - zB 'Simon Pabst', 'start'), numerische Werte (Zahlen n $\geq$ 0), Zeitpunkte oder Zeitstempel (siehe Abschnitt \ref{sec:vars}). Variablen müssen mit einem Großbuchstaben beginnen. Dannach können sie alle Zeichen [A-Za-z0-9\_]enthalten. Es ist zu beachten, dass reservierte Schlüsselwörter als Variable nicht erlaubt sind (Abschnitt \ref{sec:keywords}). Werden die selben Variablen in unterschiedlichen Klauseln eingesetzt, dann entsprechen sie dem selben Wert. Unterschiedliche Variablen \textit{können} bei der Auswertung den selben Wert annehmen. Sollte es ausdrücklich gewünscht sein, unterschiedliche Werte für unterschiedliche Variablen zu erhalten, empfiehlt es sich, das Prädikat VAR != VAR zu setzen.
 
-Die definierten Variablen gelten innerhalb einer Regel. Man kann die selben Variablen in verschiedenen Regeln verwenden, ohne dass sie den selben Wert annehmen (toto besser formulieren)
+Die definierten Variablen gelten innerhalb einer Regel. Man kann die selben Variablen in verschiedenen Regeln verwenden, ohne dass sie sich auf den selben Wert beziehen müssen.
 
 \begin{verbatim}
 IF user A executed 'T1' AND user B executed 'T2' AND A != B
@@ -261,9 +264,9 @@ IF user 'Mark' executed 'T1'
 IF NUMBER WHERE user A executed 'T1'.TID_1 is N AND N > 3
     THEN user A cannot execute 'T1'.TID_2
 
-// Inter-Process - ...???
-IF NUMBER WHERE user A executed Task.T_1.TID_1 is N AND N < 100
-    THEN user A must execute 'T3'
+// Inter-Process - ein Nutzer darf 'T3' höchstens 100 mal ausführen
+IF NUMBER WHERE user A executed 'T3'.T_1.TID_1 is N AND N > 100
+    THEN user A cannot execute 'T3'
 \end{verbatim}
 \begin{figure}[!h]
 \caption{Beispiele für verschiedene Geltungsbereiche}
@@ -314,17 +317,17 @@ Kritische Aufgabenpaare müssen mit \texttt{SET} gesetzt werden. Kollaborateure 
 
 \subsection{reservierte Schlüsselwörter}
 \label{sec:keywords}
-Variablen müssen immer mit einem Großbuchstaben beginnen. Folgende Schlüsselwörter sind jedoch nicht erlaubt:
- \textbf{SET IF THEN NOT AND OR DEF DESC UT RT TT WT TS TP NT STRING\_VAR WHERE}\\
+Variablen müssen immer mit einem Großbuchstaben beginnen. Folgende Schlüsselwörter sind jedoch nicht erlaubt:\\
+ \textbf{SET, IF, THEN, NOT, AND, OR, DEF, DESC, UT, RT, TT, WT, TS, TP, NT, STRING\_VAR, WHERE}\\
 Wörter, die mit \textbf{GENERATED} oder \textbf{RULEID} beginnen.
-
-etwas, das mit P beginnt??
 
 %
 % Nochmal konkretes Beispiel
 %
 \section{Konkretes Beispiel}
 Die Regeln in Abschnitt \ref{sec:exampleconstraints}  können mit der entwickelten Definitionssprache wie folgt ausgedrückt werden:\\
+\color{red} TODO aktualisieren, wenn Programm fertig
+\color{black}
 \small
 \begin{verbatim}
 SET related, critical task pairs,...

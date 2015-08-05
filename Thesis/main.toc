@@ -13,8 +13,8 @@
 \contentsline {section}{\numberline {1.3}Aufbau der Arbeit}{2}{section.18}
 \contentsline {chapter}{\numberline {2}Verwandte Arbeit}{3}{chapter.19}
 \contentsline {section}{\numberline {2.1}Untersuchung Instanz-\IeC {\"u}bergreifender Regeln}{3}{section.20}
-\contentsline {section}{\numberline {2.2}Definition und Anwendung von Regeln in Gesch\IeC {\"a}ftsprozessen}{4}{section.21}
-\contentsline {section}{\numberline {2.3}ProM - CLIMB - SCIFF}{4}{section.22}
+\contentsline {section}{\numberline {2.2}SCIFF - SCIFFChecker - ProM}{4}{section.21}
+\contentsline {section}{\numberline {2.3}Weitere Ans\IeC {\"a}tze}{4}{section.22}
 \contentsline {chapter}{\numberline {3}Grundlagen}{5}{chapter.23}
 \contentsline {section}{\numberline {3.1}Grundlagen und Definitionen}{5}{section.24}
 \contentsline {subsection}{\numberline {3.1.1}Prozess Schemata und Instanzen}{5}{subsection.25}
@@ -23,45 +23,45 @@
 \contentsline {subsection}{\numberline {3.1.4}Zeitmodell}{8}{subsection.31}
 \contentsline {subsection}{\numberline {3.1.5}Event Logs}{8}{subsection.32}
 \contentsline {section}{\numberline {3.2}Herleitung der Einschr\IeC {\"a}nkungen}{9}{section.35}
-\contentsline {subsection}{\numberline {3.2.1}Ein praktisches Beispiel mit vielen Einschr\IeC {\"a}nkungen}{9}{subsection.36}
-\contentsline {subsection}{\numberline {3.2.2}Arten von Constraints - Herleitung}{10}{subsection.47}
-\contentsline {subsection}{\numberline {3.2.3}G\IeC {\"u}ltigkeitsbereich von Constraints}{12}{subsection.49}
-\contentsline {chapter}{\numberline {4}Entwicklung einer Definitionssprache f\IeC {\"u}r Regeln}{13}{chapter.50}
-\contentsline {section}{\numberline {4.1}Anforderungen an die Grammatik}{13}{section.51}
-\contentsline {section}{\numberline {4.2}Definition der Grammatik}{14}{section.52}
-\contentsline {subsection}{\numberline {4.2.1}Argumente - Variablen und Konstanten}{15}{subsection.54}
-\contentsline {subsection}{\numberline {4.2.2}Pr\IeC {\"a}dikate}{16}{subsection.56}
-\contentsline {subsection}{\numberline {4.2.3}Regeln}{17}{subsection.57}
-\contentsline {section}{\numberline {4.3}Grammatik - Syntax und Semantik}{18}{section.60}
-\contentsline {subsection}{\numberline {4.3.1}Definition eigener Pr\IeC {\"a}dikate}{18}{subsection.63}
-\contentsline {subsection}{\numberline {4.3.2}Setzen von Fakten}{19}{subsection.65}
-\contentsline {subsection}{\numberline {4.3.3}Notation bei Regeln}{19}{subsection.67}
-\contentsline {subsection}{\numberline {4.3.4}Spezifikation des Kontexts}{20}{subsection.69}
-\contentsline {subsection}{\numberline {4.3.5}Events}{21}{subsection.71}
-\contentsline {subsection}{\numberline {4.3.6}Disjunktion}{21}{subsection.72}
-\contentsline {subsection}{\numberline {4.3.7}Kollaborateure und kritische Aufgabenpaare}{22}{subsection.75}
-\contentsline {subsection}{\numberline {4.3.8}reservierte Schl\IeC {\"u}sselw\IeC {\"o}rter}{22}{subsection.76}
-\contentsline {section}{\numberline {4.4}Konkretes Beispiel}{22}{section.77}
-\contentsline {chapter}{\numberline {5}Implementierung}{25}{chapter.79}
-\contentsline {section}{\numberline {5.1}Verwendete Hilfsmittel}{26}{section.81}
-\contentsline {subsection}{\numberline {5.1.1}SEWOL}{26}{subsection.82}
-\contentsline {subsection}{\numberline {5.1.2}ANTLR}{26}{subsection.83}
-\contentsline {subsection}{\numberline {5.1.3}Programmiersprachen}{26}{subsection.84}
-\contentsline {section}{\numberline {5.2}Architektur und Umsetzung der Analyse}{27}{section.85}
-\contentsline {subsection}{\numberline {5.2.1}Erstellen der Wissensbasis - Einlesen der Logs}{27}{subsection.86}
-\contentsline {subsection}{\numberline {5.2.2}\IeC {\"U}bersetzung der Regeln}{28}{subsection.89}
-\contentsline {subsection}{\numberline {5.2.3}Algorithmus Compliance Checker}{30}{subsection.92}
-\contentsline {subsection}{\numberline {5.2.4}Darstellung der Ergebnisse}{30}{subsection.93}
-\contentsline {chapter}{\numberline {6}Auswertung}{31}{chapter.95}
-\contentsline {section}{\numberline {6.1}Evaluation}{31}{section.96}
-\contentsline {section}{\numberline {6.2}Diskussion}{33}{section.102}
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{34}{chapter.103}
+\contentsline {subsection}{\numberline {3.2.1}Ein praktisches Beispiel}{9}{subsection.36}
+\contentsline {subsection}{\numberline {3.2.2}Arten von Einschr\IeC {\"a}nkungen}{10}{subsection.38}
+\contentsline {subsection}{\numberline {3.2.3}G\IeC {\"u}ltigkeitsbereich von Constraints}{12}{subsection.40}
+\contentsline {chapter}{\numberline {4}Entwicklung einer Definitionssprache f\IeC {\"u}r Regeln}{13}{chapter.41}
+\contentsline {section}{\numberline {4.1}Anforderungen an die Grammatik}{13}{section.42}
+\contentsline {section}{\numberline {4.2}Definition der Grammatik}{14}{section.43}
+\contentsline {subsection}{\numberline {4.2.1}Argumente - Variablen und Konstanten}{15}{subsection.45}
+\contentsline {subsection}{\numberline {4.2.2}Pr\IeC {\"a}dikate}{16}{subsection.47}
+\contentsline {subsection}{\numberline {4.2.3}Regeln}{17}{subsection.48}
+\contentsline {section}{\numberline {4.3}Grammatik - Syntax und Semantik}{18}{section.51}
+\contentsline {subsection}{\numberline {4.3.1}Definition eigener Pr\IeC {\"a}dikate}{18}{subsection.54}
+\contentsline {subsection}{\numberline {4.3.2}Setzen von Fakten}{19}{subsection.56}
+\contentsline {subsection}{\numberline {4.3.3}Notation bei Regeln}{19}{subsection.58}
+\contentsline {subsection}{\numberline {4.3.4}Spezifikation des Kontexts}{20}{subsection.60}
+\contentsline {subsection}{\numberline {4.3.5}Events}{21}{subsection.62}
+\contentsline {subsection}{\numberline {4.3.6}Disjunktion}{21}{subsection.63}
+\contentsline {subsection}{\numberline {4.3.7}Kollaborateure und kritische Aufgabenpaare}{22}{subsection.66}
+\contentsline {subsection}{\numberline {4.3.8}reservierte Schl\IeC {\"u}sselw\IeC {\"o}rter}{22}{subsection.67}
+\contentsline {section}{\numberline {4.4}Konkretes Beispiel}{22}{section.68}
+\contentsline {chapter}{\numberline {5}Implementierung}{25}{chapter.70}
+\contentsline {section}{\numberline {5.1}Verwendete Hilfsmittel}{26}{section.72}
+\contentsline {subsection}{\numberline {5.1.1}SEWOL}{26}{subsection.73}
+\contentsline {subsection}{\numberline {5.1.2}ANTLR}{26}{subsection.74}
+\contentsline {subsection}{\numberline {5.1.3}Programmiersprachen}{26}{subsection.75}
+\contentsline {section}{\numberline {5.2}Architektur und Umsetzung der Analyse}{27}{section.76}
+\contentsline {subsection}{\numberline {5.2.1}Erstellen der Wissensbasis - Einlesen der Logs}{27}{subsection.77}
+\contentsline {subsection}{\numberline {5.2.2}\IeC {\"U}bersetzung der Regeln}{28}{subsection.80}
+\contentsline {subsection}{\numberline {5.2.3}Algorithmus Compliance Checker}{30}{subsection.83}
+\contentsline {subsection}{\numberline {5.2.4}Darstellung der Ergebnisse}{30}{subsection.84}
+\contentsline {chapter}{\numberline {6}Auswertung}{31}{chapter.86}
+\contentsline {section}{\numberline {6.1}Evaluation}{31}{section.87}
+\contentsline {section}{\numberline {6.2}Diskussion}{33}{section.93}
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{35}{chapter.94}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Pr\IeC {\"a}dikate}{35}{appendix.104}
-\contentsline {chapter}{\numberline {B}Weitere Beispiele f\IeC {\"u}r die Benutzung der Grammatik}{39}{appendix.112}
-\contentsline {chapter}{\numberline {C}Anleitung zur Verwendung}{41}{appendix.113}
-\contentsline {chapter}{\numberline {D}Paketstruktur}{43}{appendix.121}
-\contentsline {chapter}{\numberline {E}Grammatik im BNF Format}{44}{appendix.122}
-\contentsline {chapter}{\numberline {F}Algorithmus Compliance Checker}{45}{appendix.123}
+\contentsline {chapter}{\numberline {A}Pr\IeC {\"a}dikate}{36}{appendix.95}
+\contentsline {chapter}{\numberline {B}Weitere Beispiele f\IeC {\"u}r die Benutzung der Grammatik}{40}{appendix.103}
+\contentsline {chapter}{\numberline {C}Anleitung zur Verwendung}{42}{appendix.104}
+\contentsline {chapter}{\numberline {D}Paketstruktur}{44}{appendix.112}
+\contentsline {chapter}{\numberline {E}Grammatik im BNF Format}{45}{appendix.113}
+\contentsline {chapter}{\numberline {F}Algorithmus Compliance Checker}{46}{appendix.114}
 \vspace {2em}
-\contentsline {chapter}{Literaturverzeichnis}{47}{dummy.167}
+\contentsline {chapter}{Literaturverzeichnis}{48}{dummy.158}

@@ -45,12 +45,12 @@ Ziel der Arbeit ist es, eine Definitionssprache zu entwickeln, die es ermöglich
 %-----------------------------------
 
 \section{Aufbau der Arbeit}
-Folgende Konventionen werden hier verwendet:\\
+Folgende Konventionen werden hier eingehalten:\\
 \textit{kursive Begriffe  bezeichnen Fachbegriffe}\\
 \textbf{Definitionen und Abkürzungen werden beim ersten Vorkommen fett geschrieben}\\
-\texttt{Blockschrift kennzeichnet Pseudocode, Klassennamen, Code,...}\\
+\texttt{Blockschrift kennzeichnet Pseudocode, Klassennamen, Code und Programmbefehle}\\
 
-Diese Arbeit setzt ein elementares Verständnis von Logik und logischer Programmierung voraus, da hier darauf nicht näher eingegangen wird.
+Diese Arbeit setzt ein elementares Verständnis von Logik und logischer Programmierung voraus, da hier nicht näher darauf eingegangen wird.
 
-In Kapitel 2 wird einerseits ein Überblick über die Grundlagenliteratur gegeben als auch verwandte Arbeit vorgestellt. Dabei wird kurz darauf eingegangen, inwiefern sich diese Arbeit von den Anderen unterscheidet. In Kapitel 3 werden wichtige Begriffe erläutert. In Kapitel 4 widmen wir uns der  Herleitung von Einschränkungen und der Definition einer entsprechenden Grammatik. Diese wird in Kapitel 5 in ein Programm integriert, welches Event Logs auf die Verletzung von Einschränkungen prüft. Dazu wird der Algorithmus vorgestellt und der Aufbau des Programms vorgestellt. In Kapitel 6 wird ein Beispiel zur Funktionsweise des Programms vorgestellt. Letztendlich wird die Arbeit in Kapitel 7 mit ein paar abschließenden Bemerkungen beendet.
+In Kapitel 2 wird einerseits ein Überblick über die Grundlagenliteratur gegeben als auch verwandte Arbeit vorgestellt. Dabei wird kurz darauf eingegangen, inwiefern sich diese Arbeit von den Anderen unterscheidet. In Kapitel 3 werden wichtige Begriffe erläutert. In Kapitel 4 widmen wir uns der  Herleitung von Einschränkungen und der Definition einer entsprechenden Grammatik. Diese wird in Kapitel 5 in ein Programm integriert, welches Event Logs auf die Verletzung von Einschränkungen prüft. Dazu wird der Algorithmus und der Aufbau des Programms vorgestellt. In Kapitel 6 wird ein Beispiel zur Funktionsweise des Programms präsentiert. Letztendlich wird die Arbeit in Kapitel 7 mit ein paar abschließenden Bemerkungen beendet.
 

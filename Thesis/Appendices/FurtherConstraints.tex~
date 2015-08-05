@@ -22,6 +22,7 @@ darf kein neuer Teilnehmer mehr angenommen werden."
 
 SET 'asd' is related to 'asdas'
 DESC "Mitarbeiter aus dem Unternehmen dürfen nicht an dem Gewinnspiel teilnehmen"
+IF P1 executed...
 
 DESC "task1 und task2 müssen von verschiedenen Gruppen erledigt werden."
 IF role R executed 'task1' 

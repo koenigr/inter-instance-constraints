@@ -77,7 +77,7 @@ UT 'is collaborator of' UT	& UT sind alle Akteure, die an criticalTaskPair gearb
 \hline	
 \end{tabular}
 \\\\\small Da sich die beiden \textit{executed} Prädikate nicht auf ein bestimmtes Event beziehen, ist es notwendig, das Event extra anzugeben, um keine multiplen Ergebnisse zu erhalten. Es werden vier Prädikate für die Event-Typen \textit{assign}, \textit{start}, \textit{abort} und \textit{complete} angeboten. Für alle weiteren kann man das allgemeine Event-Prädikat 'Event(' TT ')' verwenden. Für das Event \textit{skip} wäre es EventType(TT).'skip'. Das Event muss in zwei einfachen Anführungszeichen stehen.
-\caption{Prädikate, um Aussagen über den Status in die Regeln mit einbeziehen zu können}
+\caption{Status Prädikate}
 \label{tab:status}
 \end{table}
 

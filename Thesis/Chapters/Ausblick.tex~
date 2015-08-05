@@ -1,14 +1,18 @@
 % Chapter Template
 
-\chapter{Ausblick} % Main chapter title
+\chapter{Zusammenfassung} % Main chapter title
 
 \label{Kapitel6} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
 \lhead{Kapitel 5. \emph{Zusammenfassung}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-In dieser Arbeit wurde das und das gemacht...
+Das Ziel der Arbeit war es, eine Beschreibungssprache für Regeln zu entwickeln, die sowohl für die Spezifizierung von Regeln zu Aktivitäten innerhalb einer Prozessinstanz als auch zwischen mehreren Instanzen eingesetzt werden kann. Das wurde gelöst, indem eine für die jeweilige Spannweite eindeutige Notation für Aktivitäten gewählt wurde, die es dem Parser erlaubt, den Kontext sofort zu erkennen und die Regeln automatisch so zu erweitern, dass der richtige Kontext gewährleistet ist. Das nimmt dem Programmierer die Arbeit ab, in den Regeln selbst definieren zu müssen, ob sich die Tasks auf die selbe Instanz beziehen. Da die Variablen für die Aktivitäten auch Werte für die Prozessinstanz (im Instanz-übergreifenden Kontext) und auch für das Prozessschema (im Prozess-übergreifendem Kontext) enthalten, ist es dennoch möglich, einzelne Aktivitäten bei Bedarf auf spezielle Instanzen festzulegen bzw zu erzwingen, dass sich mehrere Aktivitäten in der selben Instanz befinden müssen. Die Struktur der Definitionssprache ist so gewählt, dass sie einerseits an die natürliche Sprache angelehnt ist, um das Verständnis bei Lesen der Regeln zu erleichtern. Gleichzeitig lässt sie durch ihre Verwandtschaft zur logischen Programmierung keine Mehrdeutigkeit zu.
 
-Wie wurden die Schutzziele erfüllt?
+Die Regeln und Fakten werden auf Prologklauseln abgebildet. Die flexiblen Container - die interne Datenstruktur, welche alle Klauseln zwischenspeichert um sie schließlich zusammen in Prologklauseln zu konvertieren - ermöglichen es, eigene Prädikate in der Regelspezifikation zu definieren und sogleich im weiteren Verlauf zu verwenden. 
+
+Der Compliancechecker ist in Prolog implementiert und berechnet inwiefern die aus den Logs extrahierten Klausen der Spezifikation entsprechen. Es wurden zahlreiche Regeln aus den verschiedenen Bereichen in Abschnitt \ref{sec:ArtenConstraints} getestet. Die Regelbeschreibungssprache besitzt vordefinierte Prädikate, die es möglich machen, auszudrücken, ob die Ausführung einer Aktivität durch einen Nutzer / Rolle verboten oder zwingend ist. Alle weiteren Erwartungen, wie zB die Ausführung zu einem bestimmten Zeitpunkt, können dadurch getestet werden, dass der unerwünschte Fall im Körper der \texttt{illegal execution} Regel beschrieben wird.
+Die Struktur des Programms und der Grammatik macht die Definitionssprache leicht erweiterbar, um weitere Prädikate oder Regeltypen fest zu integrieren, ohne dass die Definitionssprache an Übersichtlichkeit verliert.
+
 
 
 

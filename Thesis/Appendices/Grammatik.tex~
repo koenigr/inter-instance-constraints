@@ -6,6 +6,8 @@
 
 \lhead{Appendix R. \emph{Grammatik im BNF Format}} % This is for the header on each page - perhaps a shortened title
 
+\color{red} TODO fertig machen, wenn Programm fertig
+\color{black}
 
 \begin{tabular}{lll}
 $<$file$>$ 		&::=& ($<$define$>$)* ($<$explicitSetting$>$)* ($<$assignment$>$)*  $<$EOF$>$\\
@@ -24,6 +26,9 @@ $<$atoms$>$ 		&::=& $<$specification$>$ 	\\
 			&&	$| <$extern$>$ \\
 			&&	$| <$definedClause$>$ \\
 $<$definedClause$>$ 	&::=& $<$clause$>$  "(" ($<$const$>|<$var$>$ ) ("," ($<$const$>|<$var$>$ ))* ")"\\
+\hline
+$<$def-symbols$>$ 	&::=& DEF...\\
+$<$set-symbols$>$ 	&::=& SET...\\
 \hline
 $<$var$>$ 		&::=& $<$uppercase letter$> | <$variable$> <$character$>$\\
 $<$lowercase letter$>$  &::=& a $|$ b $|$ c $|$ ... $|$ x $|$ y $|$ z\\

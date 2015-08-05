@@ -6,29 +6,29 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces einfaches Beispiel eines Prozessschemas\relax }}{5}{figure.caption.26}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Aktivit\IeC {\"a}ten und Events\relax }}{6}{figure.caption.28}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Beispiel Rollenmodell\relax }}{7}{figure.caption.30}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Ontologie eines Prozesses // TODO nochmal Beziehungen \IeC {\"u}berdenken\relax }}{8}{figure.caption.33}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Bearbeitung eines Kreditantrags in der Bank\relax }}{10}{figure.caption.37}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Typen von Einschr\IeC {\"a}nkungen und Regeln\relax }}{10}{figure.caption.48}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Ontologie eines Prozesses\relax }}{8}{figure.caption.33}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Bearbeitung eines Kreditantrags in der Bank\relax }}{9}{figure.caption.37}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Typen von Einschr\IeC {\"a}nkungen und Regeln\relax }}{11}{figure.caption.39}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Beispiel Spezifikation einer einfachen Regel\relax }}{14}{figure.caption.53}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Absolute Regel mit einem leeren K\IeC {\"o}rper\relax }}{17}{figure.caption.59}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Beispiel f\IeC {\"u}r die Definition von Regeln\relax }}{18}{figure.caption.62}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Definition eigener Pr\IeC {\"a}dikate.\relax }}{19}{figure.caption.64}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Setzen von Fakten.\relax }}{19}{figure.caption.66}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Unterschiedliche Werte f\IeC {\"u}r unterschiedliche Variablen\relax }}{20}{figure.caption.68}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Beispiele f\IeC {\"u}r verschiedene Geltungsbereiche\relax }}{21}{figure.caption.70}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Disjunktion im K\IeC {\"o}rper einer Regel. Man beachte, dass jede Disjunktion von umschlie\IeC {\ss }enden Klammern umgeben sein muss.\relax }}{21}{figure.caption.73}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Disjunktion im Kopfbereich ist nicht erlaubt. Es m\IeC {\"u}ssen zwei getrennte Regeln erstellt werden.\relax }}{22}{figure.caption.74}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Regeln f\IeC {\"u}r unsere gefundenen Beispiele\relax }}{24}{figure.caption.78}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Beispiel Spezifikation einer einfachen Regel\relax }}{14}{figure.caption.44}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Absolute Regel mit einem leeren K\IeC {\"o}rper\relax }}{17}{figure.caption.50}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Beispiel f\IeC {\"u}r die Definition von Regeln\relax }}{18}{figure.caption.53}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Definition eigener Pr\IeC {\"a}dikate.\relax }}{19}{figure.caption.55}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Setzen von Fakten.\relax }}{19}{figure.caption.57}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Unterschiedliche Werte f\IeC {\"u}r unterschiedliche Variablen\relax }}{20}{figure.caption.59}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Beispiele f\IeC {\"u}r verschiedene Geltungsbereiche\relax }}{21}{figure.caption.61}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Disjunktion im K\IeC {\"o}rper einer Regel. Man beachte, dass jede Disjunktion von umschlie\IeC {\ss }enden Klammern umgeben sein muss.\relax }}{22}{figure.caption.64}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Disjunktion im Kopfbereich ist nicht erlaubt. Es m\IeC {\"u}ssen zwei getrennte Regeln erstellt werden.\relax }}{22}{figure.caption.65}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Regeln f\IeC {\"u}r unsere gefundenen Beispiele\relax }}{24}{figure.caption.69}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Aufbau des IICMCheckers\relax }}{25}{figure.caption.80}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Interne Datenstruktur\relax }}{29}{figure.caption.91}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Beispiel Output\relax }}{30}{figure.caption.94}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Aufbau des IICMCheckers\relax }}{25}{figure.caption.71}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Interne Datenstruktur\relax }}{29}{figure.caption.82}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Beispiel Output\relax }}{30}{figure.caption.85}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Einfache Regelspezifikation\relax }}{31}{figure.caption.98}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Beispiel Wissensbasis\relax }}{32}{figure.caption.99}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Beispiel Wissensbasis\relax }}{32}{figure.caption.100}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Output nach der Analyse\relax }}{33}{figure.caption.101}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Einfache Regelspezifikation\relax }}{31}{figure.caption.89}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Beispiel Wissensbasis\relax }}{32}{figure.caption.90}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Beispiel Wissensbasis\relax }}{32}{figure.caption.91}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Output nach der Analyse\relax }}{33}{figure.caption.92}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

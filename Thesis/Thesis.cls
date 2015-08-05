@@ -203,7 +203,7 @@
                 {Albert Ludwigs Universit\"at - Freiburg}} % Your university's name - this is currently used in the title page
                 {University Name}}
 %-------------------------------------------------   
-\UNIVERSITY{\texorpdfstring{\href{University Web Site URL Here (include http://)} % Your university's URL
+\UNIVERSITY{\texorpdfstring{ % Your university's URL
                 {ALBERT-LUDWIGS-UNIVERSITÄT FREIBURG}} % Your university's name in capitals - this is currently used in the abstract page
                 {ALBERT-LUDWIGS-UNIVERSITÄT FREIBURG}}
 %-------------------------------------------------                
@@ -298,11 +298,11 @@
   \begin{center}
     \setlength{\parskip}{0pt}
     {\normalsize \UNIVNAME \par} % University name in capitals
+    {\normalsize \deptname \par} % Department name
+    {\normalsize \groupname \par} % Faculty name
     \bigskip
     {\huge{\textit{Kurzfassung}} \par}
     \bigskip
-    {\normalsize \groupname \par} % Faculty name
-    {\normalsize \deptname \par} % Department name
     \bigskip
     {\normalsize \degreename\par} % Degree name
     \bigskip

@@ -6,9 +6,9 @@
 
 \lhead{Chapter 5. \emph{Auswertung}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 \section{Evaluation}
-Sämtliche hier vorgestellte Regeln wurden mit speziell erstellen Logs in SEWOL erfolgreich getestet. Es wurden alle Regelverletzungen gefunden und keine \textit{false negatives} vermerkt. TODO etwas besser erklären.
+Sämtliche hier vorgestellte Regeln wurden mit speziell erstellen Logs in SEWOL erfolgreich getestet. Es wurden alle Regelverletzungen gefunden und keine \textit{false negatives} vermerkt.
 
-Im Folgenden wird ein stark vereinfachtes Beispiel für den Analysevorgang vorgestellt und der genaue Ablauf der Auswertung besprochen. Gegeben seien ein Log und eine Regelspezifikation.
+Im Folgenden wird ein vereinfachtes Beispiel für den Analysevorgang vorgestellt und der genaue Ablauf der Auswertung besprochen. Gegeben seien ein Log und eine Regelspezifikation.
 
 \begin{table}[h!]
 \footnotesize
@@ -109,10 +109,15 @@ User Jenny executed Task 3
 
 \section{Diskussion}
 
-Werden alle Constraint Fälle abgedeckt?
-Optimierung??\\
-Weitere Enforcement Prädikate definieren. Im Moment geht alls weitere durch illegal execution\\
-Mehr critical\_task\_apirs anbieten\\
+Die entwickelte Definitionssprache stellt einige vordefinierte Prädikate zur Verfügung, die ausdrücken, ob die Ausführung einer Aktivität durch einen bestimmten Nutzer oder Rolle gewünscht oder unerwünscht ist. Diese Erwartungen sind daran gebunden, ob der Körper der Regel durch vorhergehende Aktivitäten erfüllt wurde. Ist dies der Fall, so tritt die Regel in Kraft. Die Erwartung wird anschließend gegen die Informationen aus den Logs verglichen. Wenn die tatsächliche Ausführung nicht der Spezifikation entspricht, wird dies verzeichnet.
+
+Der Vorteil am implementierten Programm ist, dass es sich leicht erweitern lässt, um weitere Erwartungstypen zu definieren. Um zB ein Prädikat \texttt{expected execution time of TT is TP} zu implementieren, muss dieses Prädikat in der Grammatik Definition hinzugefügt werden und ein weiterer Regeltyp im Container zugelassen werden. Diese Regel wird dem Container hinzugefügt, sobald der Listener diesen Typ entdeckt und \texttt{main.pl} um eine Routine erweitert werden, die die tatsächliche Ausführungszeit mit der erwarteten Zeit vergleicht.
+
+Für alle nicht vordefinierten Erwartungen kann man \texttt{illegal execution} verwenden, um zu beschreiben, welcher Verlauf einen Regelbruch darstellt. Somit ist das Programm nicht an die definierten Kopf-Prädikate gebunden und kann alle Einschränkungstypen abdecken.
+
+Durch die eindeutige Notation von Aktivitäten bezüglich des Gültigkeitsbereich wird schon während dem parsen erkannt, welche Spanne eine Regel besitzt. Der Regel werden intern weitere Prädikate hinzugefügt, die den jeweiligen Kontext erzwingen. Da im Namen der Aktivität bei Instanzübergreifenden Regeln bereits ein Platz für die Instanzvariable vorhanden ist, kann man leicht definieren, ob sich einzelne Aktivitäten in einer Regel vielleicht doch in der selben Instanz befinden müssen. Ferner kann man bei Betrachtung der status.pl die genauen Instanz Ids ermitteln, um bei Bedarf eine eindeutige Instanz für die Untersuchung zu erzwingen. 
+
+Ein weiterer Vorteil an dem entwickelten Programm ist die Flexibilität bezüglich der verwendeten Prädikate. Um Nutzer und Rollen zu gruppieren, stehen einige Vordefinierte Prädikate zur Verfügung. Mittels des Schlüsselwortes "DEF"\ lassen sich eigene Prädikate definieren, die entweder gesetzt werden oder denen man sogar eine Regel erstellen kann.
 
 
 

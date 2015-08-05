@@ -102,7 +102,7 @@
 \end{minipage}\\[3cm]
  
 \emph{Abgabedatum:}\\
-{\large \today}\\[4cm] % Date
+{\large 21. August t2015}\\[4cm] % Date
 %\includegraphics{Logo} % University/department logo - uncomment to place it
  
 \vfill
@@ -141,7 +141,8 @@ Unterschrift:\\
 \textit{``Companies spend millions of dollars on firewalls, encryption and secure access devices, and it’s money wasted, because none of these measures address the weakest link in the security chain."}
 
 \begin{flushright}
-Kevin Mitnick
+Kevin Mitnick\\
+\color{red} TODO: Muss hier auch eine genaue Quelle angegeben werden?
 \end{flushright}
 
 \vfill\vfill\vfill\vfill\vfill\vfill\null % Add some space at the bottom to position the quote just right
@@ -156,7 +157,7 @@ Kevin Mitnick
 
 \abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
-The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
+Compliance Checker werden in Unternehmen dazu eingesetzt, um Geschäftsprozesse auf Basis ausgeführter Aktivitäten in Form von Logs daraufhin zu prüfen, ob Regeln wie das Separation of Duty Prinzip tatsächlich eingehalten wurden. Dadurch sollen Fehler von Angestellten und möglicher Betrug erkannt werden. Allerdings werden die Prozessinstanzen unabhängig voneinander überprüft. Neuere Forschungen weisen darauf hin, dass dies nicht ausreicht, und es ebenso notwendig ist, Regeln zum Arbeitsablauf zwischen mehreren Instanzen zu definieren und die Aktivitäten daraufhin zu analysieren. In dieser Arbeit wird eine Regelbeschreibungssprache entwickelt, die auch Instanz-übergreifende Regeln definieren lässt und erläutert, wie Logs auf die Einhaltung dieser Regeln getestet werden können.
 }
 
 \clearpage % Start a new page
@@ -184,10 +185,11 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 
 \clearpage % Start a new page
 
-\lhead{\emph{Definitionen}} % Set the left side page header to "Symbols"
+\lhead{\emph{Symbole}} % Set the left side page header to "Symbols"
 
 \listofnomenclature{ll} % Include a list of Symbols (a three column table)
 {
+\textbf{Definition von Prozessen}&\\
 $W$ & Prozessschema \\
 $W_i$ & Prozessschema i\\
 $W_i^k$ & k-te Instanz des Prozessschema i\\
@@ -198,13 +200,27 @@ $t_{ij}^k$& Aktivität j aus der k-ten Instanz des Prozessschema i\\
 $R$& Menge der Rollen \\
 $U$& Menge der Nutzer\\
 $\Tau$ & Menge aller Zeitpunkte\\
-$TP$& Zeitpunkt Symbole\\
-$TS$& Zeitspannen Symbole\\
-$E$& Event Logs\\
+$\tau \in \Tau$& Zeitpunkt\\
+$\Theta$ & Menge aller Zeitintervalle\\
+$\theta \in \Theta$ & Zeitintervall\\
+$E$& Menge aller Informationen in Event Logs\\
+\hline
+\textbf{Prädikate}&\\
 $L$& Menge aller Prädikate außer den Kopfprädikaten\\
+$H$& Menge der Kopfprädikate\\
 $K$& Menge aller Disjunktionen von Prädikaten aus L\\
 $N$& Menge aller Negationen von Konjunktionen von Prädikaten aus L\\
+\hline
+\textbf{Argumenttypen}&\\
+$UT$& Variablen und Konstanten über U\\
+$RT$& Variablen und Konstanten über R\\
+$TT$& Variablen und Konstentn über T\\
+$WT$& Variablen und Konstanten über W und $W_i$\\
+$TP$& Variablen und Konstanten über $\Tau$\\
+$TS$& Variablen und Konstanten über Zeitspannen\\
+$ET$& Variablen und Konstanten über Events\\
 }
+
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
@@ -236,6 +252,7 @@ $N$& Menge aller Negationen von Konjunktionen von Prädikaten aus L\\
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
+\input{Appendices/Predicates}
 \input{Appendices/FurtherConstraints}
 \input{Appendices/Programmstarten}
 \input{Appendices/Paketstruktur}

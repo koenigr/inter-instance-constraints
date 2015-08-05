@@ -101,7 +101,7 @@ ISSN={1081-6011},}
 
 
 
-@inproceedings{tan_consistency_2004,
+@inproceedings{tan_consistency,
 	title = {The consistency of task-based authorization constraints in workflow},
 	doi = {10.1109/CSFW.2004.1310739},
 	booktitle = {Computer {Security} {Foundations} {Workshop}, 2004. {Proceedings}. 17th {IEEE}},
@@ -203,7 +203,7 @@ pages={134-145},
 language={English}
 }
 
-@INPROCEEDINGS{SCIFF2,
+@INPROCEEDINGS{LTLChecker,
     author = {H. T. De Beer and B. F. Van Dongen},
     title = {Process Mining and Verification of Properties: An Approach based on Temporal Logic},
     booktitle = {On the Move to Meaningful Internet Systems 2005: CoopIS, DOA, and ODBASE: OTM Confederated International Conferences, CoopIS, DOA, and ODBASE 2005, volume 3760 of Lecture Notes in Computer Science},

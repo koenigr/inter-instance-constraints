@@ -1,4 +1,4 @@
-\begin{thebibliography}{15}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -49,12 +49,6 @@ E.~Bertino, E.~Ferrari, and V.~Atluri.
 \newblock In \emph{in Workflow Management Systems. ACM Transactions on
   Information System Security}, pages 65--104, 1999.
 
-\bibitem[Wagner(2002)]{rulelanguage}
-Gerd Wagner.
-\newblock How to design a general rule markup language.
-\newblock In \emph{In Invited talk at the Workshop XML Technologien für das
-  Semantic Web (XSW 2002}, pages 24--25, 2002.
-
 \bibitem[SCI(2015)]{SCIFF}
 Sciff documentation.
 \newblock \url{http://www.lia.deis.unibo.it/research/climb/tools-SCIFF.html},
@@ -71,15 +65,6 @@ Federico Chesani, Paola Mello, Marco Montali, Fabrizio Riguzzi, Maurizio
   Notes in Business Information Processing}, pages 134--145. Springer Berlin
   Heidelberg, 2009.
 
-\bibitem[Beer and Dongen(2005)]{SCIFF2}
-H.~T.~De Beer and B.~F.~Van Dongen.
-\newblock Process mining and verification of properties: An approach based on
-  temporal logic.
-\newblock In \emph{On the Move to Meaningful Internet Systems 2005: CoopIS,
-  DOA, and ODBASE: OTM Confederated International Conferences, CoopIS, DOA, and
-  ODBASE 2005, volume 3760 of Lecture Notes in Computer Science}, pages
-  130--147. Springer-Verlag, 2005.
-
 \bibitem[Alberti et~al.(2008)Alberti, Chesani, Gavanelli, Lamma, Mello, and
   Torroni]{SCIFF3}
 Marco Alberti, Federico Chesani, Marco Gavanelli, Evelina Lamma, Paola Mello,
@@ -88,6 +73,31 @@ Marco Alberti, Federico Chesani, Marco Gavanelli, Evelina Lamma, Paola Mello,
   sciff framework.
 \newblock \emph{ACM Transactions on Computational Logic (TOCL)}, 9\penalty0
   (4):\penalty0 29, 2008.
+
+\bibitem[Casati et~al.(2001)Casati, Castano, and Fugini]{active_database}
+Fabio Casati, Silvana Castano, and Mariagrazia Fugini.
+\newblock Managing {Workflow} {Authorization} {Constraints} {Through} {Active}
+  {Database} {Technology}.
+\newblock \emph{Information Systems Frontiers}, 3\penalty0 (3):\penalty0
+  319--338, September 2001.
+\newblock ISSN 1387-3326.
+\newblock \doi{10.1023/A:1011461409620}.
+\newblock URL \url{http://dx.doi.org/10.1023/A:1011461409620}.
+
+\bibitem[Wagner(2002)]{rulelanguage}
+Gerd Wagner.
+\newblock How to design a general rule markup language.
+\newblock In \emph{In Invited talk at the Workshop XML Technologien für das
+  Semantic Web (XSW 2002}, pages 24--25, 2002.
+
+\bibitem[Beer and Dongen(2005)]{LTLChecker}
+H.~T.~De Beer and B.~F.~Van Dongen.
+\newblock Process mining and verification of properties: An approach based on
+  temporal logic.
+\newblock In \emph{On the Move to Meaningful Internet Systems 2005: CoopIS,
+  DOA, and ODBASE: OTM Confederated International Conferences, CoopIS, DOA, and
+  ODBASE 2005, volume 3760 of Lecture Notes in Computer Science}, pages
+  130--147. Springer-Verlag, 2005.
 
 \bibitem[Wolter and Schaad(2007)]{wolter_modeling_of_TBAC_in_BPMN}
 Christian Wolter and Andreas Schaad.
