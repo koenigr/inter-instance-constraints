@@ -12,8 +12,8 @@ public class GLB extends Fact{
 	 */
 
 
-	public GLB(String role, String task, boolean neg) {
-		super(NAME, NUMBER_OF_ARGUMENTS, neg);
+	public GLB(String role, String task) {
+		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, role);
 		setArgument(1, task);
 	}

@@ -1,4 +1,7 @@
+package main;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +36,7 @@ public static void main(String[] args) {
 	}
 }
 
-public static void createLog() throws LockingException, 
+public static List<List<Log<LogEntry>>> createLog() throws LockingException, 
 	CompatibilityException, ParameterException, PerspectiveException, 
 	IOException, ParserException {
 		
@@ -161,15 +164,15 @@ traceB.addEntry(entry2C2);
 Log<LogEntry> log = new Log<LogEntry>();
 log.addTrace(traceA);
 log.addTrace(traceB);
-		
-// Serialize Logs
-String fileName = loglocation + "/" + logfile;
-LogWriter w = new LogWriter(LogFormatFactory.MXML(), fileName);
-w.writeTrace(traceA);
-w.writeTrace(traceB);
-w.closeFile();
-		
-		
+
+
+List l1 = new ArrayList<List>();
+List l2 = new ArrayList<Log>();
+l2.add(log);
+l1.add(l2);	
+
+System.out.println("finished creation");
+return l1;		
 }
 }
 

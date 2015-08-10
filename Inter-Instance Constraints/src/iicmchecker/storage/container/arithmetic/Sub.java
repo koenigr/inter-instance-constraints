@@ -8,7 +8,7 @@ public class Sub extends Fact{
 	private static final String NAME = "";
 	
 	public Sub(String leftArg, String rightArg) {
-		super(NAME, NUMBER_OF_ARGUMENTS, false);
+		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, leftArg);
 		setArgument(1, rightArg);
 	}

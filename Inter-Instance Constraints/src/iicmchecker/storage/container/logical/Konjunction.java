@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import iicmchecker.storage.container.Fact;
 
-public class Disjunction extends Fact{
+public class Konjunction extends Fact{
 
-	public Disjunction(ArrayList<Fact> facts) {
+	public Konjunction(ArrayList<Fact> facts) {
 		super("", 0);
 		this.facts.addAll(facts);
 	}
@@ -25,14 +25,14 @@ public class Disjunction extends Fact{
 		
 		if (facts.isEmpty()) {
 			// TODO Exception
-			System.out.println("Disjunction is empty");
+			System.out.println("Konjunction is empty");
 			System.exit(0);
 		}
 		
 		String result = "(";
 		
 		for (Fact f : facts) {
-			result += f.getAsString() + ";";
+			result += f.getAsString() + ",";
 		}
 		
 		result = result.substring(0, result.length() - 1);

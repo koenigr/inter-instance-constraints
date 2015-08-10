@@ -11,8 +11,8 @@ public class TaskName extends Fact{
 	 * task_name(TID, TNAME)
 	 */
 
-	public TaskName(String taskID, String name, boolean neg) {
-		super(NAME, NUMBER_OF_ARGUMENTS, neg);
+	public TaskName(String taskID, String name) {
+		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, taskID);
 		setArgument(1, name);
 	}

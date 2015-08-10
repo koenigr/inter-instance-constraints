@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import de.uni.freiburg.iig.telematik.sewol.log.Log;
 import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
 import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
 
@@ -30,10 +32,9 @@ Logger logger = LoggerFactory.getLogger();
 	
 String rulelocation;
 String[] rulefiles;	
-String loglocation;
-String[] logfiles;
 String outputlocation;
 Level loggerLevel = Level.ALL;
+List<List<List<Log<LogEntry>>>> LogList = new ArrayList<List<List<Log<LogEntry>>>>();
 
 
 public void setLoggerLevel(Level loggerLevel) {this.loggerLevel = loggerLevel;}
@@ -41,10 +42,6 @@ public void setLoggerLevel(Level loggerLevel) {this.loggerLevel = loggerLevel;}
 public void setRuleLocation(String rulelocation) {this.rulelocation = rulelocation;}
 
 public void setRuleFiles(String[] rulefiles) {this.rulefiles = rulefiles;}
-
-public void setLogLocation(String loglocation) {this.loglocation = loglocation;}
-
-public void setLogFiles(String[] logfiles) {this.logfiles = logfiles;}
 
 public void setOutputLocation(String outputlocation) {this.outputlocation = outputlocation;}
 
@@ -65,7 +62,7 @@ public void run() {
 logger.entering("IICMChecker", "run()");
 init();
 parseRuleFiles();	
-parseLogFiles();
+readLogs();
 storeKnowledgeBase();
 runComplianceChecker();
 }
@@ -109,22 +106,16 @@ walker.walk(new IIListener(), tree);
 }
 }
 
-private void parseLogFiles() {
-for (String logfile : logfiles) {
+private void readLogs() {
+for (List<List<Log<LogEntry>>> log : LogList) {
 
 try {
-
-/*
-* Parse logs
-*/
-LogParser lparser = new LogParser();
-List<List<LogTrace<LogEntry>>> logs = lparser.parseLog(loglocation, logfile);
 
 /*
  * Read the logs and create a prolog file
 */
 LogTransformer ltransformer = new LogTransformer();
-ltransformer.transform(logs);
+ltransformer.transform(log);
 
 } catch (Exception e) {
 	e.printStackTrace();
@@ -146,6 +137,10 @@ private void runComplianceChecker() {
  */
 Compliancechecker mc = new Compliancechecker();
 	mc.run();
+}
+
+public void addLog(List<List<Log<LogEntry>>> log1) {
+	LogList.add(log1);
 }
 
 }

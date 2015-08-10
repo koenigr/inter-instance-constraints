@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import de.uni.freiburg.iig.telematik.sewol.log.DataAttribute;
+import de.uni.freiburg.iig.telematik.sewol.log.Log;
 import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
 import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
 import iicmchecker.storage.StorageHelper;
@@ -24,7 +25,7 @@ public class LogTransformer {
 	
 	private static Logger logger = LoggerFactory.getLogger();
 	
-	public void transform(List<List<LogTrace<LogEntry>>> logs) {
+	public void transform(List<List<Log<LogEntry>>> logs) {
 		
 		logger.severe("Starting log transformer...");
 		
@@ -34,11 +35,15 @@ public class LogTransformer {
 		Integer tID = 0;
 		
 		
-		for (List<LogTrace<LogEntry>> el : logs) { // Workflows
+		for (List<Log<LogEntry>> el : logs) { // Workflows
 			String workflowname = wname.toString();
 			wname ++;
 			
-			for (LogTrace<LogEntry> trace : el) { // workflow Instanzen
+			
+			for (Log<LogEntry> logtraces : el) { // workflow Instanzen
+
+				List<LogTrace<LogEntry>> lt = logtraces.getTraces();
+			for (LogTrace<LogEntry> trace : lt) {
 				
 				List<LogEntry> entryList = trace.getEntries();
 				String workflowID = wID.toString();
@@ -66,32 +71,32 @@ public class LogTransformer {
 					
 					if (group != null && taskID != null) {
 					  sc.addExecutedGroupStatus(
-					    new ExecutedGroupStatus(group, taskID, false));
+					    new ExecutedGroupStatus(group, taskID));
 					}
 					
 					if (user != null && taskID != null) {
 					  sc.addExecutedUserStatus(
-					    new ExecutedUserStatus(user, taskID, false));
+					    new ExecutedUserStatus(user, taskID));
 					}
 					
 					if (timestamp != null && taskID != null) {	
-					  sc.addTimestamp(new Timestamp(taskID, timestamp, false));
+					  sc.addTimestamp(new Timestamp(taskID, timestamp));
 					}
 					
 					if (name != null && taskID != null) {
-					  sc.addTaskName(new TaskName(taskID, name, false));
+					  sc.addTaskName(new TaskName(taskID, name));
 					}
 
 					if (eventType != null && taskID != null) {
-					  sc.addTaskEvent(new TaskEvent(taskID, eventType, false));
+					  sc.addTaskEvent(new TaskEvent(taskID, eventType));
 					}
 					
 					if (workflowID != null && taskID != null) {
-					  sc.addTaskWorkflow(new TaskWorkflow(taskID, workflowID, false));
+					  sc.addTaskWorkflow(new TaskWorkflow(taskID, workflowID));
 					}
 					
 					if (workflowID != null && workflowname != null) {
-					  sc.addWorkflowName(new WorkflowName(workflowID, workflowname, false));
+					  sc.addWorkflowName(new WorkflowName(workflowID, workflowname));
 					}
 					
 					for(DataAttribute a : entry.getMetaAttributes()) {
@@ -100,16 +105,12 @@ public class LogTransformer {
 						String val = attrVal.toString();
 						boolean b = StringChecker.isValidNumber(val);
 
-						if (b) {
-							sc.addTaskAttribute(new TaskAttribute(taskID, attrName, Integer.valueOf(val), false));
-						} else {
-							sc.addTaskAttribute(new TaskAttribute(taskID, attrName, val, false));
-						}
-						
-						
+						sc.addTaskAttribute(new TaskAttribute(taskID, attrName, val));
+
 					}
 					
 				}
+			}
 			}
 			
 		}

@@ -12,7 +12,7 @@ public class CannotDoUser extends Fact{
 	 */
 
 	public CannotDoUser(String user, String task) {
-		super(NAME , NUMBER_OF_ARGUMENTS, false);
+		super(NAME , NUMBER_OF_ARGUMENTS);
 		setArgument(0, user);
 		setArgument(1, task);
 	}

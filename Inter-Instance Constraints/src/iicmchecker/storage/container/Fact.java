@@ -1,6 +1,7 @@
 package iicmchecker.storage.container;
 
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import iicmchecker.utils.StringChecker;
@@ -13,11 +14,10 @@ public abstract class Fact{
 	protected String[] arguments;
 	protected String predicate;
 	protected int numberOfArguments = 0;
-	protected boolean negation = false;
 
 	Logger logger = LoggerFactory.getLogger();
 	
-	public Fact(String predicate, int numberOfArguments, boolean neg) { 
+	public Fact(String predicate, int numberOfArguments) { 
 		
 		logger.info("Creating new predicate " + predicate);
 		/*
@@ -25,7 +25,6 @@ public abstract class Fact{
 		 *  ob nur kleinschreibung und _ 
 		 */
 		
-		negation = neg;
 		
 		if(!StringChecker.isValidPredicate(predicate)) {
 			new InvalidPredicateFormatException(predicate);
@@ -73,10 +72,6 @@ public abstract class Fact{
 		if (hasArgs) {
 			result = result.substring(0, result.length()-1);
 			result += ")";
-		}
-		
-		if(negation) {
-			result = "not(" + result + ")";
 		}
 		
 		return result;

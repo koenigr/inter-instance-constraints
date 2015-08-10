@@ -12,7 +12,7 @@ public class MustDoRole extends Fact{
 	 */
 
 	public MustDoRole(String role, String task) {
-		super(NAME, NUMBER_OF_ARGUMENTS, false);
+		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, role);
 		setArgument(1, task);
 	}

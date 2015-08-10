@@ -16,6 +16,10 @@ public class RuleBody {
 		body.add(f);
 	}
 	
+	public void addFacts(ArrayList<Fact> facts)  {
+		body.addAll(facts);
+	}
+	
 	public void setFirst(Fact f) {
 		logger.info("Adding fact to body in first position.");
 		ArrayList<Fact> tmp = new ArrayList<Fact>();

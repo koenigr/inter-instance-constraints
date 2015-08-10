@@ -12,8 +12,8 @@ public class TaskEvent extends Fact{
 	 * task_event(TID, eventtype)
 	 */
 
-	public TaskEvent(String taskID, String name, boolean neg) {
-		super(NAME, NUMBER_OF_ARGUMENTS, neg);
+	public TaskEvent(String taskID, String name) {
+		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, taskID);
 		setArgument(1, StringChecker.convertToValidConstant(name));
 	}

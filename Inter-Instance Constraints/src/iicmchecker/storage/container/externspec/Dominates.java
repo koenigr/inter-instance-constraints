@@ -11,8 +11,8 @@ public class Dominates extends Fact {
 	 * dominates(TT, TT) 
 	 */
 
-	public Dominates(String role1, String role2, boolean neg) {
-		super(NAME, NUMBER_OF_ARGUMENTS, neg);
+	public Dominates(String role1, String role2) {
+		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, role1);
 		setArgument(1, role2);
 	}

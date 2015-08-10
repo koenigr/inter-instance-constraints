@@ -10,7 +10,7 @@ public class MustDoUser extends Fact{
 	 * user_must_execute(UT,TT)
 	 */
 	public MustDoUser(String user, String task) {
-		super("user_must_execute", NUMBER_OF_ARGUMENTS, false);
+		super("user_must_execute", NUMBER_OF_ARGUMENTS);
 		setArgument(0, user);
 		setArgument(1, task);
 	}

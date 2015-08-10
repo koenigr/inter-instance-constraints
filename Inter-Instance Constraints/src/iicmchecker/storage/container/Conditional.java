@@ -1,7 +1,5 @@
 package iicmchecker.storage.container;
 
-
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import iicmchecker.storage.container.ConditionalBody;
@@ -11,9 +9,8 @@ import iicmchecker.utils.exceptions.UnexpectedNumberOfArgumentsException;
 import iicmchecker.utils.logging.LoggerFactory;
 
 public abstract class Conditional extends Fact{
-	public Conditional(String predicate, int numberOfArguments, boolean neg) {
-		super(predicate, numberOfArguments, neg);
-		// TODO Auto-generated constructor stub
+	public Conditional(String predicate, int numberOfArguments) {
+		super(predicate, numberOfArguments);
 	}
 
 	private ConditionalBody body;

@@ -123,7 +123,7 @@ public class ParserHelper {
 	public void checkTime(String time) {
 		
 		logger.info("checking time " + time);
-		
+		time = time.substring(1, time.length());
 		String[] tmpArr = time.split(":");
 		int length = tmpArr.length;
 		
