@@ -10,7 +10,7 @@ public class Timestamp extends Fact {
 	private static final int NUMBER_OF_ARGUMENTS = 2;
 	
 	/*
-	 * timestamp(TID, Timestamp)
+	 * timestamp(TID, Timestamp in ms)
 	 */
 	
 	public Timestamp(String taskID, Date timestamp) {
@@ -20,6 +20,14 @@ public class Timestamp extends Fact {
 			
 		setArgument(0, taskID);
 		setArgument(1, String.valueOf(ms));
+	}
+
+	public Timestamp(String taskID, String timestamp) {
+
+		super("timestamp", NUMBER_OF_ARGUMENTS);
+		
+		setArgument(0, taskID);
+		setArgument(1, timestamp);
 	}
 
 }

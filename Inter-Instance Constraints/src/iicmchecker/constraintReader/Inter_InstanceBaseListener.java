@@ -601,6 +601,42 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterComparisonVar(Inter_InstanceParser.ComparisonVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComparisonVar(Inter_InstanceParser.ComparisonVarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComparisonConst(Inter_InstanceParser.ComparisonConstContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComparisonConst(Inter_InstanceParser.ComparisonConstContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComparisonArithmArg(Inter_InstanceParser.ComparisonArithmArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComparisonArithmArg(Inter_InstanceParser.ComparisonArithmArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArithmeticExpr(Inter_InstanceParser.ArithmeticExprContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -12,18 +12,13 @@ public class TaskAttribute extends Fact{
 	private AttrType attrType = AttrType.STRING;
 
 	/*
-	 * String_var(TT, AttrName, AttrValue)
+	 * attribute(TT, AttrName, AttrValue)
 	 */
 
 	public TaskAttribute(String taskID, String attrName, String attrValue) {
 		super(NAME, NUMBER_OF_ARGUMENTS);
 		setArgument(0, taskID);
 		setArgument(1, attrName);
-
-		if (StringChecker.isValidNumber(attrValue)) {
-			setArgument(2, String.valueOf(attrValue));
-		} else {
-		    setArgument(2, "'" + attrValue + "'");
-		}
+		setArgument(2, attrValue);
 	}
 }

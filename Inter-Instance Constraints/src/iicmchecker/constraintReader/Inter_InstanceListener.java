@@ -561,6 +561,42 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitInequalityExpr(Inter_InstanceParser.InequalityExprContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code comparisonVar}
+	 * labeled alternative in {@link Inter_InstanceParser#comparisonArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparisonVar(Inter_InstanceParser.ComparisonVarContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code comparisonVar}
+	 * labeled alternative in {@link Inter_InstanceParser#comparisonArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparisonVar(Inter_InstanceParser.ComparisonVarContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code comparisonConst}
+	 * labeled alternative in {@link Inter_InstanceParser#comparisonArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparisonConst(Inter_InstanceParser.ComparisonConstContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code comparisonConst}
+	 * labeled alternative in {@link Inter_InstanceParser#comparisonArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparisonConst(Inter_InstanceParser.ComparisonConstContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code comparisonArithmArg}
+	 * labeled alternative in {@link Inter_InstanceParser#comparisonArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparisonArithmArg(Inter_InstanceParser.ComparisonArithmArgContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code comparisonArithmArg}
+	 * labeled alternative in {@link Inter_InstanceParser#comparisonArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparisonArithmArg(Inter_InstanceParser.ComparisonArithmArgContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Inter_InstanceParser#arithmeticExpr}.
 	 * @param ctx the parse tree
 	 */

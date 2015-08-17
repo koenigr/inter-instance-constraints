@@ -22,6 +22,11 @@ import iicmchecker.utils.StringChecker;
 import iicmchecker.utils.logging.LoggerFactory;
 
 public class LogTransformer {
+
+	static Integer wname = 0;
+	static Integer wID = 0;
+	static Integer tID = 0;
+	
 	
 	private static Logger logger = LoggerFactory.getLogger();
 	
@@ -30,9 +35,6 @@ public class LogTransformer {
 		logger.severe("Starting log transformer...");
 		
 		StatusContainer sc = StorageHelper.getInstance().getStatusContainer();
-		Integer wname = 0;
-		Integer wID = 0;
-		Integer tID = 0;
 		
 		
 		for (List<Log<LogEntry>> el : logs) { // Workflows
@@ -60,14 +62,6 @@ public class LogTransformer {
 					String user = StringChecker.convertToValidConstant(entry.getOriginator());
 					String eventType = StringChecker.convertToValidConstant(entry.getEventType().toString());
 					Date timestamp = entry.getTimestamp();
-					
-					if (timestamp == null) { 
-					/*
-					 *  TODO wie wird das behandelt?
-					 *  Einfach null setzen oder das letzte Datum  + 1 nehmen?
-					 */
-						timestamp = new Date();
-					}
 					
 					if (group != null && taskID != null) {
 					  sc.addExecutedGroupStatus(

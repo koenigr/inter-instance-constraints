@@ -15,6 +15,6 @@ public class Equality extends Fact{
 
 	@Override
 	public String getAsString() {
-		return getArgument(0) + " == " + getArgument(1);
+		return getArgument(0) + " = " + getArgument(1);
 	}
 }

@@ -46,9 +46,11 @@ import iicmchecker.storage.container.rules.UserCannotDoRule;
 import iicmchecker.storage.container.rules.UserMustDoRule;
 import iicmchecker.storage.container.status.ExecutedGroupStatus;
 import iicmchecker.storage.container.status.ExecutedUserStatus;
+import iicmchecker.storage.container.status.TaskAttribute;
 import iicmchecker.storage.container.status.TaskEvent;
 import iicmchecker.storage.container.status.TaskName;
 import iicmchecker.storage.container.status.TaskWorkflow;
+import iicmchecker.storage.container.status.Timestamp;
 import iicmchecker.storage.container.status.WorkflowName;
 import iicmchecker.utils.EventHelper;
 import iicmchecker.utils.EventHelper.EventTypes;
@@ -56,6 +58,9 @@ import iicmchecker.utils.exceptions.UnexpectedContextException;
 import iicmchecker.utils.logging.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import de.uni.freiburg.iig.telematik.sewol.log.EventType;
@@ -63,35 +68,43 @@ import de.uni.freiburg.iig.telematik.sewol.log.EventType;
 
 public class IIListener extends Inter_InstanceBaseListener {
 	
-	private ExternAndSpecificationContainer esc;
+	protected ExternAndSpecificationContainer esc;
 	
-	private RuleContainer rc;
+	protected RuleContainer rc;
 	
-	private Logger logger = LoggerFactory.getLogger();
+	protected Logger logger = LoggerFactory.getLogger();
 	
-	private enum InputContext {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY, CONDITIONAL_BODY}
+	protected enum InputContext {UNDEF, SETTING, DEFINE, ASSIGNMENT_HEAD, ASSIGNMENT_BODY, CONDITIONAL_BODY}
 	
-	private boolean negation = false;
+	protected boolean negation = false;
 	
-	private boolean disjunction = false;
+	protected boolean disjunction = false;
 	
-	private InputContext inputContext = InputContext.UNDEF;
+	protected InputContext inputContext = InputContext.UNDEF;
 	
-	private enum RuleContext {UNDEF, INTRAINSTANCE, INTERINSTANCE, INTERPROCESS}
+	protected enum RuleContext {UNDEF, INTRAINSTANCE, INTERINSTANCE, INTERPROCESS}
 	
-	private RuleContext ruleContext = RuleContext.UNDEF; // TODO prüfen, ob der Kontext eingehalten wurde
+	protected RuleContext ruleContext = RuleContext.UNDEF; // TODO prüfen, ob der Kontext eingehalten wurde
 	
-	private RuleBody rule_body = new RuleBody();
+	protected RuleBody rule_body = new RuleBody();
 	
-	private ConditionalBody conditional_body;
+	protected ConditionalBody conditional_body;
 	
-	private ArrayList<Fact> negation_body = new ArrayList<Fact>(); 
+	protected ArrayList<Fact> negation_body = new ArrayList<Fact>(); 
 	
-	private ArrayList<Fact> disjunction_body = new ArrayList<Fact>(); 
+	protected ArrayList<Fact> disjunction_body = new ArrayList<Fact>(); 
 	
-	private ArrayList<String> taskIDs = new ArrayList<String>();
+	protected HashMap<String, String> taskIDs = new HashMap<String, String>();
 	
-	private String description;
+	protected String description;
+	
+	protected String taskName;
+	
+	protected String workflowID;
+	 
+	protected String workflowName;
+	
+	protected String taskID;
 	
 	private ListenerHelper lh= new ListenerHelper();
 	
@@ -171,7 +184,6 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Entering assignmentbody");
 		inputContext = InputContext.ASSIGNMENT_BODY;
 
-		rule_body = new RuleBody();
 	}
 
 	@Override
@@ -186,6 +198,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		description = "";
 		ruleContext = RuleContext.UNDEF;
 		taskIDs.clear();
+		rule_body = new RuleBody();
 	}
 
 	@Override
@@ -215,17 +228,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String user2 = ctx.getChild(2).getText();
 		Partner r = new Partner(user1, user2);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addPartner(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 		
 	}
 	
@@ -238,17 +244,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String user2 = ctx.getChild(2).getText();
 		SameGroup r = new SameGroup(user1, user2);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addSameGroup(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 		
 	}
 
@@ -262,18 +261,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String user2 = ctx.getChild(2).getText();
 		Related r = new Related(user1, user2);
 		
-
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addRelated(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 		
 	}
 	
@@ -290,17 +281,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task = ctx.getChild(3).getText();
 		RoleTask r = new RoleTask(role, task);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addRoleTask(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 		
 	}
 
@@ -313,17 +297,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task = ctx.getChild(3).getText();
 		UserTask r = new UserTask(user, task);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addUserTask(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) { // TODO Switch oder anderes..
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}	
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 
 	@Override
@@ -335,17 +312,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String role = ctx.getChild(3).getText();
 		UserRole r = new UserRole(user, role);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addUserRole(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 
 	@Override
@@ -357,17 +327,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task = ctx.getChild(2).getText();
 		GLB r = new GLB(role, task);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addGLB(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}	
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 
 	@Override
@@ -378,17 +341,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task = ctx.getChild(2).getText();
 		LUB r = new LUB(role, task);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addLUB(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}	
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 
 	@Override
@@ -400,17 +356,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String role2 = ctx.getChild(2).getText();
 		Dominates r = new Dominates(role1, role2);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-				esc.addDominates(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 
 	@Override
@@ -422,17 +371,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task2 = ctx.getChild(3).getText();
 		CriticalTaskPair r = new CriticalTaskPair(task1, task2);
 		
-		if (disjunction) {
-			disjunction_body.add(r);
-		} else if (negation) {
-			negation_body.add(r);
-		} else if (inputContext == InputContext.SETTING) {
-			esc.addCriticalTaskPair(r);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(r);
-	    } else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFact(r);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(r);
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 		
 	}
 	
@@ -447,53 +389,28 @@ public class IIListener extends Inter_InstanceBaseListener {
 
 		lh.checkChildCount(4, ctx.getChildCount());
 		
-		if(inputContext == InputContext.ASSIGNMENT_HEAD) {
-			UserCannotDoRule rule = new UserCannotDoRule();
-			String user = ctx.getChild(1).getText();
-			String taskID = ListenerHelper.generateStringForVar();
-			String taskName = ctx.getChild(3).getText();
-			
-			taskIDs.add(taskID);
-			
-			
-			String workflowID;
-			switch(ruleContext) {
-			case INTRAINSTANCE: 
-				workflowID = ListenerHelper.generateStringForVar();
-				for (String id : taskIDs) {
-					rule_body.addFact(new TaskWorkflow(id, workflowID));
-				}
-				break;
-			case INTERINSTANCE:	
-				String workflowName = ListenerHelper.generateStringForVar();
-				workflowID = taskName.split("\\.")[1];
-				rule_body.setFirst(new TaskWorkflow(taskID,	workflowID));
-				taskName = taskName.split("\\.")[0];
-				for (String id : taskIDs) {
-					workflowID = ListenerHelper.generateStringForVar();
-					rule_body.addFact(new TaskWorkflow(id, workflowID));
-					rule_body.addFact(new WorkflowName(workflowID, workflowName));
-				}
-				break;
-			case INTERPROCESS: break;
-			default: break; // TODO
-			}
-			
-			rule.setHead(new CannotDoUser(user, taskID));
-			rule_body.setFirst(new TaskName(taskID, taskName));
-			rule.setBody(rule_body);
-			System.out.println("a " + description);
-			if (description == null || description == "") {
+		assert(inputContext == InputContext.ASSIGNMENT_HEAD); 
 
-				System.out.println("c " + description);
-				description = ListenerHelper.generateRuleID();
-			}
-			System.out.println("b " + description);
-			rule.setDescription(description);
-			rc.addUserCannotDoRule(rule);
-		} else {
-			// TODO
-		}
+		UserCannotDoRule rule = new UserCannotDoRule();
+		String user = ctx.getChild(1).getText();
+		taskName = ctx.getChild(3).getText();
+		workflowID = "";
+		workflowName = "";
+
+		ListenerHelper.parseTaskName(this);
+		
+		ListenerHelper.generateTaskID(this);
+		
+		System.out.println(taskName);
+		System.out.println(taskID);
+		System.out.println(workflowID);
+		System.out.println(workflowName);
+		
+		CannotDoUser head = new CannotDoUser(user, taskID);
+		
+		ListenerHelper.addContextSpecificPredicatesToRule(this);
+		
+		ListenerHelper.setUserCannotDoRule(this, rule, head);
 		
 	}
 
@@ -504,49 +421,28 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(4, ctx.getChildCount());
 		
-		if(inputContext == InputContext.ASSIGNMENT_HEAD) {
-			RoleCannotDoRule rule = new RoleCannotDoRule();
-				String user = ctx.getChild(1).getText();
-				String taskID = ListenerHelper.generateStringForVar();
-				String taskName = ctx.getChild(3).getText();
-				
-				taskIDs.add(taskID);
-				
-				String workflowID;
-				switch(ruleContext) {
-				case INTRAINSTANCE: 
-					workflowID = ListenerHelper.generateStringForVar();
-					for (String id : taskIDs) {
-						rule_body.addFact(new TaskWorkflow(id, workflowID));
-					}
-					break;
-				case INTERINSTANCE:	
-					String workflowName = ListenerHelper.generateStringForVar();
-					workflowID = taskName.split("\\.")[1];
-					rule_body.setFirst(new TaskWorkflow(taskID,	workflowID));
-					taskName = taskName.split("\\.")[0];
-					for (String id : taskIDs) {
-						workflowID = ListenerHelper.generateStringForVar();
-						rule_body.addFact(new TaskWorkflow(id, workflowID));
-						rule_body.addFact(new WorkflowName(workflowID, workflowName));
-					}
-					break;
-				case INTERPROCESS: break;
-				default: break; // TODO
-				}
-				
-				rule.setHead(new CannotDoRole(user, taskID));
-				rule_body.setFirst(new TaskName(taskID, taskName));
-				rule.setBody(rule_body);
-			if (description == null || description == "") {
-				description = ListenerHelper.generateRuleID();
-			}
-			rule.setDescription(description);
-			rc.addRoleCannotDoRule(rule);
-		} else {
-			// TODO
-		}
+		assert(inputContext == InputContext.ASSIGNMENT_HEAD); 
+
+		RoleCannotDoRule rule = new RoleCannotDoRule();
+		String user = ctx.getChild(1).getText();
+		taskName = ctx.getChild(3).getText();
+		workflowID = "";
+		workflowName = "";
+
+		ListenerHelper.parseTaskName(this);
 		
+		ListenerHelper.generateTaskID(this);
+		
+		System.out.println(taskName);
+		System.out.println(taskID);
+		System.out.println(workflowID);
+		System.out.println(workflowName);
+		
+		CannotDoRole head = new CannotDoRole(user, taskID);
+		
+		ListenerHelper.addContextSpecificPredicatesToRule(this);
+		
+		ListenerHelper.setRoleCannotDoRule(this, rule, head);
 	}
 
 	@Override
@@ -556,50 +452,28 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(4, ctx.getChildCount());
 		
-		if (inputContext == InputContext.ASSIGNMENT_HEAD) {
-			UserMustDoRule rule = new UserMustDoRule();
-				String user = ctx.getChild(1).getText();
-				String taskID = ListenerHelper.generateStringForVar();
-				String taskName = ctx.getChild(3).getText();
-				
-				taskIDs.add(taskID);
-				
-				
-				String workflowID;
-				switch(ruleContext) {
-				case INTRAINSTANCE: 
-					workflowID = ListenerHelper.generateStringForVar();
-					for (String id : taskIDs) {
-						rule_body.addFact(new TaskWorkflow(id, workflowID));
-					}
-					break;
-				case INTERINSTANCE:	
-					String workflowName = ListenerHelper.generateStringForVar();
-					workflowID = taskName.split("\\.")[1];
-					rule_body.setFirst(new TaskWorkflow(taskID,	workflowID));
-					taskName = taskName.split("\\.")[0];
-					for (String id : taskIDs) {
-						workflowID = ListenerHelper.generateStringForVar();
-						rule_body.addFact(new TaskWorkflow(id, workflowID));
-						rule_body.addFact(new WorkflowName(workflowID, workflowName));
-					}
-					break;
-				case INTERPROCESS: break;
-				default: break; // TODO
-				}
-				
-				rule.setHead(new MustDoUser(user, taskID));
-				rule_body.setFirst(new TaskName(taskID, taskName));
-				rule.setBody(rule_body);
-			if (description == null || description == "") {
-				description = ListenerHelper.generateRuleID();
-			}
-			rule.setDescription(description);
-			rc.addUserMustDoRule(rule);
-		} else {
-			// TODO
-		}
+		assert(inputContext == InputContext.ASSIGNMENT_HEAD); 
+
+		UserMustDoRule rule = new UserMustDoRule();
+		String user = ctx.getChild(1).getText();
+		taskName = ctx.getChild(3).getText();
+		workflowID = "";
+		workflowName = "";
+
+		ListenerHelper.parseTaskName(this);
 		
+		ListenerHelper.generateTaskID(this);
+		
+		System.out.println(taskName);
+		System.out.println(taskID);
+		System.out.println(workflowID);
+		System.out.println(workflowName);
+		
+		MustDoUser head = new MustDoUser(user, taskID);
+		
+		ListenerHelper.addContextSpecificPredicatesToRule(this);
+		
+		ListenerHelper.setUserMustDoRule(this, rule, head);
 	}
 
 	@Override
@@ -609,49 +483,28 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(4, ctx.getChildCount());
 		
-		if (inputContext == InputContext.ASSIGNMENT_HEAD) {
-			RoleMustDoRule rule = new RoleMustDoRule();
-				String user = ctx.getChild(1).getText();
-				String taskID = ListenerHelper.generateStringForVar();
-				String taskName = ctx.getChild(3).getText();
-				
-				taskIDs.add(taskID);
-				
-				String workflowID;
-				switch(ruleContext) {
-				case INTRAINSTANCE: 
-					workflowID = ListenerHelper.generateStringForVar();
-					for (String id : taskIDs) {
-						rule_body.addFact(new TaskWorkflow(id, workflowID));
-					}
-					break;
-				case INTERINSTANCE:	
-					String workflowName = ListenerHelper.generateStringForVar();
-					workflowID = taskName.split("\\.")[1];
-					rule_body.setFirst(new TaskWorkflow(taskID,	workflowID));
-					taskName = taskName.split("\\.")[0];
-					for (String id : taskIDs) {
-						workflowID = ListenerHelper.generateStringForVar();
-						rule_body.addFact(new TaskWorkflow(id, workflowID));
-						rule_body.addFact(new WorkflowName(workflowID, workflowName));
-					}
-					break;
-				case INTERPROCESS: break;
-				default: break; // TODO
-				}
-				
-				rule.setHead(new MustDoRole(user, taskID));
-				rule_body.setFirst(new TaskName(taskID, taskName));
-				rule.setBody(rule_body);
-			if (description == null || description == "") {
-				description = ListenerHelper.generateRuleID();
-			}
-			rule.setDescription(description);
-			rc.addRoleMustDoRule(rule);
-			
-		} else {
-			// TODO
-		}
+		assert(inputContext == InputContext.ASSIGNMENT_HEAD); 
+
+		RoleMustDoRule rule = new RoleMustDoRule();
+		String user = ctx.getChild(1).getText();
+		taskName = ctx.getChild(3).getText();
+		workflowID = "";
+		workflowName = "";
+
+		ListenerHelper.parseTaskName(this);
+		
+		ListenerHelper.generateTaskID(this);
+		
+		System.out.println(taskName);
+		System.out.println(taskID);
+		System.out.println(workflowID);
+		System.out.println(workflowName);
+		
+		MustDoRole head = new MustDoRole(user, taskID);
+		
+		ListenerHelper.addContextSpecificPredicatesToRule(this);
+		
+		ListenerHelper.setRoleMustDoRule(this, rule, head);
 	}
 
 
@@ -661,45 +514,18 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exiting Illegal Execution Context");
 		
 		lh.checkChildCount(1, ctx.getChildCount());
+
+		Collection<String> valueset = taskIDs.values();
+
+		assert(inputContext == InputContext.ASSIGNMENT_HEAD); 
+
+		IllegalExecutionRule rule = new IllegalExecutionRule();
 		
-		if (inputContext == InputContext.ASSIGNMENT_HEAD) {
-			IllegalExecutionRule rule = new IllegalExecutionRule();
-			
-			String workflowID;
-			switch(ruleContext) {
-			case INTRAINSTANCE: 
-				workflowID = ListenerHelper.generateStringForVar();
-				for (String id : taskIDs) {
-					rule_body.addFact(new TaskWorkflow(id, workflowID));
-				}
-				break;
-			case INTERINSTANCE:	
-				String workflowName = ListenerHelper.generateStringForVar();
-				for (String id : taskIDs) {
-					workflowID = ListenerHelper.generateStringForVar();
-					rule_body.addFact(new TaskWorkflow(id, workflowID));
-					rule_body.addFact(new WorkflowName(workflowID, workflowName));
-				}
-				break;
-			case INTERPROCESS: break;
-			default: break; // TODO
-			}
-			
-			System.out.println(description);
-			if (description == null || description == "") {
-				description = ListenerHelper.generateRuleID();
-			}
-			System.out.println(description);
-			rule.setDescription(description);
-			rule.setHead(new IllegalExecution());
-			rule.setBody(rule_body);
-			
-			rc.addIllegalExecutionRule(rule);
-			
-			
-		} else {
-			// TODO
-		}	
+		IllegalExecution head = new IllegalExecution();
+		
+		ListenerHelper.addContextSpecificPredicatesToRule(this);
+		
+		ListenerHelper.setIllegalExecutionRule(this, rule, head);
 	}
 	
 	
@@ -711,37 +537,31 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitExecutedUser(Inter_InstanceParser.ExecutedUserContext ctx) {
 		logger.info("Exiting Executed User Context");
-		String user = "";
-		String taskID = ListenerHelper.generateStringForVar();
-		
-		taskIDs.add(taskID);
 
 		lh.checkChildCount(4, ctx.getChildCount());
-		
-		String taskName = "";
-		
-		user = ctx.getChild(1).getText();
+
+		String user = ctx.getChild(1).getText();
 		taskName = ctx.getChild(3).getText();
+		workflowID = "";
+		workflowName = "";
+		
+		ListenerHelper.parseTaskName(this);
 
 		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(new ExecutedUserStatus(user, taskID));
-		if(ruleContext == RuleContext.INTERINSTANCE) {
-			String workflowID = taskName.split("\\.")[1];
-			taskName = taskName.split("\\.")[0];
-			tmp.add(new TaskWorkflow(taskID, workflowID));
+		
+		if (!taskIDs.containsKey(taskName)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
 		}
-		tmp.add(new TaskName(taskID, taskName));
+
+		String taskID = taskIDs.get(taskName);
+
+		tmp.add(new ExecutedUserStatus(user, taskID));
 		
-		
-		if (disjunction) {
-			disjunction_body.add(new Konjunction(tmp));
-		} else if (negation) {
-			negation_body.addAll(tmp);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFacts(tmp);
-		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFacts(tmp);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
+
+		ListenerHelper.addTmpToBody(this, tmp);
 		
 	}
 	
@@ -752,30 +572,27 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(4, ctx.getChildCount());
 		
 		String role = ctx.getChild(1).getText();
-		String taskID = ListenerHelper.generateStringForVar();
-		
-		taskIDs.add(taskID);
+		taskName = ctx.getChild(3).getText();
+		workflowID = "";
+		workflowName = "";
 
-		String taskName = ctx.getChild(3).getText();
-		
 		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(new ExecutedGroupStatus(role, taskID));
-		if(ruleContext == RuleContext.INTERINSTANCE) {
-			String workflowID = taskName.split("\\.")[1];
-			taskName = taskName.split("\\.")[0];
-			tmp.add(new TaskWorkflow(taskID, workflowID));
-		}
-		tmp.add(new TaskName(taskID, taskName));
 		
-		if (disjunction) {
-			disjunction_body.add(new Konjunction(tmp));
-		} else if (negation) {
-			negation_body.addAll(tmp);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFacts(tmp);
-		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFacts(tmp);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ListenerHelper.parseTaskName(this);
+		
+		if (!taskIDs.containsKey(taskName)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
+		}
+
+		String taskID = taskIDs.get(taskName);
+
+		tmp.add(new ExecutedGroupStatus(role, taskID));
+
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
+
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 	
 	@Override
@@ -784,33 +601,24 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(3, ctx.getChildCount());
 		
-		String user = ctx.getChild(0).getText();
-		String taskID = ListenerHelper.generateStringForVar();
-		
-		taskIDs.add(taskID);
-		
-		String taskName = ctx.getChild(2).getText();
+		String user = ctx.getChild(0).getText();		
+		taskName = ctx.getChild(2).getText();
 		EventHelper.EventTypes event = EventHelper.EventTypes.ASSIGN;
+		workflowID = "";
+		workflowName = "";
 
 		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		if(ruleContext == RuleContext.INTERINSTANCE) {
-			String workflowID = taskName.split("\\.")[1];
-			taskName = taskName.split("\\.")[0];
-			tmp.add(new TaskWorkflow(taskID, workflowID));
-		}
-		tmp.add(new TaskName(taskID, taskName));
+		
+		ListenerHelper.parseTaskName(this);
+
+		String taskID = taskIDs.get(taskName);
+
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
+		
 		tmp.add(new ExecutedUserStatus(taskID, user));
 		tmp.add(new TaskEvent(taskID, EventHelper.getAsString(event)));
 		
-		if (disjunction) {
-			disjunction_body.add(new Konjunction(tmp));
-		} else if (negation) {
-			negation_body.addAll(tmp);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFacts(tmp);
-		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-		    conditional_body.addFacts(tmp);	
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 
 	@Override
@@ -819,31 +627,29 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(2, ctx.getChildCount());
 		
-		String taskName = ctx.getChild(0).getText();
-		String taskID = ListenerHelper.generateStringForVar();
+		taskName = ctx.getChild(0).getText();
+		workflowID = "";
+		workflowName = "";
 		
-		taskIDs.add(taskID);
+		ListenerHelper.parseTaskName(this);
+
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		
+		if (!taskIDs.containsKey(taskName)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
+		}
+
+		String taskID = taskIDs.get(taskName);
 		
 		EventHelper.EventTypes event = EventHelper.EventTypes.ATE_ABORT;
+
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		if(ruleContext == RuleContext.INTERINSTANCE) {
-			String workflowID = taskName.split("\\.")[1];
-			taskName = taskName.split("\\.")[0];
-			tmp.add(new TaskWorkflow(taskID, workflowID));
-		}
-		tmp.add(new TaskName(taskID, taskName));
 		tmp.add(new TaskEvent(taskID, EventHelper.getAsString(event)));
-		
-		if (disjunction) {
-			disjunction_body.add(new Konjunction(tmp));
-		} else if (negation){
-			negation_body.addAll(tmp);
-		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFacts(tmp);
-		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFacts(tmp);
-		} else {System.out.println("Fehler"); System.exit(0);}
+
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 
 	@Override
@@ -851,33 +657,30 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Succeeded Task Context");
 		
 		lh.checkChildCount(2, ctx.getChildCount());
-		
-		String taskName = ctx.getChild(0).getText();
-		String taskID = ListenerHelper.generateStringForVar();
-		EventHelper.EventTypes event = EventHelper.EventTypes.COMPLETE;
-		
-		taskIDs.add(taskID);
-		
+
 		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		if(ruleContext == RuleContext.INTERINSTANCE) {
-			String workflowID = taskName.split("\\.")[1];
-			taskName = taskName.split("\\.")[0];
-			tmp.add(new TaskWorkflow(taskID, workflowID));
+		
+		taskName = ctx.getChild(0).getText();
+		workflowID = "";
+		workflowName = "";
+		
+		ListenerHelper.parseTaskName(this);
+		
+		EventHelper.EventTypes event = EventHelper.EventTypes.COMPLETE;
+
+		if (!taskIDs.containsKey(taskName)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
 		}
-		tmp.add(new TaskName(taskID, taskName));
+
+		String taskID = taskIDs.get(taskName);
+		
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
+		
 		tmp.add(new TaskEvent(taskID, EventHelper.getAsString(event)));
 		
-		
-		if (disjunction) {
-			disjunction_body.add(new Konjunction(tmp));
-		} else if (negation) {
-			negation_body.addAll(tmp);
-		}
-		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFacts(tmp);
-		} else if(inputContext == InputContext.CONDITIONAL_BODY) {
-			conditional_body.addFacts(tmp);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		ListenerHelper.addTmpToBody(this, tmp);
 		
 	}
 
@@ -887,38 +690,131 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(3, ctx.getChildCount());
 		
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		
 		String user1 = ctx.getChild(0).getText();
-		String taskID1 = ListenerHelper.generateStringForVar();
-		
-		taskIDs.add(taskID1);
-		
-		
-		String taskID2 = ListenerHelper.generateStringForVar();
-		
-		taskIDs.add(taskID2);
-		
-		
 		String user2 = ctx.getChild(2).getText();
 		
-		if (disjunction) {
-			disjunction_body.add(new Collaborator(user1, user2));
-		} else if (negation) {
-			negation_body.add(new Collaborator(user1, user2));
-		}
-		else if (inputContext == InputContext.ASSIGNMENT_BODY) {
-			rule_body.addFact(new Collaborator(user1, taskID1));
-		} else if (inputContext == InputContext.CONDITIONAL_BODY){
-			conditional_body.addFact(new Collaborator(user1, user2));
-		}  else {
-			System.out.println("Fehler"); System.exit(0);
-		}
+		tmp.add(new Collaborator(user1, user2));
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 	}
 
 	@Override
-	public void exitTimeinterval(iicmchecker.constraintReader.Inter_InstanceParser.TimeintervalContext ctx) {
-		// TODO
+	public void exitTimeinterval(Inter_InstanceParser.TimeintervalContext ctx) {
+		logger.info("Exit timeinterval Context");
+		
+		lh.checkChildCount(6, ctx.getChildCount());
+		
+		String task1 = ctx.getChild(1).getText();
+		String task2 = ctx.getChild(3).getText();
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+
+		String taskID1 = taskIDs.get(task1);
+		String taskID2 = taskIDs.get(task2);
+		
+		if (!taskIDs.containsKey(task1)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(task1, taskID);
+			tmp.add(new TaskName(taskID1, task1));
+		}		
+		
+		if (!taskIDs.containsKey(task2)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(task2, taskID);
+			tmp.add(new TaskName(taskID2, task2));
+		}
+
+		
+		
+		String timestamp1 = ListenerHelper.generateStringForVar();
+		String timestamp2 = ListenerHelper.generateStringForVar();
+		
+		String timeinterval = ctx.ts().returnValue;
+		
+		String arithmeticExpr = "(" + timestamp2 + " - " + timestamp1 + ")";
+		
+		tmp.add(new Timestamp(taskID1, timestamp1));
+		tmp.add(new Timestamp(taskID2, timestamp2));
+		tmp.add(new Equality(arithmeticExpr, timeinterval));
+		
+		ListenerHelper.addTmpToBody(this, tmp);
 		
 	}
+	
+	@Override
+	public void exitTimestamp(Inter_InstanceParser.TimestampContext ctx) {
+		logger.info("Exit timestamp Context");
+		
+		lh.checkChildCount(4, ctx.getChildCount());
+		
+		String taskName = ctx.getChild(1).getText();	
+		String timestamp = ctx.tp().returnValue;
+
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		
+		if (!taskIDs.containsKey(taskName)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
+		}
+
+		String taskID = taskIDs.get(taskName);
+		
+		tmp.add(new Timestamp(taskID, timestamp));
+		
+		ListenerHelper.addTmpToBody(this, tmp);
+	}
+	
+	@Override
+	public void exitFlexibleEvent(Inter_InstanceParser.FlexibleEventContext ctx) {
+	logger.info("Exit Event Context");
+		
+		lh.checkChildCount(4, ctx.getChildCount());
+		
+		String taskName = ctx.getChild(1).getText();
+		String eventtype = ctx.getChild(3).getText();
+
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		
+		if (!taskIDs.containsKey(taskName)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
+		}
+
+		String taskID = taskIDs.get(taskName);
+		
+		tmp.add(new TaskEvent(taskID, eventtype));
+		
+		ListenerHelper.addTmpToBody(this, tmp);
+	}
+	
+	@Override
+	public void exitAttribute(Inter_InstanceParser.AttributeContext ctx) {
+	logger.info("Exit Attribute Context");
+		
+		lh.checkChildCount(6, ctx.getChildCount());
+
+		String attribute = ctx.getChild(1).getText();
+		String taskName = ctx.getChild(3).getText();
+		String value = ctx.getChild(5).getText();
+		
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		
+		if (!taskIDs.containsKey(taskName)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
+		}
+		
+		String taskID = taskIDs.get(taskName);
+		
+		tmp.add(new TaskAttribute(taskID, attribute, value));
+		
+		ListenerHelper.addTmpToBody(this, tmp);
+	}
+	
 
 	/*
 	 * CONDITIONAL
@@ -940,9 +836,9 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitNumSimple(Inter_InstanceParser.NumSimpleContext ctx) {
 		logger.info("Num Simple Context");
-		lh.checkChildCount(5, ctx.getChildCount());
+		lh.checkChildCount(7, ctx.getChildCount());
 		
-		String result = ctx.getChild(4).getText();
+		String result = ctx.getChild(6).getText();
 		NumSimple ns = new NumSimple(result);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
@@ -950,12 +846,12 @@ public class IIListener extends Inter_InstanceBaseListener {
 	
 	@Override
 	public void exitNumVars(Inter_InstanceParser.NumVarsContext ctx) {
-		// TODO prüfen, ob die Variable auch im Body vorkommt?? Oder ich lass es, wenn die Zeit knapp wird
+		
 		logger.info("Num Vars Context");
-		lh.checkChildCount(6, ctx.getChildCount());
+		lh.checkChildCount(8, ctx.getChildCount());
 		
 		String var = ctx.getChild(1).getText();
-		String result = ctx.getChild(5).getText();
+		String result = ctx.getChild(7).getText();
 		NumVars ns = new NumVars(var, result);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
@@ -964,10 +860,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitSum(Inter_InstanceParser.SumContext ctx) {
 		logger.info("Sum Context");
-		lh.checkChildCount(6, ctx.getChildCount());
+		lh.checkChildCount(8, ctx.getChildCount());
 		
 		String var = ctx.getChild(1).getText();
-		String result = ctx.getChild(5).getText();
+		String result = ctx.getChild(7).getText();
 		Sum ns = new Sum(var, result);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
@@ -976,10 +872,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitAvg(Inter_InstanceParser.AvgContext ctx) {
 		logger.info("Num Vars Context");
-		lh.checkChildCount(6, ctx.getChildCount());
+		lh.checkChildCount(8, ctx.getChildCount());
 		
 		String var = ctx.getChild(1).getText();
-		String result = ctx.getChild(5).getText();
+		String result = ctx.getChild(7).getText();
 		Avg ns = new Avg(var, result);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
@@ -988,10 +884,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitMin(Inter_InstanceParser.MinContext ctx) {
 		logger.info("Num Vars Context");
-		lh.checkChildCount(6, ctx.getChildCount());
+		lh.checkChildCount(8, ctx.getChildCount());
 		
 		String var = ctx.getChild(1).getText();
-		String result = ctx.getChild(5).getText();
+		String result = ctx.getChild(7).getText();
 		Min ns = new Min(var, result);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
@@ -1000,10 +896,10 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitMax(Inter_InstanceParser.MaxContext ctx) {
 		logger.info("Num Vars Context");
-		lh.checkChildCount(6, ctx.getChildCount());
+		lh.checkChildCount(8, ctx.getChildCount());
 		
 		String var = ctx.getChild(1).getText();
-		String result = ctx.getChild(5).getText();
+		String result = ctx.getChild(7).getText();
 		Max ns = new Max(var, result);
 		ns.setBody(conditional_body);
 		rule_body.addFact(ns);
@@ -1075,9 +971,8 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(3, ctx.getChildCount());
 		
 		
-		String left = ctx.getChild(0).getText();
-		String right = ctx.getChild(2).getText();
-		
+		String left = ctx.comparisonArg(0).returnValue;
+		String right = ctx.comparisonArg(1).returnValue;
 		
 		
 		if (inputContext == InputContext.ASSIGNMENT_BODY) {
@@ -1112,8 +1007,8 @@ public class IIListener extends Inter_InstanceBaseListener {
 	public void exitInequalityExpr(Inter_InstanceParser.InequalityExprContext ctx) {
 		logger.info("Exit Inequality Expression");
 		lh.checkChildCount(3, ctx.getChildCount());
-		String left = ctx.getChild(0).getText();
-		String right = ctx.getChild(2).getText();
+		String left = ctx.comparisonArg(0).returnValue;
+		String right = ctx.comparisonArg(1).returnValue;
 
 			
 		if (inputContext == InputContext.ASSIGNMENT_BODY) {
@@ -1214,10 +1109,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 	@Override
 	public void exitAbsoluteInterval(Inter_InstanceParser.AbsoluteIntervalContext ctx) {
        int numElements = ctx.getChildCount();
-       int returnvalue = 0;
-       returnvalue= lh.parseAndAddValue(returnvalue, ctx.getChild(1).getText());
-       ctx.returnValue = Integer.toString(returnvalue); // TODO
+       long returnvalue = 0;
+       for (int i = 1; i < numElements - 1; i++) {
+         returnvalue += lh.parseAndAddValue(ctx.getChild(i).getText());
+       }
        System.out.println("Return Value " + ctx.returnValue);     
+
+       ctx.returnValue = (new Long(returnvalue)).toString(); 
 	}
 	
 	@Override
@@ -1260,4 +1158,22 @@ public class IIListener extends Inter_InstanceBaseListener {
 		logger.info("Exit VarTP Context");
 		ctx.returnValue = ctx.getText();
 	}	
+	
+	@Override
+	public void exitComparisonVar(Inter_InstanceParser.ComparisonVarContext ctx) {
+		logger.info("Exit Comparison Var Context");
+		ctx.returnValue = ctx.getText();
+	}
+	
+	@Override
+	public void exitComparisonConst(Inter_InstanceParser.ComparisonConstContext ctx) {
+		logger.info("Exit Comparison Const Context");
+		ctx.returnValue = ctx.getText();
+	}
+	
+	@Override
+	public void exitComparisonArithmArg(Inter_InstanceParser.ComparisonArithmArgContext ctx) {
+		logger.info("Exit Comparison Arithm Arg Context");
+		ctx.returnValue = ctx.arithmeticArg().returnValue;
+	}
 }

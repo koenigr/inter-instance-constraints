@@ -139,8 +139,8 @@ Compliancechecker mc = new Compliancechecker();
 	mc.run();
 }
 
-public void addLog(List<List<Log<LogEntry>>> log1) {
-	LogList.add(log1);
+public void addLog(List<List<Log<LogEntry>>> log) {
+	LogList.add(log);
 }
 
 }

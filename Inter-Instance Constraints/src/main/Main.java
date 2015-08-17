@@ -26,7 +26,7 @@ private static String[] rulefiles = {
 			    "negationrules", "rules", "orrules"
 };*/
 
-private static String[] rulefiles = {"arithmetic"};
+private static String[] rulefiles = {"simplecases"};
 private static String outputlocation = "prologfiles";
 /*
  * severe Grundlegender Ablauf
@@ -49,7 +49,6 @@ public static void main(String[] args) {
 		log1 = lc.createLog();
 	} catch (ParameterException | LockingException | PerspectiveException
 			| IOException | ParserException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	
@@ -58,6 +57,7 @@ public static void main(String[] args) {
 	checker.setLoggerLevel(loggerLevel);
 	checker.setRuleLocation(rulelocation);
 	checker.setRuleFiles(rulefiles);
+	checker.addLog(log1);
 	checker.addLog(log1);
 	checker.setOutputLocation(outputlocation);
 	checker.run();
