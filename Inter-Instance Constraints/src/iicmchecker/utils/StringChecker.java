@@ -9,7 +9,7 @@ public class StringChecker {
 	}
 
 	public static boolean isValidConstant(String arg) {
-		return arg.matches("'.*'"); // TODO testen, ob das stimmt
+		return arg.matches("'.*'"); 
 	}
 	
 	public static String convertToValidConstant(String arg) {
@@ -17,7 +17,7 @@ public class StringChecker {
 			return null;
 		}
 		
-		if (arg.matches("'.*'")) {// TODO testen, ob das stimmt
+		if (arg.matches("'.*'")) {
 			return arg;
 		} else if (arg.matches("\".*\"")) {
 			return "'" + arg.substring(1, arg.length() - 1) + "'";

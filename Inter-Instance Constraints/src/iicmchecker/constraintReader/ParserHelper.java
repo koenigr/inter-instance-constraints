@@ -49,9 +49,16 @@ public class ParserHelper {
 		}
 	}
 	
-	public void existsClause(String name) {
+	public void existsClause(String name, int numOfArgs) {
 		if (!definedClauses.containsKey(name)) {
 			logger.warning("Unknown clause " + name);
+			System.exit(0);
+		}
+
+		System.out.println(numOfArgs + " " + getNumberOfArgs(name));
+		if (numOfArgs != getNumberOfArgs(name)) {
+			System.out.println(numOfArgs + " " + getNumberOfArgs(name));
+			logger.warning("Invalid number of arguments in defined clause " + name);
 			System.exit(0);
 		}
 	}
@@ -64,6 +71,10 @@ public class ParserHelper {
 			logger.warning("Shit happened in ParserHelper");
 			System.exit(0);
 		}
+	}
+	
+	public int getNumberOfArgs(String name) {
+		return definedClauses.get(name).getNumberOfArgs();
 	}
 	
 	/**

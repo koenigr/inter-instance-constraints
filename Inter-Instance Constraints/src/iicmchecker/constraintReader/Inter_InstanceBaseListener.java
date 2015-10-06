@@ -373,6 +373,18 @@ public class Inter_InstanceBaseListener implements Inter_InstanceListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTaskName(Inter_InstanceParser.TaskNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTaskName(Inter_InstanceParser.TaskNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAssignedUser(Inter_InstanceParser.AssignedUserContext ctx) { }
 	/**
 	 * {@inheritDoc}

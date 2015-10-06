@@ -341,6 +341,18 @@ public interface Inter_InstanceListener extends ParseTreeListener {
 	 */
 	void exitExecutedRole(Inter_InstanceParser.ExecutedRoleContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code taskName}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void enterTaskName(Inter_InstanceParser.TaskNameContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code taskName}
+	 * labeled alternative in {@link Inter_InstanceParser#status}.
+	 * @param ctx the parse tree
+	 */
+	void exitTaskName(Inter_InstanceParser.TaskNameContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code assignedUser}
 	 * labeled alternative in {@link Inter_InstanceParser#status}.
 	 * @param ctx the parse tree

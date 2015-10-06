@@ -1,11 +1,15 @@
 package iicmchecker.storage.container.logical;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import iicmchecker.storage.container.Fact;
+import iicmchecker.utils.logging.LoggerFactory;
 
 public class Disjunction extends Fact{
 
+	Logger logger = LoggerFactory.getLogger();
+	
 	public Disjunction(ArrayList<Fact> facts) {
 		super("", 0);
 		this.facts.addAll(facts);
@@ -24,8 +28,7 @@ public class Disjunction extends Fact{
 	public String getAsString() {
 		
 		if (facts.isEmpty()) {
-			// TODO Exception
-			System.out.println("Disjunction is empty");
+			logger.severe("Disjunction is empty");
 			System.exit(0);
 		}
 		

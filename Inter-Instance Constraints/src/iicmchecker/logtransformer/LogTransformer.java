@@ -56,11 +56,17 @@ public class LogTransformer {
 					String taskID = tID.toString();
 					tID++;
 
-					
 					String name = StringChecker.convertToValidConstant(entry.getActivity());
 					String group = StringChecker.convertToValidConstant(entry.getRole());
 					String user = StringChecker.convertToValidConstant(entry.getOriginator());
-					String eventType = StringChecker.convertToValidConstant(entry.getEventType().toString());
+					
+					String eventType;
+					if (entry.getEventType() != null) {
+					    eventType = StringChecker.convertToValidConstant(entry.getEventType().toString());
+					} else {
+						eventType = null;
+					}
+					
 					Date timestamp = entry.getTimestamp();
 					
 					if (group != null && taskID != null) {

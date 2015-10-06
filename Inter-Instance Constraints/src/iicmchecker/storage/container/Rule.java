@@ -8,10 +8,10 @@ import iicmchecker.storage.container.RuleBody;
 import iicmchecker.utils.logging.LoggerFactory;
 
 public abstract class Rule {
-	private RuleBody body;
-	private Fact head;
-	private ArrayList<String> description = new ArrayList<String>();
-	private Logger logger = LoggerFactory.getLogger();
+	protected RuleBody body;
+	protected Fact head;
+	protected ArrayList<String> description = new ArrayList<String>();
+	protected Logger logger = LoggerFactory.getLogger();
 	
 	public void setHead(Fact head) {
 		logger.info("Rule:setHead() set head " + head.getAsString());
@@ -24,7 +24,6 @@ public abstract class Rule {
 	}
 	
 	public String getAsString() {
-		System.out.println("rule description:" + description);
 		String result;
 		result = head.getAsString() + " :- "
 				+ body.getAsString()

@@ -1,16 +1,16 @@
 package iicmchecker.storage.container.container;
 
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import iicmchecker.storage.container.Rule;
+import iicmchecker.storage.container.rules.DefinedRule;
 import iicmchecker.storage.container.rules.IllegalExecutionRule;
 import iicmchecker.storage.container.rules.RoleCannotDoRule;
 import iicmchecker.storage.container.rules.RoleMustDoRule;
@@ -27,6 +27,7 @@ public class RuleContainer {
 	private ArrayList<UserMustDoRule> userMustDo = new ArrayList<UserMustDoRule>();
 	private ArrayList<RoleCannotDoRule> roleCannotDo = new ArrayList<RoleCannotDoRule>();
 	private ArrayList<RoleMustDoRule> roleMustDo = new ArrayList<RoleMustDoRule>();
+	private HashMap<String, ArrayList<Rule>> defined = new HashMap<String, ArrayList<Rule>>();
 	
 	Logger logger = LoggerFactory.getLogger();
 	
@@ -52,6 +53,13 @@ public class RuleContainer {
 	
 	public void addRoleMustDoRule(RoleMustDoRule r) {
 		roleMustDo.add(r);
+	}
+	
+	public void addDefined(DefinedRule r) {
+		if (!defined.containsKey(r.getName())) {
+			defined.put(r.getName(), new ArrayList<Rule>());
+		}
+		(defined.get(r.getName())).add(r);
 	}
 	
 	public void printToFile() {
@@ -81,13 +89,18 @@ public class RuleContainer {
 			for(Rule r : roleMustDo) {
 				writer.write(r.getAsString());
 			}
+			
+			for (ArrayList<Rule> al: defined.values()) {
+				for (Rule r : al) {
+					writer.write(r.getAsString());
+				}
+			}
 		
 			writer.close();
 
 			logger.severe("Rules are written to " + outputFile);
 		
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

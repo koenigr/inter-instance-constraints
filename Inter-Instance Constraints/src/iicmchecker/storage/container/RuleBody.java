@@ -28,13 +28,12 @@ public class RuleBody {
 		body = tmp;
 	}
 	
-	public String getAsString() { // TODO hier ein paar weitere Prolog interne Sachen einfügen
+	public String getAsString() { 
 		String bodyStr = " ";
 		for (Fact f : body) {
 			String fact = f.getAsString();
 			bodyStr = bodyStr.concat(fact + ",");
 		}
-		// bodyStr = bodyStr.substring(0, bodyStr.length() - 1);
 		return bodyStr;
 	}
 	

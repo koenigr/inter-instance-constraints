@@ -1,4 +1,5 @@
 % Critical Task Pair facts
+critical_task_pair('Antrag annehmen','Antrag prüfen 1').
 % dominates facts
 dominates('Manager','Kundenberater').
 dominates('Kundenberater','Azubi').

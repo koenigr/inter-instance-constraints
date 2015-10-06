@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class LoggerFactory {
 	  static private ConsoleHandler handler;
 	  static private CFormatter formatter;
-	  private static final String LOGGER_NAME = "kjjkhkj"; // TODO
+	  private static final String LOGGER_NAME = "IICLogger"; 
 	  private static Level level = Level.ALL;
 	  private static Logger logger = Logger.getLogger(LOGGER_NAME);
 	  
@@ -45,7 +45,6 @@ public class LoggerFactory {
 	  }
 	  
 	  static public Logger getLogger() {
-		  // TODO sind das verschiedene Logger?
 		return logger;  
 	  }
 }

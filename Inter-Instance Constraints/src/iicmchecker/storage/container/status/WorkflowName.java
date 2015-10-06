@@ -8,7 +8,7 @@ public class WorkflowName extends Fact{
 	private static final String NAME = "workflow_name";
 	
 	/*
-	 * workflowName( WID, WName)
+	 * workflow_name( WID, WName)
 	 */
 
 	public WorkflowName(String workflowID, String workflowname) {

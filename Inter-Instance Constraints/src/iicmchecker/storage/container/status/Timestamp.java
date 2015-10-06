@@ -3,7 +3,6 @@ package iicmchecker.storage.container.status;
 import java.util.Date;
 
 import iicmchecker.storage.container.Fact;
-import iicmchecker.utils.StringChecker;
 
 public class Timestamp extends Fact {
 	

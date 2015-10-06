@@ -3,6 +3,7 @@ package iicmchecker.constraintReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import iicmchecker.constraintReader.IIListener.InputContext;
 import iicmchecker.constraintReader.IIListener.RuleContext;
@@ -24,12 +25,15 @@ import iicmchecker.storage.container.status.TaskName;
 import iicmchecker.storage.container.status.TaskWorkflow;
 import iicmchecker.storage.container.status.WorkflowName;
 import iicmchecker.utils.exceptions.UnexpectedNumberOfChildrenException;
+import iicmchecker.utils.logging.LoggerFactory;
 
 
 public class ListenerHelper {
 	
 	private static int variable_for_vars = 0;
 	private static int variable_for_ruleIDs = 0;
+	
+	private static Logger logger = LoggerFactory.getLogger();
 
 	public void checkChildCount(int expected, int actual) {
 		if (expected != actual) {
@@ -62,7 +66,7 @@ public class ListenerHelper {
 		} else if (value[1].equals("M")) {
 			d.setMonth(Integer.parseInt(value[0]));
 		} else if (value[1].equals("D")) {
-			d.setDate(Integer.parseInt(value[0]));
+			d.setDate(Integer.parseInt(value[0])+1);
 		} else if (value[1].equals("h")) {
 			d.setHours(Integer.parseInt(value[0]));
 		} else if (value[1].equals("m")) {
@@ -162,8 +166,8 @@ public class ListenerHelper {
 			l.workflowID = l.taskName.split("\\.")[1];
 			l.taskName = l.taskName.split("\\.")[0];
 		} else if (l.ruleContext == RuleContext.INTERPROCESS) {
-			l.workflowName = l.taskName.split("\\.")[2];
-			l.workflowID = l.taskName.split("\\.")[1];
+			l.workflowID = l.taskName.split("\\.")[2];
+			l.workflowName = l.taskName.split("\\.")[1];
 			l.taskName = l.taskName.split("\\.")[0];
 		}
 	}
@@ -172,6 +176,7 @@ public class ListenerHelper {
 			ArrayList<Fact> tmp, String taskID) {
 		
 		if(l.ruleContext == RuleContext.INTERINSTANCE) {
+			System.out.println("Add TaskWorkflow");
 			tmp.add(new TaskWorkflow(taskID, l.workflowID));
 		} else if (l.ruleContext == RuleContext.INTERPROCESS) {
 			tmp.add(new TaskWorkflow(taskID, l.workflowID));
@@ -190,7 +195,10 @@ public class ListenerHelper {
 			l.rule_body.addFacts(tmp);
 		} else if(l.inputContext == InputContext.CONDITIONAL_BODY) {
 			l.conditional_body.addFacts(tmp);
-		} else {System.out.println("Fehler"); System.exit(0);}
+		} else {
+			System.out.println("wrong context: " + l.inputContext.toString()); 
+			System.exit(0);
+		}
 		
 	}
 
@@ -202,6 +210,7 @@ public class ListenerHelper {
 			Collection<String> valueset = l.taskIDs.values();
 			
 			ListenerHelper.addContextSpecificPredicates(l, tmp, taskID);
+			l.rule_body.addFacts(tmp);
 			
 			switch(l.ruleContext) {
 			case INTRAINSTANCE: 
@@ -211,6 +220,8 @@ public class ListenerHelper {
 				}
 				break;
 			case INTERINSTANCE:	
+				System.out.println("Interinstance");
+				
 				String workflowName = ListenerHelper.generateStringForVar();
 				for (String id : valueset) {
 					l.workflowID = ListenerHelper.generateStringForVar();
@@ -219,7 +230,7 @@ public class ListenerHelper {
 				}
 				break;
 			case INTERPROCESS: break; // TODO hier ist alles egal?
-			default: System.exit(0); break; // TODO
+			default: logger.warning("Rule Context is undefined"); break; // TODO
 			}
 
 	}

@@ -39,7 +39,7 @@ public String executeCommand(String command) {
 	
 public void run() {
 		logger.severe("Executing modelchecker...");
-	    System.out.println(executeCommand("prolog prologfiles/start.pl einArgument zweitesArgument"));
+	    System.out.println(executeCommand("prolog prologfiles/start.pl"));
 	    logger.severe("Modelchecker finished");
 }
 }

@@ -1,10 +1,15 @@
 package iicmchecker.storage.container.logical;
 
 import iicmchecker.storage.container.Fact;
+import iicmchecker.utils.logging.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Negation extends Fact{
+	
+	Logger logger = LoggerFactory.getLogger();
+	
 	public Negation(ArrayList<Fact> facts) {
 		super("", 0);
 		this.facts.addAll(facts);
@@ -26,8 +31,7 @@ public class Negation extends Fact{
 		System.out.println("Getting negation as String: Number of Elements " + facts.size());
 		
 		if (facts.isEmpty()) {
-			// TODO Exception
-			System.out.println("Negation is empty");
+			logger.severe("Negation is empty");
 			System.exit(0);
 		}
 		

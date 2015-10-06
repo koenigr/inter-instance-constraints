@@ -1,7 +1,6 @@
 package iicmchecker.storage.container.status;
 
 import iicmchecker.storage.container.Fact;
-import iicmchecker.utils.StringChecker;
 
 public class TaskAttribute extends Fact{
 
@@ -9,7 +8,6 @@ public class TaskAttribute extends Fact{
 	private static final String NAME = "attribute";
 	
 	public enum AttrType {STRING, NUMBER};
-	private AttrType attrType = AttrType.STRING;
 
 	/*
 	 * attribute(TT, AttrName, AttrValue)

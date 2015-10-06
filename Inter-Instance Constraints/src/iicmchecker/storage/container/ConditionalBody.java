@@ -29,7 +29,7 @@ public class ConditionalBody {
 		body = tmp;
 	}
 	
-	public String getAsString() { // TODO hier ein paar weitere Prolog interne Sachen einfügen
+	public String getAsString() { 
 		String bodyStr = "(";
 		for (Fact f : body) {
 			String fact = f.getAsString();

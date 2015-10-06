@@ -1,7 +1,6 @@
 package iicmchecker.storage.container.status;
 
 import iicmchecker.storage.container.Fact;
-import iicmchecker.utils.StringChecker;
 
 public class TaskEvent extends Fact{
 

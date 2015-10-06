@@ -42,7 +42,6 @@ public class StorageHelper {
 		esc = new ExternAndSpecificationContainer();
 		sc = new StatusContainer();
 		
-		// TODO was ist, wenn die location leer ist?
 		rc.setOutputFile(LOCATION + "/" +  OUTPUTFILE_RULES);
 		esc.setOutputFile(LOCATION + "/" +  OUTPUTFILE_EXTERNSPEC);
 		sc.setOutputFile(LOCATION + "/" + OUTPUTFILE_STATUS);
@@ -62,7 +61,6 @@ public class StorageHelper {
 		return sc;
 	}
 	
-	// TODO testen was passiert, wenn es nicht geht
 	public void printToFile() {
 		logger.severe("Writing rules to file...");
 		rc.printToFile();

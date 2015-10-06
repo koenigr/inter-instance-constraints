@@ -8,7 +8,7 @@ public class ExecutedUserStatus extends Fact {
 	private static final int NUMBER_OF_ARGUMENTS = 2;
 	
 	/*
-	 * executed_user(UT, TT)
+	 * user_executed(UT, TT)
 	 */
 
 	public ExecutedUserStatus(String user, String taskID) {

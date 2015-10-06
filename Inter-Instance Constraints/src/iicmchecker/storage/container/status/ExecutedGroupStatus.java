@@ -8,15 +8,15 @@ public class ExecutedGroupStatus extends Fact {
 	private static final int NUMBER_OF_ARGUMENTS = 2;
 	
 	/*
-	 * executedGroup( GT, TT)
+	 * role_executed( GT, TT)
 	 */
 	public ExecutedGroupStatus() {
-		super("executed_group", NUMBER_OF_ARGUMENTS);
+		super("role_executed", NUMBER_OF_ARGUMENTS);
 	}
 
 	public ExecutedGroupStatus(String group, String taskID) {
 
-		super("group_executed", NUMBER_OF_ARGUMENTS);
+		super("role_executed", NUMBER_OF_ARGUMENTS);
 		setArgument(0, group);
 		setArgument(1, taskID);
 		

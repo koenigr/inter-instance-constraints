@@ -11,7 +11,7 @@ public class IllegalExecution extends Fact {
 	 * illegal_execution
 	 */
 	public IllegalExecution() {
-		super("illegal_execution", NUMBER_OF_ARGUMENTS);
+		super(NAME, NUMBER_OF_ARGUMENTS);
 	}
 
 	@Override

@@ -12,7 +12,6 @@ import iicmchecker.storage.container.status.WorkflowName;
 import iicmchecker.utils.logging.LoggerFactory;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -150,13 +149,10 @@ public class StatusContainer {
 			logger.severe("Status Predicates are written to " + outputFile);
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}

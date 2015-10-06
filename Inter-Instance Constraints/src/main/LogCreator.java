@@ -1,42 +1,29 @@
 package main;
 
+import iicmchecker.utils.logging.LoggerFactory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import de.invation.code.toval.parser.ParserException;
 import de.invation.code.toval.validate.CompatibilityException;
 import de.invation.code.toval.validate.ParameterException;
-import de.uni.freiburg.iig.telematik.sewol.format.LogFormatFactory;
-import de.uni.freiburg.iig.telematik.sewol.log.DULogEntry;
 import de.uni.freiburg.iig.telematik.sewol.log.DataAttribute;
 import de.uni.freiburg.iig.telematik.sewol.log.EventType;
 import de.uni.freiburg.iig.telematik.sewol.log.LockingException;
 import de.uni.freiburg.iig.telematik.sewol.log.Log;
 import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
 import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
-import de.uni.freiburg.iig.telematik.sewol.parser.ParsingMode;
-import de.uni.freiburg.iig.telematik.sewol.parser.xes.XESLogParser;
-import de.uni.freiburg.iig.telematik.sewol.writer.LogWriter;
 import de.uni.freiburg.iig.telematik.sewol.writer.PerspectiveException;
 
 public class LogCreator {
+	
+Logger logger = LoggerFactory.getLogger();
 
-private static String loglocation = "logfiles"; 
-private static String logfile = "logfile";
-
-public static void main(String[] args) {
-	try {
-		createLog();
-	} catch (ParameterException | LockingException | PerspectiveException
-			| IOException | ParserException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-}
-
-public static List<List<Log<LogEntry>>> createLog() throws LockingException, 
+public List<List<Log<LogEntry>>> createLog() throws LockingException, 
 	CompatibilityException, ParameterException, PerspectiveException, 
 	IOException, ParserException {
 		
@@ -137,7 +124,6 @@ entry2C2.setTimestamp(new Date(499537600000l));
 /*
  * Create Log Traces
  */
-System.out.println("Creating trace A");
 LogTrace<LogEntry> traceA = new LogTrace<LogEntry>();
 traceA.addEntry(entryA1);
 traceA.addEntry(entryA2);
@@ -146,7 +132,6 @@ traceA.addEntry(entryB2);
 traceA.addEntry(entryC1);
 traceA.addEntry(entryC2);
 
-System.out.println("Creating trace B");
 LogTrace<LogEntry> traceB = new LogTrace<LogEntry>();
 traceB.addEntry(entry2A1);
 traceB.addEntry(entry2A2);
@@ -171,7 +156,7 @@ List l2 = new ArrayList<Log>();
 l2.add(log);
 l1.add(l2);	
 
-System.out.println("finished creation");
+logger.info("finished creation");
 return l1;		
 }
 }

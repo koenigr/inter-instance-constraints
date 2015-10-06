@@ -13,7 +13,6 @@ import iicmchecker.compliancechecker.Compliancechecker;
 import iicmchecker.constraintReader.IIListener;
 import iicmchecker.constraintReader.Inter_InstanceLexer;
 import iicmchecker.constraintReader.Inter_InstanceParser;
-import iicmchecker.logtransformer.LogParser;
 import iicmchecker.logtransformer.LogTransformer;
 import iicmchecker.storage.StorageHelper;
 import iicmchecker.utils.logging.LoggerFactory;
@@ -24,7 +23,6 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import de.uni.freiburg.iig.telematik.sewol.log.Log;
 import de.uni.freiburg.iig.telematik.sewol.log.LogEntry;
-import de.uni.freiburg.iig.telematik.sewol.log.LogTrace;
 
 public class IICMChecker {
 	
@@ -52,10 +50,8 @@ private void init() {
 	try {
 		LoggerFactory.setup();
 	} catch (IOException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	// TODO hier alle init Sachen statt im Constructor von den Teilen
 }
 
 public void run() {
@@ -96,7 +92,7 @@ fs.close();
 ParseTreeWalker walker = new ParseTreeWalker();
 walker.walk(new IIListener(), tree);
 
- tree.inspect(parser);
+// tree.inspect(parser);
 
 
 } catch(Exception e) {
@@ -125,7 +121,6 @@ ltransformer.transform(log);
 }
 
 private void storeKnowledgeBase() {
-// TODO die location angeben
 StorageHelper.getInstance().printToFile();
 }
 

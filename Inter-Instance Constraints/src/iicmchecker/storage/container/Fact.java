@@ -1,7 +1,5 @@
 package iicmchecker.storage.container;
 
-
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import iicmchecker.utils.StringChecker;
@@ -20,10 +18,6 @@ public abstract class Fact{
 	public Fact(String predicate, int numberOfArguments) { 
 		
 		logger.info("Creating new predicate " + predicate);
-		/*
-		 *  TODO den String noch allerlei testen
-		 *  ob nur kleinschreibung und _ 
-		 */
 		
 		
 		if(!StringChecker.isValidPredicate(predicate)) {
@@ -35,18 +29,9 @@ public abstract class Fact{
 	}
 	
 	protected void setArgument(int pos, String arg) {
-		/*
-		 *  TODO den String noch allerlei testen
-		 *  Darf entweder nur eine Variable sein oder ein String mit einfachen Strichen
-		 *  Das macht der String Checker
-		 *  Ebenfalls Error ausgeben, wenn der Wert schon gesetzt wurde
-		 */
 		
 		if (pos >= numberOfArguments) {
 			new IllegalArgumentsPositionException(pos, numberOfArguments - 1);
-		}
-		if (StringChecker.isValidVariable(arg) || StringChecker.isValidConstant(arg)) {
-				// TODO Exception
 		}
 		
 		arguments[pos] = arg;
@@ -58,7 +43,6 @@ public abstract class Fact{
 	
 
 	public String getAsString() {
-		// TODO testen, ob alles gesetzt wurde
 		boolean hasArgs = numberOfArguments > 0;
 		String result;
 		result = predicate;
@@ -75,5 +59,9 @@ public abstract class Fact{
 		}
 		
 		return result;
+	}
+
+	public String getName() {
+		return predicate;
 	}
 }

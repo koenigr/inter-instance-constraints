@@ -2,6 +2,7 @@ package iicmchecker.constraintReader;
 
 
 
+import iicmchecker.constraintReader.Inter_InstanceParser.DefinedClauseContext;
 import iicmchecker.storage.StorageHelper;
 import iicmchecker.storage.container.Fact;
 import iicmchecker.storage.container.RuleBody;
@@ -35,6 +36,8 @@ import iicmchecker.storage.container.logical.Konjunction;
 import iicmchecker.storage.container.logical.Negation;
 import iicmchecker.storage.container.rules.CannotDoRole;
 import iicmchecker.storage.container.rules.CannotDoUser;
+import iicmchecker.storage.container.rules.Defined;
+import iicmchecker.storage.container.rules.DefinedRule;
 import iicmchecker.storage.container.rules.MustDoRole;
 import iicmchecker.storage.container.rules.MustDoUser;
 import iicmchecker.storage.container.rules.IllegalExecution;
@@ -59,6 +62,7 @@ import iicmchecker.utils.logging.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -133,6 +137,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 	public void exitExplicitSetting(Inter_InstanceParser.ExplicitSettingContext ctx) {
 		logger.info("Exiting Explicit setting inputContext");
 		inputContext = InputContext.UNDEF;
+		ruleContext = RuleContext.UNDEF;
 	}
 	
 	public void enterDefine(Inter_InstanceParser.DefineContext ctx) {
@@ -228,11 +233,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String user2 = ctx.getChild(2).getText();
 		Partner r = new Partner(user1, user2);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
-		
+		if (inputContext == InputContext.SETTING) {
+			esc.addPartner(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 	}
 	
 	@Override
@@ -244,10 +251,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String user2 = ctx.getChild(2).getText();
 		SameGroup r = new SameGroup(user1, user2);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addSameGroup(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 		
 	}
 
@@ -261,10 +271,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String user2 = ctx.getChild(2).getText();
 		Related r = new Related(user1, user2);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addRelated(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 		
 	}
 	
@@ -281,10 +294,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task = ctx.getChild(3).getText();
 		RoleTask r = new RoleTask(role, task);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addRoleTask(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 		
 	}
 
@@ -297,10 +313,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task = ctx.getChild(3).getText();
 		UserTask r = new UserTask(user, task);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addUserTask(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 	}
 
 	@Override
@@ -312,10 +331,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String role = ctx.getChild(3).getText();
 		UserRole r = new UserRole(user, role);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addUserRole(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 	}
 
 	@Override
@@ -327,10 +349,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task = ctx.getChild(2).getText();
 		GLB r = new GLB(role, task);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addGLB(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 	}
 
 	@Override
@@ -341,10 +366,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String task = ctx.getChild(2).getText();
 		LUB r = new LUB(role, task);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addLUB(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 	}
 
 	@Override
@@ -356,25 +384,31 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String role2 = ctx.getChild(2).getText();
 		Dominates r = new Dominates(role1, role2);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addDominates(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 	}
 
 	@Override
 	public void exitCritTaskPair(Inter_InstanceParser.CritTaskPairContext ctx) {
 		logger.info("Exiting Critical Task Pair Context");
 
-		lh.checkChildCount(5, ctx.getChildCount());
-		String task1 = ctx.getChild(1).getText();
-		String task2 = ctx.getChild(3).getText();
+		lh.checkChildCount(4, ctx.getChildCount());
+		String task1 = ctx.getChild(0).getText();
+		String task2 = ctx.getChild(2).getText();
 		CriticalTaskPair r = new CriticalTaskPair(task1, task2);
 		
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
-		tmp.add(r);
-		
-		ListenerHelper.addTmpToBody(this, tmp);
+		if (inputContext == InputContext.SETTING) {
+			esc.addCriticalTaskPair(r);
+		} else {
+		    ArrayList<Fact> tmp = new ArrayList<Fact>();
+		    tmp.add(r);
+		    ListenerHelper.addTmpToBody(this, tmp);
+		}
 		
 	}
 	
@@ -401,7 +435,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		ListenerHelper.generateTaskID(this);
 		
-		System.out.println(taskName);
+		System.out.println("Task Name: " + taskName);
 		System.out.println(taskID);
 		System.out.println(workflowID);
 		System.out.println(workflowName);
@@ -603,6 +637,7 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		String user = ctx.getChild(0).getText();		
 		taskName = ctx.getChild(2).getText();
+		System.out.println("AAAAAAAAAAA: " + taskName);
 		EventHelper.EventTypes event = EventHelper.EventTypes.ASSIGN;
 		workflowID = "";
 		workflowName = "";
@@ -611,11 +646,17 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		ListenerHelper.parseTaskName(this);
 
+		if (!taskIDs.containsKey(taskName)) {
+			String taskID = ListenerHelper.generateStringForVar();
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
+		}
+		
 		String taskID = taskIDs.get(taskName);
 
 		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
 		
-		tmp.add(new ExecutedUserStatus(taskID, user));
+		tmp.add(new ExecutedUserStatus(user, taskID));
 		tmp.add(new TaskEvent(taskID, EventHelper.getAsString(event)));
 		
 		ListenerHelper.addTmpToBody(this, tmp);
@@ -706,26 +747,41 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(6, ctx.getChildCount());
 		
-		String task1 = ctx.getChild(1).getText();
-		String task2 = ctx.getChild(3).getText();
-		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		taskName = ctx.getChild(1).getText();
 
-		String taskID1 = taskIDs.get(task1);
-		String taskID2 = taskIDs.get(task2);
+		workflowID = "";
+		workflowName = "";
 		
-		if (!taskIDs.containsKey(task1)) {
+		ListenerHelper.parseTaskName(this);
+		
+
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		
+		if (!taskIDs.containsKey(taskName)) {
 			String taskID = ListenerHelper.generateStringForVar();
-			taskIDs.put(task1, taskID);
-			tmp.add(new TaskName(taskID1, task1));
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
 		}		
 		
-		if (!taskIDs.containsKey(task2)) {
+
+		String taskID1 = taskIDs.get(taskName);
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID1);
+		
+		System.out.println("BBBBBB " + taskName);
+
+		taskName = ctx.getChild(3).getText();
+		
+		ListenerHelper.parseTaskName(this);
+		
+		if (!taskIDs.containsKey(taskName)) {
 			String taskID = ListenerHelper.generateStringForVar();
-			taskIDs.put(task2, taskID);
-			tmp.add(new TaskName(taskID2, task2));
+			taskIDs.put(taskName, taskID);
+			tmp.add(new TaskName(taskID, taskName));
 		}
 
-		
+		String taskID2 = taskIDs.get(taskName);
+
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID2);
 		
 		String timestamp1 = ListenerHelper.generateStringForVar();
 		String timestamp2 = ListenerHelper.generateStringForVar();
@@ -748,10 +804,17 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(4, ctx.getChildCount());
 		
-		String taskName = ctx.getChild(1).getText();	
+		taskName = ctx.getChild(1).getText();	
 		String timestamp = ctx.tp().returnValue;
 
+		workflowID = "";
+		workflowName = "";
+		
+		ListenerHelper.parseTaskName(this);
+
 		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		
+		
 		
 		if (!taskIDs.containsKey(taskName)) {
 			String taskID = ListenerHelper.generateStringForVar();
@@ -760,6 +823,8 @@ public class IIListener extends Inter_InstanceBaseListener {
 		}
 
 		String taskID = taskIDs.get(taskName);
+		
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
 		
 		tmp.add(new Timestamp(taskID, timestamp));
 		
@@ -772,10 +837,17 @@ public class IIListener extends Inter_InstanceBaseListener {
 		
 		lh.checkChildCount(4, ctx.getChildCount());
 		
-		String taskName = ctx.getChild(1).getText();
+		taskName = ctx.getChild(1).getText();
 		String eventtype = ctx.getChild(3).getText();
 
+		workflowID = "";
+		workflowName = "";
+		
+		ListenerHelper.parseTaskName(this);
+
 		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		
+		
 		
 		if (!taskIDs.containsKey(taskName)) {
 			String taskID = ListenerHelper.generateStringForVar();
@@ -784,6 +856,8 @@ public class IIListener extends Inter_InstanceBaseListener {
 		}
 
 		String taskID = taskIDs.get(taskName);
+		
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
 		
 		tmp.add(new TaskEvent(taskID, eventtype));
 		
@@ -797,8 +871,13 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(6, ctx.getChildCount());
 
 		String attribute = ctx.getChild(1).getText();
-		String taskName = ctx.getChild(3).getText();
+		taskName = ctx.getChild(3).getText();
 		String value = ctx.getChild(5).getText();
+
+		workflowID = "";
+		workflowName = "";
+		
+		ListenerHelper.parseTaskName(this);
 		
 		ArrayList<Fact> tmp = new ArrayList<Fact>();
 		
@@ -809,6 +888,8 @@ public class IIListener extends Inter_InstanceBaseListener {
 		}
 		
 		String taskID = taskIDs.get(taskName);
+		
+		ListenerHelper.addContextSpecificPredicates(this, tmp, taskID);
 		
 		tmp.add(new TaskAttribute(taskID, attribute, value));
 		
@@ -974,31 +1055,32 @@ public class IIListener extends Inter_InstanceBaseListener {
 		String left = ctx.comparisonArg(0).returnValue;
 		String right = ctx.comparisonArg(1).returnValue;
 		
-		
-		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+		if (negation == true) {
+			negation_body.add(new Equality(left, right));
+		} else if (disjunction == true) {
+			disjunction_body.add(new Equality(left, right));
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			if (ctx.getChild(1).getText().equals("=")) {
-				System.out.println("gleich");
 				rule_body.addFact(new Equality(left, right));
 			} else if (ctx.getChild(1).getText().equals("!=")) {
-				System.out.println("ungleich");
 				rule_body.addFact(new Inequality(left, right));
 			} else {
-				System.out.println("Problem bei EuqualityExpression");
+				logger.severe("Problem in EuqualityExpression");
 				System.exit(0);
 			}
 		} else if  (inputContext == InputContext.CONDITIONAL_BODY) {
 			if (ctx.getChild(1).getText().equals("=")) {
 				System.out.println("gleich");
-				rule_body.addFact(new Equality(left, right));
+				conditional_body.addFact(new Equality(left, right));
 			} else if (ctx.getChild(1).getText().equals("!=")) {
 				System.out.println("ungleich");
-				rule_body.addFact(new Inequality(left, right));
+				conditional_body.addFact(new Inequality(left, right));
 			} else {
-				System.out.println("Problem bei EqualityExpression");
+				logger.severe("Problem in EqualityExpression");
 				System.exit(0);
 			}
 		}else {
-			System.out.println("Problem bei EqualityExpression Disjunction");
+			System.out.println("Problem in EqualityExpression");
 			System.exit(0);
 		}
 	}
@@ -1009,44 +1091,43 @@ public class IIListener extends Inter_InstanceBaseListener {
 		lh.checkChildCount(3, ctx.getChildCount());
 		String left = ctx.comparisonArg(0).returnValue;
 		String right = ctx.comparisonArg(1).returnValue;
-
 			
-		if (inputContext == InputContext.ASSIGNMENT_BODY) {
+		if (negation == true) {
+			negation_body.add(new Lower(left, right));
+		} else if (disjunction == true) {
+			disjunction_body.add(new Lower(left, right));
+		} else if (inputContext == InputContext.ASSIGNMENT_BODY) {
 			if (ctx.getChild(1).getText().equals("<")) {
-				System.out.println("kleiner");
 				rule_body.addFact(new Lower(left, right));
 			} else if (ctx.getChild(1).getText().equals("<=")) {
-				System.out.println("kleinergleich");
 				rule_body.addFact(new LEQ(left, right));
 			} else if (ctx.getChild(1).getText().equals(">")) {
-				System.out.println("größer");
 				rule_body.addFact(new Greater(left, right));
 			} else if (ctx.getChild(1).getText().equals(">=")) {
-				System.out.println("größergleich");
 				rule_body.addFact(new GEQ(left, right));
 			}else {
-				System.out.println("Problem bei InequalityExpression");
+				logger.severe("Problem in InequalityExpression");
 				System.exit(0);
 			}
 		} else if  (inputContext == InputContext.CONDITIONAL_BODY) {
 			if (ctx.getChild(1).getText().equals("<")) {
 				System.out.println("kleiner");
-				rule_body.addFact(new Lower(left, right));
+				conditional_body.addFact(new Lower(left, right));
 			} else if (ctx.getChild(1).getText().equals("<=")) {
 				System.out.println("kleinergleich");
-				rule_body.addFact(new LEQ(left, right));
+				conditional_body.addFact(new LEQ(left, right));
 			} else if (ctx.getChild(1).getText().equals(">")) {
 				System.out.println("größer");
-				rule_body.addFact(new Greater(left, right));
+				conditional_body.addFact(new Greater(left, right));
 			} else if (ctx.getChild(1).getText().equals(">=")) {
 				System.out.println("größergleich");
-				rule_body.addFact(new GEQ(left, right));
+				conditional_body.addFact(new GEQ(left, right));
 			}else {
-				System.out.println("Problem bei InequalityExpression");
+				logger.severe("Problem in InequalityExpression");
 				System.exit(0);
 			}
 		}else {
-			System.out.println("Problem bei InequalityExpression Disjunction");
+			logger.severe("Problem in InequalityExpression Disjunction");
 			System.exit(0);
 		}
 	}
@@ -1113,8 +1194,9 @@ public class IIListener extends Inter_InstanceBaseListener {
        for (int i = 1; i < numElements - 1; i++) {
          returnvalue += lh.parseAndAddValue(ctx.getChild(i).getText());
        }
-       System.out.println("Return Value " + ctx.returnValue);     
-
+       System.out.println("Return Value Absolute Interval " + returnvalue);     
+       System.out.println("Return value as String: " + new Date(returnvalue).toString());
+       
        ctx.returnValue = (new Long(returnvalue)).toString(); 
 	}
 	
@@ -1175,5 +1257,39 @@ public class IIListener extends Inter_InstanceBaseListener {
 	public void exitComparisonArithmArg(Inter_InstanceParser.ComparisonArithmArgContext ctx) {
 		logger.info("Exit Comparison Arithm Arg Context");
 		ctx.returnValue = ctx.arithmeticArg().returnValue;
+	}
+	
+	/*
+	 * DEFINED PREDICATES
+	 */
+	@Override
+	public void exitDefinedClause(DefinedClauseContext ctx) {
+		logger.info("Exiting Defined Context");
+		
+		Integer numOfChildren = ctx.getChildCount();
+		ArrayList<String> args = new ArrayList<String>();
+		
+		for (int i = 2; i < numOfChildren; i += 2 ) {
+			args.add(ctx.getChild(i).getText());
+			// TODO Context beachten
+		}
+		
+		Defined f = new Defined(ctx.getChild(0).getText(), args);
+		
+		ArrayList<Fact> tmp = new ArrayList<Fact>();
+		tmp.add(f);
+		
+		if (inputContext == InputContext.SETTING) {
+			DefinedRule r = new DefinedRule();
+			r.setHead(f);
+			rc.addDefined(r);
+		} else if (inputContext != InputContext.ASSIGNMENT_HEAD) {
+		    ListenerHelper.addTmpToBody(this, tmp);
+		} else {
+			DefinedRule r = new DefinedRule();
+			r.setBody(rule_body);
+			r.setHead(f);
+			rc.addDefined(r);
+		}
 	}
 }
