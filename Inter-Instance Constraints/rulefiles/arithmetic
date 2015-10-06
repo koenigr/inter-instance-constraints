@@ -1,0 +1,5 @@
+IF ((2 + 3) - 4) > 5
+THEN illegal execution
+
+IF (tp( 1999-03-12 T 12:13:44.123) + ts(5m 3.5s)) > 2000 AND timeinterval of TT1 and TTT is ts(3Y)
+THEN illegal execution

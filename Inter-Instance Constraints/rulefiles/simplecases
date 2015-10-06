@@ -1,0 +1,9 @@
+
+/*Um zu verhindern, dass Fehler durch Überlastung passieren, darf jeder Mitarbeiter am
+Tag höchstens 100 Tasks bearbeiten.*/
+DESC "C9"
+IF NUMBER WHERE ( user User executed Task1.WID.WN 
+   AND timeinterval of Task1.WID.WN and Task2.WID1.WN1 is X
+   AND X < ts( 1D ) 
+   AND Task1 != Task2 ) IS N AND N > 5
+THEN user User cannot execute Task2.WID1.WN1

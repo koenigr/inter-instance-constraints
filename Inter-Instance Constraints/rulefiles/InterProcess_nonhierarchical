@@ -1,3 +1,4 @@
 DESC 'Ein User darf nicht mehr als 100 Tasks pro Tag erledigen'
-IF NUMBER WHERE USER executed TASK.WORKFLOW.INSTANCE IS N AND N >= 100
-	THEN USER cannot execute TASK.WORKFLOW.INSTANCE
+IF NUMBER WHERE ( user USER executed TASK.WORKFLOW.INSTANCE ) IS N 
+AND N >= 100
+	THEN user USER cannot execute TASK.WORKFLOW.INSTANCE

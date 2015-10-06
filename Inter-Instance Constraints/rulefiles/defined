@@ -1,0 +1,13 @@
+DEF bla(TT,TT,TT)
+DEF idiot
+DEF depp(UT)
+
+SET bla(Hallo,'dsf',ASD)
+SET idiot
+SET depp(Hey)
+
+IF bla('ein','zwei','drei'h) THEN bla('zwei', A, B)
+
+DESC "mimi"
+IF user U executed Task
+THEN illegal execution

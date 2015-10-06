@@ -1,0 +1,17 @@
+set 'Mark' is related to 'Susi'
+
+DESC "'check' and 'pay' cannot be executed by related actors"
+IF A executed 'check' 
+AND A is related to C 
+THEN C cannot execute 'pay'
+
+
+DESC "Rule which contains number predicate"
+IF A is assigned to 'check' 
+AND B aborted
+AND C succeeded
+AND A is collaborator of B
+AND NUMBER OF Z WHERE B aborted AND C aborted IS N
+AND SUM OF Y WHERE B succeeded IS N
+THEN C cannot execute 'pay'
+

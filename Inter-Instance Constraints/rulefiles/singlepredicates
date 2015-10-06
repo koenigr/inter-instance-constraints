@@ -1,0 +1,30 @@
+
+IF timeinterval of Task1 and Task2 is N AND N > 2000 
+THEN illegal execution
+
+IF timestamp of Task1 is N AND N > ts(4M)
+THEN illegal execution
+
+IF eventtype of 'Einloggen' is 'start'
+THEN illegal execution
+
+IF eventtype of Task1 is 'start'
+THEN illegal execution
+
+IF eventtype of 'Einloggen' is Event1
+THEN illegal execution
+
+IF eventtype of Task1 is Event1
+THEN illegal execution
+
+IF attribute ATTR of Task1 is VAL
+THEN illegal execution
+
+IF attribute 'customer' of 'pay check' is 'Dennis'
+THEN illegal execution
+
+IF attribute 'amount' of 'pay check' is 5000
+THEN illegal execution
+
+IF 'ROLE1' > 'ROLE2' and 
+THEN illegal execution

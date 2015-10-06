@@ -1,0 +1,3 @@
+DESC "HIER IST EIN OR!!!"
+IF (user User executed Task1 OR user USER executed Task2)
+THEN illegal execution

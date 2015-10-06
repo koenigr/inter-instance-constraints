@@ -1,3 +1,3 @@
-/* Klein Susi muss entweder Task2 oder Task3 ausführen */
-IF NOT 'klein Susi' executed 'Task2'
-	THEN 'klein Susi' must execute 'Task3'
+DESC "Klein Susi muss entweder Task2 oder Task3 ausführen"
+IF NOT ( user 'klein Susi' executed 'Task2' )
+	THEN user 'klein Susi' must execute 'Task3'

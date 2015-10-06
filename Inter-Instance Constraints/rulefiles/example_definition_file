@@ -12,5 +12,5 @@ IF group(A,X) AND group(B,X) THEN same_group(A,B)
 IF USER1 executed TASK1 AND USER2 executed TASK2 AND critical_task_pair(TASK1, TASK2)
 THEN collaborator(USER1, USER2)
 
-IF Event(TASK).'manual_skip' AND USER executed TASK 
+IF EventType(TASK).'manual_skip' AND USER executed TASK 
 THEN user_skipped_task(USER, TASK)

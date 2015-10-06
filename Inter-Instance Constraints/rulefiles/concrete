@@ -1,0 +1,85 @@
+SET 'Manager' dominates 'Kundenberater'
+SET 'Kundenberater' dominates 'Azubi'
+SET 'Tom'is related to'Susi'
+SET 'Susi' is related to 'Mark'
+SET 'Antrag annehmen' and 'Antrag prüfen 1' are critical task pairs
+
+// Der Kontakt mit dem Kunden (T1 und T6) muss durch den Kundenberater erfolgen
+DESC "C1a"
+IF
+THEN role 'Kundenberater' must execute 'Antrag empfangen'
+
+DESC "C1b"
+IF
+THEN role 'Kundenberater' must execute 'Kunde kontaktieren'
+
+/* Um den Kunden nicht zu lange warten zu lassen, sollte der Kunde spatestens 3 Tage nach
+erstem Kontakt ueber das Ergebnis informiert werden  */
+DESC "C2"
+IF 'Kunde kontaktieren' completed AND 'Antrag empfangen' completed 
+AND timestamp of 'Kunde kontaktieren' is N2 AND timestamp of 'Antrag empfangen' is N1
+AND (N2 - N1) > ts(3D)
+THEN illegal execution
+
+/* Den Antrag annehmen (T1) und den Antrag pruefen(T2, T3) sollten von verschiedenen
+Personen erledigt werden */
+DESC "C3a"
+IF user U1 executed 'Antrag empfangen' AND 'Antrag empfangen' completed
+THEN user U1 cannot execute 'Antrag prüfen 1'
+
+DESC "C3b"
+IF user U1 executed 'Antrag empfangen' AND 'Antrag empfangen' completed
+THEN user U1 cannot execute 'Antrag prüfen 2'
+
+/* Ferner sollten auch die zwei Pruefungen von verschiedenen Mitarbeitern vollzogen werden.
+   T3 muss durch den Bank Manager erfolgen.*/
+DESC "C4a"
+IF user U1 executed 'Antrag prüfen 1' AND 'Antrag prüfen 1' completed
+THEN user U1 cannot execute 'Antrag prüfen 2'
+
+DESC "C4b"
+IF attribute 'Kreditwunsch' of 'Antrag empfangen' is N AND N > 100000
+THEN role 'Bank Manager' must execute 'Antrag prüfen 2'
+
+/*Es dürfen keine Anträge von Verwandten geprüft werden.*/
+DESC "C5a"
+IF U1 is related to U2 AND attribute 'Kunde' of 'Antrag prüfen 1' is U2
+THEN user U1 cannot execute 'Antrag prüfen 1'
+
+DESC "C5b"
+IF U1 is related to U2 AND attribute 'Kunde' of 'Antrag prüfen 2' is U2
+THEN user U1 cannot execute 'Antrag prüfen 2'
+
+/* Ein Mitarbeiter darf bei demselben Kunden höchstens Kredite bis 100000 Euro prüfen */
+DESC "C6"
+IF SUM OF X WHERE 
+	( 	user USER1 executed 'Antrag prüfen 1'.WID 
+		AND attribute 'Kreditwunsch' of 'Antrag prüfen 1'.WID is X 
+		AND attribute 'Kunde' of 'Antrag prüfen 1'.WID is C) 
+IS N AND N > 100000
+AND attribute 'Kunde' of 'Antrag prüfen 1'.WID2 is C
+THEN user USER1 cannot execute 'Antrag prüfen 1'.WID2
+
+/*Ein Mitarbeiterpaar darf höchstens 3mal gemeinsam an T1 und T2 arbeiten.*/
+DESC "C7"
+IF NUMBER WHERE ( U1 is collaborator of U2 
+	AND user U1 executed 'Antrag annehmen'.WID) IS N AND N > 3
+THEN user U2 cannot execute 'Antrag prüfen 1'.WID
+
+DESC "C7 - besser"
+IF NUMBER WHERE ( U1 is collaborator of U2 ) is N AND N > 3
+THEN illegal execution
+
+/*Wenn ein Mitarbeiter 5x einem Task zugewiesen wird und ihn dann abbricht, darf er nicht
+mehr an dem Task arbeiten.*/
+DESC "C8"
+IF NUMBER WHERE ( user U1 executed T1.WID.WN AND T1.WID.WN aborted ) IS N AND N > 5
+THEN user U1 cannot execute T1.WID2.WN2
+
+/*Um zu verhindern, dass Fehler durch Überlastung passieren, darf jeder Mitarbeiter am
+Tag höchstens 100 (hier 5) Tasks bearbeiten.*/
+DESC "C9"
+IF NUMBER OF Task WHERE ( user User executed Task1.WID.WN 
+   AND timeinterval of Task1.WID.WN and Task2.WID1.WN1 is X
+   AND X < ts( 1D ) ) IS N AND N > 5
+THEN user User cannot execute Task2.WID1.WN1

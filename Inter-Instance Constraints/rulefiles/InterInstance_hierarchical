@@ -1,21 +1,30 @@
-define best_friends(UT, TT)
+DEF friends(UT, TT)
 
-set 'Manager' dominates 'Secretary'
-set critical_task_pair('task1', 'task2')
+SET 'Manager' dominates 'Secretary'
+SET 'task1' and 'task2' are critical task pairs
 
-DESC 'Task 1 darf nur innerhalb eines Monats ausgeführt werden, nachdem es das erste mal ausgeführt wurde'
-IF MIN OF X WHERE 'task1'.WID.Timestamp = X IS N1 
-AND MAX OF Y WHERE 'task1'.WID.Timestamp = Y IS N2 AND ( N2 - N1 ) > P20D
-AND best_friends(USER1, USER2)
-THEN panic
 
-DESC 'If task1 is executed more than 5 times by a role then the a higher role must execute it'
-IF NUMBER WHERE ROLE1 executed 'task1'.WID AND  P = 'Azubi' IS N
-AND N > 5 AND (ROLE1 dominates ROLE2 or ROLE1 = ROLE2)
+
+IF MIN OF X WHERE ( timestamp of 'task1'.WID1 is X) IS N1 
+AND MAX OF Y WHERE (timestamp of 'task1'.WID2 is Y) IS N2 AND ( N2 - N1 ) > ts(20D)
+AND friends(USER1, USER2)
+THEN illegal execution
+
+
+DESC 'If task1 is executed more than 5 times by a role then 
+the a higher role must execute it'
+IF NUMBER WHERE (role ROLE1 executed 'task1'.WID AND  P = 'Azubi') IS N
+AND N > 5 AND (ROLE1 dominates ROLE2 OR ROLE1 = ROLE2)
 THEN role ROLE2 cannot execute 'task1'.WID
 
-DESC 'Wenn USER1 und USER2 10mal am kritischen TaskPair gearbeitet haben, muss es eine höhere Rolle ausführen'
-IF (USER1 executed 'task1'.WID or USER2 executed 'task1'.WID ) AND USER1 is collaborator of USER2
-AND ROLE <= USER1.Role AND ROLE <= USER2.Role AND T1.WID.Timestamp = 1999-04-13T22:15:23.2456
-AND Pf < P22D36h
+DESC 'Wenn USER1 und USER2 10mal am kritischen TaskPair gearbeitet haben, 
+muss es eine höhere Rolle ausführen'
+IF (user USER1 executed 'task1'.WID OR user USER2 executed 'task1'.WID ) 
+AND USER1 is collaborator of USER2
+AND user USER1 belongs to role Role1
+AND user USER2 belongs to role Role2
+AND Role1 dominates ROLE
+AND Role2 dominates ROLE
+AND timestamp of T1.WID is tp(1999-04-13 T 22:15:23.2456)
+AND Pf < ts(22D 36h)
 THEN role ROLE cannot execute 'task2'.WID
